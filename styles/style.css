@@ -50,11 +50,12 @@ body {
 /* Styles for the top bar */
 .top-bar {
   background-color: var(--main-blue); /* Blue bar color */
-  height: 75px; /* Height of the top bar */
+  height: 10vh; /* Makes height 10% of viewport height. Also makes it so it wont scale when zooming */
   width: 100%; /* Full width across the screen */
   display: flex; /* Use flexbox for centering */
   justify-content: center; /* Center the content horizontally */
   align-items: center; /* Center the content vertically */
+  z-index: 1; /* Ensures top bar is always on top of other elements */
 }
 
 /* Styles for the text inside the top bar */
@@ -62,30 +63,40 @@ body {
   font-family: 'Nunito', sans-serif; /* Font family */
   font-style: normal; /* Normal style */
   font-weight: 900; /* Bold weight */
-  font-size: 45px; /* Font size */
-  line-height: 70px; /* Line height */
+  font-size: 5vh; /* Makes height 5% of viewport height. Also makes it so it wont scale when zooming */
   color: var(--pure-white); /* White text color */
   margin: 0; /* Remove default margin */
   text-align: center; /* Center-align text */
 }
 
+
+
+/* Main screen container */
+.main-screen-container {
+  position: relative; /* Make this container the reference point for children */
+  width: 100%; /* Full width of the screen */
+  height: calc(100vh - 10%); /* Full height of the screen minus the top bar */
+  z-index: -1; /* Ensures top bar is always on top of other elements */
+  transform: scale(1.0) translate(0, -1vh); /* Let's us scale and move the main content. Helpful for later.*/
+  transform-origin: center; /* Ensure scaling is centered */
+}
+
 /* Rainbow styling */
 .rainbow {
-  position: fixed; /* Center relative to the viewport */
-  top: 50%; /* Vertically center */
-  left: 50%; /* Horizontally center */
-  transform: translate(-50%, -50%) translate(-240px, -350px); /* Move to the center of the screen */
+  position: absolute; /* Position relative to the main-screen-container */
+  top: 50%; /* Vertically center within the container */
+  left: 50%; /* Horizontally center within the container */
+  transform: translate(-50%, -50%) translate(-240px, -370px); /* Adjust to desired position */
   height: auto; /* Maintain aspect ratio */
   z-index: -3; /* Default z-index for clouds */
 }
 
-
 /* Cloud styling */
 .cloud {
-  position: fixed; /* Center relative to the viewport */
-  top: 50%; /* Vertically center */
-  left: 50%; /* Horizontally center */
-  transform: translate(-50%, -50%); /* Move to the center of the screen */
+  position: absolute; /* Position relative to the main-screen-container */
+  top: 50%; /* Vertically center within the container */
+  left: 50%; /* Horizontally center within the container */
+  transform: translate(-50%, -50%); /* Adjust based on the container's center */
   height: auto; /* Maintain aspect ratio */
   z-index: 2; /* Default z-index for clouds */
 }
@@ -93,25 +104,26 @@ body {
 /* Individual cloud positions with offsets */
 .cloud1 {
   width: 290px;
-  transform: translate(-50%, -50%) translate(380px, 210px); /* Offset from center */
+  transform: translate(-50%, -50%) translate(380px, 160px); /* Offset from the container's center */
 }
 
 .cloud2 {
   width: 220px;
-  transform: translate(-50%, -50%) translate(160px, -160px); /* Offset from center */
+  transform: translate(-50%, -50%) translate(160px, -200px); /* Offset from the container's center */
 }
 
 .cloud3 {
   width: 220px;
   z-index: -2; /* Place this behind the container */
-  transform: translate(-50%, -50%) translate(-435px, 25px); /* Offset from center */
+  transform: translate(-50%, -50%) translate(-435px, 0px); /* Offset from the container's center */
 }
+
 /* Container to center the rectangles */
 .container {
   display: flex;
   justify-content: center; /* Horizontally center */
   align-items: center; /* Vertically center */
-  height: calc(100vh - 75px); /* Full viewport height minus top bar */
+  height: calc(90vh); /* Full viewport height minus top bar */
   transform: scale(0.75); /* Scale everything inside by 75% */
   transform-origin: center; /* Ensure scaling is centered */
 }
@@ -322,4 +334,35 @@ body {
 
 
 
+/* Waves container */
+.waves-container {
+  position: fixed; /* Fixed at the bottom of the viewport */
+  bottom: 0; /* Align with the bottom of the viewport */
+  left: 0; /* Full-width placement */
+  width: 100%;
+  pointer-events: none; /* Ensure waves don’t interfere with interactions */
+  z-index: 1; /* Default z-index, can adjust later */
+  transform-origin: bottom; /* Set the scaling origin to the bottom edge */
+  transform: scaleY(0.8); /* Scale the wave vertically to 80% of its original height */
+}
+
+/* Individual wave styling */
+.wave {
+  position: absolute; /* Relative to the waves-container */
+  bottom: 0; /* Stick to the bottom of the container */
+  width: 100%; /* Stretch across the entire container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.back-wave {
+  z-index: 1; /* Lowest wave */
+}
+
+.middle-wave {
+  z-index: 2; /* Middle layer */
+}
+
+.front-wave {
+  z-index: 3; /* Top wave */
+}
 
