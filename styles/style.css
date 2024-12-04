@@ -1,0 +1,325 @@
+/* Define variables */
+:root {
+	
+		/* Color variables */
+  --main-yellow-subdued: #E3B318;
+  --main-yellow-bold: #FFBF10;
+  --main-blue: #1863A9;
+  --main-green: #318F30;
+  --main-off-white: #F0EAD4;
+  --main-red: #E63C36;
+  --main-cyan: #2BB3C5;
+  --muted-blue-1: #88D6F8;
+  --muted-blue-2: #A3CDED;
+  --very-muted-blue: #AFC3CA;
+  --side-bar-off-white: #E5DEC6;
+  --pure-white: #FFFFFF;
+  --side-bar-bg-color: #E3B318;
+  --main-green-subdued: #378636;
+  --main-blue-subdued: #2F6496;
+  --main-red-subdued: #D8423D;
+  --main-cyan-subdued: #207F8B;
+  --main-purple: #8D3CAA;
+  --main-black: #1D1D1B;
+  
+		/* Shading variables */
+  --main-light-shading: 
+    inset 6px 6px 20px rgba(255, 255, 255, 0.15),
+    inset 3.6px 3.6px 4px rgba(255, 255, 255, 0.5),
+    inset -3.6px -3.6px 16px rgba(0, 0, 0, 0.24);
+
+  --main-drop-shadow: 
+    5px 5px 6px rgba(0, 0, 0, 0.25);
+
+  --main-shading-with-drop-shadow: 
+    var(--main-light-shading),
+    var(--main-drop-shadow);		
+}
+
+
+/* General body styling */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--main-off-white);
+  background-image: url('../images/bgpattern.png');	/* Tiled BG Image */
+  background-size: 20%;
+  background-repeat: repeat;
+}
+
+/* Styles for the top bar */
+.top-bar {
+  background-color: var(--main-blue); /* Blue bar color */
+  height: 75px; /* Height of the top bar */
+  width: 100%; /* Full width across the screen */
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+}
+
+/* Styles for the text inside the top bar */
+.page-title {
+  font-family: 'Nunito', sans-serif; /* Font family */
+  font-style: normal; /* Normal style */
+  font-weight: 900; /* Bold weight */
+  font-size: 45px; /* Font size */
+  line-height: 70px; /* Line height */
+  color: var(--pure-white); /* White text color */
+  margin: 0; /* Remove default margin */
+  text-align: center; /* Center-align text */
+}
+
+/* Rainbow styling */
+.rainbow {
+  position: fixed; /* Center relative to the viewport */
+  top: 50%; /* Vertically center */
+  left: 50%; /* Horizontally center */
+  transform: translate(-50%, -50%) translate(-240px, -350px); /* Move to the center of the screen */
+  height: auto; /* Maintain aspect ratio */
+  z-index: -3; /* Default z-index for clouds */
+}
+
+
+/* Cloud styling */
+.cloud {
+  position: fixed; /* Center relative to the viewport */
+  top: 50%; /* Vertically center */
+  left: 50%; /* Horizontally center */
+  transform: translate(-50%, -50%); /* Move to the center of the screen */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 2; /* Default z-index for clouds */
+}
+
+/* Individual cloud positions with offsets */
+.cloud1 {
+  width: 290px;
+  transform: translate(-50%, -50%) translate(380px, 210px); /* Offset from center */
+}
+
+.cloud2 {
+  width: 220px;
+  transform: translate(-50%, -50%) translate(160px, -160px); /* Offset from center */
+}
+
+.cloud3 {
+  width: 220px;
+  z-index: -2; /* Place this behind the container */
+  transform: translate(-50%, -50%) translate(-435px, 25px); /* Offset from center */
+}
+/* Container to center the rectangles */
+.container {
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  height: calc(100vh - 75px); /* Full viewport height minus top bar */
+  transform: scale(0.75); /* Scale everything inside by 75% */
+  transform-origin: center; /* Ensure scaling is centered */
+}
+
+/* Background (blue) rectangle styling */
+.background-rectangle {
+  background: var(--main-blue);
+  width: 1000px;
+  height: 510px;
+  border-radius: 50px;
+  position: relative; /* Ensures child elements are positioned relative to it */
+  overflow: hidden; /* Clip child elements, including the SVG */
+  box-shadow: var(--main-shading-with-drop-shadow);
+  z-index: 0; /* Ensure it stays behind forground rectangle */
+}
+
+/* Add the SVG to the background rectangle */
+.background-rectangle::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width of the rectangle */
+  height: 100%; /* Full height of the rectangle */
+  background-image: url('../images/loginimg.svg'); /* Add the SVG as a background */
+  background-size: cover; /* Ensure the SVG covers the entire area */
+  background-position: center; /* Center the SVG */
+  opacity: 0.35; /* Set the opacity */
+  pointer-events: none; /* Make it non-interactive */
+}
+
+
+/* Left-side content container */
+.left-content-container {
+  position: absolute;
+  top: 25px; /* Align with top of the blue rectangle */
+  left: 25px; /* Align with the left margin of the blue rectangle */
+  right: 25px; /* Align with the right margin of the blue rectangle */
+  bottom: 25px; /* Align with the bottom of the blue rectangle */
+  width: 295px; /* Bg Rectangle width (1000) - Foreground Rectangle Width (630)  - 75 (all paddings)*/
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  z-index: 1; /* Ensure this rectangle appears on top */
+}
+
+/* Google logo */
+.google-logo {
+  width: 90px; /* Adjust as needed */
+  height: auto; /* Maintain aspect ratio */
+}
+
+/* "Sign in" text */
+.sign-in-text {
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 63px;
+  color: var(--pure-white);
+  margin: 0; /* Remove default margins */
+}
+
+/* Subtitle text "Use your google account" */
+.subtitle-text {
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 40px;	/* use for padding */
+  color: var(--pure-white);
+  margin: 0; /* Remove default margins */
+}
+
+/* "Don't have an account?" text */
+.create-account-text {
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 30px;
+  color: var(--pure-white);
+  margin: 0; /* Remove default margins */
+}
+
+/* Create Account button */
+.create-account-button {
+  background-color: var(--main-green);
+  color: var(--pure-white);
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 33px;
+  border: none;
+  border-radius: 17px; /* Rounded corners */
+  padding: 10px 20px; /* Adjust button padding */
+  cursor: pointer;
+  box-shadow: var(--main-shading-with-drop-shadow);
+}
+
+.create-account-button:hover {
+  background-color: var(--main-green-subdued); /* Slightly subdued color on hover */
+}
+
+/* Container for the button and the text above it */
+.button-container {
+  display: flex;
+  flex-direction: column; /* Stack the button and text vertically */
+  align-items: center; /* Center horizontally */
+  margin-top: 100px; /* Add some spacing from the elements above */
+  width: 100%; /* Ensure it spans the full width of the left content container */
+}
+
+
+/* Foreground (yellow) rectangle styling */
+.foreground-rectangle {
+  width: 630px;
+  height: 460px;
+  border-radius: 34px;
+  box-shadow: var(--main-shading-with-drop-shadow);
+  position: absolute; /* Position relative to the parent */
+  right: 25px; /* Leave a 25px gap on the right */
+  top: 25px; /* Leave a 25px gap on the top */
+  bottom: 25px; /* Leave a 25px gap on the bottom */
+  margin: auto; /* Center within the parent rectangle */
+  z-index: 1; /* Ensure this rectangle appears on top */
+  opacity: 1; /* Keep the rectangle fully opaque */
+}
+
+/* Create a pseudo-element for the foreground opacity. This lets the foreground rectangle be low opacity but nothing else on top is */
+.foreground-rectangle::before {
+  content: '';
+  position: absolute;
+  top: 50;
+  left: 50;
+  width: 100%;
+  height: 100%;
+  background: var(--main-yellow-subdued);
+  border-radius: 34px;
+  opacity: 0.7; /* Apply the 70% opacity here */
+  z-index: -1; /* Ensure it stays behind the content */
+}
+
+/* Right-side content container */
+.right-content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center */
+  align-items: center; /* Center content horizontally within the container */
+  width: 100%; /* Full width of the foreground rectangle */
+  height: 100%; /* Full height of the foreground rectangle */
+  padding: 25px; /* Ensure consistent spacing inside the rectangle */
+  box-sizing: border-box; /* Include padding in the width/height calculations */
+  position: relative; /* Ensure proper positioning for child elements */
+}
+
+/* Email label */
+.email-label {
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 43px;
+  line-height: 59px;
+  color: var(--pure-white);
+  width: auto; /* Ensure it wraps its content */
+  text-align: left; /* Align the text to the left */
+  align-self: flex-start; /* Align it to the left of the container */
+  margin-left: 60px; /* Match the input box's padding */
+  margin-bottom: 10px; /* Add spacing below the label */
+}
+
+/* Email input box */
+.email-input {
+  width: 75%; /* Adjust width as needed */
+  height: 50px; /* Height of the input box */
+  background: var(--main-off-white);
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  color: var(--main-blue-subdued);
+  border: none;
+  border-radius: 21px;
+  box-shadow: var(--main-light-shading);
+  font-size: 18px;
+  padding: 10px 15px; /* Add some inner padding for the text */
+  
+}
+
+/* Sign in button */
+.sign-in-button {
+  background-color: var(--main-red-subdued);
+  color: var(--pure-white);
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 33px;
+  border: none;
+  border-radius: 25px; /* Rounded corners */
+  padding: 10px 30px; /* Adjust button padding */
+  cursor: pointer;
+  box-shadow: var(--main-light-shading);
+  align-self: flex-end; /* Align the button to the right */
+  width: auto; /* Ensure button is sized to its content */
+  margin-top: 20px; /* Adjust position relative to the input box */
+  margin-right: 60px; /* Match the input padding for alignment */
+}
+
+
+
+
+
