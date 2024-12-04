@@ -55,6 +55,7 @@ body {
   display: flex; /* Use flexbox for centering */
   justify-content: center; /* Center the content horizontally */
   align-items: center; /* Center the content vertically */
+  z-index: 1; /* Ensures top bar is always on top of other elements */
 }
 
 /* Styles for the text inside the top bar */
@@ -73,6 +74,7 @@ body {
   position: relative; /* Make this container the reference point */
   width: 100%; /* Full width of the screen */
   height: calc(100vh - 10vh); /* Full height of the screen minus the top bar */
+  z-index: -1; /* Ensures top bar is always on top of other elements */
 }
 
 
