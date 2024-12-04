@@ -82,7 +82,8 @@ body {
 .main-screen-container {
   position: relative; /* Make this container the reference point for children */
   width: 100%; /* Full width of the screen */
-  height: calc(100vh - 10vh); /* Full height of the screen minus the top bar */
+  height: calc(100vh - 10%); /* Full height of the screen minus the top bar */
+  transform: translate(0, -3vh); /* Moves all content on screen up slightly, so it's slightly above center */
 }
 
 /* Rainbow styling */
@@ -90,7 +91,7 @@ body {
   position: absolute; /* Position relative to the main-screen-container */
   top: 50%; /* Vertically center within the container */
   left: 50%; /* Horizontally center within the container */
-  transform: translate(-50%, -50%) translate(-240px, -350px); /* Adjust to desired position */
+  transform: translate(-50%, -50%) translate(-240px, -370px); /* Adjust to desired position */
   height: auto; /* Maintain aspect ratio */
   z-index: -3; /* Default z-index for clouds */
 }
@@ -338,4 +339,34 @@ body {
 
 
 
+/* Waves container */
+.waves-container {
+  position: fixed; /* Fixed at the bottom of the viewport */
+  bottom: 0; /* Align with the bottom of the viewport */
+  left: 0; /* Full-width placement */
+  width: 100%;
+  height: 1vh; /* Adjust height to keep visual consistency */
+  pointer-events: none; /* Ensure waves don’t interfere with interactions */
+  z-index: 1; /* Default z-index, can adjust later */
+}
+
+/* Individual wave styling */
+.wave {
+  position: absolute; /* Relative to the waves-container */
+  bottom: 0; /* Stick to the bottom of the container */
+  width: 100%; /* Stretch across the entire container */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.back-wave {
+  z-index: 1; /* Lowest wave */
+}
+
+.middle-wave {
+  z-index: 2; /* Middle layer */
+}
+
+.front-wave {
+  z-index: 3; /* Top wave */
+}
 
