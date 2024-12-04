@@ -49,13 +49,16 @@ body {
 
 /* Styles for the top bar */
 .top-bar {
+  z-index: 10; /* Ensures top bar is always on top of other elements */
   background-color: var(--main-blue); /* Blue bar color */
   height: 10vh; /* Makes height 10% of viewport height. Also makes it so it wont scale when zooming */
   width: 100%; /* Full width across the screen */
   display: flex; /* Use flexbox for centering */
   justify-content: center; /* Center the content horizontally */
   align-items: center; /* Center the content vertically */
-  z-index: 1; /* Ensures top bar is always on top of other elements */
+  position: fixed; /* Fixed to the top of the viewport */
+  top: 0; /* Align to the top */
+  left: 0; /* Full width alignment */
 }
 
 /* Styles for the text inside the top bar */
@@ -70,14 +73,12 @@ body {
 }
 
 
-
 /* Main screen container */
 .main-screen-container {
   position: relative; /* Make this container the reference point for children */
   width: 100%; /* Full width of the screen */
-  height: calc(100vh - 10%); /* Full height of the screen minus the top bar */
-  z-index: -1; /* Ensures top bar is always on top of other elements */
-  transform: scale(1.0) translate(0, -1vh); /* Let's us scale and move the main content. Helpful for later.*/
+  height: calc(100vh - 10vh); /* Full height of the screen minus the top bar */
+  transform: scale(1.0) translate(0, 5vh); /* Let's us scale and move the main content. Helpful for later.*/
   transform-origin: center; /* Ensure scaling is centered */
 }
 
@@ -88,7 +89,7 @@ body {
   left: 50%; /* Horizontally center within the container */
   transform: translate(-50%, -50%) translate(-240px, -370px); /* Adjust to desired position */
   height: auto; /* Maintain aspect ratio */
-  z-index: -3; /* Default z-index for clouds */
+  z-index: -5; /* Default z-index for clouds */
 }
 
 /* Cloud styling */
@@ -98,7 +99,7 @@ body {
   left: 50%; /* Horizontally center within the container */
   transform: translate(-50%, -50%); /* Adjust based on the container's center */
   height: auto; /* Maintain aspect ratio */
-  z-index: 2; /* Default z-index for clouds */
+  z-index: 1; /* Default z-index for clouds */
 }
 
 /* Individual cloud positions with offsets */
@@ -341,7 +342,7 @@ body {
   left: 0; /* Full-width placement */
   width: 100%;
   pointer-events: none; /* Ensure waves don’t interfere with interactions */
-  z-index: 1; /* Default z-index, can adjust later */
+  z-index: 5; /* Default z-index, can adjust later */
   transform-origin: bottom; /* Set the scaling origin to the bottom edge */
   transform: scaleY(0.8); /* Scale the wave vertically to 80% of its original height */
 }
