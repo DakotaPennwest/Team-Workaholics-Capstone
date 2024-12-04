@@ -69,13 +69,6 @@ body {
   text-align: center; /* Center-align text */
 }
 
-/* Main screen container */
-.main-screen-container {
-  position: relative; /* Make this container the reference point */
-  width: 100%; /* Full width of the screen */
-  height: calc(100vh - 10vh); /* Full height of the screen minus the top bar */
-  z-index: -1; /* Ensures top bar is always on top of other elements */
-}
 
 
 /* Main screen container */
@@ -83,7 +76,9 @@ body {
   position: relative; /* Make this container the reference point for children */
   width: 100%; /* Full width of the screen */
   height: calc(100vh - 10%); /* Full height of the screen minus the top bar */
-  transform: translate(0, -3vh); /* Moves all content on screen up slightly, so it's slightly above center */
+  z-index: -1; /* Ensures top bar is always on top of other elements */
+  transform: scale(1.1) translate(0, -1vh); /* Let's us scale and move the main content. Helpful for later.*/
+  transform-origin: center; /* Ensure scaling is centered */
 }
 
 /* Rainbow styling */
@@ -345,9 +340,10 @@ body {
   bottom: 0; /* Align with the bottom of the viewport */
   left: 0; /* Full-width placement */
   width: 100%;
-  height: 1vh; /* Adjust height to keep visual consistency */
   pointer-events: none; /* Ensure waves don’t interfere with interactions */
   z-index: 1; /* Default z-index, can adjust later */
+  transform-origin: bottom; /* Set the scaling origin to the bottom edge */
+  transform: scaleY(0.8); /* Scale the wave vertically to 80% of its original height */
 }
 
 /* Individual wave styling */
