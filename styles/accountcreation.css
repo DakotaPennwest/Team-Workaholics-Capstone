@@ -1,0 +1,245 @@
+/* Define variables */
+:root {
+	
+    /* Color variables */
+    --main-yellow-subdued: #E3B318;
+    --main-yellow-bold: #FFBF10;
+    --main-blue: #1863A9;
+    --main-green: #318F30;
+    --main-off-white: #F0EAD4;
+    --main-red: #E63C36;
+    --main-cyan: #2BB3C5;
+    --muted-blue-1: #88D6F8;
+    --muted-blue-2: #A3CDED;
+    --very-muted-blue: #AFC3CA;
+    --side-bar-off-white: #E5DEC6;
+    --pure-white: #FFFFFF;
+    --side-bar-bg-color: #E3B318;
+    --main-green-subdued: #378636;
+    --main-blue-subdued: #2F6496;
+    --main-red-subdued: #D8423D;
+    --main-cyan-subdued: #207F8B;
+    --main-purple: #8D3CAA;
+    --main-black: #1D1D1B;
+
+    /* Shading variables */
+    --main-light-shading: 
+    inset 6px 6px 20px rgba(255, 255, 255, 0.15),
+    inset 3.6px 3.6px 4px rgba(255, 255, 255, 0.5),
+    inset -3.6px -3.6px 16px rgba(0, 0, 0, 0.24);
+
+    --main-drop-shadow: 
+    5px 5px 6px rgba(0, 0, 0, 0.25);
+
+    --main-shading-with-drop-shadow: 
+    var(--main-light-shading),
+    var(--main-drop-shadow);		
+}
+
+
+/* General body styling */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-off-white);
+    background-image: url('../images/bgpattern.png');	/* Tiled BG Image */
+    background-size: 20%;
+    background-repeat: repeat;
+}
+
+/* Styles for the top bar */
+.top-bar {
+    z-index: 10; /* Ensures top bar is always on top of other elements */
+    background-color: var(--main-blue); /* Blue bar color */
+    height: 10vh; /* Makes height 10% of viewport height. Also makes it so it wont scale when zooming */
+    width: 100%; /* Full width across the screen */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    position: fixed; /* Fixed to the top of the viewport */
+    top: 0; /* Align to the top */
+    left: 0; /* Full width alignment */
+}
+
+/* Styles for the text inside the top bar */
+.page-title {
+    font-family: 'Nunito', sans-serif; /* Font family */
+    font-style: normal; /* Normal style */
+    font-weight: 900; /* Bold weight */
+    font-size: 5vh; /* Makes height 5% of viewport height. Also makes it so it wont scale when zooming */
+    color: var(--pure-white); /* White text color */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center-align text */
+}
+
+/* Back arrow container */
+.back-arrow {
+    position: absolute; /* Position relative to the top bar */
+    left: 20px; /* Adjust horizontal alignment from the left */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically center the content */
+    cursor: pointer; /* Make it clickable for user feedback */
+    z-index: 11; /* Ensure it appears above other content */
+}
+
+/* Back arrow icon */
+.back-arrow-icon {
+    height: 3.5vh; /* Adjust size relative to viewport height */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 5px; /* Space between icon and text */
+}
+
+/* Back arrow text */
+.go-back-text {
+    font-family: 'Nunito', sans-serif; /* Consistent font */
+    font-style: normal; /* Normal style */
+    font-weight: 900; /* Slightly lighter than title */
+    font-size: 3.5vh; /* Small text size relative to viewport height */
+    color: var(--pure-white); /* Match top bar color theme */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center-align text within container */
+}
+
+/* Main screen container */
+/* Content that is below top bar and above the waves at the bottom */
+.main-screen-container {
+    position: relative; /* Make this container the reference point for children */
+    width: 100%; /* Full width of the screen */
+    height: calc(100vh - 10vh); /* Full height of the screen minus the top bar */
+    transform: scale(1.0) translate(0, 5vh); /* Let's us scale and move the main content. Helpful for later.*/
+    transform-origin: center; /* Ensure scaling is centered */
+}
+
+
+/* Container to center the forms */
+.form-container {
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    height: calc(90vh); /* Full viewport height minus top bar */
+}
+
+/* Rectangle that is the account creation form */
+.account-creation-form {
+    background: var(--main-blue);
+    width: 1000px;
+    height: 510px;
+    border-radius: 50px;
+    position: relative; /* Ensures child elements are positioned relative to it */
+    overflow: hidden; /* Clip child elements, including the SVG */
+    box-shadow: var(--main-shading-with-drop-shadow);
+    z-index: 0; /* Ensure the background stays behind */
+}
+
+/* Add the SVG to the account creation form */
+.account-creation-form::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the rectangle */
+    height: 100%; /* Full height of the rectangle */
+    background-image: url('../images/loginimg.svg'); /* Add the SVG as a background */
+    background-size: cover; /* Ensure the SVG covers the entire area */
+    background-position: center; /* Center the SVG */
+    opacity: 0.35; /* Set the opacity */
+    pointer-events: none; /* Make it non-interactive */
+}
+
+
+/* Left-side content container */
+.account-creation-form-left {
+    position: absolute;
+    top: 25px; /* Align with top of the blue rectangle */
+    left: 25px; /* Align with the left margin of the blue rectangle */
+    right: 25px; /* Align with the right margin of the blue rectangle */
+    bottom: 25px; /* Align with the bottom of the blue rectangle */
+    width: 295px; /* Bg Rectangle width (1000) - Foreground Rectangle Width (630)  - 75 (all paddings)*/
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    z-index: 1; /* Ensure this rectangle appears on top */
+    flex-direction: column; /* Stack items vertically */
+    z-index: 1; /* Ensure this rectangle appears on top */
+    justify-content: flex-end; /* Align content to the bottom */
+}
+
+
+/* Styling for User Icon */
+.user-icon {
+    width: 80%; /* Adjust size (reduce to 70% of the container's width) */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Styling for the "User" text */
+.user-text {
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 50px;
+    color: var(--pure-white);
+    margin-top: 1px; /* Add spacing above the text */
+    margin-bottom: 5px; /* Adds space at bottom */
+}
+
+/* Right side of account form + the background rectangle */
+.account-creation-form-right {
+    width: 630px;
+    height: 460px;
+    border-radius: 34px;
+    box-shadow: var(--main-shading-with-drop-shadow);
+    position: absolute; /* Position relative to the parent */
+    right: 25px; /* Leave a 25px gap on the right */
+    top: 25px; /* Leave a 25px gap on the top */
+    bottom: 25px; /* Leave a 25px gap on the bottom */
+    margin: auto; /* Center within the parent rectangle */
+    z-index: 1; /* Ensure this rectangle appears on top */
+    opacity: 1; /* Keep the rectangle fully opaque */
+}
+
+/* Create a pseudo-element for the foreground opacity. This lets the foreground rectangle be low opacity but nothing else on top is */
+.account-creation-form-right::before {
+    content: '';
+    position: absolute;
+    top: 50;
+    left: 50;
+    width: 100%;
+    height: 100%;
+    background: var(--main-cyan);
+    border-radius: 34px;
+    opacity: 0.7; /* Apply the 70% opacity here */
+    z-index: -1; /* Ensure it stays behind the content */
+}
+
+
+
+/* Waves container */
+.waves-container {
+    position: fixed; /* Fixed at the bottom of the viewport */
+    bottom: 0; /* Align with the bottom of the viewport */
+    left: 0; /* Full-width placement */
+    width: 100%;
+    pointer-events: none; /* Ensure waves don’t interfere with interactions */
+    z-index: 5; /* Default z-index, can adjust later */
+    transform-origin: bottom; /* Set the scaling origin to the bottom edge */
+    transform: scaleY(0.8); /* Scale the wave vertically to 80% of its original height */
+}
+
+/* Individual wave styling */
+.wave {
+    position: absolute; /* Relative to the waves-container */
+    bottom: 0; /* Stick to the bottom of the container */
+    width: 100%; /* Stretch across the entire container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.back-wave {
+    z-index: 1; /* Lowest wave */
+}
+
+.middle-wave {
+    z-index: 2; /* Middle layer */
+}
+
+.front-wave {
+    z-index: 3; /* Top wave */
+}
