@@ -166,8 +166,10 @@ body {
 
 /* Styling for User Icon */
 .user-icon {
-    width: 80%; /* Adjust size (reduce to 70% of the container's width) */
+    width: 75%; /* Adjust size (reduce to 70% of the container's width) */
     height: auto; /* Maintain aspect ratio */
+    transform: translate(4px, 0px); /* Visually ligns up icon more (Nitpicky thing) */
+    transform-origin: center; /* Ensure scaling is centered */
 }
 
 /* Styling for the "User" text */
@@ -178,7 +180,7 @@ body {
     font-size: 50px;
     color: var(--pure-white);
     margin-top: 1px; /* Add spacing above the text */
-    margin-bottom: 5px; /* Adds space at bottom */
+    margin-bottom: 10px; /* Adds space at bottom */
 }
 
 /* Right side of account form + the background rectangle */
