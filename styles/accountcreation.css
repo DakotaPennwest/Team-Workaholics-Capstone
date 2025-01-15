@@ -122,7 +122,7 @@ body {
 /* Rectangle that is the account creation form */
 .account-creation-form {
     background: var(--main-blue);
-    width: 950px;
+    width: 900px;
     height: 550px;
     border-radius: 50px;
     position: relative; /* Ensures child elements are positioned relative to it */
@@ -154,7 +154,7 @@ body {
     left: 25px; /* Align with the left margin of the blue rectangle */
     right: 25px; /* Align with the right margin of the blue rectangle */
     bottom: 25px; /* Align with the bottom of the blue rectangle */
-    width: 275px; /* Acc-Form width (950) - Acc-form-right width (630)  - 75 (all paddings)*/
+    width: 275px; /* Acc-Form width (900) - Acc-form-right width (550)  - 75 (all paddings)*/
     display: flex;
     align-items: center; /* Vertically center the content */
     z-index: 1; /* Ensure this rectangle appears on top */
@@ -166,7 +166,7 @@ body {
 
 /* Styling for User Icon */
 .user-icon {
-    width: 85%; /* Adjust size (reduce to 70% of the container's width) */
+    width: 80%; /* Adjust size (reduce to 70% of the container's width) */
     height: auto; /* Maintain aspect ratio */
     transform: translate(4px, 0px); /* Visually ligns up icon more (Nitpicky thing) */
     transform-origin: center; /* Ensure scaling is centered */
@@ -185,7 +185,7 @@ body {
 
 /* Right side of account form + the background rectangle */
 .account-creation-form-right {
-    width: 600px;
+    width: 550px;
     height: 500px;
     border-radius: 34px;
     box-shadow: var(--main-shading-with-drop-shadow);
