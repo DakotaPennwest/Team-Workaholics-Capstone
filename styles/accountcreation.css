@@ -122,8 +122,8 @@ body {
 /* Rectangle that is the account creation form */
 .account-creation-form {
     background: var(--main-blue);
-    width: 1000px;
-    height: 510px;
+    width: 950px;
+    height: 550px;
     border-radius: 50px;
     position: relative; /* Ensures child elements are positioned relative to it */
     overflow: hidden; /* Clip child elements, including the SVG */
@@ -154,7 +154,7 @@ body {
     left: 25px; /* Align with the left margin of the blue rectangle */
     right: 25px; /* Align with the right margin of the blue rectangle */
     bottom: 25px; /* Align with the bottom of the blue rectangle */
-    width: 295px; /* Bg Rectangle width (1000) - Foreground Rectangle Width (630)  - 75 (all paddings)*/
+    width: 275px; /* Acc-Form width (950) - Acc-form-right width (630)  - 75 (all paddings)*/
     display: flex;
     align-items: center; /* Vertically center the content */
     z-index: 1; /* Ensure this rectangle appears on top */
@@ -166,7 +166,7 @@ body {
 
 /* Styling for User Icon */
 .user-icon {
-    width: 75%; /* Adjust size (reduce to 70% of the container's width) */
+    width: 85%; /* Adjust size (reduce to 70% of the container's width) */
     height: auto; /* Maintain aspect ratio */
     transform: translate(4px, 0px); /* Visually ligns up icon more (Nitpicky thing) */
     transform-origin: center; /* Ensure scaling is centered */
@@ -180,13 +180,13 @@ body {
     font-size: 50px;
     color: var(--pure-white);
     margin-top: 1px; /* Add spacing above the text */
-    margin-bottom: 10px; /* Adds space at bottom */
+    margin-bottom: 25px; /* Adds space at bottom. Also Aligns position of icon and text */
 }
 
 /* Right side of account form + the background rectangle */
 .account-creation-form-right {
-    width: 630px;
-    height: 460px;
+    width: 600px;
+    height: 500px;
     border-radius: 34px;
     box-shadow: var(--main-shading-with-drop-shadow);
     position: absolute; /* Position relative to the parent */
