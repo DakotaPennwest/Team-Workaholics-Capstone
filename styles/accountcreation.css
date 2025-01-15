@@ -212,7 +212,151 @@ body {
     z-index: -1; /* Ensure it stays behind the content */
 }
 
+/* Form Header Styling */
+.form-header {
+    font-family: 'Nunito', sans-serif; /* Match the rest of the page's font */
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px; /* Adjust size to match the screenshot */
+    color: var(--pure-white); /* White text color */
+    margin: 0; /* Remove any default margin */
+    margin-top: 25px; /* Adds space above text*/
+    text-align: center; /* Center the text horizontally */
+}
 
+/* Form Subheader Styling */
+.form-subheader {
+    font-family: 'Nunito', sans-serif; /* Match the header font */
+    font-style: normal;
+    font-weight: 800; /* Slightly lighter than the header */
+    font-size: 15px; /* Adjust size to match the screenshot */
+    color: var(--pure-white); /* White text color */
+    margin-top: 0px; /* Makes subheader closer */
+    margin: 0px;
+    text-align: center; /* Center the text horizontally */
+}
+
+
+/* Container for input fields */
+.form-input-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow rows to wrap */
+    justify-content: center; /* Spread input pairs horizontally */
+    align-items: center; /* Vertically align items */
+    column-gap: 25px; /* Space between coumns */
+    row-gap: 0px;  /* Space between rows */
+    margin: 0px;
+    margin-top: 20px;
+}
+
+/* Wrapper for each input field */
+.input-wrapper {
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
+}
+
+/* Label Styling */
+.input-label {
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 16px;
+    color: var(--pure-white);
+    margin-bottom: 4px; /* Space between label and input */
+    text-align: left;
+}
+
+/* Input Box Styling */
+.text-input-box {
+    width: 200px; /* Full width of the wrapper */
+    height: 25px; /* Standard input height */
+    background: var(--main-off-white);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    color: var(--main-blue-subdued);
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 5px; /* Inner padding for text */
+    outline: none;
+    box-shadow: var(--main-light-shading);
+}
+
+.text-input-box:focus {
+    border: 2px solid var(--main-green); /* Highlight on focus */
+    box-shadow: var(--main-shading-with-drop-shadow);
+}
+
+/* Error Message Styling */
+.error-message {
+    font-family: 'Nunito', sans-serif; /* Match the rest of the page's font */
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--pure-white); /* Red text color for errors */
+    margin-top: 5px; /* Add some space above the error message */
+    text-align: right; /* Align the error message to the right */
+    min-height: 20px; /* Reserve space for the error message */
+    /*This adds an outline around error message */
+    /* This was the only way I was able to get the outline to work and it's not the */
+    text-shadow: 
+        -1px -1px 0 var(--main-red),  
+        1px -1px 0 var(--main-red),
+        -1px  1px 0 var(--main-red),
+        1px  1px 0 var(--main-red);
+}
+
+input[type=date]:invalid::-webkit-datetime-edit {
+    color: #757575; /*This makes the date placeholder color correct */
+}
+
+/* Create Account button styling */
+.form-button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if needed */
+    margin-top: 0px; /* Add spacing between the input fields and the button */
+}
+
+/* Sign in button */
+.form-button {
+    background-color: var(--main-red-subdued);
+    color: var(--pure-white);
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    border: 2px solid transparent;
+    border: none;
+    border-radius: 25px; /* Rounded corners */
+    padding: 10px 30px; /* Adjust button padding */
+    cursor: pointer;
+    box-shadow: var(--main-light-shading);
+    width: auto; /* Ensure button is sized to its content */
+}
+
+.form-button:hover {
+    color: var(--main-yellow-bold);
+    background-color: var(--main-red);
+    box-shadow: var(--main-shading-with-drop-shadow);
+}
+
+/* Styling for the clickable text under the button */
+.login-text {
+    font-family: 'Nunito', sans-serif; /* Match the page's font */
+    font-style: normal;
+    font-weight: 900;
+    font-size: 11px; /* Smaller text size */
+    color: var(--pure-white); /* White text */
+    text-align: center;
+    margin-top: 8px; /* Space between button and text */
+    cursor: pointer; /* Show pointer on hover */
+    text-decoration: underline; /* Add underline to indicate a link */
+}
+
+.login-text:hover {
+    color: var(--main-yellow-bold); /* Highlight text on hover */
+}
 
 /* Waves container */
 .waves-container {
