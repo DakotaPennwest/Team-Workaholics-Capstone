@@ -1,0 +1,225 @@
+/* Define variables */
+:root {
+	
+    /* Color variables */
+    --main-yellow-subdued: #E3B318;
+    --main-yellow-bold: #FFBF10;
+    --main-blue: #1863A9;
+    --main-green: #318F30;
+    --main-off-white: #F0EAD4;
+    --main-red: #E63C36;
+    --main-cyan: #2BB3C5;
+    --muted-blue-1: #88D6F8;
+    --muted-blue-2: #A3CDED;
+    --very-muted-blue: #AFC3CA;
+    --side-bar-off-white: #E5DEC6;
+    --pure-white: #FFFFFF;
+    --side-bar-bg-color: #E3B318;
+    --main-green-subdued: #378636;
+    --main-blue-subdued: #2F6496;
+    --main-red-subdued: #D8423D;
+    --main-cyan-subdued: #207F8B;
+    --main-purple: #8D3CAA;
+    --main-black: #1D1D1B;
+
+    /* Shading variables */
+    --main-light-shading: 
+    inset 6px 6px 20px rgba(255, 255, 255, 0.15),
+    inset 3.6px 3.6px 4px rgba(255, 255, 255, 0.5),
+    inset -3.6px -3.6px 16px rgba(0, 0, 0, 0.24);
+
+    --main-drop-shadow: 
+    5px 5px 6px rgba(0, 0, 0, 0.25);
+
+    --main-shading-with-drop-shadow: 
+    var(--main-light-shading),
+    var(--main-drop-shadow);		
+}
+
+
+/* General body styling */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-off-white);
+    background-image: url('../images/bgpattern.png');	/* Tiled BG Image */
+    background-size: 20%;
+    background-repeat: repeat;
+}
+
+/* Styles for the top bar */
+.top-bar {
+    z-index: 10; /* Ensures top bar is always on top of other elements */
+    background-color: var(--main-blue); /* Blue bar color */
+    height: 10vh; /* Makes height 10% of viewport height. Also makes it so it wont scale when zooming */
+    width: 100%; /* Full width across the screen */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    position: fixed; /* Fixed to the top of the viewport */
+    top: 0; /* Align to the top */
+    left: 0; /* Full width alignment */
+}
+
+/* Styles for the text inside the top bar */
+.page-title {
+    font-family: 'Nunito', sans-serif; /* Font family */
+    font-style: normal; /* Normal style */
+    font-weight: 900; /* Bold weight */
+    font-size: 5vh; /* Makes height 5% of viewport height. Also makes it so it wont scale when zooming */
+    color: var(--pure-white); /* White text color */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center-align text */
+}
+
+/* Back arrow container */
+.back-arrow {
+    position: absolute; /* Position relative to the top bar */
+    left: 20px; /* Adjust horizontal alignment from the left */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically center the content */
+    cursor: pointer; /* Make it clickable for user feedback */
+    z-index: 11; /* Ensure it appears above other content */
+}
+
+/* Back arrow icon */
+.back-arrow-icon {
+    height: 3.5vh; /* Adjust size relative to viewport height */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 5px; /* Space between icon and text */
+}
+
+/* Back arrow text */
+.go-back-text {
+    font-family: 'Nunito', sans-serif; /* Consistent font */
+    font-style: normal; /* Normal style */
+    font-weight: 900; /* Slightly lighter than title */
+    font-size: 3.5vh; /* Small text size relative to viewport height */
+    color: var(--pure-white); /* Match top bar color theme */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center-align text within container */
+}
+
+/* Main screen container */
+/* Content that is below top bar and above the waves at the bottom */
+.main-screen-container {
+    position: relative; /* Make this container the reference point for children */
+    width: 100%; /* Full width of the screen */
+    height: calc(100vh - 10vh); /* Full height of the screen minus the top bar */
+    transform: scale(1.0) translate(0, 5vh); /* Let's us scale and move the main content. Helpful for later.*/
+    transform-origin: center; /* Ensure scaling is centered */
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+}
+
+
+/* Container to center the forms */
+.content-container {
+    width: 900px;
+    height: 550px;
+    position: relative; /* Ensures child elements are positioned relative to it */
+    z-index: 0; /* Ensure the background stays behind */
+}
+
+/* Holds the chat bubble that directs the user what to do*/
+.chat-bubble-container{
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if needed */
+    margin-top: 9%; /* Add spacing between the input fields and the button */
+}
+
+/* Chat bubble that is meant to come from the application to the user */
+.chat-bubble-from {
+    display: inline-block; /* Ensure the width scales to fit the text */
+    background-color: var(--main-blue);
+    color: var(--pure-white);
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 33px;
+    border-radius: 25px; /* Rounded corners */
+    border-bottom-left-radius: 5px; /* Slightly sharper bottom-left corner */
+    padding: 10px 30px; /* Adjust padding */
+    box-shadow: var(--main-light-shading);
+}
+
+
+/* Container for account type boxes */
+.account-type-boxes-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow rows to wrap */
+    justify-content: center; /* Spread input pairs horizontally */
+    align-items: center; /* Vertically align items */
+    column-gap: 50px; /* Space between coumns */
+    row-gap: 0px;  /* Space between rows */
+    margin: 0px;
+    margin-top: 50px;
+}
+
+
+/* Account type box */
+.account-type-box {
+    background: var(--main-blue);
+    width: 40%;
+    height: 300px;
+    border-radius: 50px;
+    position: relative; /* Ensures child elements are positioned relative to it */
+    overflow: hidden; /* Clip child elements, including the SVG */
+    box-shadow: var(--main-shading-with-drop-shadow);
+    z-index: 0; /* Ensure it stays behind forground rectangle */
+    cursor: pointer;
+    border: none;
+}
+
+/* Add the SVG to the account creation form */
+.account-type-box::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the rectangle */
+    height: 100%; /* Full height of the rectangle */
+    background-image: url('../images/loginimg.svg'); /* Add the SVG as a background */
+    background-size: cover; /* Ensure the SVG covers the entire area */
+    background-position: center; /* Center the SVG */
+    opacity: 0.35; /* Set the opacity */
+}
+
+.account-type-box:hover {
+    filter: contrast(125%) brightness(120%);
+}
+
+/* Waves container */
+.waves-container {
+    position: fixed; /* Fixed at the bottom of the viewport */
+    bottom: 0; /* Align with the bottom of the viewport */
+    left: 0; /* Full-width placement */
+    width: 100%;
+    pointer-events: none; /* Ensure waves don’t interfere with interactions */
+    z-index: 5; /* Default z-index, can adjust later */
+    transform-origin: bottom; /* Set the scaling origin to the bottom edge */
+    transform: scaleY(0.8); /* Scale the wave vertically to 80% of its original height */
+}
+
+/* Individual wave styling */
+.wave {
+    position: absolute; /* Relative to the waves-container */
+    bottom: 0; /* Stick to the bottom of the container */
+    width: 100%; /* Stretch across the entire container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.back-wave {
+    z-index: 1; /* Lowest wave */
+}
+
+.middle-wave {
+    z-index: 2; /* Middle layer */
+}
+
+.front-wave {
+    z-index: 3; /* Top wave */
+}
