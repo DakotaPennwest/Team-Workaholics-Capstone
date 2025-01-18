@@ -34,6 +34,11 @@
     --main-shading-with-drop-shadow: 
     var(--main-light-shading),
     var(--main-drop-shadow);		
+
+    --main-light-shading-no-top: 
+    inset 6px 0px 20px rgba(255, 255, 255, 0.15),
+    inset 3.6px 0px 4px rgba(255, 255, 255, 0.5),
+    inset -3.6px 0px 16px rgba(0, 0, 0, 0.24);
 }
 
 
@@ -80,6 +85,19 @@ body {
     align-items: center; /* Vertically center the content */
     cursor: pointer; /* Make it clickable for user feedback */
     z-index: 11; /* Ensure it appears above other content */
+}
+
+/* Changes the color of the go back text to yellow and adds underline */
+.back-arrow:hover .back-arrow-icon, 
+.back-arrow:hover .go-back-text {
+    text-decoration: underline; 
+    text-decoration: var(--pure-white) wavy underline;
+    text-underline-offset: 20%;
+    text-decoration-thickness: 10%; 
+    /* This requires a website: https://codepen.io/sosuke/pen/Pjoqqp*/
+    /* This will turn any black item into the specific hex code chosen. In this case, I am changing it to #FFBF10 (main yellow bold)*/
+    /*Note: you have to take the difference of the invert % from 100. IN this case invert % was 84 - 100 = 16%*/
+    filter: invert(16%) sepia(27%) saturate(3154%) hue-rotate(347deg) brightness(100%) contrast(102%); 
 }
 
 /* Back arrow icon */
@@ -188,8 +206,17 @@ body {
     opacity: 0.35; /* Set the opacity */
 }
 
-.account-type-box:hover {
-    filter: contrast(125%) brightness(120%);
+.account-type-box:hover { 
+    filter: contrast(105%) brightness(110%);  /* Makes button brighter*/
+}
+
+/* This needs to be separated as the filter won't work if all put together */
+/* This adds the underline under the text when the user hovers over each button */
+.account-type-box:hover .account-type-box-text { 
+    text-decoration: underline;  /* Adds underline */
+    text-decoration: var(--pure-white) wavy underline; /* Makes underline wavy */
+    text-underline-offset: 20%; /* lowers underline down 20% */
+    text-decoration-thickness: 10%; /* Makes underline a certain thinkness*/
 }
 
 /* Styling for User Icon */
@@ -209,6 +236,32 @@ body {
     transform-origin: center; /* Ensure scaling is centered */
     opacity: 0.70; /* Set the opacity */
 }
+
+/* Red background text container */
+.account-type-box-text {
+    position: absolute; /* Position relative to the account box */
+    top: 50%; /* Start positioning from the vertical center */
+    left: 50%; /* Start positioning from the horizontal center */
+    transform: translate(-50%, -50%); /* Adjust position to perfectly center */
+    width: 100%; /* Set the width relative to the box */
+    height: 50%; /* Fixed height for consistency */
+    background: rgba(230, 60, 54, 0.8); /* Red background with 80% opacity */
+    color: var(--pure-white); /* White text color */
+    font-family: 'Nunito', sans-serif; /* Match font family */
+    font-style: normal;
+    font-weight: 900;
+    font-size: 27px; /* Adjust font size for readability */
+    line-height: 45px; /* Space between lines of text */
+    text-align: center; /* Center the text horizontally */
+    display: flex; /* Use flexbox for vertical centering */
+    align-items: center; /* Vertically align text */
+    justify-content: center; /* Horizontally align text */
+    padding: 0 10px; /* Optional: Add horizontal padding */
+    box-sizing: border-box; /* Include padding in height and width */
+    z-index: 2; /* Ensure it stays above the icon */
+    box-shadow: var(--main-light-shading-no-top);
+}
+
 
 /* Waves container */
 .waves-container {
