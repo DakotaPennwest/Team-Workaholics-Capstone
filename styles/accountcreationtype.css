@@ -143,7 +143,7 @@ body {
     border-radius: 25px; /* Rounded corners */
     border-bottom-left-radius: 5px; /* Slightly sharper bottom-left corner */
     padding: 10px 30px; /* Adjust padding */
-    box-shadow: var(--main-light-shading);
+    box-shadow: var(--main-shading-with-drop-shadow);
 }
 
 
@@ -175,7 +175,7 @@ body {
 }
 
 /* Add the SVG to the account creation form */
-.account-type-box::after {
+.account-type-box::before {
     content: "";
     position: absolute;
     top: 0;
@@ -190,6 +190,24 @@ body {
 
 .account-type-box:hover {
     filter: contrast(125%) brightness(120%);
+}
+
+/* Styling for User Icon */
+.user-icon {
+    width: 55%; /* Adjust size (reduce to 70% of the container's width) */
+    height: auto; /* Maintain aspect ratio */
+    transform: translate(4px, 10%); /* Moves icon down and barely to the left */
+    transform-origin: center; /* Ensure scaling is centered */
+    opacity: 0.70; /* Set the opacity */
+}
+
+/* Styling for Parent and CHild User Icon */
+.parent-child-user-icon {
+    width: 72%; /* Adjust size (reduce to 70% of the container's width) */
+    height: auto; /* Maintain aspect ratio */
+    transform: translate(4px, 12%); /* Moves icon down and barely to the left */
+    transform-origin: center; /* Ensure scaling is centered */
+    opacity: 0.70; /* Set the opacity */
 }
 
 /* Waves container */
