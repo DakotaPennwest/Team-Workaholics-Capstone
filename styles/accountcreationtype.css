@@ -52,6 +52,7 @@ body {
     background-repeat: repeat;
 }
 
+
 /* Styles for the top bar */
 .top-bar {
     z-index: 10; /* Ensures top bar is always on top of other elements */
@@ -63,7 +64,7 @@ body {
     align-items: center; /* Center the content vertically */
     position: fixed; /* Fixed to the top of the viewport */
     top: 0; /* Align to the top */
-    left: 0; /* Full width alignment */
+    min-width: 100%;
 }
 
 /* Styles for the text inside the top bar */
@@ -77,14 +78,34 @@ body {
     text-align: center; /* Center-align text */
 }
 
-/* Back arrow container */
+/* Back Arrow Styling */
 .back-arrow {
-    position: absolute; /* Position relative to the top bar */
-    left: 20px; /* Adjust horizontal alignment from the left */
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Vertically center the content */
-    cursor: pointer; /* Make it clickable for user feedback */
-    z-index: 11; /* Ensure it appears above other content */
+    position:absolute; /* Makes position relative to I believe top-bar-left*/
+    left: 3vh;
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center vertically */
+    cursor: pointer; /* Maintain the pointer effect */
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    padding: 0; /* Remove padding */
+}
+
+/* Back arrow icon */
+.back-arrow-icon {
+    height: 3.5vh; /* Adjust size relative to viewport height */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 5%; /* Space between icon and text */
+}
+
+/* Back arrow text */
+.go-back-text {
+    font-family: 'Nunito', sans-serif; /* Consistent font */
+    font-style: normal; /* Normal style */
+    font-weight: 900; /* Slightly lighter than title */
+    font-size: 3.5vh; /* Small text size relative to viewport height */
+    color: var(--pure-white); /* Match top bar color theme */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center-align text within container */
 }
 
 /* Changes the color of the go back text to yellow and adds underline */
@@ -97,25 +118,7 @@ body {
     /* This requires a website: https://codepen.io/sosuke/pen/Pjoqqp*/
     /* This will turn any black item into the specific hex code chosen. In this case, I am changing it to #FFBF10 (main yellow bold)*/
     /*Note: you have to take the difference of the invert % from 100. IN this case invert % was 84 - 100 = 16%*/
-    filter: invert(16%) sepia(27%) saturate(3154%) hue-rotate(347deg) brightness(100%) contrast(102%); 
-}
-
-/* Back arrow icon */
-.back-arrow-icon {
-    height: 3.5vh; /* Adjust size relative to viewport height */
-    width: auto; /* Maintain aspect ratio */
-    margin-right: 5px; /* Space between icon and text */
-}
-
-/* Back arrow text */
-.go-back-text {
-    font-family: 'Nunito', sans-serif; /* Consistent font */
-    font-style: normal; /* Normal style */
-    font-weight: 900; /* Slightly lighter than title */
-    font-size: 3.5vh; /* Small text size relative to viewport height */
-    color: var(--pure-white); /* Match top bar color theme */
-    margin: 0; /* Remove default margin */
-    text-align: center; /* Center-align text within container */
+    filter: invert(16%) sepia(27%) saturate(3154%) hue-rotate(347deg) brightness(100%) contrast(102%);   
 }
 
 /* Main screen container */
