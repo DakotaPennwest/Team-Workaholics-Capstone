@@ -1,0 +1,42 @@
+/* Define variables */
+:root {
+	
+    /* Color variables */
+    --main-yellow-subdued: #E3B318;
+    --main-yellow-bold: #FFBF10;
+    --main-blue: #1863A9;
+    --main-green: #318F30;
+    --main-off-white: #F0EAD4;
+    --main-red: #E63C36;
+    --main-cyan: #2BB3C5;
+    --muted-blue-1: #88D6F8;
+    --muted-blue-2: #A3CDED;
+    --very-muted-blue: #AFC3CA;
+    --side-bar-off-white: #E5DEC6;
+    --pure-white: #FFFFFF;
+    --side-bar-bg-color: #E3B318;
+    --main-green-subdued: #378636;
+    --main-blue-subdued: #2F6496;
+    --main-red-subdued: #D8423D;
+    --main-cyan-subdued: #207F8B;
+    --main-purple: #8D3CAA;
+    --main-black: #1D1D1B;
+
+    /* Shading variables */
+    --main-light-shading: 
+    inset 6px 6px 20px rgba(255, 255, 255, 0.15),
+    inset 3.6px 3.6px 4px rgba(255, 255, 255, 0.5),
+    inset -3.6px -3.6px 16px rgba(0, 0, 0, 0.24);
+
+    --main-drop-shadow: 
+    5px 5px 6px rgba(0, 0, 0, 0.25);
+
+    --main-shading-with-drop-shadow: 
+    var(--main-light-shading),
+    var(--main-drop-shadow);		
+
+    --main-light-shading-no-top: 
+    inset 6px 0px 20px rgba(255, 255, 255, 0.15),
+    inset 3.6px 0px 4px rgba(255, 255, 255, 0.5),
+    inset -3.6px 0px 16px rgba(0, 0, 0, 0.24);
+}
