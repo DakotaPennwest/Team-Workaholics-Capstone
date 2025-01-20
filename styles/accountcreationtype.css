@@ -78,8 +78,8 @@
 
 .account-type-box:hover { 
     filter: contrast(105%) brightness(110%);  /* Makes button brighter*/
-    border: 5px solid var(--main-red); /* Highlight on focus */    
-    margin: -5px; /* Needed to erase the extra size the border adds. This keeps everything in place */  
+    box-shadow: 0 0 0 5px var(--main-red), var(--main-shading-with-drop-shadow); /* Add a red outline and default shading */ 
+    /* Note: I am using this rather than using something like  border: 5.0px solid var(--main-red); margin: -5px;  Because this moved things weirdly*/ 
 }
 
 /* This needs to be separated as the filter won't work if all put together */
@@ -132,4 +132,5 @@
     box-sizing: border-box; /* Include padding in height and width */
     z-index: 2; /* Ensure it stays above the icon */
     box-shadow: var(--main-light-shading-no-top);
+    border: none;
 }
