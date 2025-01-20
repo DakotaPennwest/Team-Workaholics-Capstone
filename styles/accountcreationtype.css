@@ -87,7 +87,7 @@
 .account-type-box:hover .account-type-box-text { 
     text-decoration: underline;  /* Adds underline */
     text-decoration: var(--pure-white) wavy underline; /* Makes underline wavy */
-    text-underline-offset: 20%; /* lowers underline down 20% */
+    text-underline-offset: 25%; /* lowers underline down 20% */
     text-decoration-thickness: 10%; /* Makes underline a certain thinkness*/
 }
 
