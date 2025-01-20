@@ -1,0 +1,136 @@
+/* Container to center the forms */
+.content-container {
+    width: 900px;
+    height: 550px;
+    position: relative; /* Ensures child elements are positioned relative to it */
+    z-index: 0; /* Ensure the background stays behind */
+}
+
+/* Holds the chat bubble that directs the user what to do*/
+.chat-bubble-container{
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if needed */
+    margin-top: 4vh; /* Add spacing between chat bubble and top bar */
+}
+
+/* Chat bubble that is meant to come from the application to the user */
+.chat-bubble-from {
+    display: inline-block; /* Ensure the width scales to fit the text */
+    background-color: var(--main-blue);
+    color: var(--pure-white);
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 33px;
+    border-radius: 25px; /* Rounded corners */
+    border-bottom-left-radius: 5px; /* Slightly sharper bottom-left corner */
+    padding: 10px 30px; /* Adjust padding */
+    box-shadow: var(--main-shading-with-drop-shadow);
+}
+
+
+/* Container for account type boxes */
+.account-type-boxes-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow rows to wrap */
+    justify-content: center; /* Spread input pairs horizontally */
+    align-items: center; /* Vertically align items */
+    column-gap: 50px; /* Space between coumns */
+    row-gap: 0px;  /* Space between rows */
+    margin: 0px;
+    margin-top: 50px;
+}
+
+
+.account-type-box {
+    display: block; /* Ensure it behaves like a block element */
+    text-decoration: none; /* Remove default link underline */
+    color: inherit; /* Inherit text color */
+    cursor: pointer; /* Show pointer on hover */
+    /* Keep existing styles for button-like behavior */
+    background: var(--main-blue);
+    width: 40%;
+    height: 300px;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--main-shading-with-drop-shadow);
+    z-index: 0;
+    text-align: center; 
+}
+
+
+/* Add the SVG to the account creation form */
+.account-type-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the rectangle */
+    height: 100%; /* Full height of the rectangle */
+    background-image: url('../images/loginimg.svg'); /* Add the SVG as a background */
+    background-size: cover; /* Ensure the SVG covers the entire area */
+    background-position: center; /* Center the SVG */
+    opacity: 0.35; /* Set the opacity */
+}
+
+.account-type-box:hover { 
+    filter: contrast(105%) brightness(110%);  /* Makes button brighter*/
+    box-shadow: 0 0 0 5px var(--main-red), var(--main-shading-with-drop-shadow); /* Add a red outline and default shading */ 
+    /* Note: I am using this rather than using something like  border: 5.0px solid var(--main-red); margin: -5px;  Because this moved things weirdly*/ 
+}
+
+/* This needs to be separated as the filter won't work if all put together */
+/* This adds the underline under the text when the user hovers over each button */
+.account-type-box:hover .account-type-box-text { 
+    text-decoration: underline;  /* Adds underline */
+    text-decoration: var(--pure-white) wavy underline; /* Makes underline wavy */
+    text-underline-offset: 25%; /* lowers underline down 20% */
+    text-decoration-thickness: 10%; /* Makes underline a certain thinkness*/
+}
+
+/* Styling for User Icon */
+.user-icon {
+    width: 55%; /* Adjust size (reduce to 70% of the container's width) */
+    height: auto; /* Maintain aspect ratio */
+    transform: translate(4px, 10%); /* Moves icon down and barely to the left */
+    transform-origin: center; /* Ensure scaling is centered */
+    opacity: 0.70; /* Set the opacity */
+}
+
+/* Styling for Parent and CHild User Icon */
+.parent-child-user-icon {
+    width: 72%; /* Adjust size (reduce to 70% of the container's width) */
+    height: auto; /* Maintain aspect ratio */
+    transform: translate(4px, 12%); /* Moves icon down and barely to the left */
+    transform-origin: center; /* Ensure scaling is centered */
+    opacity: 0.70; /* Set the opacity */
+}
+
+/* Red background text container */
+.account-type-box-text {
+    position: absolute; /* Position relative to the account box */
+    top: 50%; /* Start positioning from the vertical center */
+    left: 50%; /* Start positioning from the horizontal center */
+    transform: translate(-50%, -50%); /* Adjust position to perfectly center */
+    width: 100%; /* Set the width relative to the box */
+    height: 50%; /* Fixed height for consistency */
+    background: rgba(230, 60, 54, 0.8); /* Red background with 80% opacity */
+    color: var(--pure-white); /* White text color */
+    font-family: 'Nunito', sans-serif; /* Match font family */
+    font-style: normal;
+    font-weight: 900;
+    font-size: 27px; /* Adjust font size for readability */
+    line-height: 45px; /* Space between lines of text */
+    text-align: center; /* Center the text horizontally */
+    display: flex; /* Use flexbox for vertical centering */
+    align-items: center; /* Vertically align text */
+    justify-content: center; /* Horizontally align text */
+    padding: 0 10px; /* Optional: Add horizontal padding */
+    box-sizing: border-box; /* Include padding in height and width */
+    z-index: 2; /* Ensure it stays above the icon */
+    box-shadow: var(--main-light-shading-no-top);
+    border: none;
+}
