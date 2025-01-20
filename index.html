@@ -4,13 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In</title>
-  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/stylevariables.css">
+  <link rel="stylesheet" href="styles/indexlogin.css">
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
 
 
 	<!-- Top bar -->
 	<div class="top-bar">
+        <!-- Title of current page -->
 		<h1 class="page-title">Login</h1>
 	</div>
 	
@@ -27,21 +31,19 @@
 
 
 		<!-- Container for the centered rectangles -->
-		<div class="container">
+		<div class="form-container">
 		
 			<!-- Blue rectangle (background rectangle) -->
-			<div class="background-rectangle">
+			<div class="login-form">
 				
 				<!-- Left-side content container -->
 				<div class="left-content-container">
-					<!-- Google logo -->
-					<img class="google-logo" src="./images/googleicon.svg" alt="Google Logo">
 
 					<!-- "Sign in" text -->
 					<h2 class="sign-in-text">Sign in</h2>
 
 					<!-- Subtitle text -->
-					<p class="subtitle-text">Use your Google Account</p>
+					<p class="subtitle-text">You can sign in with your <br> email or username</p>
 
 					<!-- Button container for the button and text above it -->
 					<div class="button-container">
@@ -49,22 +51,35 @@
 						<p class="create-account-text">Don’t have an account?</p>
 
 						<!-- Create Account button -->
-						<button class="create-account-button">Create Account</button>
+						<a href="accountcreationtype.html" class="create-account-button">Create Account</a>
 					</div>
 				</div>
 				
 				
 				<!-- Yellow rectangle (foreground rectangle) -->
-				<div class="foreground-rectangle">
-					<!-- Right-side content container -->
-					<div class="right-content-container">
-						<!-- Email label -->
-						<label for="email-input" class="email-label">Email</label>
-						<!-- Email input box -->
-						<input type="text" id="email-input" class="email-input" placeholder="Enter your email">
-						<!-- Sign in button -->
-						<button class="sign-in-button">Sign In</button>
+				<div class="right-content-container">
+					
+					<!-- Input Fields -->
+					<div class="form-input-container">
+
+						<div class="input-wrapper">
+							<label for="emailInput" class="input-label">Email</label>
+							<input type="email" id="emailInput" class="text-input-box" placeholder="Ex: john@example.com">
+							<p id="emailError" class="error-message"></p>
+						</div>
+						<div class="input-wrapper">
+							<label for="passwordInput" class="input-label">Password</label>
+							<input type="password" id="passwordInput" class="text-input-box" placeholder="">
+							<p id="passwordError" class="error-message"></p>
+						</div>
+
 					</div>
+
+					<!-- Sign in button -->
+					<div class="form-button-container">
+						<button class="form-button">Sign In</button>
+					</div>
+
 				</div>
 				
 			</div>

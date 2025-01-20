@@ -1,0 +1,294 @@
+
+
+/* Rainbow styling */
+.rainbow {
+  position: absolute; /* Position relative to the main-screen-container */
+  top: 50%; /* Vertically center within the container */
+  left: 50%; /* Horizontally center within the container */
+  transform: translate(-50%, -50%) translate(-240px, -370px); /* Adjust to desired position */
+  height: auto; /* Maintain aspect ratio */
+  z-index: -5; /* Default z-index for clouds */
+  pointer-events: none; /* Make it non-interactive */
+  user-select: none; /* Makes image not selectable*/
+}
+
+/* Cloud styling */
+.cloud {
+  position: absolute; /* Position relative to the main-screen-container */
+  top: 50%; /* Vertically center within the container */
+  left: 50%; /* Horizontally center within the container */
+  transform: translate(-50%, -50%); /* Adjust based on the container's center */
+  height: auto; /* Maintain aspect ratio */
+  z-index: 1; /* Default z-index for clouds */
+  pointer-events: none; /* Make it non-interactive */
+  user-select: none; /* Makes image not selectable*/
+}
+
+/* Individual cloud positions with offsets */
+.cloud1 {
+  width: 290px;
+  transform: translate(-50%, -50%) translate(380px, 160px); /* Offset from the container's center */
+}
+
+.cloud2 {
+  width: 220px;
+  transform: translate(-50%, -50%) translate(160px, -200px); /* Offset from the container's center */
+}
+
+.cloud3 {
+  width: 220px;
+  z-index: -2; /* Place this behind the container */
+  transform: translate(-50%, -50%) translate(-435px, 0px); /* Offset from the container's center */
+}
+
+/* Container to center the rectangles */
+.form-container {
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+  height: calc(90vh); /* Full viewport height minus top bar */
+  transform: scale(0.75); /* Scale everything inside by 75% */
+  transform-origin: center; /* Ensure scaling is centered */
+}
+
+/* Background (blue) rectangle styling */
+.login-form {
+  background: var(--main-blue);
+  width: 1000px;
+  height: 510px;
+  border-radius: 50px;
+  position: relative; /* Ensures child elements are positioned relative to it */
+  overflow: hidden; /* Clip child elements, including the SVG */
+  box-shadow: var(--main-shading-with-drop-shadow);
+  z-index: 0; /* Ensure it stays behind forground rectangle */
+  transform: scale(1.0) translate(0, 0); /* Let's us scale and move the main content. Helpful for later.*/
+  transform-origin: center; /* Ensure scaling is centered */
+}
+
+/* Add the SVG to the background rectangle */
+.login-form::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width of the rectangle */
+  height: 100%; /* Full height of the rectangle */
+  background-image: url('../images/loginimg.svg'); /* Add the SVG as a background */
+  background-size: cover; /* Ensure the SVG covers the entire area */
+  background-position: center; /* Center the SVG */
+  opacity: 0.35; /* Set the opacity */
+  pointer-events: none; /* Make it non-interactive */
+}
+
+
+/* Left-side content container */
+.left-content-container {
+  position: absolute;
+  top: 25px; /* Align with top of the blue rectangle */
+  left: 25px; /* Align with the left margin of the blue rectangle */
+  right: 25px; /* Align with the right margin of the blue rectangle */
+  bottom: 25px; /* Align with the bottom of the blue rectangle */
+  width: 295px; /* Bg Rectangle width (1000) - Foreground Rectangle Width (630)  - 75 (all paddings)*/
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  z-index: 1; /* Ensure this rectangle appears on top */
+}
+
+
+/* "Sign in" text */
+.sign-in-text {
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 63px;
+  color: var(--pure-white);
+  margin: 0; /* Remove default margins */
+  text-align: center;
+  margin-top: 30%;
+}
+
+/* Subtitle text "Use your google account" */
+.subtitle-text {
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--pure-white);
+  margin: 0; /* Remove default margins */
+  text-align: center;
+}
+
+/* "Don't have an account?" text */
+.create-account-text {
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 30px;
+  color: var(--pure-white);
+  margin: 2%; /* Remove default margins */
+}
+
+/* Create Account button */
+.create-account-button {
+  background-color: var(--main-green-subdued);
+  color: var(--pure-white);
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 33px;
+  border: none;
+  border-radius: 17px; /* Rounded corners */
+  padding: 10px 20px; /* Adjust button padding */
+  cursor: pointer;
+  box-shadow: var(--main-shading-with-drop-shadow);
+  position:relative;
+  text-decoration: none;
+}
+
+.create-account-button:hover {
+  background-color: var(--main-green); /* Slightly subdued color on hover */
+  box-shadow: 0 0 0 5px var(--main-yellow-bold), var(--main-shading-with-drop-shadow); /* Add a red outline and default shading */ 
+  color: var(--main-yellow-bold);
+  text-decoration: underline; 
+    text-decoration: var(--main-yellow-bold) wavy underline;
+    text-underline-offset: 20%;
+    text-decoration-thickness: 10%; 
+}
+
+/* Container for the button and the text above it */
+.button-container {
+  display: flex;
+  flex-direction: column; /* Stack the button and text vertically */
+  align-items: center; /* Center horizontally */
+  margin-top: 35%; /* Add some spacing from the elements above */
+  width: 100%; /* Ensure it spans the full width of the left content container */
+}
+
+
+/* Foreground (yellow) rectangle styling */
+.right-content-container {
+  width: 630px;
+  height: 460px;
+  border-radius: 34px;
+  box-shadow: var(--main-shading-with-drop-shadow);
+  position: absolute; /* Position relative to the parent */
+  right: 25px; /* Leave a 25px gap on the right */
+  top: 25px; /* Leave a 25px gap on the top */
+  bottom: 25px; /* Leave a 25px gap on the bottom */
+  margin: auto; /* Center within the parent rectangle */
+  z-index: 1; /* Ensure this rectangle appears on top */
+  opacity: 1; /* Keep the rectangle fully opaque */
+}
+
+/* Create a pseudo-element for the foreground opacity. This lets the foreground rectangle be low opacity but nothing else on top is */
+.right-content-container::before {
+  content: '';
+  position: absolute;
+  top: 50;
+  left: 50;
+  width: 100%;
+  height: 100%;
+  background: var(--main-yellow-subdued);
+  border-radius: 34px;
+  opacity: 0.7; /* Apply the 70% opacity here */
+  z-index: -1; /* Ensure it stays behind the content */
+}
+
+/* Container for input fields */
+.form-input-container {
+  display: flex;
+  flex-direction: column; /* Stack input pairs vertically */
+  justify-content: center; /* Center inputs vertically if needed */
+  align-items:center; /* Center inputs horizontally */
+  margin: 0px;
+  margin-top: 10%;
+}
+
+/* Wrapper for each input field */
+.input-wrapper {
+  display: flex;
+  flex-direction: column; /* Stack label and input vertically */
+}
+
+/* Label Styling */
+.input-label {
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 30px;
+  color: var(--pure-white);
+  margin-bottom: 4px; /* Space between label and input */
+  text-align: left;
+}
+
+/* Input Box Styling */
+.text-input-box {
+  width: 450px; /* Full width of the wrapper */
+  height: 45px; /* Standard input height */
+  background: var(--main-off-white);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 20px;
+  color: var(--main-blue-subdued);
+  border: none;
+  border-radius: 10px;
+  padding: 10px; /* Inner padding for text */
+  outline: none;
+  box-shadow: var(--main-light-shading);
+}
+
+.text-input-box:focus {
+  box-shadow: 0 0 0 3px var(--main-green), var(--main-shading-with-drop-shadow); /* Add a yellow outline and default shading */ 
+}
+
+/* Error Message Styling */
+.error-message {
+  font-family: 'Nunito', sans-serif; /* Match the rest of the page's font */
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--pure-white); /* Red text color for errors */
+  margin-top: 5px; /* Add some space above the error message */
+  text-align: right; /* Align the error message to the right */
+  min-height: 20px; /* Reserve space for the error message */
+  /*This adds an outline around error message */
+  /* This was the only way I was able to get the outline to work and it's not the best */
+  text-shadow: 
+      -1px -1px 0 var(--main-red),  
+      1px -1px 0 var(--main-red),
+      -1px  1px 0 var(--main-red),
+      1px  1px 0 var(--main-red);
+}
+
+/* Create Account button styling */
+.form-button-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically if needed */
+}
+
+/* Sign in button */
+.form-button {
+  background-color: var(--main-red-subdued);
+  color: var(--pure-white);
+  font-family: 'Nunito', sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 25px;
+  border: 2px solid transparent;
+  border: none;
+  border-radius: 25px; /* Rounded corners */
+  padding: 10px 30px; /* Adjust button padding */
+  cursor: pointer;
+  box-shadow: var(--main-light-shading);
+  width: auto; /* Ensure button is sized to its content */
+}
+
+.form-button:hover {
+  color: var(--main-yellow-bold);
+  background-color: var(--main-red);
+  box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow); /* Add a yellow outline and default shading */ 
+}
+
