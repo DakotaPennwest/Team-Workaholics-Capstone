@@ -11,7 +11,7 @@
     display: flex;
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically if needed */
-    margin-top: 2vh; /* Add spacing between chat bubble and top bar */
+    margin-top: 4vh; /* Add spacing between chat bubble and top bar */
 }
 
 /* Chat bubble that is meant to come from the application to the user */

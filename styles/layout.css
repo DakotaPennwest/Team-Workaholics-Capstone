@@ -100,6 +100,8 @@ body {
     z-index: 5; /* Default z-index, can adjust later */
     transform-origin: bottom; /* Set the scaling origin to the bottom edge */
     transform: scaleY(0.8); /* Scale the wave vertically to 80% of its original height */
+    height: 10vh;
+    max-height: 10vh;
 }
 
 /* Individual wave styling */
