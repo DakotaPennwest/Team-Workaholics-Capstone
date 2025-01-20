@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign In</title>
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/stylevariables.css">
   <link rel="stylesheet" href="styles/accountcreation.css">
   <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 </head>
@@ -12,11 +14,14 @@
 
 	<!-- Top bar -->
 	<div class="top-bar">
+        <!-- Title of current page -->
 		<h1 class="page-title">Create Account</h1>
-        <div class="back-arrow">
+        <!-- Go Back arrow -->
+         <!-- Note: I can see this needed to be changed. Needs testing to ensure this method works -->
+        <a href="javascript:history.back()" class="back-arrow">
             <img src="./images/backarrow.svg" alt="back arrow" class="back-arrow-icon">
             <h2 class="go-back-text">Back</h2>
-        </div>
+        </a>
 	</div>
 	
 	<!-- Main screen container -->
@@ -83,7 +88,7 @@
 					</div>
 
 					<!-- Clickable text -->
-					<p class="login-text">Already have an account? Login here</p>
+					<a href="index.html" class="login-text">Already have an account? Login here</a>
 
 				</div>
 				

@@ -1,122 +1,9 @@
-/* Define variables */
-:root {
-	
-    /* Color variables */
-    --main-yellow-subdued: #E3B318;
-    --main-yellow-bold: #FFBF10;
-    --main-blue: #1863A9;
-    --main-green: #318F30;
-    --main-off-white: #F0EAD4;
-    --main-red: #E63C36;
-    --main-cyan: #2BB3C5;
-    --muted-blue-1: #88D6F8;
-    --muted-blue-2: #A3CDED;
-    --very-muted-blue: #AFC3CA;
-    --side-bar-off-white: #E5DEC6;
-    --pure-white: #FFFFFF;
-    --side-bar-bg-color: #E3B318;
-    --main-green-subdued: #378636;
-    --main-blue-subdued: #2F6496;
-    --main-red-subdued: #D8423D;
-    --main-cyan-subdued: #207F8B;
-    --main-purple: #8D3CAA;
-    --main-black: #1D1D1B;
-
-    /* Shading variables */
-    --main-light-shading: 
-    inset 6px 6px 20px rgba(255, 255, 255, 0.15),
-    inset 3.6px 3.6px 4px rgba(255, 255, 255, 0.5),
-    inset -3.6px -3.6px 16px rgba(0, 0, 0, 0.24);
-
-    --main-drop-shadow: 
-    5px 5px 6px rgba(0, 0, 0, 0.25);
-
-    --main-shading-with-drop-shadow: 
-    var(--main-light-shading),
-    var(--main-drop-shadow);		
-}
-
-
-/* General body styling */
-body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--main-off-white);
-    background-image: url('../images/bgpattern.png');	/* Tiled BG Image */
-    background-size: 20%;
-    background-repeat: repeat;
-}
-
-/* Styles for the top bar */
-.top-bar {
-    z-index: 10; /* Ensures top bar is always on top of other elements */
-    background-color: var(--main-blue); /* Blue bar color */
-    height: 10vh; /* Makes height 10% of viewport height. Also makes it so it wont scale when zooming */
-    width: 100%; /* Full width across the screen */
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
-    position: fixed; /* Fixed to the top of the viewport */
-    top: 0; /* Align to the top */
-    left: 0; /* Full width alignment */
-}
-
-/* Styles for the text inside the top bar */
-.page-title {
-    font-family: 'Nunito', sans-serif; /* Font family */
-    font-style: normal; /* Normal style */
-    font-weight: 900; /* Bold weight */
-    font-size: 5vh; /* Makes height 5% of viewport height. Also makes it so it wont scale when zooming */
-    color: var(--pure-white); /* White text color */
-    margin: 0; /* Remove default margin */
-    text-align: center; /* Center-align text */
-}
-
-/* Back arrow container */
-.back-arrow {
-    position: absolute; /* Position relative to the top bar */
-    left: 20px; /* Adjust horizontal alignment from the left */
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Vertically center the content */
-    cursor: pointer; /* Make it clickable for user feedback */
-    z-index: 11; /* Ensure it appears above other content */
-}
-
-/* Back arrow icon */
-.back-arrow-icon {
-    height: 3.5vh; /* Adjust size relative to viewport height */
-    width: auto; /* Maintain aspect ratio */
-    margin-right: 5px; /* Space between icon and text */
-}
-
-/* Back arrow text */
-.go-back-text {
-    font-family: 'Nunito', sans-serif; /* Consistent font */
-    font-style: normal; /* Normal style */
-    font-weight: 900; /* Slightly lighter than title */
-    font-size: 3.5vh; /* Small text size relative to viewport height */
-    color: var(--pure-white); /* Match top bar color theme */
-    margin: 0; /* Remove default margin */
-    text-align: center; /* Center-align text within container */
-}
-
-/* Main screen container */
-/* Content that is below top bar and above the waves at the bottom */
-.main-screen-container {
-    position: relative; /* Make this container the reference point for children */
-    width: 100%; /* Full width of the screen */
-    height: calc(100vh - 10vh); /* Full height of the screen minus the top bar */
-    transform: scale(1.0) translate(0, 5vh); /* Let's us scale and move the main content. Helpful for later.*/
-    transform-origin: center; /* Ensure scaling is centered */
-}
-
-
 /* Container to center the forms */
 .form-container {
     display: flex;
     justify-content: center; /* Horizontally center */
     align-items: center; /* Vertically center */
-    height: calc(90vh); /* Full viewport height minus top bar */
+    height: 100%;
 }
 
 /* Rectangle that is the account creation form */
@@ -129,6 +16,8 @@ body {
     overflow: hidden; /* Clip child elements, including the SVG */
     box-shadow: var(--main-shading-with-drop-shadow);
     z-index: 0; /* Ensure the background stays behind */
+    transform: scale(0.95) translate(0, -3vh); /* Let's us scale and move the main content. Helpful for later.*/
+    transform-origin: center; /* Ensure scaling is centered */
 }
 
 /* Add the SVG to the account creation form */
@@ -170,6 +59,8 @@ body {
     height: auto; /* Maintain aspect ratio */
     transform: translate(4px, 0px); /* Visually ligns up icon more (Nitpicky thing) */
     transform-origin: center; /* Ensure scaling is centered */
+    pointer-events: none; /* Make it non-interactive */
+    user-select: none; /* Makes image not selectable*/
 }
 
 /* Styling for the "User" text */
@@ -275,16 +166,15 @@ body {
     font-weight: 900;
     font-size: 13px;
     color: var(--main-blue-subdued);
-    border: 2px solid transparent;
+    border: none;
     border-radius: 10px;
-    padding: 5px; /* Inner padding for text */
+    padding: 7px; /* Inner padding for text */
     outline: none;
     box-shadow: var(--main-light-shading);
 }
 
 .text-input-box:focus {
-    border: 2px solid var(--main-green); /* Highlight on focus */
-    box-shadow: var(--main-shading-with-drop-shadow);
+    box-shadow: 0 0 0 3px var(--main-green), var(--main-shading-with-drop-shadow); /* Add a yellow outline and default shading */ 
 }
 
 /* Error Message Styling */
@@ -298,7 +188,7 @@ body {
     text-align: right; /* Align the error message to the right */
     min-height: 20px; /* Reserve space for the error message */
     /*This adds an outline around error message */
-    /* This was the only way I was able to get the outline to work and it's not the */
+    /* This was the only way I was able to get the outline to work and it's not the best */
     text-shadow: 
         -1px -1px 0 var(--main-red),  
         1px -1px 0 var(--main-red),
@@ -306,6 +196,7 @@ body {
         1px  1px 0 var(--main-red);
 }
 
+/*This only seems to work in chrome */
 input[type=date]:invalid::-webkit-datetime-edit {
     color: #757575; /*This makes the date placeholder color correct */
 }
@@ -338,7 +229,7 @@ input[type=date]:invalid::-webkit-datetime-edit {
 .form-button:hover {
     color: var(--main-yellow-bold);
     background-color: var(--main-red);
-    box-shadow: var(--main-shading-with-drop-shadow);
+    box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow); /* Add a yellow outline and default shading */ 
 }
 
 /* Styling for the clickable text under the button */
@@ -349,43 +240,16 @@ input[type=date]:invalid::-webkit-datetime-edit {
     font-size: 11px; /* Smaller text size */
     color: var(--pure-white); /* White text */
     text-align: center;
-    margin-top: 8px; /* Space between button and text */
+    margin-top: 10px; /* Space between button and text */
     cursor: pointer; /* Show pointer on hover */
-    text-decoration: underline; /* Add underline to indicate a link */
+    text-decoration: none;
+    display: block; /* Make it a block-level element for proper alignment */
 }
 
 .login-text:hover {
     color: var(--main-yellow-bold); /* Highlight text on hover */
-}
-
-/* Waves container */
-.waves-container {
-    position: fixed; /* Fixed at the bottom of the viewport */
-    bottom: 0; /* Align with the bottom of the viewport */
-    left: 0; /* Full-width placement */
-    width: 100%;
-    pointer-events: none; /* Ensure waves don’t interfere with interactions */
-    z-index: 5; /* Default z-index, can adjust later */
-    transform-origin: bottom; /* Set the scaling origin to the bottom edge */
-    transform: scaleY(0.8); /* Scale the wave vertically to 80% of its original height */
-}
-
-/* Individual wave styling */
-.wave {
-    position: absolute; /* Relative to the waves-container */
-    bottom: 0; /* Stick to the bottom of the container */
-    width: 100%; /* Stretch across the entire container */
-    height: auto; /* Maintain aspect ratio */
-}
-
-.back-wave {
-    z-index: 1; /* Lowest wave */
-}
-
-.middle-wave {
-    z-index: 2; /* Middle layer */
-}
-
-.front-wave {
-    z-index: 3; /* Top wave */
+    text-decoration: underline; 
+    text-decoration: var(--main-yellow-bold) wavy underline;
+    text-underline-offset: 20%;
+    text-decoration-thickness: 10%; 
 }
