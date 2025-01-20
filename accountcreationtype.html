@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/stylevariables.css">
+    <link rel="stylesheet" href="styles/accountcreationtype.css">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+
+	<!-- Top bar -->
+	<div class="top-bar">
+        <!-- Title of current page -->
+		<h1 class="page-title">Create Account</h1>
+        <!-- Go Back arrow -->
+         <!-- Note: I can see this needed to be changed. Needs testing to ensure this method works -->
+        <a href="javascript:history.back()" class="back-arrow">
+            <img src="./images/backarrow.svg" alt="back arrow" class="back-arrow-icon">
+            <h2 class="go-back-text">Back</h2>
+        </a>
+	</div>
+    
+	
+	<!-- Main screen container -->
+	<div class="main-screen-container">
+
+
+		<!-- Container for holding boxes and message -->
+		<div class="content-container">
+            
+            <div class="chat-bubble-container">
+                <!-- Chat Bubble -->
+                <div class="chat-bubble-from">What kind of account do you want to make?</div>
+            </div>
+
+            <div class="account-type-boxes-container">
+
+                <!-- Parent and Child User Type -->
+                <a href="#" class="account-type-box">
+                    <img src="./images/parentchilduseraccountIconyellow.svg" alt="parent and child user icon" class="parent-child-user-icon">
+                    <div class="account-type-box-text">
+                        I am a parent<br> 
+                        making an account<br>
+                        for me and my child
+                    </div>
+                </a>
+
+                <!-- Solo User Type -->
+                <a href="accountcreationsolouser.html" class="account-type-box">
+                    <img src="./images/useraccountIconyellow.svg" alt="user icon" class="user-icon">
+                    <div class="account-type-box-text">
+                        I am over the age of<br>
+                        14 and am making an<br>
+                        account for myself
+                    </div>
+                </a>
+
+            </div>
+
+		</div>
+
+	</div>
+
+	<!-- Waves -->
+	<div class="waves-container">
+		<img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
+		<img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
+		<img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
+	</div>
+
+</body>
+</html>
