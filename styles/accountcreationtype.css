@@ -98,6 +98,8 @@
     transform: translate(4px, 10%); /* Moves icon down and barely to the left */
     transform-origin: center; /* Ensure scaling is centered */
     opacity: 0.70; /* Set the opacity */
+    pointer-events: none; /* Make it non-interactive */
+    user-select: none; /* Makes image not selectable*/
 }
 
 /* Styling for Parent and CHild User Icon */
@@ -107,6 +109,8 @@
     transform: translate(4px, 12%); /* Moves icon down and barely to the left */
     transform-origin: center; /* Ensure scaling is centered */
     opacity: 0.70; /* Set the opacity */
+    pointer-events: none; /* Make it non-interactive */
+    user-select: none; /* Makes image not selectable*/
 }
 
 /* Red background text container */
