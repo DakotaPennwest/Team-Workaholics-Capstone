@@ -250,6 +250,6 @@ input[type=date]:invalid::-webkit-datetime-edit {
     color: var(--main-yellow-bold); /* Highlight text on hover */
     text-decoration: underline; 
     text-decoration: var(--main-yellow-bold) wavy underline;
-    text-underline-offset: 20%;
+    text-underline-offset: 25%;
     text-decoration-thickness: 10%; 
 }
