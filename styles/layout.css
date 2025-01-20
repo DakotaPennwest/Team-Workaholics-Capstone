@@ -44,6 +44,7 @@ body {
     background: none; /* Remove background */
     border: none; /* Remove border */
     padding: 0; /* Remove padding */
+    text-decoration: none;
 }
 
 /* Back arrow icon */

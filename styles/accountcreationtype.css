@@ -44,19 +44,23 @@
 }
 
 
-/* Account type box */
 .account-type-box {
+    display: block; /* Ensure it behaves like a block element */
+    text-decoration: none; /* Remove default link underline */
+    color: inherit; /* Inherit text color */
+    cursor: pointer; /* Show pointer on hover */
+    /* Keep existing styles for button-like behavior */
     background: var(--main-blue);
     width: 40%;
     height: 300px;
     border-radius: 50px;
-    position: relative; /* Ensures child elements are positioned relative to it */
-    overflow: hidden; /* Clip child elements, including the SVG */
+    position: relative;
+    overflow: hidden;
     box-shadow: var(--main-shading-with-drop-shadow);
-    z-index: 0; /* Ensure it stays behind forground rectangle */
-    cursor: pointer;
-    border: none;
+    z-index: 0;
+    text-align: center; 
 }
+
 
 /* Add the SVG to the account creation form */
 .account-type-box::before {
@@ -74,7 +78,8 @@
 
 .account-type-box:hover { 
     filter: contrast(105%) brightness(110%);  /* Makes button brighter*/
-    border: 5px solid var(--main-red); /* Highlight on focus */     
+    border: 5px solid var(--main-red); /* Highlight on focus */    
+    margin: -5px; /* Needed to erase the extra size the border adds. This keeps everything in place */  
 }
 
 /* This needs to be separated as the filter won't work if all put together */

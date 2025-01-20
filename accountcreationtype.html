@@ -13,11 +13,14 @@
 
 	<!-- Top bar -->
 	<div class="top-bar">
+        <!-- Title of current page -->
 		<h1 class="page-title">Create Account</h1>
-        <button class="back-arrow">
+        <!-- Go Back arrow -->
+         <!-- Note: I can see this needed to be changed. Needs testing to ensure this method works -->
+        <a href="javascript:history.back()" class="back-arrow">
             <img src="./images/backarrow.svg" alt="back arrow" class="back-arrow-icon">
             <h2 class="go-back-text">Back</h2>
-        </button>
+        </a>
 	</div>
     
 	
@@ -35,28 +38,26 @@
 
             <div class="account-type-boxes-container">
 
-                <!-- Parent and Child User Type-->
-                <button class="account-type-box">
+                <!-- Parent and Child User Type -->
+                <a href="#" class="account-type-box">
                     <img src="./images/parentchilduseraccountIconyellow.svg" alt="parent and child user icon" class="parent-child-user-icon">
-
                     <div class="account-type-box-text">
                         I am a parent<br> 
                         making an account<br>
                         for me and my child
                     </div>
-                </button>
+                </a>
 
                 <!-- Solo User Type -->
-                <button class="account-type-box">
+                <a href="accountcreationsolouser.html" class="account-type-box">
                     <img src="./images/useraccountIconyellow.svg" alt="user icon" class="user-icon">
-
                     <div class="account-type-box-text">
                         I am over the age of<br>
                         14 and am making an<br>
                         account for myself
                     </div>
+                </a>
 
-                </button>
             </div>
 
 		</div>
