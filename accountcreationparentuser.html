@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Account</title>
+  <title>Create Parent Account</title>
   <link rel="stylesheet" href="styles/layout.css">
   <link rel="stylesheet" href="styles/stylevariables.css">
   <link rel="stylesheet" href="styles/accountcreation.css">
@@ -36,8 +36,8 @@
 				
 				<!-- Left-side of account form -->
 				<div class="account-creation-form-left">
-                    <img src="./images/useraccountIcon.webp" alt="user icon" class="user-icon">
-                    <p class="user-text">User</p>
+                    <img src="./images/parentuseraccountIcon.webp" alt="parent user icon" class="parent-child-user-icon">
+                    <p class="user-text">Parent User</p>
 				</div>
 				
 				
@@ -46,7 +46,7 @@
 
 					<!-- Header Text -->
 					<h3 class="form-header">Let's make your account!</h3>
-					<h4 class="form-subheader">Please enter the following information</h4>
+					<h4 class="form-subheader">Please enter the following information for the Parent Account</h4>
 
 					<!-- Input Fields -->
 					<div class="form-input-container">
@@ -54,16 +54,6 @@
 							<label for="firstNameInput" class="input-label">First Name</label>
 							<input type="text" id="firstNameInput" class="text-input-box" placeholder="Ex: John">
 							<p id="firstNameError" class="error-message"></p>
-						</div>
-						<div class="input-wrapper">
-							<label for="birthdayInput" class="input-label">Birthday</label>
-							<input type="date" id="birthdayInput" required class="text-input-box" >
-							<p id="birthdayError" class="error-message"></p>
-						</div>
-						<div class="input-wrapper">
-							<label for="emailInput" class="input-label">Email</label>
-							<input type="email" id="emailInput" class="text-input-box" placeholder="Ex: john@example.com">
-							<p id="emailError" class="error-message"></p>
 						</div>
 						<div class="input-wrapper">
 							<label for="usernameInput" class="input-label">Username</label>
@@ -80,11 +70,16 @@
 							<input type="password" id="confirmPasswordInput" class="text-input-box" placeholder="">
 							<p id="confirmPasswordError" class="error-message"></p>
 						</div>
+						<div class="input-wrapper">
+							<label for="emailInput" class="input-label">Email</label>
+							<input type="email" id="emailInput" class="text-input-box" placeholder="Ex: john@example.com">
+							<p id="emailError" class="error-message"></p>
+						</div>
 					</div>
 
 					<!-- Create Account button -->
 					<div class="form-button-container">
-						<button class="form-button">Create Account</button>
+						<a href="accountcreationchilduser.html" class="form-button-next">Next</a>
 					</div>
 
 					<!-- Clickable text -->
