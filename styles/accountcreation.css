@@ -55,7 +55,7 @@
 
 /* Styling for User Icon */
 .user-icon {
-    width: 80%; /* Adjust size (reduce to 70% of the container's width) */
+    width: 90%; /* Adjust size*/
     height: auto; /* Maintain aspect ratio */
     transform: translate(4px, 0px); /* Visually ligns up icon more (Nitpicky thing) */
     transform-origin: center; /* Ensure scaling is centered */
@@ -68,10 +68,26 @@
     font-family: 'Nunito', sans-serif;
     font-style: normal;
     font-weight: 900;
-    font-size: 50px;
+    font-size: clamp(25px, 5vw, 50px); /* Dynamically adjust font size */
     color: var(--pure-white);
     margin-top: 1px; /* Add spacing above the text */
-    margin-bottom: 25px; /* Adds space at bottom. Also Aligns position of icon and text */
+    margin-bottom: 25px; /* Adds space at bottom */
+    text-align: center; /* Center-align text horizontally */
+    overflow: hidden; /* Clip overflowed text */
+    text-overflow: ellipsis; /* Add "..." if clipped */
+    position:relative;
+    line-height: clamp(25px, 5vw, 50px); /* Dynamically adjust font size */;
+}
+
+
+/* Styling for User Icon */
+.parent-child-user-icon {
+    width: 105%; /* Adjust size  */
+    height: auto; /* Maintain aspect ratio */
+    transform: translate(4px, 0px); /* Visually ligns up icon more (Nitpicky thing) */
+    transform-origin: center; /* Ensure scaling is centered */
+    pointer-events: none; /* Make it non-interactive */
+    user-select: none; /* Makes image not selectable*/
 }
 
 /* Right side of account form + the background rectangle */
@@ -224,11 +240,36 @@ input[type=date]:invalid::-webkit-datetime-edit {
     cursor: pointer;
     box-shadow: var(--main-light-shading);
     width: auto; /* Ensure button is sized to its content */
+    text-decoration: none; /* Removes underline */
 }
 
 .form-button:hover {
     color: var(--main-yellow-bold);
     background-color: var(--main-red);
+    box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow); /* Add a yellow outline and default shading */ 
+}
+
+/* Sign in button */
+.form-button-next {
+    background-color: var(--main-green-subdued);
+    color: var(--pure-white);
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px;
+    border: 2px solid transparent;
+    border: none;
+    border-radius: 25px; /* Rounded corners */
+    padding: 10px 30px; /* Adjust button padding */
+    cursor: pointer;
+    box-shadow: var(--main-light-shading);
+    width: auto; /* Ensure button is sized to its content */
+    text-decoration: none; /* Removes underline */
+}
+
+.form-button-next:hover {
+    color: var(--main-yellow-bold);
+    background-color: var(--main-green);
     box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow); /* Add a yellow outline and default shading */ 
 }
 
