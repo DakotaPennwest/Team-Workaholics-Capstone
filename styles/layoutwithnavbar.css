@@ -93,12 +93,14 @@ body {
     display: flex;
     flex-direction: column; /* Stack links vertically */
     align-items: center; /* Center links horizontally */
-    height: 60%;
+    justify-content: space-evenly; /* Ensure even spacing between links */
+    height: 60%; /* Fixed height for the container */
     width: 85%; /* Matches container width */
     background-color: var(--side-bar-off-white);
     border-radius: 7vh;
     box-shadow: var(--main-light-shading-pure-scaled);
     overflow: hidden; /* Ensure no overflow for long content */
+    padding-bottom: 15%; /* Moves links up some so they don't go under waves */
 }
 
 /* Navigation Bar Link */
@@ -108,13 +110,10 @@ body {
     justify-content: center; /* Center the link content horizontally */
     text-decoration: none; /* Remove underline from links */
     color: var(--main-blue); /* Default link text color */
-    padding: 1vh;  /* Padding between links */
-    width: 100%; /* Width of each link */
-    margin-top: 1vh;
-    height: 7vh;
-    position:relative;
-    top: 2vh;
+    width: 100%; /* Stretch link to fit container width */
+    height: 10%; /* Adjustable height for each link */
 }
+
 
 
 /* Link Icon */
