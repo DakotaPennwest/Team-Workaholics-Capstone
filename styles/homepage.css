@@ -1,58 +1,80 @@
+/* Rainbow styling */
+.rainbow {
+    position: absolute; /* Position relative to the main-screen-container */
+    top: 50%; /* Vertically center within the container */
+    left: 50%; /* Horizontally center within the container */
+    transform: translate(-50%, -50%) translate(-80px, -180px) scaleX(-1)  rotate(-10deg); /* Adjust to desired position */
+    width: 250px;
+    height: auto; /* Maintain aspect ratio */
+    z-index: -5; /* Default z-index for clouds */
+    pointer-events: none; /* Make it non-interactive */
+    user-select: none; /* Makes image not selectable*/
+  }
+  
+  /* Cloud styling */
+  .cloud {
+    position: absolute; /* Position relative to the main-screen-container */
+    top: 50%; /* Vertically center within the container */
+    left: 50%; /* Horizontally center within the container */
+    transform: translate(-50%, -50%); /* Adjust based on the container's center */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1; /* Default z-index for clouds */
+    pointer-events: none; /* Make it non-interactive */
+    user-select: none; /* Makes image not selectable*/
+  }
+  
+  /* Individual cloud positions with offsets */
+  .cloud1 {
+    width: 450px;
+    transform: translate(-50%, -50%) translate(8px, -250px); /* Offset from the container's center */
+    z-index: 10;
+  }
+  
+  .cloud2 {
+    width: 220px;
+    transform: translate(-50%, -50%) translate(250px, -270px); /* Offset from the container's center */
+  }
+  
+  .cloud3 {
+    width: 200px;
+    z-index: -2; /* Place this behind the container */
+    transform: translate(-50%, -50%) translate(-260px, -220px); /* Offset from the container's center */
+  }
+
 /* Container to center the forms */
 .content-container {
-    width: 900px;
-    height: 550px;
+    width: 100%;
+    transform: scale(0.9); /* Scales links. 1.0 means no change */
+    transform-origin: center; /* Ensure scaling is centered */
     position: relative; /* Ensures child elements are positioned relative to it */
     z-index: 0; /* Ensure the background stays behind */
-}
-
-/* Holds the chat bubble that directs the user what to do*/
-.chat-bubble-container{
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically if needed */
-    margin-top: 4vh; /* Add spacing between chat bubble and top bar */
-}
-
-/* Chat bubble that is meant to come from the application to the user */
-.chat-bubble-from {
-    display: inline-block; /* Ensure the width scales to fit the text */
-    background-color: var(--main-blue);
-    color: var(--pure-white);
-    font-family: 'Nunito', sans-serif;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 33px;
-    border-radius: 25px; /* Rounded corners */
-    border-bottom-left-radius: 5px; /* Slightly sharper bottom-left corner */
-    padding: 10px 30px; /* Adjust padding */
-    box-shadow: var(--main-shading-with-drop-shadow);
+    align-items: center;
+    align-content: center;
+    height: 100%;
 }
 
 
 /* Container for account type boxes */
-.account-type-boxes-container {
+.home-page-boxes-container {
     display: flex;
     flex-wrap: wrap; /* Allow rows to wrap */
     justify-content: center; /* Spread input pairs horizontally */
     align-items: center; /* Vertically align items */
-    column-gap: 50px; /* Space between coumns */
-    row-gap: 0px;  /* Space between rows */
+    column-gap: 55px; /* Space between boxes */
     margin: 0px;
-    margin-top: 50px;
+    margin-top: 250px; /* Moves boxes down */
 }
 
 
-.account-type-box {
+.home-page-journal-box {
     display: block; /* Ensure it behaves like a block element */
     text-decoration: none; /* Remove default link underline */
     color: inherit; /* Inherit text color */
     cursor: pointer; /* Show pointer on hover */
     /* Keep existing styles for button-like behavior */
-    background: var(--main-blue);
-    width: 40%;
-    height: 300px;
+    background: rgb(34, 140, 222);
+    width: 360px;
+    height: 350px;
     border-radius: 50px;
     position: relative;
     overflow: hidden;
@@ -63,20 +85,54 @@
 
 
 /* Add the SVG to the account creation form */
-.account-type-box::before {
+.home-page-journal-box::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%; /* Full width of the rectangle */
     height: 100%; /* Full height of the rectangle */
-    background-image: url('../images/loginimg.svg'); /* Add the SVG as a background */
+    background-image: url('../images/journalBg.svg'); /* Add the SVG as a background */
     background-size: cover; /* Ensure the SVG covers the entire area */
     background-position: center; /* Center the SVG */
-    opacity: 0.35; /* Set the opacity */
+    z-index: 0;
 }
 
-.account-type-box:hover { 
+.home-page-strategy-box {
+    display: block; /* Ensure it behaves like a block element */
+    text-decoration: none; /* Remove default link underline */
+    color: inherit; /* Inherit text color */
+    cursor: pointer; /* Show pointer on hover */
+    /* Keep existing styles for button-like behavior */
+    background: var(--main-yellow-subdued);
+    width: 360px;
+    height: 350px;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--main-shading-with-drop-shadow);
+    z-index: 0;
+    text-align: center; 
+}
+
+
+/* Add the SVG to the account creation form */
+.home-page-strategy-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the rectangle */
+    height: 100%; /* Full height of the rectangle */
+    background-image: url('../images/strategyBg.svg'); /* Add the SVG as a background */
+    background-size: cover; /* Ensure the SVG covers the entire area */
+    background-position: center; /* Center the SVG */
+    opacity: 0.85; /* Set the opacity */
+    z-index: 0;
+}
+
+.home-page-strategy-box:hover,
+.home-page-journal-box:hover { 
     filter: contrast(105%) brightness(110%);  /* Makes button brighter*/
     box-shadow: 0 0 0 5px var(--main-red), var(--main-shading-with-drop-shadow); /* Add a red outline and default shading */ 
     /* Note: I am using this rather than using something like  border: 5.0px solid var(--main-red); margin: -5px;  Because this moved things weirdly*/ 
@@ -84,49 +140,27 @@
 
 /* This needs to be separated as the filter won't work if all put together */
 /* This adds the underline under the text when the user hovers over each button */
-.account-type-box:hover .account-type-box-text { 
+.home-page-strategy-box:hover .home-page-strategy-box-text,
+.home-page-journal-box:hover .home-page-journal-box-text{ 
     text-decoration: underline;  /* Adds underline */
     text-decoration: var(--pure-white) wavy underline; /* Makes underline wavy */
     text-underline-offset: 25%; /* lowers underline down 20% */
     text-decoration-thickness: 10%; /* Makes underline a certain thinkness*/
 }
 
-/* Styling for User Icon */
-.user-icon {
-    width: 55%; /* Adjust size (reduce to 70% of the container's width) */
-    height: auto; /* Maintain aspect ratio */
-    transform: translate(4px, 10%); /* Moves icon down and barely to the left */
-    transform-origin: center; /* Ensure scaling is centered */
-    opacity: 0.70; /* Set the opacity */
-    pointer-events: none; /* Make it non-interactive */
-    user-select: none; /* Makes image not selectable*/
-}
-
-/* Styling for Parent and CHild User Icon */
-.parent-child-user-icon {
-    width: 72%; /* Adjust size (reduce to 70% of the container's width) */
-    height: auto; /* Maintain aspect ratio */
-    transform: translate(4px, 12%); /* Moves icon down and barely to the left */
-    transform-origin: center; /* Ensure scaling is centered */
-    opacity: 0.70; /* Set the opacity */
-    pointer-events: none; /* Make it non-interactive */
-    user-select: none; /* Makes image not selectable*/
-}
 
 /* Red background text container */
-.account-type-box-text {
-    position: absolute; /* Position relative to the account box */
-    top: 50%; /* Start positioning from the vertical center */
-    left: 50%; /* Start positioning from the horizontal center */
-    transform: translate(-50%, -50%); /* Adjust position to perfectly center */
-    width: 100%; /* Set the width relative to the box */
-    height: 50%; /* Fixed height for consistency */
+.home-page-journal-box-text {
     background: rgba(230, 60, 54, 0.8); /* Red background with 80% opacity */
+    position: absolute; /* Position relative to the account box */
+    bottom: 10%; /* Distance from bottom */
+    width: 100%; /* Set the width relative to the box */
+    height: 35%; /* Fixed height for consistency */
     color: var(--pure-white); /* White text color */
     font-family: 'Nunito', sans-serif; /* Match font family */
     font-style: normal;
     font-weight: 900;
-    font-size: 27px; /* Adjust font size for readability */
+    font-size: 36px; /* Adjust font size for readability */
     line-height: 45px; /* Space between lines of text */
     text-align: center; /* Center the text horizontally */
     display: flex; /* Use flexbox for vertical centering */
@@ -137,4 +171,44 @@
     z-index: 2; /* Ensure it stays above the icon */
     box-shadow: var(--main-light-shading-no-top);
     border: none;
+}
+
+/* Red background text container */
+.home-page-strategy-box-text {
+    background: rgb(24, 99, 169, 0.8); /* Main blue 80 percent opacity */
+    position: absolute; /* Position relative to the account box */
+    bottom: 10%; /* Distance from bottom */
+    width: 100%; /* Set the width relative to the box */
+    height: 35%; /* Fixed height for consistency */
+    color: var(--pure-white); /* White text color */
+    font-family: 'Nunito', sans-serif; /* Match font family */
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px; /* Adjust font size for readability */
+    line-height: 45px; /* Space between lines of text */
+    text-align: center; /* Center the text horizontally */
+    display: flex; /* Use flexbox for vertical centering */
+    align-items: center; /* Vertically align text */
+    justify-content: center; /* Horizontally align text */
+    padding: 0 10px; /* Optional: Add horizontal padding */
+    box-sizing: border-box; /* Include padding in height and width */
+    z-index: 2; /* Ensure it stays above the icon */
+    box-shadow: var(--main-light-shading-no-top);
+    border: none;
+}
+
+.home-page-box-status{
+    height: 55%;
+    width: 80%;
+    left: 10%;
+    position: relative;
+    font-family: 'Nunito', sans-serif; /* Match font family */
+    font-style: normal;
+    font-weight: 900;
+    font-size: 20px; /* Adjust font size for readability */
+    text-align: center; /* Center the text horizontally */
+    color: var(--pure-white); /* White text color */
+    z-index: 2;
+    align-content: center ;
+    text-shadow: var(--box-text-drop-shadow); /* Use the text drop shadow variable */
 }

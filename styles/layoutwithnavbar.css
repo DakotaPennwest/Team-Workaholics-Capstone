@@ -227,12 +227,12 @@ body {
 .main-screen-container {
     margin-left: var(--navigation-bar-width); /* Automatically adjust based on the navigation bar width */
     width: calc(100% - var(--navigation-bar-width)); /* Fill the remaining space */
-    position: relative; /* Keeps content properly aligned */
-    top: 10vh; /* Push down to account for the top bar */
-    height: calc(100vh - 10vh); /* Fill remaining vertical space */
-    display: flex; /* Center content horizontally and vertically */
-    justify-content: center;
-    align-items: center;
+    position: relative; /* Keeps content properly aligned */      
+    height: calc(100vh - 10vh - 2vh); /* Full height of the screen minus the top bar minus waves at bottom (waves heighy not exact)*/
+    top: 10vh; /* Moves main screen down under top bar*/
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
     overflow: hidden;
 }
 
