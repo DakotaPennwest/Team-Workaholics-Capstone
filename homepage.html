@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles/layoutwithnavbar.css">
+    <link rel="stylesheet" href="styles/stylevariables.css">
+    <link rel="stylesheet" href="styles/homepage.css">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+
+    <!-- Back Wave -->
+    <!-- Needs to be here to create layered effect with nav bar -->
+	<div class="waves-container">
+        <img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
+	</div>
+
+    <!-- Navigation Bar -->
+    <div class="navigation-bar">
+
+        <a href="index.html" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
+            <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
+        </a>
+        
+
+        <!-- Profile Picture Section -->
+        <div class="navigation-bar-profile-picture-section">
+            <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
+        </div>
+    
+        <!-- Profile Name Section -->
+        <div class="navigation-bar-user-name-section">
+            <p class="navigation-bar-user-first-name">Jason</p>
+        </div>
+
+        <!-- Links Background -->
+        <div class="navigation-bar-links-container">
+            <!-- Home Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text-selected">Home</span>
+            </a>
+            <!-- Journal Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Journal</span>
+            </a>
+            <!-- Strategies Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Strategies</span>
+            </a>
+            <!-- Progress Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Progress</span>
+            </a>
+            <!-- Settings Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Settings</span>
+             </a>
+        </div>
+
+    </div>
+
+
+	<!-- Top bar -->
+	<div class="top-bar">
+        <!-- Title of current page -->
+		<h1 class="page-title">Home</h1>
+	</div>
+    
+	
+	<!-- Main screen container -->
+	<div class="main-screen-container">
+
+
+		<!-- Container for holding boxes and message -->
+		<div class="content-container">
+            
+            <div class="chat-bubble-container">
+                <!-- Chat Bubble -->
+                <div class="chat-bubble-from">What kind of account do you want to make?</div>
+            </div>
+
+            <div class="account-type-boxes-container">
+
+                <!-- Parent and Child User Type -->
+                <a href="accountcreationparentuser.html" class="account-type-box">
+                    <img src="./images/parentchilduseraccountIconyellow.webp" alt="parent and child user icon" class="parent-child-user-icon">
+                    <div class="account-type-box-text">
+                        I am a parent<br> 
+                        making an account<br>
+                        for me and my child
+                    </div>
+                </a>
+
+                <!-- Solo User Type -->
+                <a href="accountcreationsolouser.html" class="account-type-box">
+                    <img src="./images/useraccountIconyellow.webp" alt="user icon" class="user-icon">
+                    <div class="account-type-box-text">
+                        I am over the age of<br>
+                        14 and am making an<br>
+                        account for myself
+                    </div>
+                </a>
+
+            </div>
+
+		</div>
+
+	</div>
+
+    <!-- Front and Middle Waves -->
+	<div class="waves-container">
+		<img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
+		<img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
+	</div>
+
+</body>
+</html>
