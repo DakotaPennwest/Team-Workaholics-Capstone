@@ -26,7 +26,7 @@
   /* Individual cloud positions with offsets */
   .cloud1 {
     width: 450px;
-    transform: translate(-50%, -50%) translate(8px, -250px); /* Offset from the container's center */
+    transform: translate(-50%, -50%) translate(10px, -250px); /* Offset from the container's center */
     z-index: 10;
   }
   
@@ -205,7 +205,7 @@
     font-family: 'Nunito', sans-serif; /* Match font family */
     font-style: normal;
     font-weight: 900;
-    font-size: 20px; /* Adjust font size for readability */
+    font-size: 24px; /* Adjust font size for readability */
     text-align: center; /* Center the text horizontally */
     color: var(--pure-white); /* White text color */
     z-index: 2;
