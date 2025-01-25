@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Home</title>
     <link rel="stylesheet" href="styles/layoutwithnavbar.css">
     <link rel="stylesheet" href="styles/stylevariables.css">
@@ -32,7 +32,7 @@
     
         <!-- Profile Name Section -->
         <div class="navigation-bar-user-name-section">
-            <p class="navigation-bar-user-first-name">Jason</p>
+            <p class="navigation-bar-user-first-name" id="userFirstName">Jason</p>
         </div>
 
         <!-- Links Background -->
@@ -70,7 +70,7 @@
 	<!-- Top bar -->
 	<div class="top-bar">
         <!-- Title of current page -->
-		<h1 class="page-title">Hello Jason</h1>
+		<h1 class="page-title" id="welcomeMessage">Hello Jason</h1>
 	</div>
     
 	
@@ -92,23 +92,24 @@
 
             <div class="home-page-boxes-container">
 
-                <!-- Check Journal Button -->
-                <a href="#" class="home-page-journal-box">
+                
+                <!-- Journal Box -->
+                <a href="#" class="home-page-box home-page-journal-box">
                     <div class="home-page-box-status" id="journalStatus">
                         You haven't done your journal today
                     </div>
-                    <div class="home-page-journal-box-text">
+                    <div class="home-page-box-text home-page-journal-box-text" id="journalDirection">
                         Begin Journal!
                     </div>
                 </a>
 
-                <!-- Check Strategy Button -->
-                <a href="#" class="home-page-strategy-box">
+                <!-- Strategy Box -->
+                <a href="#" class="home-page-box home-page-strategy-box">
                     <div class="home-page-box-status" id="currentStrategy">
                         Your current strategy is<br>
                         Meditation
                     </div>
-                    <div class="home-page-strategy-box-text">
+                    <div class="home-page-box-text home-page-strategy-box-text" id="strategyDirection">
                         Go to Strategies
                     </div>
                 </a>

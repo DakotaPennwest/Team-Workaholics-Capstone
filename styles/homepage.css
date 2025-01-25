@@ -57,144 +57,112 @@
 /* Container for account type boxes */
 .home-page-boxes-container {
     display: flex;
-    flex-wrap: wrap; /* Allow rows to wrap */
     justify-content: center; /* Spread input pairs horizontally */
     align-items: center; /* Vertically align items */
     column-gap: 55px; /* Space between boxes */
-    margin: 0px;
-    margin-top: 250px; /* Moves boxes down */
+    position:relative;
+    top: 120px; /* Moves boxes down */
 }
 
 
+/* Shared styles for boxes */
+.home-page-box {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    width: 360px;
+    height: 350px;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--main-shading-with-drop-shadow);
+    text-align: center;
+    z-index: 0;
+}
+
+/* Shared pseudo-element styles for background images */
+.home-page-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    opacity: 0.85; /* Default opacity */
+}
+
+
+/* Specific styles for journal box */
 .home-page-journal-box {
-    display: block; /* Ensure it behaves like a block element */
-    text-decoration: none; /* Remove default link underline */
-    color: inherit; /* Inherit text color */
-    cursor: pointer; /* Show pointer on hover */
-    /* Keep existing styles for button-like behavior */
     background: rgb(34, 140, 222);
-    width: 360px;
-    height: 350px;
-    border-radius: 50px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: var(--main-shading-with-drop-shadow);
-    z-index: 0;
-    text-align: center; 
 }
 
-
-/* Add the SVG to the account creation form */
-.home-page-journal-box::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; /* Full width of the rectangle */
-    height: 100%; /* Full height of the rectangle */
-    background-image: url('../images/journalBg.svg'); /* Add the SVG as a background */
-    background-size: cover; /* Ensure the SVG covers the entire area */
-    background-position: center; /* Center the SVG */
-    z-index: 0;
-}
-
+/* Specific styles for strategy box */
 .home-page-strategy-box {
-    display: block; /* Ensure it behaves like a block element */
-    text-decoration: none; /* Remove default link underline */
-    color: inherit; /* Inherit text color */
-    cursor: pointer; /* Show pointer on hover */
-    /* Keep existing styles for button-like behavior */
     background: var(--main-yellow-subdued);
-    width: 360px;
-    height: 350px;
-    border-radius: 50px;
-    position: relative;
-    overflow: hidden;
-    box-shadow: var(--main-shading-with-drop-shadow);
-    z-index: 0;
-    text-align: center; 
 }
 
+/* Journal-specific background */
+.home-page-journal-box::before {
+    background-image: url('../images/journalBg.svg');
+}
 
-/* Add the SVG to the account creation form */
+/* Strategy-specific background */
 .home-page-strategy-box::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; /* Full width of the rectangle */
-    height: 100%; /* Full height of the rectangle */
-    background-image: url('../images/strategyBg.svg'); /* Add the SVG as a background */
-    background-size: cover; /* Ensure the SVG covers the entire area */
-    background-position: center; /* Center the SVG */
-    opacity: 0.85; /* Set the opacity */
-    z-index: 0;
+    background-image: url('../images/strategyBg.svg');
 }
 
-.home-page-strategy-box:hover,
-.home-page-journal-box:hover { 
-    filter: contrast(105%) brightness(110%);  /* Makes button brighter*/
-    box-shadow: 0 0 0 5px var(--main-red), var(--main-shading-with-drop-shadow); /* Add a red outline and default shading */ 
-    /* Note: I am using this rather than using something like  border: 5.0px solid var(--main-red); margin: -5px;  Because this moved things weirdly*/ 
+/* Hover effects shared for all boxes */
+.home-page-box:hover {
+    filter: contrast(105%) brightness(108%);
+    box-shadow: 0 0 0 7px var(--main-red), var(--main-shading-with-drop-shadow);
 }
 
-/* This needs to be separated as the filter won't work if all put together */
 /* This adds the underline under the text when the user hovers over each button */
 .home-page-strategy-box:hover .home-page-strategy-box-text,
-.home-page-journal-box:hover .home-page-journal-box-text{ 
+.home-page-journal-box:hover .home-page-journal-box-text { 
     text-decoration: underline;  /* Adds underline */
     text-decoration: var(--pure-white) wavy underline; /* Makes underline wavy */
     text-underline-offset: 25%; /* lowers underline down 20% */
-    text-decoration-thickness: 10%; /* Makes underline a certain thinkness*/
+    text-decoration-thickness: 10%; /* Makes underline a certain thickness*/
 }
 
+/* Shared text container styles */
+.home-page-box-text {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    height: 35%;
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 45px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    z-index: 2;
+    box-shadow: var(--main-light-shading-no-top);
+    border: none;
+}
 
-/* Red background text container */
+/* Journal-specific text styles */
 .home-page-journal-box-text {
-    background: rgba(230, 60, 54, 0.8); /* Red background with 80% opacity */
-    position: absolute; /* Position relative to the account box */
-    bottom: 10%; /* Distance from bottom */
-    width: 100%; /* Set the width relative to the box */
-    height: 35%; /* Fixed height for consistency */
-    color: var(--pure-white); /* White text color */
-    font-family: 'Nunito', sans-serif; /* Match font family */
-    font-style: normal;
-    font-weight: 900;
-    font-size: 36px; /* Adjust font size for readability */
-    line-height: 45px; /* Space between lines of text */
-    text-align: center; /* Center the text horizontally */
-    display: flex; /* Use flexbox for vertical centering */
-    align-items: center; /* Vertically align text */
-    justify-content: center; /* Horizontally align text */
-    padding: 0 10px; /* Optional: Add horizontal padding */
-    box-sizing: border-box; /* Include padding in height and width */
-    z-index: 2; /* Ensure it stays above the icon */
-    box-shadow: var(--main-light-shading-no-top);
-    border: none;
+    background: rgba(230, 60, 54, 0.8); /* Red */
+    color: var(--pure-white);
 }
 
-/* Red background text container */
+/* Strategy-specific text styles */
 .home-page-strategy-box-text {
-    background: rgb(24, 99, 169, 0.8); /* Main blue 80 percent opacity */
-    position: absolute; /* Position relative to the account box */
-    bottom: 10%; /* Distance from bottom */
-    width: 100%; /* Set the width relative to the box */
-    height: 35%; /* Fixed height for consistency */
-    color: var(--pure-white); /* White text color */
-    font-family: 'Nunito', sans-serif; /* Match font family */
-    font-style: normal;
-    font-weight: 900;
-    font-size: 36px; /* Adjust font size for readability */
-    line-height: 45px; /* Space between lines of text */
-    text-align: center; /* Center the text horizontally */
-    display: flex; /* Use flexbox for vertical centering */
-    align-items: center; /* Vertically align text */
-    justify-content: center; /* Horizontally align text */
-    padding: 0 10px; /* Optional: Add horizontal padding */
-    box-sizing: border-box; /* Include padding in height and width */
-    z-index: 2; /* Ensure it stays above the icon */
-    box-shadow: var(--main-light-shading-no-top);
-    border: none;
+    background: rgba(24, 99, 169, 0.8); /* Blue */
+    color: var(--pure-white);
 }
 
 .home-page-box-status{

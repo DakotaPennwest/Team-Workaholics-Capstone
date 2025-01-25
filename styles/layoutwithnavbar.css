@@ -30,7 +30,7 @@ body {
 
 .navigation-bar-sign-out-icon{
     position:absolute;
-    left: 5%;
+    left: 6%;
     top: 2%;
     background: none;
     margin: none;
@@ -95,7 +95,7 @@ body {
     align-items: center; /* Center links horizontally */
     justify-content: space-evenly; /* Ensure even spacing between links */
     height: 60%; /* Fixed height for the container */
-    width: 85%; /* Matches container width */
+    width: 78%; /* Matches container width */
     background-color: var(--side-bar-off-white);
     border-radius: 7vh;
     box-shadow: var(--main-light-shading-pure-scaled);
