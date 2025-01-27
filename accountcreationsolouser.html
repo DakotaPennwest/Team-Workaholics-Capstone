@@ -3,107 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Account</title>
+  <title>Create Solo User Account</title>
   <link rel="stylesheet" href="styles/layout.css">
   <link rel="stylesheet" href="styles/stylevariables.css">
   <link rel="stylesheet" href="styles/accountcreation.css">
   <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-
-
-	<!-- Top bar -->
-	<div class="top-bar">
+    <!-- Top bar -->
+    <div class="top-bar">
         <!-- Title of current page -->
-		<h1 class="page-title">Create Account</h1>
+        <h1 class="page-title">Create Account</h1>
         <!-- Go Back arrow -->
-         <!-- Note: I can see this needed to be changed. Needs testing to ensure this method works -->
         <a href="javascript:history.back()" class="back-arrow">
             <img src="./images/backarrow.svg" alt="back arrow" class="back-arrow-icon">
             <h2 class="go-back-text">Back</h2>
         </a>
-	</div>
-	
-	<!-- Main screen container -->
-	<div class="main-screen-container">
+    </div>
 
-
-		<!-- Container for the centering the forms -->
-		<div class="form-container">
-		
-			<!-- Box that holds the form for account creation -->
-			<div class="account-creation-form">
-				
-				<!-- Left-side of account form -->
-				<div class="account-creation-form-left">
+    <!-- Main screen container -->
+    <div class="main-screen-container">
+        <!-- Container for the centering the forms -->
+        <div class="form-container">
+            <!-- Box that holds the form for account creation -->
+            <div class="account-creation-form">
+                <!-- Left-side of account form -->
+                <div class="account-creation-form-left">
                     <img src="./images/useraccountIcon.webp" alt="user icon" class="user-icon">
                     <p class="user-text">User</p>
-				</div>
-				
-				
-				<!-- Right side of account form -->
-				<div class="account-creation-form-right">
+                </div>
 
-					<!-- Header Text -->
-					<h3 class="form-header">Let's make your account!</h3>
-					<h4 class="form-subheader">Please enter the following information</h4>
+                <!-- Right side of account form -->
+                <div class="account-creation-form-right">
+                    <!-- Header Text -->
+                    <h3 class="form-header">Let's make your account!</h3>
+                    <h4 class="form-subheader">Please enter the following information</h4>
 
-					<!-- Input Fields -->
-					<div class="form-input-container">
-						<div class="input-wrapper">
-							<label for="firstNameInput" class="input-label">First Name</label>
-							<input type="text" id="firstNameInput" class="text-input-box" placeholder="Ex: John">
-							<p id="firstNameError" class="error-message"></p>
-						</div>
-						<div class="input-wrapper">
-							<label for="birthdayInput" class="input-label">Birthday</label>
-							<input type="date" id="birthdayInput" required class="text-input-box" >
-							<p id="birthdayError" class="error-message"></p>
-						</div>
-						<div class="input-wrapper">
-							<label for="emailInput" class="input-label">Email</label>
-							<input type="email" id="emailInput" class="text-input-box" placeholder="Ex: john@example.com">
-							<p id="emailError" class="error-message"></p>
-						</div>
-						<div class="input-wrapper">
-							<label for="usernameInput" class="input-label">Username</label>
-							<input type="text" id="usernameInput" class="text-input-box" placeholder="Ex: john123">
-							<p id="usernameError" class="error-message"></p>
-						</div>
-						<div class="input-wrapper">
-							<label for="passwordInput" class="input-label">Password</label>
-							<input type="password" id="passwordInput" class="text-input-box" placeholder="">
-							<p id="passwordError" class="error-message"></p>
-						</div>
-						<div class="input-wrapper">
-							<label for="confirmPasswordInput" class="input-label">Confirm Password</label>
-							<input type="password" id="confirmPasswordInput" class="text-input-box" placeholder="">
-							<p id="confirmPasswordError" class="error-message"></p>
-						</div>
-					</div>
+                    <!-- Input Fields -->
+                    <div class="form-input-container">
+                        <div class="input-wrapper">
+                            <label for="firstNameInput" class="input-label">First Name</label>
+                            <input type="text" id="firstNameInput" class="text-input-box" placeholder="Ex: John">
+                            <p id="firstNameError" class="error-message"></p>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="birthdayInput" class="input-label">Birthday</label>
+                            <input type="date" id="birthdayInput" required class="text-input-box">
+                            <p id="birthdayError" class="error-message"></p>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="emailInput" class="input-label">Email</label>
+                            <input type="email" id="emailInput" class="text-input-box" placeholder="Ex: john@example.com">
+                            <p id="emailError" class="error-message"></p>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="usernameInput" class="input-label">Username</label>
+                            <input type="text" id="usernameInput" class="text-input-box" placeholder="Ex: john123">
+                            <p id="usernameError" class="error-message"></p>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="passwordInput" class="input-label">Password</label>
+                            <input type="password" id="passwordInput" class="text-input-box" placeholder="">
+                            <p id="passwordError" class="error-message"></p>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="confirmPasswordInput" class="input-label">Confirm Password</label>
+                            <input type="password" id="confirmPasswordInput" class="text-input-box" placeholder="">
+                            <p id="confirmPasswordError" class="error-message"></p>
+                        </div>
+                    </div>
 
-					<!-- Create Account button -->
-					<div class="form-button-container">
-						<button class="form-button">Create Account</button>
-					</div>
+                    <!-- Create Account button -->
+                    <div class="form-button-container">
+                        <button class="form-button" type="button" onclick="submitSoloForm()">Create Account</button>
+                    </div>
 
-					<!-- Clickable text -->
-					<a href="index.html" class="login-text">Already have an account? Login here</a>
+                    <!-- Clickable text -->
+                    <a href="index.php" class="login-text">Already have an account? Login here</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-				</div>
-				
-			</div>
+    <!-- Waves -->
+    <div class="waves-container">
+        <img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
+        <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
+        <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
+    </div>
 
-		</div>
+    <!-- Hidden form to submit data -->
+    <form id="soloAccountForm" method="post" action="processAccountCreation.php" style="display: none;">
+        <input type="hidden" name="accountType" value="solo">
+        <input type="hidden" name="firstName" id="formFirstNameInput">
+        <input type="hidden" name="username" id="formUsernameInput">
+        <input type="hidden" name="password" id="formPasswordInput">
+        <input type="hidden" name="confirmPassword" id="formConfirmPasswordInput">
+        <input type="hidden" name="birthday" id="formBirthdayInput">
+        <input type="hidden" name="email" id="formEmailInput">
+    </form>
 
-	</div>
+    <script>
+        function submitSoloForm() {
+            document.getElementById('formFirstNameInput').value = document.getElementById('firstNameInput').value;
+            document.getElementById('formUsernameInput').value = document.getElementById('usernameInput').value;
+            document.getElementById('formPasswordInput').value = document.getElementById('passwordInput').value;
+            document.getElementById('formConfirmPasswordInput').value = document.getElementById('confirmPasswordInput').value;
+            document.getElementById('formBirthdayInput').value = document.getElementById('birthdayInput').value;
+            document.getElementById('formEmailInput').value = document.getElementById('emailInput').value;
 
-	<!-- Waves -->
-	<div class="waves-container">
-		<img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
-		<img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
-		<img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
-	</div>
+            // Submit the form using fetch
+            fetch('processAccountCreation.php', {
+                method: 'POST',
+                body: new FormData(document.getElementById('soloAccountForm'))
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = 'JournalHomePage.php';
+                } else {
+                    document.getElementById('errorMessageContainer').innerText = data.message;
+                }
+            })
+            .catch(error => {
+                document.getElementById('errorMessageContainer').innerText = 'An error occurred. Please try again.';
+            });
+        }
+    </script>
 
+    <!-- Error message container -->
+    <div id="errorMessageContainer" style="color: red;"></div>
 </body>
 </html>

@@ -21,6 +21,13 @@ Features all both the child and parent track and manage sensory integration thro
 ## Usage
 
 1. Start the application
+Child Test User Login: 
+Username: testUser    
+password: password456
+
+Parent test User Login:
+Username: parentTestUser
+Password: password123
 
 2. Follow the on-screen instructions to create a child or parent account and start journaling.
 
