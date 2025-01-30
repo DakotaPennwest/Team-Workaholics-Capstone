@@ -294,3 +294,19 @@ input[type=date]:invalid::-webkit-datetime-edit {
     text-underline-offset: 25%;
     text-decoration-thickness: 10%; 
 }
+
+/* Fix autofill styles */
+.text-input-box:-webkit-autofill,
+.text-input-box:-webkit-autofill:hover,
+.text-input-box:-webkit-autofill:focus,
+.text-input-box:-webkit-autofill:active {
+  font-family: 'Nunito', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 12px !important;
+  color: var(--main-blue-subdued) !important;
+  background: var(--main-off-white);
+  background-color: var(--main-off-white) !important;
+  box-shadow: var(--main-light-shading) !important;
+  -webkit-text-fill-color: var(--main-blue-subdued) !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
