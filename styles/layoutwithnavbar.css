@@ -1,0 +1,275 @@
+/* General body styling */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-off-white);
+    background-image: url('../images/bgpattern.png');	/* Tiled BG Image */
+    background-size: 20%;
+    background-repeat: repeat;
+    position: relative; /* Creates a root stacking context for all elements */
+    z-index: auto; /* Ensure it doesn’t interfere */
+}
+
+/* Navigation Bar */
+.navigation-bar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: var(--navigation-bar-width); /* 30% or any set width */
+    min-width: var(--navigation-bar-width); /* 30% or any set width */
+    background-color: var(--side-bar-bg-color); /* Use the yellow color */
+    box-shadow: var(--main-light-shading-scaled); /* Add some depth */
+    background-image: url('../images/navbarbg.svg');	/* Tiled BG Image */
+    background-size: 100%;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center elements horizontally */
+    overflow: hidden;
+}
+
+.navigation-bar-sign-out-icon{
+    position:absolute;
+    left: 6%;
+    top: 2%;
+    background: none;
+    margin: none;
+    outline: none;
+    border: none;
+    pointer-events: cursor;
+    height:6%;
+    display: inline-block;
+}
+
+
+/* Changes the color of the go back text to yellow and adds underline */
+.navigation-bar-sign-out-icon:hover {
+    /* This requires a website: https://codepen.io/sosuke/pen/Pjoqqp*/
+    /* This will turn any black item into the specific hex code chosen. In this case, I am changing it to #FFBF10 (main yellow bold)*/
+    /*Note: you have to take the difference of the invert % from 100. IN this case invert % was 84 - 100 = 16%*/
+    filter: contrast(1000%);   
+}
+
+/* Profile Picture Section */
+.navigation-bar-profile-picture-section {
+    height: 30%;
+    align-items: center; /* Center elements horizontally */
+    align-content: center;
+    pointer-events: none; /* Make it non-interactive */
+    user-select: none; /* Makes image not selectable*/
+}
+
+/* Profile Picture */
+.navigation-bar-profile-picture {
+    height: 95%;
+    margin-top: 10%;
+    pointer-events: none; /* Make it non-interactive */
+    user-select: none; /* Makes image not selectable*/
+}
+
+/* User Name section*/
+.navigation-bar-user-name-section {
+    height: 10%;
+    align-items: center; /* Center elements horizontally */
+    align-content: center;
+    width:fit-content;
+}
+
+
+/* User First Name */
+.navigation-bar-user-first-name {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: var(--pure-white); /* Match the theme */
+    text-align: center; /* Center-align the profile picture and name */
+    vertical-align: middle;
+    line-height: 10%;
+    text-shadow: var(--profile-name-text-shadow); /* Use the new shading variable */
+    font-size: 5vh;
+}
+
+/* Navigation Bar Links Container */
+.navigation-bar-links-container {
+    display: flex;
+    flex-direction: column; /* Stack links vertically */
+    align-items: center; /* Center links horizontally */
+    justify-content: space-evenly; /* Ensure even spacing between links */
+    height: 60%; /* Fixed height for the container */
+    width: 78%; /* Matches container width */
+    background-color: var(--side-bar-off-white);
+    border-radius: 7vh;
+    box-shadow: var(--main-light-shading-pure-scaled);
+    overflow: hidden; /* Ensure no overflow for long content */
+    padding-bottom: 15%; /* Moves links up some so they don't go under waves */
+}
+
+/* Navigation Bar Link */
+.navigation-bar-link {
+    display: flex;
+    align-items: center; /* Center text and icon vertically */
+    justify-content: center; /* Center the link content horizontally */
+    text-decoration: none; /* Remove underline from links */
+    color: var(--main-blue); /* Default link text color */
+    width: 100%; /* Stretch link to fit container width */
+    height: 10%; /* Adjustable height for each link */
+}
+
+
+
+/* Link Icon */
+.navigation-bar-link-icon {
+    height: 70%; /* Adjust size relative to viewport height */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 0.4vw; /* Space between icon and text */
+}
+
+/* Link Text */
+.navigation-bar-link-text {
+    font-family: 'Nunito', sans-serif;
+    font-size: 3.2vh; /* Adjust font size relative to viewport height */
+    font-weight: 700;
+    text-align: center; /* Center-align text */
+}
+
+/* Link Text */
+.navigation-bar-link-text-selected {
+    font-family: 'Nunito', sans-serif;
+    font-size: 3.2vh; /* Adjust font size relative to viewport height */
+    font-weight: 800;
+    text-align: center; /* Center-align text */
+    color: var(--main-red); /* Default link text color */
+    text-decoration: underline; 
+    text-decoration: var(--main-red) wavy underline;
+    text-underline-offset: 25%;
+    text-decoration-thickness: 10%; 
+}
+
+/* Hover effect for links */
+.navigation-bar-link:hover {
+    color: var(--main-green); /* Change text color on hover */
+    text-decoration: underline; 
+    text-decoration: var(--main-green) wavy underline;
+    text-underline-offset: 25%;
+    text-decoration-thickness: 10%; 
+}
+
+/* Adjust top bar */
+.top-bar {
+    margin-left: var(--navigation-bar-width); /* Automatically adjust based on the navigation bar width */
+    width: calc(100% - var(--navigation-bar-width)); /* Fill the remaining space */
+    position: fixed; /* Sticks to the top of the screen */
+    top: 0;
+    z-index: 10; /* Ensure it stays above other elements */
+    background-color: var(--main-blue); /* Keep existing color */
+    height: 10vh; /* Same height as before */
+    display: flex; /* Center content horizontally and vertically */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styles for the text inside the top bar */
+.page-title {
+    font-family: 'Nunito', sans-serif; /* Font family */
+    font-style: normal; /* Normal style */
+    font-weight: 900; /* Bold weight */
+    font-size: 5vh; /* Makes height 5% of viewport height. Also makes it so it wont scale when zooming */
+    color: var(--pure-white); /* White text color */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center-align text */
+}
+
+/* Back Arrow Styling */
+.back-arrow {
+    position:absolute; /* Makes position relative to I believe top-bar-left*/
+    left: 3vh;
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center vertically */
+    cursor: pointer; /* Maintain the pointer effect */
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    padding: 0; /* Remove padding */
+    text-decoration: none;
+}
+
+/* Back arrow icon */
+.back-arrow-icon {
+    height: 3.5vh; /* Adjust size relative to viewport height */
+    width: auto; /* Maintain aspect ratio */
+    margin-right: 5%; /* Space between icon and text */
+}
+
+/* Back arrow text */
+.go-back-text {
+    font-family: 'Nunito', sans-serif; /* Consistent font */
+    font-style: normal; /* Normal style */
+    font-weight: 900; /* Slightly lighter than title */
+    font-size: 3.5vh; /* Small text size relative to viewport height */
+    color: var(--pure-white); /* Match top bar color theme */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center-align text within container */
+}
+
+/* Changes the color of the go back text to yellow and adds underline */
+.back-arrow:hover .back-arrow-icon, 
+.back-arrow:hover .go-back-text {
+    text-decoration: underline; 
+    text-decoration: var(--pure-white) wavy underline;
+    text-underline-offset: 20%;
+    text-decoration-thickness: 10%; 
+    /* This requires a website: https://codepen.io/sosuke/pen/Pjoqqp*/
+    /* This will turn any black item into the specific hex code chosen. In this case, I am changing it to #FFBF10 (main yellow bold)*/
+    /*Note: you have to take the difference of the invert % from 100. IN this case invert % was 84 - 100 = 16%*/
+    filter: invert(16%) sepia(27%) saturate(3154%) hue-rotate(347deg) brightness(100%) contrast(102%);   
+}
+
+
+/* Adjust main screen container */
+.main-screen-container {
+    margin-left: var(--navigation-bar-width); /* Automatically adjust based on the navigation bar width */
+    width: calc(100% - var(--navigation-bar-width)); /* Fill the remaining space */
+    position: relative; /* Keeps content properly aligned */      
+    height: calc(100vh - 10vh - 2vh); /* Full height of the screen minus the top bar minus waves at bottom (waves heighy not exact)*/
+    top: 10vh; /* Moves main screen down under top bar*/
+    display: flex;
+    justify-content: center; /* Horizontally center */
+    align-items: center; /* Vertically center */
+    overflow: hidden;
+}
+
+/* Waves Container */
+.waves-container {
+    position: fixed; /* Fixes waves at the bottom */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10vh;
+    pointer-events: none; /* Prevent interaction with waves */
+    transform-origin: bottom;
+    transform: scaleY(0.8); /* Adjust vertical scale */
+}
+
+/* Individual wave styling */
+.wave {
+    position: absolute; /* Relative to the waves-container */
+    bottom: 0; /* Stick to the bottom of the container */
+    width: 100%; /* Stretch across the entire container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Back Wave 
+NOTE: These seem to not be needed, however, I am keeping them commented out just incase
+.back-wave {
+
+} */
+
+/* Middle Wave 
+.middle-wave {
+
+}*/
+
+/* Front Wave
+.front-wave {
+
+} */
+
+  
