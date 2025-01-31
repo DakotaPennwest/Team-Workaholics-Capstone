@@ -202,13 +202,14 @@ textarea:is(:focus){
     width: 75px; /* Set a standard width */
     height: 75px;
     cursor: pointer; /* Make it clickable */
-    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+    transition: transform 0.3s ease-in-out; /* Smooth hover effect */
     z-index: 2;
 }
 
 /* Hover Effect */
 .new-prompt-icon:hover {
-    transform: scale(1.1); /* Slightly enlarges the icon on hover */
+    transform: scale(1.1) rotate(360deg) translate(2px, -1px); /* Slightly enlarges the icon on hover */
+    transform-origin: center;
     filter: hue-rotate(245deg) saturate(115%);
 }
 
