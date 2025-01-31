@@ -132,22 +132,22 @@
 
 .inner-wrapper textarea{
     font-family: 'Nunito', sans-serif;
-    width: calc(100% - 25px);
+    width: calc(100% - 2px);
     resize: none;
-    height: 70px;
+    height: 45px;
     outline: none;
     padding: 10px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     max-height: 300px;
     caret-color: var(--muted-blue-1);
-    border: 2px solid transparent;
-    border-style: dashed;
+    border: none;
     border-radius: 10px;
     z-index: 1;
     background-color: transparent;
     color: var(--pure-white);
     position: relative;
+    box-sizing: border-box;
 }
 
 textarea::placeholder{
@@ -156,10 +156,8 @@ textarea::placeholder{
 }
 
 textarea:is(:focus){
-    border: 2px solid var(--pure-white);
-    color: var(--pure-white);
-    border-style: dashed;
-    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: var(--box-text-drop-shadow);
 }
 
 /* Next button styling */

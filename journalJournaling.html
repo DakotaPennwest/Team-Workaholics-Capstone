@@ -139,12 +139,12 @@
 
 
     <!-- Javascript to handle the resizing of the journal. -->
-    <!-- Feel free to move this to a separate script file if you prefer -->
+    <!-- Feel free to move this to a separate script file if you prefer  -->
     <script>
         const textarea = document.querySelector("textarea");
         
         function adjustHeight() {
-            textarea.style.height = "50px"; // Ensure it's reset before recalculating
+            textarea.style.height = "45px"; // Ensure it's reset before recalculating
             let scHeight = textarea.scrollHeight;
             textarea.style.height = `${scHeight}px`;
     
@@ -161,7 +161,7 @@
     
         // Run once on page load
         window.addEventListener("load", adjustHeight);
-    </script>
+    </script> 
     
     
 
