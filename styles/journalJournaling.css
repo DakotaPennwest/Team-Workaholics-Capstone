@@ -197,10 +197,10 @@ textarea:is(:focus){
 /* New Prompt Icon Styling */
 .new-prompt-icon {
     position: relative; /* Positions it within the container */
-    top: -95px; /* Moves it slightly above the journal container */
-    right: -47px; /* Moves it slightly to the right */
+    top: -25px; /* Moves it slightly above the journal container */
+    right: -50px; /* Moves it slightly to the right */
     width: 75px; /* Set a standard width */
-    height: auto; /* Maintain aspect ratio */
+    height: 75px;
     cursor: pointer; /* Make it clickable */
     transition: transform 0.2s ease-in-out; /* Smooth hover effect */
     z-index: 2;
