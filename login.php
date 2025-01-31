@@ -26,13 +26,13 @@ $statementUser->execute();
 $rowUser = $statementUser->fetch(PDO::FETCH_ASSOC);
 
 if ($rowUser) {
-    if (password_verify($password, $rowUser['password'])) {  // Compare hashed passwords
+    if (password_verify($password, $rowUser['password'])) {
         // Login successful as user
         $_SESSION['username'] = $username;
         $_SESSION['role'] = $rowUser['role'];
 
         $response['success'] = true;
-        $response['redirect'] = 'JournalHomePage.php';
+        $response['redirect'] = 'homepage.html';
         echo json_encode($response);
         exit();
     } else {
@@ -50,13 +50,13 @@ $statementParent->execute();
 $rowParent = $statementParent->fetch(PDO::FETCH_ASSOC);
 
 if ($rowParent) {
-    if (password_verify($password, $rowParent['password'])) {  // Compare hashed passwords
+    if (password_verify($password, $rowParent['password'])) {
         // Login successful as parent
         $_SESSION['username'] = $username;
         $_SESSION['role'] = $rowParent['role'];
 
         $response['success'] = true;
-        $response['redirect'] = 'JournalHomePage.php';
+        $response['redirect'] = 'homepage.html';
         echo json_encode($response);
         exit();
     } else {
