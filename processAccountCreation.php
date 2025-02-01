@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $response['success'] = true;
                 $response['message'] = "Child account created successfully!";
-                $response['redirect'] = "JournalHomePage.php";
+                $response['redirect'] = "homepage.html";
             } catch (PDOException $e) {
                 $response['message'] = "Error: " . $e->getMessage();
             }
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 $response['success'] = true;
                 $response['message'] = "Solo user account created successfully!";
-                $response['redirect'] = "JournalHomePage.php";
+                $response['redirect'] = "homepage.html";
             } catch (PDOException $e) {
                 $response['message'] = "Error: " . $e->getMessage();
             }
