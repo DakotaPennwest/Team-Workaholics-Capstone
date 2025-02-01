@@ -21,11 +21,11 @@ Features all both the child and parent track and manage sensory integration thro
 ## Usage
 
 1. Start the application
-Child Test User Login: 
+*Child Test User Login: 
 Username: testUser    
 password: password456
 
-Parent test User Login:
+*Parent test User Login:
 Username: parentTestUser
 Password: password123
 
@@ -36,7 +36,7 @@ Password: password123
 ### Sprint 1
 - **Child and Parent Account Creation/Login**
   - Design account creation forms
-  - Develop update account functionality
+  - Develop update account functionality - *will address in final sprint*
   - Implement login functionality and error handling
 
 ### Sprint 2
