@@ -1,0 +1,226 @@
+/* Adjust main screen container */
+.main-screen-container {
+    overflow: auto;
+    height: 90vh;
+}
+
+/* Container to center the forms */
+.content-container {
+    width: 100%;
+    transform: scale(1.0); /* Scales links. 1.0 means no change */
+    transform-origin: center; /* Ensure scaling is centered */
+    position: relative; /* Ensures child elements are positioned relative to it */
+    z-index: 0; /* Ensure the background stays behind */
+    height: 100%;
+    
+}
+
+/* Holds the chat bubble that directs the user what to do */
+.chat-bubble-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: left; /* Align to the left */
+    align-items: flex-start; /* Align text bubbles to the left */
+    margin-top: 35px;
+    margin-left: 50px; 
+    gap: 20px; /* Adds spacing between chat bubbles */
+}
+
+
+/* Chat bubble that is meant to come from the application to the user */
+.chat-bubble-from {
+    display: inline-block; /* Ensure the width scales to fit the text */
+    background-color: var(--main-blue);
+    color: var(--pure-white);
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 25px;
+    line-height: 40px;
+    border-radius: 25px; /* Rounded corners */
+    border-bottom-left-radius: 5px; /* Slightly sharper bottom-left corner */
+    padding: 15px 25px; /* Adjust padding */
+    box-shadow: var(--main-shading-with-drop-shadow);
+}
+
+.chat-bubble-from u {
+    text-decoration: var(--main-off-white) wavy underline;
+    text-underline-offset: 25%;
+    text-decoration-thickness: 10%; 
+}
+
+
+/* Holds the jouranl */
+.journal-container {
+    display: flex;
+    justify-content: right; /* Align to the left */
+    align-items: right; /* Align text bubbles to the left */
+    margin: 25px;
+    margin-right: 50px;
+    margin-top: 40px;
+}
+
+
+.wrapper{
+    width: 800px;
+    background: var(--main-blue);
+    border-radius: 30px;
+    border-bottom-right-radius: 5px;
+    padding: 18px;
+    position: relative; /* Ensures child elements are positioned relative to it */
+    box-shadow: var(--main-shading-with-drop-shadow);
+    z-index: 0; /* Ensure the background stays behind */
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    justify-content: right; /* Align to the right */
+    align-items: right; /* Align text bubbles to the end */
+  }
+
+/* Add the SVG to the account creation form */
+.wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the rectangle */
+    height: 100%; /* Full height of the rectangle */
+    background-image: url('../images/backgroundImages/cloudsAndRainbow.svg'); /* Add the SVG as a background */
+    background-size: cover; /* Ensure the SVG covers the entire area */
+    background-position: center; /* Center the SVG */
+    opacity: 0.25; /* Set the opacity */
+    pointer-events: none; /* Make it non-interactive */
+}
+  
+  
+
+/* Right side of account form + the background rectangle */
+.inner-wrapper {
+    padding: 25px;
+    padding-top: 0px;
+    padding-bottom: 15px;
+    border-radius: 18px;
+    box-shadow: var(--main-shading-with-drop-shadow);
+    position: relative; /* Position relative to the parent */
+    z-index: 1; /* Ensure this rectangle appears on top */
+    opacity: 1; /* Keep the rectangle fully opaque */
+    overflow: hidden;
+}
+
+.inner-wrapper::before {
+    content: ''; /* Necessary for pseudo-elements */
+    position: absolute; /* Ensures it covers the parent */
+    top: 0;
+    left: 0;
+    width: 100%; /* Cover entire inner-wrapper */
+    height: 100%;
+    background: var(--main-red-subdued); /* The subdued red color */
+    opacity: 0.80; /* 70% opacity */
+    z-index: 0; /* Send it behind the content */
+}
+
+.inner-wrapper h2{
+    color: var(--main-off-white);
+    font-size: 20px;
+    text-align: center;
+    font-weight: 900;
+    text-decoration: var(--main-off-white) wavy underline;
+    text-underline-offset: 25%;
+    text-decoration-thickness: 10%; 
+    z-index: 1;
+    position: relative;
+    line-height: 32px;
+}
+
+
+.inner-wrapper textarea{
+    font-family: 'Nunito', sans-serif;
+    width: calc(100% - 2px);
+    resize: none;
+    height: 40px;
+    outline: none;
+    padding: 10px;
+    padding-left: 12px;
+    padding-right: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    max-height: 300px;
+    caret-color: var(--muted-blue-1);
+    border: none;
+    border-radius: 10px;
+    z-index: 1;
+    background-color: transparent;
+    color: var(--pure-white);
+    position: relative;
+    box-sizing: border-box;
+}
+
+textarea::placeholder{
+    color: var(--pure-white);
+    font-weight: 700;
+}
+
+textarea:is(:focus){
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: var(--box-text-drop-shadow);
+}
+
+/* Next button styling */
+.form-button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if needed */
+    margin: 50px;
+    padding-bottom:50px;
+}
+  
+/* Sign in button */
+.form-button-next {
+    background-color: var(--main-green-subdued);
+    color: var(--pure-white);
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    border: 2px solid transparent;
+    border: none;
+    border-radius: 25px; /* Rounded corners */
+    padding: 10px 30px; /* Adjust button padding */
+    cursor: pointer;
+    box-shadow: var(--main-light-shading);
+    width: auto; /* Ensure button is sized to its content */
+}
+
+.form-button-next:hover {
+    color: var(--main-yellow-bold);
+    background-color: var(--main-green);
+    box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow); /* Add a yellow outline and default shading */ 
+}
+
+/* New Prompt Icon Styling */
+.new-prompt-icon {
+    position: relative; /* Positions it within the container */
+    top: -20px; /* Moves it slightly above the journal container */
+    right: -45px; /* Moves it slightly to the right */
+    width: 65px; /* Set a standard width */
+    height: 65px;
+    cursor: pointer; /* Make it clickable */
+    transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+    z-index: 2;
+}
+
+/* Hover Effect */
+.new-prompt-icon:hover {
+    transform: scale(1.1) rotate(-360deg) translate(2px, -1px); /* Slightly enlarges the icon on hover */
+    transform-origin: center;
+    filter: hue-rotate(245deg) saturate(115%);
+}
+
+/* Inline New Prompt Icon (Non-Clickable) */
+.inline-new-prompt-icon {
+    width: 39px; /* Adjust size to match text height */
+    height: auto; /* Maintain aspect ratio */
+    vertical-align: middle; /* Aligns it properly with text */
+    margin: 0 3px; /* Adds spacing around the icon */
+    user-select: none; /* Prevents accidental text selection */
+    pointer-events: none; /* Ensures it is not interactive */
+}
