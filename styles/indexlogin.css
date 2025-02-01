@@ -292,3 +292,18 @@
   box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow); /* Add a yellow outline and default shading */ 
 }
 
+
+/* Fix autofill styles */
+.text-input-box:-webkit-autofill,
+.text-input-box:-webkit-autofill:hover,
+.text-input-box:-webkit-autofill:focus,
+.text-input-box:-webkit-autofill:active {
+  font-family: 'Nunito', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 20px !important;
+  color: var(--main-blue-subdued) !important;
+  background-color: var(--main-off-white) !important;
+  box-shadow: var(--main-light-shading) !important;
+  -webkit-text-fill-color: var(--main-blue-subdued) !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
