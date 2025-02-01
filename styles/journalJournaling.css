@@ -35,11 +35,11 @@
     font-family: 'Nunito', sans-serif;
     font-style: normal;
     font-weight: 900;
-    font-size: 24px;
-    line-height: 45px;
+    font-size: 25px;
+    line-height: 40px;
     border-radius: 25px; /* Rounded corners */
     border-bottom-left-radius: 5px; /* Slightly sharper bottom-left corner */
-    padding: 15px 30px; /* Adjust padding */
+    padding: 15px 25px; /* Adjust padding */
     box-shadow: var(--main-shading-with-drop-shadow);
 }
 
@@ -97,6 +97,7 @@
 .inner-wrapper {
     padding: 25px;
     padding-top: 0px;
+    padding-bottom: 15px;
     border-radius: 18px;
     box-shadow: var(--main-shading-with-drop-shadow);
     position: relative; /* Position relative to the parent */
@@ -127,6 +128,7 @@
     text-decoration-thickness: 10%; 
     z-index: 1;
     position: relative;
+    line-height: 32px;
 }
 
 
@@ -134,11 +136,11 @@
     font-family: 'Nunito', sans-serif;
     width: calc(100% - 2px);
     resize: none;
-    height: 45px;
+    height: 40px;
     outline: none;
     padding: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 12px;
+    padding-right: 12px;
     font-size: 15px;
     font-weight: 700;
     max-height: 300px;
@@ -150,7 +152,6 @@
     color: var(--pure-white);
     position: relative;
     box-sizing: border-box;
-    line-height: 25px;
 }
 
 textarea::placeholder{
@@ -198,10 +199,10 @@ textarea:is(:focus){
 /* New Prompt Icon Styling */
 .new-prompt-icon {
     position: relative; /* Positions it within the container */
-    top: -25px; /* Moves it slightly above the journal container */
-    right: -50px; /* Moves it slightly to the right */
-    width: 75px; /* Set a standard width */
-    height: 75px;
+    top: -20px; /* Moves it slightly above the journal container */
+    right: -45px; /* Moves it slightly to the right */
+    width: 65px; /* Set a standard width */
+    height: 65px;
     cursor: pointer; /* Make it clickable */
     transition: transform 0.3s ease-in-out; /* Smooth hover effect */
     z-index: 2;
@@ -216,7 +217,7 @@ textarea:is(:focus){
 
 /* Inline New Prompt Icon (Non-Clickable) */
 .inline-new-prompt-icon {
-    width: 45px; /* Adjust size to match text height */
+    width: 39px; /* Adjust size to match text height */
     height: auto; /* Maintain aspect ratio */
     vertical-align: middle; /* Aligns it properly with text */
     margin: 0 3px; /* Adds spacing around the icon */
