@@ -116,7 +116,6 @@
                 .then(data => {
                     if (data.username) {
                         document.getElementById('userFirstName').textContent = data.username;
-                        document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
                     }
                 })
                 .catch(error => {
