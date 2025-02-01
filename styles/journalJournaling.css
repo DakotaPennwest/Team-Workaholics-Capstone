@@ -137,6 +137,8 @@
     height: 45px;
     outline: none;
     padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
     font-size: 15px;
     font-weight: 700;
     max-height: 300px;
@@ -148,6 +150,7 @@
     color: var(--pure-white);
     position: relative;
     box-sizing: border-box;
+    line-height: 25px;
 }
 
 textarea::placeholder{
