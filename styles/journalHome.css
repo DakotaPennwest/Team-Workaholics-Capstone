@@ -1,0 +1,139 @@
+/* Container to center the forms */
+.content-container {
+    width: 100%;
+    transform: scale(0.9); /* Scales links. 1.0 means no change */
+    transform-origin: center; /* Ensure scaling is centered */
+    position: relative; /* Ensures child elements are positioned relative to it */
+    z-index: 0; /* Ensure the background stays behind */
+    align-items: center;
+    align-content: center;
+    height: 100%;
+}
+
+
+/* Container for account type boxes */
+.home-page-boxes-container {
+    display: flex;
+    justify-content: center; /* Spread input pairs horizontally */
+    align-items: center; /* Vertically align items */
+    column-gap: 55px; /* Space between boxes */
+    position:relative;
+    top: 10px; /* Moves boxes down */
+}
+
+
+/* Shared styles for boxes */
+.home-page-box {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    width: 360px;
+    height: 350px;
+    border-radius: 50px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--main-shading-with-drop-shadow);
+    text-align: center;
+    z-index: 0;
+}
+
+/* Shared pseudo-element styles for background images */
+.home-page-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    opacity: 0.85; /* Default opacity */
+}
+
+
+/* Specific styles for journal box */
+.home-page-journal-box {
+    background: rgb(34, 140, 222);
+}
+
+/* Specific styles for all-journal box */
+.home-page-all-journal-box {
+    background: var(--main-yellow-subdued);
+}
+
+/* Journal-specific background */
+.home-page-journal-box::before {
+    background-image: url('../images/journalBg.svg');
+}
+
+/* all-journal-specific background */
+.home-page-all-journal-box::before {
+    background-image: url('../images/allJournalBg.svg');
+}
+
+/* Hover effects shared for all boxes */
+.home-page-box:hover {
+    filter: contrast(105%) brightness(108%);
+    box-shadow: 0 0 0 7px var(--main-red), var(--main-shading-with-drop-shadow);
+}
+
+/* This adds the underline under the text when the user hovers over each button */
+.home-page-all-journal-box:hover .home-page-all-journal-box-text,
+.home-page-journal-box:hover .home-page-journal-box-text { 
+    text-decoration: underline;  /* Adds underline */
+    text-decoration: var(--pure-white) wavy underline; /* Makes underline wavy */
+    text-underline-offset: 25%; /* lowers underline down 20% */
+    text-decoration-thickness: 10%; /* Makes underline a certain thickness*/
+}
+
+/* Shared text container styles */
+.home-page-box-text {
+    position: absolute;
+    bottom: 10%;
+    width: 100%;
+    height: 35%;
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 36px;
+    line-height: 45px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    z-index: 2;
+    box-shadow: var(--main-light-shading-no-top);
+    border: none;
+}
+
+/* Journal-specific text styles */
+.home-page-journal-box-text {
+    background: rgba(230, 60, 54, 0.8); /* Red */
+    color: var(--pure-white);
+}
+
+/* all-journal-specific text styles */
+.home-page-all-journal-box-text {
+    background: rgb(55, 134, 54, 0.9); /* Green */
+    color: var(--pure-white);
+}
+
+.home-page-box-status{
+    height: 55%;
+    width: 80%;
+    left: 10%;
+    position: relative;
+    font-family: 'Nunito', sans-serif; /* Match font family */
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px; /* Adjust font size for readability */
+    text-align: center; /* Center the text horizontally */
+    color: var(--pure-white); /* White text color */
+    z-index: 2;
+    align-content: center ;
+    text-shadow: var(--box-text-drop-shadow); /* Use the text drop shadow variable */
+}
