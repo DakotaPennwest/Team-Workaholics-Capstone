@@ -98,8 +98,55 @@
     </form>
 
     <script>
+        // Function for validating form data
         function submitParentForm() {
-            document.getElementById('formFirstNameInput').value = document.getElementById('firstNameInput').value;
+
+const inputFields = ['firstNameInput', 'usernameInput', 'passwordInput', 'confirmPasswordInput', 'emailInput'];
+let hasErrors = false;
+
+// For validating passwords match
+const password = document.getElementById('passwordInput');
+const confirmPassword = document.getElementById('confirmPasswordInput');
+
+inputFields.forEach(fieldId => {
+const field = document.getElementById(fieldId);
+
+// Check if field is empty or contains only spaces
+if (!field.value || field.value.trim() === '') {
+field.style.boxShadow = "0 0 0 3px var(--main-red), var(--main-light-shading)";
+hasErrors = true;
+} else {
+// Check if passwords match
+if (fieldId === 'passwordInput' || fieldId === 'confirmPasswordInput') {
+    if (password.value !== confirmPassword.value) {
+        password.style.boxShadow = "0 0 0 3px var(--main-red), var(--main-light-shading)";
+        confirmPassword.style.boxShadow = "0 0 0 3px var(--main-red), var(--main-light-shading)";
+        hasErrors = true;
+    } else {
+        field.style.boxShadow = '';
+    }
+}
+// Check email format
+else if (fieldId === 'emailInput') {
+    const email = field.value;
+    if (!email.includes('@') || !email.includes('.')) {
+        field.style.boxShadow = "0 0 0 3px var(--main-red), var(--main-light-shading)";
+        hasErrors = true;
+    } else {
+        field.style.boxShadow = '';
+    }
+} else {
+    field.style.boxShadow = '';
+}
+}
+});
+
+// if errors were found, rerun validation function
+if (hasErrors) {
+return;
+}
+
+document.getElementById('formFirstNameInput').value = document.getElementById('firstNameInput').value;
             document.getElementById('formUsernameInput').value = document.getElementById('usernameInput').value;
             document.getElementById('formPasswordInput').value = document.getElementById('passwordInput').value;
             document.getElementById('formConfirmPasswordInput').value = document.getElementById('confirmPasswordInput').value;
@@ -122,6 +169,8 @@
                 document.getElementById('errorMessageContainer').innerText = 'An error occurred. Please try again.';
             });
         }
+
+
     </script>
 
     <!-- Error message container -->
