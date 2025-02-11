@@ -76,7 +76,7 @@ if (!isset($_SESSION['username'])) {
     <div class="main-screen-container">
         <div class="content-container">
             <div class="chat-bubble-container">
-                <div class="chat-bubble-from">Let's write about feeling very sad today.</div>
+                <div class="chat-bubble-from"><u id="Prompt">Today I feel</u></div>
                 <div class="chat-bubble-from">
                     Feel free to click 
                     <img src="./images/icons/newPromptIcon.svg" alt="New Prompt" class="inline-new-prompt-icon">
@@ -88,36 +88,54 @@ if (!isset($_SESSION['username'])) {
                 <img src="./images/icons/newPromptIcon.svg" alt="New Prompt" class="new-prompt-icon">
                 <div class="wrapper">
                     <div class="inner-wrapper">
-                        <h2>Today I am feeling very sad because...</h2>
                         <form action="journalJournaling.php" method="POST">
+                            <h2>Today I am feeling very sad because...</h2>
                             <textarea name="journalContent" id="journalContent" spellcheck="false" placeholder="Click here to begin typing..." required></textarea>
                             <input type="hidden" name="emotionId" value="1"> <!-- Example emotion ID, replace with dynamic value -->
                             <input type="hidden" name="emotionalIntensityRating" value="5"> <!-- Example rating, replace with user input -->
-                            <button type="submit" class="form-button-next">Next</button>
+                            <div class="form-button-container">
+                                <button type="submit" class="form-button-next">Next</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
-      
+        </div>
+    </div>
+
     <div class="waves-container">
         <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
         <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('getUserInfo.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.username) {
-                        document.getElementById('userFirstName').textContent = data.username;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching user info:', error);
-                });
-        });
+    <!-- scriptblock to handle random prompt generation -->
+    <script>   
+        // Array of prompts
+        const prompts = [
+            "why you are feeling [emotion]?",
+            "Is there something that made you feel [emotion] today?",
+            "How did you handle feeling [emotion] today?\nWas there something you did that helped you feel better or worse?",
+            "Write about a time when you felt [emotion] before.\nHow was it similar or different to today?",
+            "What can you do next time you feel [emotion] to help yourself feel better?",
+            "What is something positive you can remember or focus on when you feel [emotion]?",
+            "What situations or people usually make you feel [emotion]?"
+        ];
 
+        // Function to generate and set a random prompt
+        function setRandomPrompt() {
+            const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
+            document.getElementById('Prompt').innerText = randomPrompt;
+        }
+
+        // Set a random prompt when the new prompt icon is clicked
+        document.querySelector('.new-prompt-icon').addEventListener('click', function() {
+            setRandomPrompt(); // Generate a new random prompt on click
+        });
+    </script> 
+
+    <!-- Javascript to handle the resizing of the journal. -->
+    <!-- Feel free to move this to a separate script file if you prefer  -->
+    <script>
         const textarea = document.querySelector("textarea");
         
         function adjustHeight() {
