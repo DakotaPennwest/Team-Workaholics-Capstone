@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php'); // Redirect to login page if not logged in
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +42,7 @@
         <!-- Links Background -->
         <div class="navigation-bar-links-container">
             <!-- Home Link -->
-            <a href="#" class="navigation-bar-link">
+            <a href="homepage.html" class="navigation-bar-link">
                 <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Home</span>
             </a>
@@ -75,7 +83,7 @@
           
             <div class="home-page-boxes-container">
                 <!-- Journal Box -->
-                <a href="#" class="home-page-box home-page-journal-box">
+                <a href="journalJournaling.html" class="home-page-box home-page-journal-box">
                     <div class="home-page-box-status" id="journalStatus">
                         You haven't done your journal today
                     </div>
@@ -102,7 +110,7 @@
         <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
     </div>
 
-    <!-- NOTE: I have to comment out this for now while I make the html. I didn't want to delete it so I just commented it out for now.
+    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             fetch('getUserInfo.php')
@@ -117,7 +125,7 @@
                     console.error('Error fetching user info:', error);
                 });
         });
-    </script> -->
+    </script>
 
 </body>
 </html>
