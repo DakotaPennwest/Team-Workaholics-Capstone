@@ -30,6 +30,8 @@ Username: parentTestUser
 Password: password123
 
 2. Follow the on-screen instructions to create a child or parent account and start journaling.
+   Click on Begin Journaling screen to start journaling process
+   Journal prompt option generates prompts to assist user in their journaling process.
 
 ## Features
 
@@ -43,8 +45,9 @@ Password: password123
 - **Journal Entry Feature**
   - Develop UI for journal entry input
   - Create journal entry prompts
-  - Implement save functionality for journal entry input
-  - Develop journal entry search by parameters
+  - Implement save functionality for journal entry input - * Created session that will carry journal
+  info to next page where it can be saved *
+  - Develop journal entry search by parameters - *will address in final sprint*
 
 ### Sprint 3
 - **Emotion Selection and Intensity Rating**
