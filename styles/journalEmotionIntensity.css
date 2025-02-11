@@ -158,6 +158,7 @@
     font-weight: 900;
     font-size: 25px;
     color: var(--pure-white);
+    margin-top: -10px; /* Moves up text slightly */
 }
 
 .left-content-container-bottom {
