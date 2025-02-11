@@ -90,8 +90,7 @@
     background-position: center; /* Center the SVG */
     opacity: 0.25; /* Set the opacity */
     pointer-events: none; /* Make it non-interactive */
-}
-  
+}  
 
 /* Foreground (yellow) rectangle styling */
 .left-content-container {
@@ -114,6 +113,62 @@
     opacity: 0.9; /* Apply the 70% opacity here */
     z-index: -1; /* Ensure it stays behind the content */
     box-shadow: var(--main-shading-with-drop-shadow);
+}
+
+.left-content-container-top {
+    position: relative;
+    display: flex;
+    height: 60%;
+    width: 100%;
+    align-items: center;
+    justify-content: center; /* Centers emoji horizontally */
+    align-items: center; /* Sticks emoji to the top */
+}
+
+.selected-emotion-emoji {
+    position:absolute;
+    height: 115px;
+    width: 115px;
+    top: 80px;
+}
+
+.selected-intensity-bar{
+    position:absolute;
+    height: 250px;
+    width: 250px;
+    top: -30px;
+}
+
+.left-content-container-middle {
+    position: relative;
+    height: 15%;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    display: flex;
+    justify-content: center; /* Centers text horizontally */
+    align-items: center; /* Sticks flex items to the bottom */
+    text-align: center; /* Ensures text is centered */
+}
+
+.left-content-selected-emotion-container {
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 25px;
+    color: var(--pure-white);
+}
+
+.left-content-container-bottom {
+    position: relative;
+    height: 25%;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start;
+    justify-content: flex-start; /* Centers at top */
+    align-items: center; /* Sticks flex items to the bottom */
 }
 
 /* Left-side content container */
@@ -178,7 +233,7 @@
     color: var(--pure-white);
     text-decoration: underline; 
     text-decoration: var(--pure-white) wavy underline;
-    text-underline-offset: 20%;
+    text-underline-offset: 25%;
     text-decoration-thickness: 10%; 
     margin-bottom: 12px; /* Adjust value to move text up */
 }
@@ -215,3 +270,65 @@
     background-color: var(--main-green);
     box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow); /* Add a yellow outline and default shading */ 
 }
+
+
+
+/* The outer container: a white box with rounded corners */
+.slider-box {
+    background: var(--main-off-white);
+    border-radius: 100px;
+    padding: 30px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 300px;
+    box-shadow: var( --main-light-shading);
+  }
+  
+  /* The slider container where all elements are absolutely positioned */
+  .slider {
+    position: relative;
+    height: 30px;
+  }
+  
+  /* The progress line (red) that shows the range from the first stop to the current selection */
+  .slider-progress {
+    position: absolute;
+    background: var(--main-red);
+    height: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 1000px;
+    z-index: 1;
+    box-shadow: var( --main-light-shading);
+  }
+  
+  /* Each discrete cyan stop */
+  .slider-stop {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: var(--main-cyan);
+    border-radius: 50%;
+    top: 50%;
+    /* Center the circle on its left coordinate */
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 2;
+    cursor: pointer;
+    box-shadow: var(--main-shading-with-drop-shadow);
+  }
+  
+  /* The red handle, which is larger than the stops */
+  .slider-handle {
+    position: absolute;
+    width: 33px;
+    height: 33px;
+    background: var(--main-red);
+    border-radius: 50%;
+    top: 50%;
+    /* Center the handle on its left coordinate */
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 3;
+    cursor: pointer;
+    box-shadow: var(--main-shading-with-drop-shadow);
+  }
+  

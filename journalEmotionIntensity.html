@@ -104,7 +104,37 @@
                 <!-- The Emotion Selection Form-->
                 <div class="emotion-selection-form">
                     <div class="left-content-container">
-                        
+                         <div class="left-content-container-top">
+
+                            <img src="./images/intensityBar/intensityBar3.svg" alt="selected intensity" class="selected-intensity-bar" id="selectedIntensityBar">
+                            <img src="./images/emotions/testEmoji.svg" alt="selected emotion emoji" class="selected-emotion-emoji" id="selectedEmotionEmoji">
+                  
+                         </div>
+
+                         <div class="left-content-container-middle">
+                            <div class="left-content-selected-emotion-container" id="selectedIntensity">Extremely</div>
+                         </div>
+
+                         <div class="left-content-container-bottom">
+
+                            <div class="slider-box">
+                                <div class="slider">
+                                  <!-- The progress line that grows from the first stop to the current stop -->
+                                  <div class="slider-progress"></div>
+                            
+                                  <!-- Five stops, equally spaced using inline styles -->
+                                  <div class="slider-stop" data-stop="1" style="left: 0%;"></div>
+                                  <div class="slider-stop" data-stop="2" style="left: 25%;"></div>
+                                  <div class="slider-stop" data-stop="3" style="left: 50%;"></div>
+                                  <div class="slider-stop" data-stop="4" style="left: 75%;"></div>
+                                  <div class="slider-stop" data-stop="5" style="left: 100%;"></div>
+                            
+                                  <!-- The red handle that shows the current selection -->
+                                  <div class="slider-handle"></div>
+                                </div>
+                              </div>
+
+                         </div>
                     </div>
     
                     <div class="right-content-container">
@@ -140,6 +170,6 @@
 
     
 
-
+    <script src="scripts/journalIntensity.js"></script>
 </body>
 </html>
