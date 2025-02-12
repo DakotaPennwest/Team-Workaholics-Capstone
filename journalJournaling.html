@@ -76,29 +76,35 @@ if (!isset($_SESSION['username'])) {
     <div class="main-screen-container">
         <div class="content-container">
             <div class="chat-bubble-container">
-                <div class="chat-bubble-from"><u id="Prompt">Today I feel</u></div>
                 <div class="chat-bubble-from">
-                    Feel free to click 
+                    Please respond to the prompt below to explain <u>how and why you feel this way</u>. <br>
+                    Feel free to click
                     <img src="./images/icons/newPromptIcon.svg" alt="New Prompt" class="inline-new-prompt-icon">
                     for a new prompt!
-                </div> 
+                </div>
+
+                <div class="prompt-message-container">
+                    <img src="./images/icons/newPromptIcon.svg" alt="New Prompt" class="new-prompt-icon">
+                    <div class="chat-bubble-from"><u id="Prompt">Why are you feeling {emotion} today?</u></div> 
+                </div>
+
             </div>
 
-            <div class="journal-container">
-                <img src="./images/icons/newPromptIcon.svg" alt="New Prompt" class="new-prompt-icon">
-                <div class="wrapper">
-                    <div class="inner-wrapper">
-                        <form action="journalJournaling.php" method="POST">
-                            <h2>Today I am feeling very sad because...</h2>
+            <form action="journalJournaling.php" method="POST"></form>
+                <div class="journal-container">
+                    <div class="wrapper">
+                        <div class="inner-wrapper">
+                            <h2>Write your journal below!</h2>
                             <textarea name="journalContent" id="journalContent" spellcheck="false" placeholder="Click here to begin typing..." required></textarea>
                             <input type="hidden" name="emotionId" value="1"> <!-- Example emotion ID, replace with dynamic value -->
                             <input type="hidden" name="emotionalIntensityRating" value="5"> <!-- Example rating, replace with user input -->
-                            <div class="form-button-container">
-                                <button type="submit" class="form-button-next">Next</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
+            </form>
+
+            <div class="form-button-container">
+                <button type="submit" class="form-button-next">Next</button>
             </div>
         </div>
     </div>
