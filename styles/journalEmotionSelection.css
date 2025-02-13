@@ -206,7 +206,7 @@
 }
 
 
-/* Defaults all emotion to visible for now */
+/* This controls if the secondary emotions are visible or not */
 .emotion-column.happiness .emotion-option.secondary,
 .emotion-column.sadness .emotion-option.secondary,
 .emotion-column.fear .emotion-option.secondary,
