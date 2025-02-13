@@ -144,6 +144,12 @@
     /* Set a fixed height to reserve space for 3 rows */
     height: 90%;
     width: 16.667%;
+    /* Adds background to each boarder. Not sold on this though so commented out for now */
+    /*
+    background-color: rgb(245, 245, 220, 0.3);
+    border-radius: 20px;
+    border: solid 5px var(--main-cyan);
+    */
 }
 
 /* Emotion option (each individual emotion) */
