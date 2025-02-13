@@ -103,8 +103,132 @@
 
                 <!-- The Emotion Selection Form-->
                 <div class="emotion-selection-form">
+
+                    <!-- All Selectable Emotions -->
                     <div class="left-content-container">
-                        
+
+                        <div class="emotion-list-container">
+                            <!-- Column 1: Happiness -->
+                            <div class="emotion-column happiness hide-secondary">
+                              <!-- Secondary emotion (top) -->
+                              <label class="emotion-option secondary" title="Excited">
+                                <input type="radio" name="emotion" value="excited">
+                                <img src="./images/emotions/excited.svg" alt="Excited">
+                                <span class="emotion-name">Excited</span>
+                              </label>
+                              <!-- Main emotion (center) -->
+                              <label class="emotion-option main" title="Happy">
+                                <input type="radio" name="emotion" value="happy">
+                                <img src="./images/emotions/happy.svg" alt="Happy">
+                                <span class="emotion-name">Happy</span>
+                              </label>
+                              <!-- Secondary emotion (bottom) -->
+                              <label class="emotion-option secondary" title="Proud">
+                                <input type="radio" name="emotion" value="proud">
+                                <img src="./images/emotions/proud.svg" alt="Proud">
+                                <span class="emotion-name">Proud</span>
+                              </label>
+                            </div>
+                          
+                            <!-- Column 2: Sadness -->
+                            <div class="emotion-column sadness hide-secondary">
+                              <label class="emotion-option secondary" title="Disappointed">
+                                <input type="radio" name="emotion" value="disappointed">
+                                <img src="./images/emotions/disappointed.svg" alt="Disappointed">
+                                <span class="emotion-name">Disappointed</span>
+                              </label>
+                              <label class="emotion-option main" title="Sad">
+                                <input type="radio" name="emotion" value="sad">
+                                <img src="./images/emotions/sad.svg" alt="Sad">
+                                <span class="emotion-name">Sad</span>
+                              </label>
+                              <label class="emotion-option secondary" title="Lonely">
+                                <input type="radio" name="emotion" value="lonely">
+                                <img src="./images/emotions/lonely.svg" alt="Lonely">
+                                <span class="emotion-name">Lonely</span>
+                              </label>
+                            </div>
+                          
+                            <!-- Column 3: Fear -->
+                            <div class="emotion-column fear hide-secondary">
+                              <label class="emotion-option secondary" title="Worried">
+                                <input type="radio" name="emotion" value="worried">
+                                <img src="./images/emotions/worried.svg" alt="Worried">
+                                <span class="emotion-name">Worried</span>
+                              </label>
+                              <label class="emotion-option main" title="Scared">
+                                <input type="radio" name="emotion" value="scared">
+                                <img src="./images/emotions/scared.svg" alt="Scared">
+                                <span class="emotion-name">Scared</span>
+                              </label>
+                              <label class="emotion-option secondary" title="Embarrassed">
+                                <input type="radio" name="emotion" value="embarrassed">
+                                <img src="./images/emotions/embarrassed.svg" alt="Embarrassed">
+                                <span class="emotion-name">Embarrassed</span>
+                              </label>
+                            </div>
+                          
+                            <!-- Column 4: Anger -->
+                            <div class="emotion-column anger hide-secondary">
+                              <label class="emotion-option secondary" title="Frustrated">
+                                <input type="radio" name="emotion" value="frustrated">
+                                <img src="./images/emotions/frustrated.svg" alt="Frustrated">
+                                <span class="emotion-name">Frustrated</span>
+                              </label>
+                              <label class="emotion-option main" title="Angry">
+                                <input type="radio" name="emotion" value="angry">
+                                <img src="./images/emotions/angry.svg" alt="Angry">
+                                <span class="emotion-name">Angry</span>
+                              </label>
+                              <label class="emotion-option secondary" title="Unfairly Treated">
+                                <input type="radio" name="emotion" value="unfairlyTreated">
+                                <img src="./images/emotions/unfairlyTreated.svg" alt="Unfairly Treated">
+                                <span class="emotion-name">Unfairly Treated</span>
+                              </label>
+                            </div>
+                          
+                            <!-- Column 5: Surprise -->
+                            <div class="emotion-column surprise hide-secondary">
+                              <label class="emotion-option secondary" title="Amazed">
+                                <input type="radio" name="emotion" value="amazed">
+                                <img src="./images/emotions/amazed.svg" alt="Amazed">
+                                <span class="emotion-name">Amazed</span>
+                              </label>
+                              <label class="emotion-option main" title="Surprised">
+                                <input type="radio" name="emotion" value="surprised">
+                                <img src="./images/emotions/surprised.svg" alt="Surprised">
+                                <span class="emotion-name">Surprised</span>
+                              </label>
+                              <label class="emotion-option secondary" title="Confused">
+                                <input type="radio" name="emotion" value="confused">
+                                <img src="./images/emotions/confused.svg" alt="Confused">
+                                <span class="emotion-name">Confused</span>
+                              </label>
+                            </div>
+                          
+                            <!-- Column 6: Disgust -->
+                            <div class="emotion-column disgust hide-secondary">
+                              <label class="emotion-option secondary" title="Gross">
+                                <input type="radio" name="emotion" value="gross">
+                                <img src="./images/emotions/gross.svg" alt="Gross">
+                                <span class="emotion-name">Gross</span>
+                              </label>
+                              <label class="emotion-option main" title="Disgusted">
+                                <input type="radio" name="emotion" value="disgusted">
+                                <img src="./images/emotions/disgusted.svg" alt="Disgusted">
+                                <span class="emotion-name">Disgusted</span>
+                              </label>
+                              <label class="emotion-option secondary" title="Uncomfortable">
+                                <input type="radio" name="emotion" value="uncomfortable">
+                                <img src="./images/emotions/uncomfortable.svg" alt="Uncomfortable">
+                                <span class="emotion-name">Uncomfortable</span>
+                              </label>
+                            </div>
+                        </div>
+                          
+
+
+
                     </div>
     
                     <div class="right-content-container">
@@ -114,12 +238,12 @@
                             </div>
 
                             <div class="selected-emotion-emoji-container">
-                                <img src="./images/emotions/testEmoji.svg" alt="selected emotion emoji" class="selected-emotion-emoji" id="selectedEmotionEmoji">
+                                <img src="./images/emotions/empty.svg" alt="selected emotion emoji" class="selected-emotion-emoji" id="selectedEmotionEmoji">
                             </div>
                         </div>
 
                         <div class="right-content-container-bottom">
-                            <div class="selected-emotion-name" id="selectedEmotionName">Happy </div>
+                            <div class="selected-emotion-name" id="selectedEmotionName">Select an Emotion</div>
                         </div>
                     </div>
                 </div>
@@ -128,7 +252,7 @@
 
 
             <!-- next button -->
-            <div class="form-button-container">
+            <div class="form-button-container hidden">
                 <button class="form-button-next" type="button">Next</button>
             </div>
 
@@ -144,6 +268,6 @@
 
     
 
-
+    <script src="scripts/journalSelection.js"></script>
 </body>
 </html>
