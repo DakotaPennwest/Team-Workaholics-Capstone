@@ -134,8 +134,11 @@ if (!isset($_SESSION['username'])) {
         }
 
         // Set a random prompt when the new prompt icon is clicked
-        document.querySelector('.new-prompt-icon').addEventListener('click', function() {
-            setRandomPrompt(); // Generate a new random prompt on click
+        // Update: Also added ability for the smaller prompt button to also be clicked.
+        document.querySelectorAll('.new-prompt-icon, .inline-new-prompt-icon').forEach(item => {
+            item.addEventListener('click', function() {
+                setRandomPrompt(); // Generate a new random prompt on click
+             });
         });
     </script> 
 

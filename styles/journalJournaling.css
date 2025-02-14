@@ -213,7 +213,8 @@ textarea:is(:focus){
 }
 
 /* Hover Effect */
-.new-prompt-icon:hover {
+.new-prompt-icon:hover,
+.inline-new-prompt-icon:hover {
     transform: scale(1.1) rotate(-360deg) translate(2px, -1px); /* Slightly enlarges the icon on hover */
     transform-origin: center;
     filter: hue-rotate(245deg) saturate(115%);
@@ -226,5 +227,6 @@ textarea:is(:focus){
     vertical-align: middle; /* Aligns it properly with text */
     margin: 0 3px; /* Adds spacing around the icon */
     user-select: none; /* Prevents accidental text selection */
-    pointer-events: none; /* Ensures it is not interactive */
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out; /* Smooth hover effect */
 }
