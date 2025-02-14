@@ -21,9 +21,9 @@
     flex-direction: column; /* Stack elements vertically */
     justify-content: left; /* Align to the left */
     align-items: flex-start; /* Align text bubbles to the left */
-    margin-top: 35px;
+    margin-top: 25px;
     margin-left: 50px; 
-    gap: 20px; /* Adds spacing between chat bubbles */
+    gap: 30px; /* Adds spacing between chat bubbles */
 }
 
 
@@ -95,9 +95,8 @@
 
 /* Right side of account form + the background rectangle */
 .inner-wrapper {
-    padding: 25px;
-    padding-top: 0px;
-    padding-bottom: 15px;
+    padding: 15px;
+    padding-bottom: 11px;
     border-radius: 18px;
     box-shadow: var(--main-shading-with-drop-shadow);
     position: relative; /* Position relative to the parent */
@@ -123,12 +122,13 @@
     font-size: 20px;
     text-align: center;
     font-weight: 900;
-    text-decoration: var(--main-off-white) wavy underline;
+    /* text-decoration: var(--main-off-white) wavy underline;
     text-underline-offset: 25%;
-    text-decoration-thickness: 10%; 
+    text-decoration-thickness: 10%; */
     z-index: 1;
     position: relative;
     line-height: 32px;
+    margin-top: 0px;
 }
 
 
@@ -196,20 +196,25 @@ textarea:is(:focus){
     box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow); /* Add a yellow outline and default shading */ 
 }
 
+.prompt-message-container {
+    position: relative;
+}
+
 /* New Prompt Icon Styling */
 .new-prompt-icon {
-    position: relative; /* Positions it within the container */
-    top: -20px; /* Moves it slightly above the journal container */
-    right: -45px; /* Moves it slightly to the right */
-    width: 65px; /* Set a standard width */
-    height: 65px;
+    position: absolute; /* Positions it within the container */
+    top: -22px; /* Moves it slightly above the journal container */
+    left: -22px;
+    width: 55px; /* Set a standard width */
+    height: 55px;
     cursor: pointer; /* Make it clickable */
     transition: transform 0.3s ease-in-out; /* Smooth hover effect */
     z-index: 2;
 }
 
 /* Hover Effect */
-.new-prompt-icon:hover {
+.new-prompt-icon:hover,
+.inline-new-prompt-icon:hover {
     transform: scale(1.1) rotate(-360deg) translate(2px, -1px); /* Slightly enlarges the icon on hover */
     transform-origin: center;
     filter: hue-rotate(245deg) saturate(115%);
@@ -222,5 +227,6 @@ textarea:is(:focus){
     vertical-align: middle; /* Aligns it properly with text */
     margin: 0 3px; /* Adds spacing around the icon */
     user-select: none; /* Prevents accidental text selection */
-    pointer-events: none; /* Ensures it is not interactive */
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out; /* Smooth hover effect */
 }
