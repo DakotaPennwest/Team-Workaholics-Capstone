@@ -1,0 +1,342 @@
+/* Adjust main screen container */
+.main-screen-container {
+    overflow: auto;
+    height: 90vh;
+}
+
+/* Container to center the forms */
+.content-container {
+    width: 100%;
+    transform: scale(1.0); /* Scales links. 1.0 means no change */
+    transform-origin: center; /* Ensure scaling is centered */
+    position: relative; /* Ensures child elements are positioned relative to it */
+    z-index: 0; /* Ensure the background stays behind */
+    height: 100%;
+    
+}
+
+/* Holds the chat bubble that directs the user what to do */
+.chat-bubble-container {
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    justify-content: left; /* Align to the left */
+    align-items: flex-start; /* Align text bubbles to the left */
+    margin-top: 35px;
+    margin-left: 50px; 
+    gap: 20px; /* Adds spacing between chat bubbles */
+}
+
+
+/* Chat bubble that is meant to come from the application to the user */
+.chat-bubble-from {
+    display: inline-block; /* Ensure the width scales to fit the text */
+    background-color: var(--main-blue);
+    color: var(--pure-white);
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 25px;
+    line-height: 40px;
+    border-radius: 25px; /* Rounded corners */
+    border-bottom-left-radius: 5px; /* Slightly sharper bottom-left corner */
+    padding: 15px 25px; /* Adjust padding */
+    box-shadow: var(--main-shading-with-drop-shadow);
+}
+
+.chat-bubble-from u {
+    text-decoration: var(--main-off-white) wavy underline;
+    text-underline-offset: 25%;
+    text-decoration-thickness: 10%; 
+}
+
+
+/* Holds emotion choice form */
+.emotion-response-container {
+    display: flex;
+    justify-content: right; /* Align to the left */
+    align-items: right; /* Align text bubbles to the left */
+    margin: 25px;
+    margin-right: 50px;
+    margin-top: 30px;
+}
+
+/* The entire emotion selection form*/
+.emotion-selection-form{
+    width: 1000px;
+    height: 330px;
+    background: var(--main-blue);
+    border-radius: 30px;
+    border-bottom-right-radius: 5px;
+    padding: 20px; 
+    padding-right: 0px; 
+    position: relative; /* Ensures child elements are positioned relative to it */
+    box-shadow: var(--main-shading-with-drop-shadow);
+    z-index: 0; /* Ensure the background stays behind */
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    display: flex; /* This makes it so both the left and right will be displayed side by side */
+}
+
+/* Add the SVG to the account creation form */
+.emotion-selection-form::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the rectangle */
+    height: 100%; /* Full height of the rectangle */
+    background-image: url('../images/backgroundImages/cloudsAndRainbow.svg'); /* Add the SVG as a background */
+    background-size: cover; /* Ensure the SVG covers the entire area */
+    background-position: center; /* Center the SVG */
+    opacity: 0.25; /* Set the opacity */
+    pointer-events: none; /* Make it non-interactive */
+}
+  
+
+/* Foreground (yellow) rectangle styling */
+.left-content-container {
+    height: 100%;
+    width: 66.667%;
+    border-radius: 20px;
+    position: relative; /* Position relative to the parent */
+    z-index: 1; /* Ensure this rectangle appears on top */
+    opacity: 1; /* Keep the rectangle fully opaque */
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    overflow: hidden;
+}
+  
+/* Create a pseudo-element for the foreground opacity. This lets the foreground rectangle be low opacity but nothing else on top is */
+.left-content-container::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--main-cyan);
+    border-radius: 20px;
+    opacity: 0.9; /* Apply the 70% opacity here */
+    z-index: -1; /* Ensure it stays behind the content */
+    box-shadow: var(--main-shading-with-drop-shadow);
+}
+
+/* Foreground (yellow) rectangle styling */
+.emotion-list-container {
+    height: 100%;
+    width: 95%;
+    border-radius: 34px;
+    position: relative; /* Position relative to the parent */
+    z-index: 1; /* Ensure this rectangle appears on top */
+    opacity: 1; /* Keep the rectangle fully opaque */
+    /* We use flexbox to evenly distribute the columns */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+/* Each column represents one emotion category */
+.emotion-column {
+    /* Flex column to stack three rows (top, main, bottom) */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    /* Set a fixed height to reserve space for 3 rows */
+    height: 90%;
+    width: 16.667%;
+    /* Adds background to each boarder. Not sold on this though so commented out for now */
+    /*
+    background-color: rgb(245, 245, 220, 0.3);
+    border-radius: 20px;
+    border: solid 5px var(--main-cyan);
+    */
+}
+
+/* Emotion option (each individual emotion) */
+.emotion-option {
+    text-align: center;
+    cursor: pointer;
+    /* Ensure each option takes equal vertical space */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hide the default radio button appearance */
+.emotion-option input[type="radio"] {
+    display: none;
+}
+
+/* Style for the emoji images */
+.emotion-option img {
+    width: 60px;   /* Adjust as needed */
+    height: 60px;  /* Adjust as needed */
+    object-fit: contain;
+    filter: brightness(98%) contrast(98%);
+}
+
+/* Style for the emotion name text */
+.emotion-name {
+    color: var(--pure-white);
+    margin-top: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+}
+
+/* When hovering over the entire option, add the same box-shadow to the emoji */
+.emotion-option:hover img {
+    box-shadow: 0 0 0 4px var(--main-red-subdued),
+                            var(--main-light-shading);
+    border-radius: 50%;
+    filter: brightness(102%) contrast(101%);
+  }
+
+/* When the radio is checked, style the following img */
+.emotion-option input[type="radio"]:checked + img {
+    box-shadow: 0 0 0 4px var(--main-red),
+                var(--main-shading-with-drop-shadow);
+    border-radius: 50%; /* makes it a circular outline if your image is square */
+    filter: brightness(109%) contrast(107%);
+}
+
+/* And style the emotion name (span) that follows the image */
+.emotion-option input[type="radio"]:checked + img + .emotion-name {
+    text-decoration: underline; 
+    text-decoration: var(--pure-white) wavy underline;
+    text-underline-offset: 25%;
+    text-decoration-thickness: 10%; 
+}
+
+
+/* This controls if the secondary emotions are visible or not */
+.emotion-column.happiness .emotion-option.secondary,
+.emotion-column.sadness .emotion-option.secondary,
+.emotion-column.fear .emotion-option.secondary,
+.emotion-column.anger .emotion-option.secondary,
+.emotion-column.surprise .emotion-option.secondary,
+.emotion-column.disgust .emotion-option.secondary {
+    visibility: visible;
+}
+  
+
+/* Left-side content container */
+.right-content-container {
+    position: relative;
+    height: 100%;
+    width: 33.333%;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    z-index: 1; /* Ensure this rectangle appears on top */
+}
+
+.right-content-container-top {
+    position: relative;
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+}
+
+.today-i-am-feeling-container {
+    height: 45%;
+    width: 100%;
+    /* Proper alignment */
+    display: flex;
+    justify-content: center; /* Centers text horizontally */
+    align-items: flex-end; /* Sticks flex items to the bottom */
+    text-align: center; /* Ensures text is centered */
+}
+
+.today-i-am-feeling-container h2 {
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 22px;
+    color: var(--pure-white);
+    margin: 0px;
+}
+
+
+.selected-emotion-emoji-container {
+    display: flex;
+    justify-content: center; /* Centers emoji horizontally */
+    align-items: center; /* Sticks emoji to the top */
+    height: 55%; /* Ensure the container has enough space */
+    width: 100%;
+}
+
+.selected-emotion-emoji {
+    height: 90px;
+    width: 90px;
+}
+
+
+.right-content-container-bottom {
+    position: relative;
+    height: 30%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    box-shadow: var(--main-light-shading-no-top-no-light);
+    background-color: rgb(216, 66, 61, 0.85);
+    margin-top: 5px;
+}
+
+.selected-emotion-name {
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 28px;
+    color: var(--pure-white);
+    text-decoration: underline; 
+    text-decoration: var(--pure-white) wavy underline;
+    text-underline-offset: 25%;
+    text-decoration-thickness: 10%; 
+    margin-bottom: 12px; /* Adjust value to move text up */
+}
+
+/* Next button styling */
+.form-button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically if needed */
+    margin: 50px;
+    margin-top: 30px;
+    padding-bottom:45px;
+}
+  
+/* Sign in button */
+.form-button-next {
+    background-color: var(--main-green-subdued);
+    color: var(--pure-white);
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 30px;
+    border: 2px solid transparent;
+    border: none;
+    border-radius: 25px; /* Rounded corners */
+    padding: 10px 30px; /* Adjust button padding */
+    cursor: pointer;
+    box-shadow: var(--main-light-shading);
+    width: auto; /* Ensure button is sized to its content */
+}
+
+.form-button-next:hover {
+    color: var(--main-yellow-bold);
+    background-color: var(--main-green);
+    box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow); /* Add a yellow outline and default shading */ 
+}
+
+.hidden {
+    display: none;
+}
+  

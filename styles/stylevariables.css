@@ -40,6 +40,12 @@
     inset 3.6px 0px 4px rgba(255, 255, 255, 0.5),
     inset -3.6px 0px 16px rgba(0, 0, 0, 0.24);
 
+    --main-light-shading-no-top-no-light: 
+    inset 6px 0px 20px rgba(255, 255, 255, 0.15),
+    inset 3.6px 0px 4px rgba(0, 0, 0, 0.24),
+    inset -3.6px 0px 16px rgba(0, 0, 0, 0.105);
+    
+
     --profile-name-text-shadow: 
     0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.15), 
     -0.02vw -0.02vw 0.05vw rgba(255, 255, 255, 0.4), 
