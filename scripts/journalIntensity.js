@@ -1,130 +1,106 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Grab all required elements.
-    const stops = document.querySelectorAll('.slider-stop');
-    const handle = document.querySelector('.slider-handle');
-    const progress = document.querySelector('.slider-progress');
-    const slider = document.querySelector('.slider');
+// Custom slider implementation for selecting emotion intensity levels.
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Cache DOM element references
+  const sliderContainer = document.querySelector('.slider');
+  const dragHandle = document.querySelector('.slider-handle');
+  const progressBar = document.querySelector('.slider-progress');
+  const snapPoints = [...document.querySelectorAll('.slider-stop')];
   
-    // Global offset (in pixels) to move the progress line's start position left of the first dot.
-    const offset = 12;
+  // Define emotion intensity levels from lowest to highest
+  const emotionIntensityLevels = ['Barely', 'Somewhat', 'Moderately', 'Very', 'Extremely'];
   
-    // This function updates the text in the UI based on which stop was selected.
-    // It reads the data-stop attribute from the stop element to determine the intensity.
-    function updateIntensityText(stopElement) {
-      // Mapping from the stop value to an intensity adjective.
-      const intensityMapping = {
-        "1": "Barely",
-        "2": "Somewhat",
-        "3": "Moderately",
-        "4": "Very",
-        "5": "Extremely"
-      };
-      // Get the stop's intensity value (as a string).
-      const intensityValue = stopElement.dataset.stop;
-      // Look up the adjective (default to an empty string if not found).
-      const adjective = intensityMapping[intensityValue] || "";
+  // Track whether user is currently dragging the handle
+  let isHandleDragging = false;
+
+  // Updates the emotion display text and intensity bar image
+  function updateEmotionDisplay(intensityIndex) {
+    const intensityLabel = emotionIntensityLevels[intensityIndex];
+    document.getElementById('selectedIntensity').textContent = intensityLabel;
+    document.getElementById('selectedEmotionName').textContent = `${intensityLabel} Excited`;
+    document.getElementById('selectedIntensityBar').src = `./images/intensityBar/intensityBar${intensityIndex + 1}.svg`;
+  }
+
+  // Updates the visual elements of the slider (handle and progress bar)
+  function updateSliderVisuals(handlePosition) {
+    dragHandle.style.left = `${handlePosition}px`;
+    
+    // Get the leftmost snap point position for the progress bar
+    const firstSnapPointBounds = snapPoints[0].getBoundingClientRect();
+    const sliderBounds = sliderContainer.getBoundingClientRect();
+    const progressBarStart = firstSnapPointBounds.left - sliderBounds.left;
+    
+    progressBar.style.left = `${progressBarStart}px`;
+    progressBar.style.width = `${handlePosition - progressBarStart}px`;
+  }
+
+  // Moves the slider handle to a specific snap point
+  function snapHandleToPoint(snapPoint) {
+    const snapPointBounds = snapPoint.getBoundingClientRect();
+    const sliderBounds = sliderContainer.getBoundingClientRect();
+    const snapPosition = snapPointBounds.left - sliderBounds.left;
+    
+    updateSliderVisuals(snapPosition);
+    updateEmotionDisplay(snapPoints.indexOf(snapPoint));
+  }
+
+  // Determines which snap point is closest to the current handle position
+  function findNearestSnapPoint(currentPosition) {
+    const sliderBounds = sliderContainer.getBoundingClientRect();
+    
+    return snapPoints.reduce((nearestIndex, snapPoint, index) => {
+      const snapPointBounds = snapPoint.getBoundingClientRect();
+      const snapPosition = snapPointBounds.left - sliderBounds.left;
+      const distanceToCurrentPoint = Math.abs(currentPosition - snapPosition);
+      const distanceToNearestPoint = Math.abs(currentPosition - (snapPoints[nearestIndex].getBoundingClientRect().left - sliderBounds.left));
       
-      // Update the two UI text elements:
-      // 1. This element shows just the intensity.
-      document.getElementById("selectedIntensity").innerText = adjective;
-      // 2. This element shows both the intensity and the emotion (here, "Excited").
-      // (This can be updated later to reflect the actual selected emotion.)
-      document.getElementById("selectedEmotionName").innerText = adjective + " Excited";
-      
-      // Update the intensity bar image based on the selected stop.
-      // It will load the image intensityBar1.svg, intensityBar2.svg, etc.
-      document.getElementById("selectedIntensityBar").src = `./images/intensityBar/intensityBar${intensityValue}.svg`;
-    }
-  
-    // Updates the slider when a stop is clicked.
-    function updateSliderByStop(stop) {
-      const sliderRect = slider.getBoundingClientRect();
-      const stopRect = stop.getBoundingClientRect();
-      const centerX = stopRect.left - sliderRect.left + stopRect.width / 2;
-      handle.style.left = centerX + 'px';
-  
-      // Get the center position of the first stop.
-      const firstStop = stops[0];
-      const firstRect = firstStop.getBoundingClientRect();
-      const firstCenter = firstRect.left - sliderRect.left + firstRect.width / 2;
-  
-      // Start the progress line offset pixels to the left of the first stop’s center.
-      progress.style.left = (firstCenter - offset) + 'px';
-      // Set the width so that it spans from the offset start to the selected stop’s center.
-      progress.style.width = (centerX - (firstCenter - offset)) + 'px';
-  
-      // Update the UI text and image based on the selected stop.
-      updateIntensityText(stop);
-    }
-  
-    // Attach click events to each stop.
-    stops.forEach(stop => {
-      stop.addEventListener('click', function() {
-        updateSliderByStop(this);
-      });
-    });
-  
-    // Variables for drag handling.
-    let isDragging = false;
-    let dragSliderRect = null;
-    let stopsPositions = [];
-  
-    // When the user presses down on the handle, start the drag.
-    handle.addEventListener('mousedown', function(e) {
-      isDragging = true;
-      dragSliderRect = slider.getBoundingClientRect();
-      // Calculate and store the center positions for all stops relative to the slider.
-      stopsPositions = [];
-      stops.forEach(stop => {
-        const stopRect = stop.getBoundingClientRect();
-        const pos = stopRect.left - dragSliderRect.left + stopRect.width / 2;
-        stopsPositions.push(pos);
-      });
-      e.preventDefault();
-    });
-  
-    // While dragging, update the handle and progress line positions.
-    document.addEventListener('mousemove', function(e) {
-      if (!isDragging) return;
-      let x = e.clientX - dragSliderRect.left;
-      // Clamp x between the first and last stops.
-      const minX = stopsPositions[0];
-      const maxX = stopsPositions[stopsPositions.length - 1];
-      if (x < minX) x = minX;
-      if (x > maxX) x = maxX;
-      handle.style.left = x + 'px';
-  
-      // Update the progress line with the offset.
-      progress.style.left = (stopsPositions[0] - offset) + 'px';
-      progress.style.width = (x - (stopsPositions[0] - offset)) + 'px';
-    });
-  
-    // On mouseup, snap the handle to the nearest stop and update the progress line.
-    document.addEventListener('mouseup', function(e) {
-      if (!isDragging) return;
-      isDragging = false;
-      const handleRect = handle.getBoundingClientRect();
-      const currentX = handleRect.left - dragSliderRect.left + handleRect.width / 2;
-  
-      // Determine the stop position closest to the handle's current center.
-      let nearestPos = stopsPositions[0];
-      let nearestIndex = 0;
-      stopsPositions.forEach((pos, index) => {
-        if (Math.abs(pos - currentX) < Math.abs(nearestPos - currentX)) {
-          nearestPos = pos;
-          nearestIndex = index;
-        }
-      });
-  
-      handle.style.left = nearestPos + 'px';
-      progress.style.left = (stopsPositions[0] - offset) + 'px';
-      progress.style.width = (nearestPos - (stopsPositions[0] - offset)) + 'px';
-  
-      // Update the UI text and image based on the snapped stop.
-      updateIntensityText(stops[nearestIndex]);
-    });
-  
-    // Initialize the slider at a default stop (for example, the third stop).
-    updateSliderByStop(stops[2]);
+      return distanceToCurrentPoint < distanceToNearestPoint ? index : nearestIndex;
+    }, 0);
+  }
+
+  // Add click handlers to each snap point for direct selection
+  snapPoints.forEach(snapPoint => {
+    snapPoint.addEventListener('click', () => snapHandleToPoint(snapPoint));
   });
-  
+
+  // Start dragging when mouse is pressed on handle
+  dragHandle.addEventListener('mousedown', () => {
+    isHandleDragging = true;
+  });
+
+  // Update handle position while dragging
+  document.addEventListener('mousemove', (e) => {
+    if (!isHandleDragging) return;
+    
+    // Calculate the valid range for handle movement
+    const sliderBounds = sliderContainer.getBoundingClientRect();
+    const leftmostSnapBounds = snapPoints[0].getBoundingClientRect();
+    const rightmostSnapBounds = snapPoints[snapPoints.length - 1].getBoundingClientRect();
+    
+    const minPosition = leftmostSnapBounds.left - sliderBounds.left;
+    const maxPosition = rightmostSnapBounds.left - sliderBounds.left;
+    
+    // Keep handle within the valid range
+    let newHandlePosition = e.clientX - sliderBounds.left;
+    newHandlePosition = Math.max(minPosition, Math.min(newHandlePosition, maxPosition));
+    
+    updateSliderVisuals(newHandlePosition);
+    updateEmotionDisplay(findNearestSnapPoint(newHandlePosition));
+  });
+
+  // Snap to nearest point when dragging ends
+  document.addEventListener('mouseup', () => {
+    if (!isHandleDragging) return;
+    
+    isHandleDragging = false;
+    const handleBounds = dragHandle.getBoundingClientRect();
+    const sliderBounds = sliderContainer.getBoundingClientRect();
+    const currentPosition = handleBounds.left - sliderBounds.left;
+    
+    const nearestSnapIndex = findNearestSnapPoint(currentPosition);
+    snapHandleToPoint(snapPoints[nearestSnapIndex]);
+  });
+
+  // Initialize slider at "Moderately" (middle position)
+  snapHandleToPoint(snapPoints[2]);
+});
