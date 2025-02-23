@@ -96,6 +96,10 @@
 
                 <div class="chat-bubble-from" id="emotionIntensityQuestion">How <u>excited</u> do you feel?</div>
 
+<!-- Add hidden inputs to store the passed emotion data -->
+<input type="hidden" id="passedEmotionName">
+<input type="hidden" id="passedEmotionValue">
+
             </div>
 
             <div class="emotion-response-container">
@@ -154,9 +158,15 @@
 
 
             <!-- next button -->
-            <div class="form-button-container">
-                <button class="form-button-next" type="button">Next</button>
-            </div>
+<div class="form-button-container">
+    <form id="intensityForm" method="POST">
+        <input type="hidden" name="emotionName" id="finalEmotionName">
+        <input type="hidden" name="emotionValue" id="finalEmotionValue">
+        <input type="hidden" name="intensityLevel" id="finalIntensityLevel">
+        <input type="hidden" name="intensityLabel" id="finalIntensityLabel">
+        <button class="form-button-next" type="submit">Next</button>
+    </form>
+</div>
 
 		</div>
 

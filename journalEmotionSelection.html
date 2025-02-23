@@ -252,9 +252,13 @@
 
 
             <!-- next button -->
-            <div class="form-button-container hidden">
-                <button class="form-button-next" type="button">Next</button>
-            </div>
+<div class="form-button-container hidden">
+    <form id="emotionForm" method="POST">
+        <input type="hidden" name="selectedEmotionName" id="selectedEmotionNameInput">
+        <input type="hidden" name="selectedEmotionValue" id="selectedEmotionValueInput">
+        <button class="form-button-next" type="submit">Next</button>
+    </form>
+</div>
 
 		</div>
 
