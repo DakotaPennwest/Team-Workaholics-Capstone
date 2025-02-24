@@ -38,12 +38,12 @@
         <!-- Links Background -->
         <div class="navigation-bar-links-container">
             <!-- Home Link -->
-            <a href="#" class="navigation-bar-link">
+            <a href="homepage.html" class="navigation-bar-link">
                 <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Home</span>
             </a>
             <!-- Journal Link -->
-            <a href="#" class="navigation-bar-link">
+            <a href="journalHome.html" class="navigation-bar-link">
                 <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text-selected">Journal</span>
             </a>
@@ -273,5 +273,24 @@
     
 
     <script src="scripts/journalSelection.js"></script>
+	<script>
+    // When the DOM content is fully loaded, this script fetches user information from the server.
+    // It then updates the element with id 'userFirstName' to display the username.
+    // If there is an error during the fetch operation, it logs the error to the console.
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('getUserInfo.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.username) {
+                    document.getElementById('userFirstName').textContent = data.username;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user info:', error);
+            });
+    });
+</script>
+
+	
 </body>
 </html>

@@ -19,7 +19,7 @@ $password = $_POST['password'] ?? '';
 $response = array('success' => false, 'error' => '');
 
 // Check the Users table
-$sqlUser = "SELECT user_password AS password, 'user' AS role FROM Users WHERE user_username = :username";
+$sqlUser = "SELECT user_id, user_password AS password, 'user' AS role FROM Users WHERE user_username = :username";
 $statementUser = $db->prepare($sqlUser);
 $statementUser->bindParam(':username', $username);
 $statementUser->execute();
@@ -30,6 +30,7 @@ if ($rowUser) {
         // Login successful as user
         $_SESSION['username'] = $username;
         $_SESSION['role'] = $rowUser['role'];
+        $_SESSION['user_id'] = $rowUser['user_id'];
 
         $response['success'] = true;
         $response['redirect'] = 'homepage.html';
@@ -43,7 +44,7 @@ if ($rowUser) {
 }
 
 // Check the Parents table
-$sqlParent = "SELECT parent_password AS password, 'parent' AS role FROM Parents WHERE parent_username = :username";
+$sqlParent = "SELECT parent_user_id, parent_password AS password, 'parent' AS role FROM Parents WHERE parent_username = :username";
 $statementParent = $db->prepare($sqlParent);
 $statementParent->bindParam(':username', $username);
 $statementParent->execute();
@@ -54,6 +55,7 @@ if ($rowParent) {
         // Login successful as parent
         $_SESSION['username'] = $username;
         $_SESSION['role'] = $rowParent['role'];
+        $_SESSION['user_id'] = $rowParent['parent_user_id'];
 
         $response['success'] = true;
         $response['redirect'] = 'homepage.html';

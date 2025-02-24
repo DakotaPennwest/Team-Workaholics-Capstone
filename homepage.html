@@ -1,13 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['username'])) {
-    header('Location: login.php'); // Redirect to login page if not logged in
-    exit();
-}
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -91,7 +81,7 @@ if (!isset($_SESSION['username'])) {
             
             <div class="home-page-boxes-container">
                 <!-- Journal Box -->
-                <a href="journalJournaling.html" class="home-page-box home-page-journal-box">
+                <a href="journalEmotionSelection.html" class="home-page-box home-page-journal-box">
                     <div class="home-page-box-status" id="journalStatus">
                         You haven't done your journal today
                     </div>
@@ -126,7 +116,7 @@ if (!isset($_SESSION['username'])) {
                 .then(data => {
                     if (data.username) {
                         document.getElementById('userFirstName').textContent = data.username;
-						document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
+                        document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
                     }
                 })
                 .catch(error => {
