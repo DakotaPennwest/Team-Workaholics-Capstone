@@ -85,7 +85,7 @@ if (!isset($_SESSION['username'])) {
 
                 <div class="prompt-message-container">
                     <img src="./images/icons/newPromptIcon.svg" alt="New Prompt" class="new-prompt-icon">
-                    <div class="chat-bubble-from"><u id="Prompt">Why are you feeling {emotion} today?</u></div> 
+                    <div class="chat-bubble-from"><u id="Prompt">Why are you feeling [emotion] today?</u></div> 
                 </div>
 
             </div>
@@ -166,5 +166,77 @@ if (!isset($_SESSION['username'])) {
         // Run once on page load
         window.addEventListener("load", adjustHeight);
     </script> 
+	<script>
+    // When the DOM content is fully loaded, this script fetches user information from the server.
+    // It then updates the element with id 'userFirstName' to display the username.
+    // If there is an error during the fetch operation, it logs the error to the console.
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('getUserInfo.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.username) {
+                    document.getElementById('userFirstName').textContent = data.username;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user info:', error);
+            });
+    });
+	
+    // When the DOM content is fully loaded
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the emotionName from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const emotionName = urlParams.get('emotionName') || 'excited'; // Default to 'excited' if not provided
+
+        // Replace [emotion] in all prompt elements
+        const prompts = document.querySelectorAll('.chat-bubble-from, #Prompt'); // Select all elements with prompt
+        prompts.forEach(prompt => {
+            prompt.innerHTML = prompt.innerHTML.replace(/\[emotion\]/g, emotionName); // Replace [emotion] with the actual emotion
+        });
+
+        // If you have multiple prompts dynamically in the array, you would need to replace [emotion] in the array as well
+        const updatedPrompts = [
+            "Why are you feeling " + emotionName + " today?",
+            "Is there something that made you feel " + emotionName + " today?",
+            "How did you handle feeling " + emotionName + " today? Was there something you did that helped you feel better or worse?",
+            "Write about a time when you felt " + emotionName + " before. How was it similar or different to today?",
+            "What can you do next time you feel " + emotionName + " to help yourself feel better?",
+            "What is something positive you can remember or focus on when you feel " + emotionName + "?",
+            "What situations or people usually make you feel " + emotionName + "?"
+        ];
+
+        // Function to generate and set a random prompt from the array
+        function setRandomPrompt() {
+            const randomPrompt = updatedPrompts[Math.floor(Math.random() * updatedPrompts.length)];
+            document.getElementById('Prompt').innerText = randomPrompt;
+        }
+
+        // Set a random prompt when the new prompt icon is clicked
+        document.querySelectorAll('.new-prompt-icon, .inline-new-prompt-icon').forEach(item => {
+            item.addEventListener('click', function() {
+                setRandomPrompt(); // Generate a new random prompt on click
+            });
+        });
+    });
+	
+	 // When the DOM content is fully loaded, this script fetches user information from the server.
+    // It then updates the element with id 'userFirstName' to display the username.
+    // If there is an error during the fetch operation, it logs the error to the console.
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('getUserInfo.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.username) {
+                    document.getElementById('userFirstName').textContent = data.username;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user info:', error);
+            });
+    });
+</script>
+
+
 </body>
 </html>

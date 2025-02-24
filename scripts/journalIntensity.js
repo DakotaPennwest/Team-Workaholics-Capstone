@@ -1,106 +1,166 @@
-// Custom slider implementation for selecting emotion intensity levels.
-
 document.addEventListener('DOMContentLoaded', () => {
-  // Cache DOM element references
-  const sliderContainer = document.querySelector('.slider');
-  const dragHandle = document.querySelector('.slider-handle');
-  const progressBar = document.querySelector('.slider-progress');
-  const snapPoints = [...document.querySelectorAll('.slider-stop')];
-  
-  // Define emotion intensity levels from lowest to highest
-  const emotionIntensityLevels = ['Barely', 'Somewhat', 'Moderately', 'Very', 'Extremely'];
-  
-  // Track whether user is currently dragging the handle
-  let isHandleDragging = false;
+    // Try to get emotion data from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    let emotionName = urlParams.get('emotionName') || 'excited'; // Default fallback to 'excited'
+    const emotionValue = urlParams.get('emotionValue') || 'excited'; // Default fallback to 'excited'
 
-  // Updates the emotion display text and intensity bar image
-  function updateEmotionDisplay(intensityIndex) {
-    const intensityLabel = emotionIntensityLevels[intensityIndex];
-    document.getElementById('selectedIntensity').textContent = intensityLabel;
-    document.getElementById('selectedEmotionName').textContent = `${intensityLabel} Excited`;
-    document.getElementById('selectedIntensityBar').src = `./images/intensityBar/intensityBar${intensityIndex + 1}.svg`;
-  }
+    // Ensure emotionName is properly defined, just in case
+    if (!emotionName) {
+        emotionName = 'excited';
+    }
 
-  // Updates the visual elements of the slider (handle and progress bar)
-  function updateSliderVisuals(handlePosition) {
-    dragHandle.style.left = `${handlePosition}px`;
-    
-    // Get the leftmost snap point position for the progress bar
-    const firstSnapPointBounds = snapPoints[0].getBoundingClientRect();
-    const sliderBounds = sliderContainer.getBoundingClientRect();
-    const progressBarStart = firstSnapPointBounds.left - sliderBounds.left;
-    
-    progressBar.style.left = `${progressBarStart}px`;
-    progressBar.style.width = `${handlePosition - progressBarStart}px`;
-  }
+    // Store the passed emotion data in hidden form fields (for further usage or form submission)
+    document.getElementById('passedEmotionName').value = emotionName;
+    document.getElementById('passedEmotionValue').value = emotionValue;
 
-  // Moves the slider handle to a specific snap point
-  function snapHandleToPoint(snapPoint) {
-    const snapPointBounds = snapPoint.getBoundingClientRect();
-    const sliderBounds = sliderContainer.getBoundingClientRect();
-    const snapPosition = snapPointBounds.left - sliderBounds.left;
-    
-    updateSliderVisuals(snapPosition);
-    updateEmotionDisplay(snapPoints.indexOf(snapPoint));
-  }
+    // Update the question text with the passed emotion
+    document.getElementById('emotionIntensityQuestion').innerHTML =
+        `How <u>${emotionName.toLowerCase()}</u> do you feel?`;
 
-  // Determines which snap point is closest to the current handle position
-  function findNearestSnapPoint(currentPosition) {
-    const sliderBounds = sliderContainer.getBoundingClientRect();
-    
-    return snapPoints.reduce((nearestIndex, snapPoint, index) => {
-      const snapPointBounds = snapPoint.getBoundingClientRect();
-      const snapPosition = snapPointBounds.left - sliderBounds.left;
-      const distanceToCurrentPoint = Math.abs(currentPosition - snapPosition);
-      const distanceToNearestPoint = Math.abs(currentPosition - (snapPoints[nearestIndex].getBoundingClientRect().left - sliderBounds.left));
-      
-      return distanceToCurrentPoint < distanceToNearestPoint ? index : nearestIndex;
-    }, 0);
-  }
+    // Update the emoji display
+    document.getElementById('selectedEmotionEmoji').src =
+        `./images/emotions/${emotionValue}.svg`;
 
-  // Add click handlers to each snap point for direct selection
-  snapPoints.forEach(snapPoint => {
-    snapPoint.addEventListener('click', () => snapHandleToPoint(snapPoint));
-  });
+    // Cache DOM elements
+    const sliderContainer = document.querySelector('.slider');
+    const dragHandle = document.querySelector('.slider-handle');
+    const progressBar = document.querySelector('.slider-progress');
+    const snapPoints = [...document.querySelectorAll('.slider-stop')];
 
-  // Start dragging when mouse is pressed on handle
-  dragHandle.addEventListener('mousedown', () => {
-    isHandleDragging = true;
-  });
+    // Hidden form fields for final submission
+    const finalEmotionName = document.getElementById('finalEmotionName');
+    const finalEmotionValue = document.getElementById('finalEmotionValue');
+    const finalIntensityLevel = document.getElementById('finalIntensityLevel');
+    const finalIntensityLabel = document.getElementById('finalIntensityLabel');
 
-  // Update handle position while dragging
-  document.addEventListener('mousemove', (e) => {
-    if (!isHandleDragging) return;
-    
-    // Calculate the valid range for handle movement
-    const sliderBounds = sliderContainer.getBoundingClientRect();
-    const leftmostSnapBounds = snapPoints[0].getBoundingClientRect();
-    const rightmostSnapBounds = snapPoints[snapPoints.length - 1].getBoundingClientRect();
-    
-    const minPosition = leftmostSnapBounds.left - sliderBounds.left;
-    const maxPosition = rightmostSnapBounds.left - sliderBounds.left;
-    
-    // Keep handle within the valid range
-    let newHandlePosition = e.clientX - sliderBounds.left;
-    newHandlePosition = Math.max(minPosition, Math.min(newHandlePosition, maxPosition));
-    
-    updateSliderVisuals(newHandlePosition);
-    updateEmotionDisplay(findNearestSnapPoint(newHandlePosition));
-  });
+    // Define emotion intensity levels
+    const emotionIntensityLevels = ['Barely', 'Somewhat', 'Moderately', 'Very', 'Extremely'];
 
-  // Snap to nearest point when dragging ends
-  document.addEventListener('mouseup', () => {
-    if (!isHandleDragging) return;
-    
-    isHandleDragging = false;
-    const handleBounds = dragHandle.getBoundingClientRect();
-    const sliderBounds = sliderContainer.getBoundingClientRect();
-    const currentPosition = handleBounds.left - sliderBounds.left;
-    
-    const nearestSnapIndex = findNearestSnapPoint(currentPosition);
-    snapHandleToPoint(snapPoints[nearestSnapIndex]);
-  });
+    let isHandleDragging = false;
 
-  // Initialize slider at "Moderately" (middle position)
-  snapHandleToPoint(snapPoints[2]);
+    function updateEmotionDisplay(intensityIndex) {
+        const intensityLabel = emotionIntensityLevels[intensityIndex];
+
+        // Update display elements
+        document.getElementById('selectedIntensity').textContent = intensityLabel;
+        document.getElementById('selectedEmotionName').textContent =
+            `${intensityLabel} ${emotionName}`;
+        document.getElementById('selectedIntensityBar').src =
+            `./images/intensityBar/intensityBar${intensityIndex + 1}.svg`;
+
+        // Update hidden form fields
+        finalEmotionName.value = emotionName;
+        finalEmotionValue.value = emotionValue;
+        finalIntensityLevel.value = intensityIndex;
+        finalIntensityLabel.value = intensityLabel;
+    }
+
+    function updateSliderVisuals(handlePosition) {
+        dragHandle.style.left = `${handlePosition}px`;
+
+        const firstSnapPointBounds = snapPoints[0].getBoundingClientRect();
+        const sliderBounds = sliderContainer.getBoundingClientRect();
+        const progressBarStart = firstSnapPointBounds.left - sliderBounds.left;
+
+        progressBar.style.left = `${progressBarStart}px`;
+        progressBar.style.width = `${handlePosition - progressBarStart}px`;
+    }
+
+    function snapHandleToPoint(snapPoint) {
+        const snapPointBounds = snapPoint.getBoundingClientRect();
+        const sliderBounds = sliderContainer.getBoundingClientRect();
+        const snapPosition = snapPointBounds.left - sliderBounds.left;
+
+        updateSliderVisuals(snapPosition);
+        updateEmotionDisplay(snapPoints.indexOf(snapPoint));
+    }
+
+    function findNearestSnapPoint(currentPosition) {
+        const sliderBounds = sliderContainer.getBoundingClientRect();
+
+        return snapPoints.reduce((nearestIndex, snapPoint, index) => {
+            const snapPointBounds = snapPoint.getBoundingClientRect();
+            const snapPosition = snapPointBounds.left - sliderBounds.left;
+            const distanceToCurrentPoint = Math.abs(currentPosition - snapPosition);
+            const distanceToNearestPoint = Math.abs(currentPosition -
+                (snapPoints[nearestIndex].getBoundingClientRect().left - sliderBounds.left));
+
+            return distanceToCurrentPoint < distanceToNearestPoint ? index : nearestIndex;
+        }, 0);
+    }
+
+    // Add click handlers to snap points
+    snapPoints.forEach(snapPoint => {
+        snapPoint.addEventListener('click', () => snapHandleToPoint(snapPoint));
+    });
+
+    // Handle drag start
+    dragHandle.addEventListener('mousedown', () => {
+        isHandleDragging = true;
+    });
+
+    // Handle dragging
+    document.addEventListener('mousemove', (e) => {
+        if (!isHandleDragging) return;
+
+        const sliderBounds = sliderContainer.getBoundingClientRect();
+        const leftmostSnapBounds = snapPoints[0].getBoundingClientRect();
+        const rightmostSnapBounds = snapPoints[snapPoints.length - 1].getBoundingClientRect();
+
+        const minPosition = leftmostSnapBounds.left - sliderBounds.left;
+        const maxPosition = rightmostSnapBounds.left - sliderBounds.left;
+
+        let newHandlePosition = e.clientX - sliderBounds.left;
+        newHandlePosition = Math.max(minPosition, Math.min(newHandlePosition, maxPosition));
+
+        updateSliderVisuals(newHandlePosition);
+        updateEmotionDisplay(findNearestSnapPoint(newHandlePosition));
+    });
+
+    // Handle drag end
+    document.addEventListener('mouseup', () => {
+        if (!isHandleDragging) return;
+
+        isHandleDragging = false;
+        const handleBounds = dragHandle.getBoundingClientRect();
+        const sliderBounds = sliderContainer.getBoundingClientRect();
+        const currentPosition = handleBounds.left - sliderBounds.left;
+
+        const nearestSnapIndex = findNearestSnapPoint(currentPosition);
+        snapHandleToPoint(snapPoints[nearestSnapIndex]);
+    });
+
+    // Initialize slider at "Moderately" (middle position)
+    snapHandleToPoint(snapPoints[2]);
+
+    // Form submission handler to save emotion intensity and redirect
+    const intensityForm = document.getElementById('intensityForm');
+    intensityForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const emotionName = finalEmotionName.value;
+        const emotionValue = finalEmotionValue.value;
+        const intensityLevel = finalIntensityLevel.value;
+        const intensityLabel = finalIntensityLabel.value;
+
+        fetch('saveIntensity.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `emotionName=${encodeURIComponent(emotionName)}&emotionValue=${encodeURIComponent(emotionValue)}&intensityLevel=${encodeURIComponent(intensityLevel)}&intensityLabel=${encodeURIComponent(intensityLabel)}`
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Redirect with emotion data
+                    window.location.href = `journalJournaling.html?emotionName=${encodeURIComponent(emotionName)}`;
+                } else {
+                    console.error('Error saving emotion intensity:', data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
 });
