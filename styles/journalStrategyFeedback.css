@@ -271,6 +271,7 @@
     transition: filter 0.1s;
     filter: brightness(99%) contrast(99%);
     -webkit-user-drag: none; /* Should stop user from dragging the icon around if they hold it. Removes disraction */
+    transition: transform 0.1s ease;
 }
 
 /* Text styling */
@@ -285,6 +286,10 @@
 /* Hover effect: slight brightness increase */
 .feedback-option:hover img {
     filter: brightness(104%) contrast(102%);
+}
+
+.feedback-option:active img {
+    transform: scale(0.95);
 }
 
 /* Selected state: when the radio is checked, make the icon even brighter and add a red outline using drop-shadow */
