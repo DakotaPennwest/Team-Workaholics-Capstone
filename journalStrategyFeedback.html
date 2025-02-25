@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Journal</title>
+    <link rel="stylesheet" href="styles/layoutwithnavbar.css">
+    <link rel="stylesheet" href="styles/stylevariables.css">
+    <link rel="stylesheet" href="styles/journalStrategyFeedback.css">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+
+    <!-- Back Wave -->
+    <!-- Needs to be here to create layered effect with nav bar -->
+	<div class="waves-container">
+        <img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
+	</div>
+
+    <!-- Navigation Bar -->
+    <div class="navigation-bar">
+
+        <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
+            <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
+        </a>
+        
+
+        <!-- Profile Picture Section -->
+        <div class="navigation-bar-profile-picture-section">
+            <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
+        </div>
+    
+        <!-- Profile Name Section -->
+        <div class="navigation-bar-user-name-section">
+            <p class="navigation-bar-user-first-name" id="userFirstName">Jason</p>
+        </div>
+
+        <!-- Links Background -->
+        <div class="navigation-bar-links-container">
+            <!-- Home Link -->
+            <a href="homepage.html" class="navigation-bar-link">
+                <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Home</span>
+            </a>
+            <!-- Journal Link -->
+            <a href="journalHome.html" class="navigation-bar-link">
+                <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text-selected">Journal</span>
+            </a>
+            <!-- Strategies Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Strategies</span>
+            </a>
+            <!-- Progress Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Progress</span>
+            </a>
+            <!-- Settings Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Settings</span>
+             </a>
+        </div>
+
+    </div>
+
+
+	<!-- Top bar -->
+	<div class="top-bar">
+        <!-- Title of current page -->
+		<h1 class="page-title">Journal</h1>
+        <!-- Go Back arrow -->
+         <!-- Note: I can see this needed to be changed. Needs testing to ensure this method works -->
+        <a href="javascript:history.back()" class="back-arrow">
+            <img src="./images/backarrow.svg" alt="back arrow" class="back-arrow-icon">
+            <h2 class="go-back-text">Back</h2>
+        </a>
+
+         <!-- Progress Bar -->
+        <img src="./images/progressBar/progressBarFeedback.svg" alt="Progress" class="progress-bar">
+
+	</div>
+    
+	
+	<!-- Main screen container -->
+	<div class="main-screen-container">
+
+
+		<!-- Container for messages and feedback form -->
+		<div class="content-container">
+
+            <!-- Chat Bubbles that direct the user what to do -->
+            <div class="chat-bubble-container">
+
+                <div class="chat-bubble-from" id="lastAssignedStrategyMessage">Your last assigned strategy was meditation</div>
+                <div class="chat-bubble-from" id="askForFeedbackMessage">How  <u>helpful</u> did you find meditation?</div>
+
+            </div>
+            
+
+            <div class="feedback-response-container">
+
+
+                <!-- The feedback Form-->
+                <div class="feedback-form">
+
+                    <!-- Holds the helpful and unhelpful icons -->
+                    <div class="left-content-container">
+
+                        <!-- Where the icons the user can select are-->
+                        <div class="feedback-icon-container">
+
+                            <label class="feedback-option" title="Unhelpful">
+                                <input type="radio" name="feedback" value="unhelpful">
+                                <img src="./images/icons/unhelpfulIcon.svg" alt="Unhelpful Icon">
+                                <span class="feedback-text">Unhelpful</span>
+                            </label>
+
+                            <label class="feedback-option" title="Helpful">
+                                <input type="radio" name="feedback" value="helpful">
+                                <img src="./images/icons/helpfulIcon.svg" alt="Helpful Icon">
+                                <span class="feedback-text">Helpful</span>
+                            </label>
+
+                        </div>
+
+                    </div>
+    
+                    <div class="right-content-container">
+                        <div class="right-content-container-top">
+                            <div class="i-found-container" id="strategyNameQuestion">
+                                <h2>I found <br> Meditation</h2>
+                            </div>
+                        </div>
+
+                        <div class="right-content-container-bottom">
+                            <div class="selected-feedback-rating" id="selectedFeedbackRating">Select a rating</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- next button -->
+            <!-- NOTE: This will need to be updated, however, I didn't want to try and do it
+                        myself and possibly mess it up so I just kept it as is for now.
+                                                                                 - Dakota -->
+            <div class="form-button-container hidden">
+                <form id="emotionForm" method="POST">
+                    <input type="hidden" name="selectedEmotionName" id="selectedEmotionNameInput">
+                    <input type="hidden" name="selectedEmotionValue" id="selectedEmotionValueInput">
+                    <button class="form-button-next" type="submit">Next</button>
+                </form>
+            </div>
+
+		</div>
+
+	</div>
+
+    <!-- Front and Middle Waves -->
+	<div class="waves-container">
+		<img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
+		<img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
+	</div>
+
+    <script src="scripts/journalFeedback.js"></script>
+	<script>
+    // When the DOM content is fully loaded, this script fetches user information from the server.
+    // It then updates the element with id 'userFirstName' to display the username.
+    // If there is an error during the fetch operation, it logs the error to the console.
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('getUserInfo.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.username) {
+                    document.getElementById('userFirstName').textContent = data.username;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user info:', error);
+            });
+    });
+    </script>
+
+	
+</body>
+</html>
