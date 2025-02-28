@@ -161,7 +161,7 @@
     justify-content: center;
     display: flex;
     overflow: hidden;
-    padding: 15px;          /* Added padding */
+    padding: 5px;          /* Added padding */
     box-sizing: border-box; /* Ensure padding is included in width/height */
 }
   
