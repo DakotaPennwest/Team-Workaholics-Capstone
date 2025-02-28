@@ -119,6 +119,7 @@
     overflow: hidden;
     padding: 5px;          /* Added padding */
     box-sizing: border-box; /* Ensure padding is included in width/height */
+    box-shadow: var(--main-shading-with-drop-shadow);
 }
   
 /* Create a pseudo-element for the foreground opacity. This lets the foreground rectangle be low opacity but nothing else on top is */

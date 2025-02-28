@@ -100,6 +100,7 @@
     position: relative; /* Position relative to the parent */
     z-index: 1; /* Ensure this rectangle appears on top */
     opacity: 1; /* Keep the rectangle fully opaque */
+    
 }
   
 /* Create a pseudo-element for the foreground opacity. This lets the foreground rectangle be low opacity but nothing else on top is */

@@ -104,6 +104,7 @@
     justify-content: center;
     display: flex;
     overflow: hidden;
+    box-shadow: var(--main-shading-with-drop-shadow);
 }
   
 /* Create a pseudo-element for the foreground opacity. This lets the foreground rectangle be low opacity but nothing else on top is */
