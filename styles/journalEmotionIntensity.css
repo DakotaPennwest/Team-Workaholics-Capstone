@@ -75,6 +75,10 @@
     overflow: hidden;
     font-family: 'Nunito', sans-serif;
     display: flex; /* This makes it so both the left and right will be displayed side by side */
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 /* Add the SVG to the account creation form */
@@ -135,8 +139,8 @@
 
 .selected-intensity-bar{
     position:absolute;
-    height: 250px;
-    width: 250px;
+    height: 240px;
+    width: 240px;
     top: -30px;
 }
 
