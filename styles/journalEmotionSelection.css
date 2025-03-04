@@ -62,7 +62,7 @@
 
 /* The entire emotion selection form*/
 .emotion-selection-form{
-    width: 1000px;
+    width: 1110px;
     height: 330px;
     background: var(--main-blue);
     border-radius: 30px;
@@ -144,7 +144,7 @@
     align-items: center;
     /* Set a fixed height to reserve space for 3 rows */
     height: 90%;
-    width: 16.667%;
+    width: 14.286%; /* 100 / 7 */
     /* Adds background to each boarder. Not sold on this though so commented out for now */
     /*
     background-color: rgb(245, 245, 220, 0.3);
@@ -219,7 +219,8 @@
 .emotion-column.fear .emotion-option.secondary,
 .emotion-column.anger .emotion-option.secondary,
 .emotion-column.surprise .emotion-option.secondary,
-.emotion-column.disgust .emotion-option.secondary {
+.emotion-column.disgust .emotion-option.secondary,
+.emotion-column.neutral .emotion-option.secondary {
     visibility: visible;
 }
   
