@@ -1,0 +1,144 @@
+/* Adjust main screen container */
+.main-screen-container {
+    overflow: auto;
+    height: 90vh;
+}
+
+/* Container to center the forms */
+.content-container {
+    width: 100%;
+    position: relative; /* Ensures child elements are positioned relative to it */
+    z-index: 0; /* Ensure the background stays behind */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Box that shows assigned strategy*/
+.assigned-strategy-box{
+    width: 960px;  /* These need to be this size so inner box is 640 by 360*/
+    height: 360px;
+    background: var(--main-blue);
+    border-radius: 30px;
+    padding: 20px; 
+    padding-left: 0px; 
+    position: relative; /* Ensures child elements are positioned relative to it */
+    box-shadow: var(--main-shading-with-drop-shadow);
+    z-index: 0; /* Ensure the background stays behind */
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    display: flex; /* This makes it so both the left and right will be displayed side by side */
+    margin-bottom: 5%;
+}
+
+.assigned-strategy-box::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the rectangle */
+    height: 100%; /* Full height of the rectangle */
+    background-image: url('../images/backgroundImages/cloudsAndRainbow.svg'); /* Add the SVG as a background */
+    background-size: cover; /* Ensure the SVG covers the entire area */
+    background-position: center; /* Center the SVG */
+    opacity: 0.25; /* Set the opacity */
+    pointer-events: none; /* Make it non-interactive */
+}
+  
+
+
+
+/* Left-side content container */
+.left-content-container {
+    position: relative;
+    height: 100%;
+    width: 33.333%;
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    justify-content: center;
+    z-index: 1; /* Ensure this rectangle appears on top */
+}
+
+.strategy-info-box {
+    position: relative;
+    height: 70%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    box-shadow: var(--main-light-shading-no-top);
+    background-color: rgba(216, 66, 61, 0.85);
+}
+
+/* The top 25% for the strategy name */
+.strategy-info-strategy-name {
+    height: 25%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 18px;
+    color: var(--pure-white);
+    text-decoration: var(--main-off-white) wavy underline;
+    text-underline-offset: 25%;
+    text-decoration-thickness: 10%;
+}
+
+.strategy-info-strategy-description {
+    height: 75%;
+    width: 100%;
+    padding: 0 30px; /* 20px left and right padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 12px;
+    color: var(--pure-white);
+    font-style: italic;
+    text-align: center;
+    box-sizing: border-box; /* ensures padding is included in width */
+}
+
+
+.right-content-container {
+    height: 100%;
+    width: 66.667%;
+    border-radius: 20px;
+    position: relative; /* Position relative to the parent */
+    z-index: 1; /* Ensure this rectangle appears on top */
+    opacity: 1; /* Keep the rectangle fully opaque */
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    overflow: hidden;
+    padding: 5px;          /* Added padding */
+    box-sizing: border-box; /* Ensure padding is included in width/height */
+    box-shadow: var(--main-shading-with-drop-shadow);
+}
+  
+/* Create a pseudo-element for the foreground opacity. This lets the foreground rectangle be low opacity but nothing else on top is */
+.right-content-container::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--main-cyan);
+    border-radius: 20px;
+    opacity: 0.9; /* Apply the 70% opacity here */
+    z-index: -1; /* Ensure it stays behind the content */
+    box-shadow: var(--main-shading-with-drop-shadow);
+}
+
+/* Ensure the strategy steps image fills its container */
+.strategy-Steps {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Change to cover if you prefer a cropped fill */
+}
+

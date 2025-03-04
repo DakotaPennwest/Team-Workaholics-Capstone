@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Strategies</title>
+    <link rel="stylesheet" href="styles/layoutwithnavbar.css">
+    <link rel="stylesheet" href="styles/stylevariables.css">
+    <link rel="stylesheet" href="styles/strategiesHome.css">
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+    <!-- Back Wave -->
+    <div class="waves-container">
+        <img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
+    </div>
+
+    <!-- Navigation Bar -->
+    <div class="navigation-bar">
+        <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
+            <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
+        </a>
+        
+        <!-- Profile Picture Section -->
+        <div class="navigation-bar-profile-picture-section">
+            <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
+        </div>
+    
+        <!-- Profile Name Section -->
+        <div class="navigation-bar-user-name-section">
+            <p class="navigation-bar-user-first-name" id="userFirstName">Jason</p>
+        </div>
+
+        <!-- Links Background -->
+        <div class="navigation-bar-links-container">
+            <!-- Home Link -->
+            <a href="homepage.html" class="navigation-bar-link">
+                <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Home</span>
+            </a>
+            <!-- Journal Link -->
+            <a href="journalHome.html" class="navigation-bar-link">
+                <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Journal</span>
+            </a>
+            <!-- Strategies Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text-selected">Strategies</span>
+            </a>
+            <!-- Progress Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Progress</span>
+            </a>
+            <!-- Settings Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Settings</span>
+             </a>
+        </div>
+
+    </div>
+
+    <!-- Top bar -->
+    <div class="top-bar">
+
+        <img src="./images/Cloud2.svg" alt="Cloud 2" class="cloud">
+
+        <!-- Title of Current Page-->
+        <h1 class="page-title">Strategies</h1>
+
+        <div class="journals-until-next-strat-counter">
+            <div class="journals-until-next-strat-text">Journals until <br> next strategy</div>
+            <div class="journals-until-next-strat-numnber" id="journalsUntilNextStrategy">3</div>
+        </div>
+
+    </div>
+    
+    <!-- Main screen container -->
+    <div class="main-screen-container">
+
+        <!-- Container for Strategy Box -->
+        <div class="content-container">
+          
+            <div class="home-page-boxes-container">
+            
+                <!-- Strategy Box -->
+                <a href="#" class="home-page-box home-page-strategy-box">
+                    <div class="home-page-box-status" id="currentStrategy">
+                        Your current strategy is<br>
+                        <u>4-7-8 Breathing</u>
+                    </div>
+                    <div class="home-page-box-text home-page-strategy-box-text" id="strategyDirection">
+                        Look at Current Strategy
+                    </div>
+                </a>
+
+            </div>
+                
+        </div>
+        
+    </div>
+
+    <!-- Front and Middle Waves -->
+    <div class="waves-container">
+        <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
+        <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
+    </div>
+
+    
+
+</body>
+</html>
