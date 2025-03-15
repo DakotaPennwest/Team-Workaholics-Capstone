@@ -1,0 +1,227 @@
+/* Adjust main screen container */
+.main-screen-container {
+    overflow: auto;
+    height: 90vh;
+}
+
+/* Container to center the forms */
+.content-container {
+    width: 100%;
+    position: relative; /* Ensures child elements are positioned relative to it */
+    z-index: 0; /* Ensure the background stays behind */
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Box that shows the full journal*/
+.view-journal-box{
+    width: 1000px;
+    height: 450px;
+    background: var(--main-blue);
+    border-radius: 30px;
+    padding: 20px; 
+    padding-left: 0px; 
+    position: relative; /* Ensures child elements are positioned relative to it */
+    box-shadow: var(--main-shading-with-drop-shadow);
+    z-index: 0; /* Ensure the background stays behind */
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+    display: flex; /* This makes it so both the left and right will be displayed side by side */
+    margin-bottom: 5%;
+    margin-top: 1%;
+}
+
+.view-journal-box::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width of the rectangle */
+    height: 100%; /* Full height of the rectangle */
+    background-image: url('../images/backgroundImages/cloudsAndRainbow.svg'); /* Add the SVG as a background */
+    background-size: cover; /* Ensure the SVG covers the entire area */
+    background-position: center; /* Center the SVG */
+    opacity: 0.25; /* Set the opacity */
+    pointer-events: none; /* Make it non-interactive */
+}
+  
+
+/* Left-side content container */
+.left-content-container {
+    position: relative;
+    height: 100%;
+    width: 27%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1; /* Ensure this rectangle appears on top */
+}
+
+/* This container is purely here for shading. It needs to match left-content-inner-container in terms of sizing */
+.left-content-inner-container-shading {
+    position: absolute;
+    display: flex;
+    width: 72%;
+    /* Since we have padding, we need to extend the height of this by 40 px (since we have 20px padding on both sides)*/
+    height: calc(100% + 40px);
+    z-index: 10; /* Ensure this shading is on top */
+    box-shadow: var(--main-light-shading-no-sides);
+}
+
+.left-content-inner-container {
+    position: relative;
+    display: flex;
+    width: 72%;
+    /* Since we have padding, we need to extend the height of this by 40 px (since we have 20px padding on both sides)*/
+    height: calc(100% + 40px);
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    z-index: 1; /* Ensure this rectangle appears on top */
+}
+
+.left-content-inner-container-top {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 50%;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    background-color: rgb(55, 134, 54, 0.75);
+    z-index: 2; /* Ensure this rectangle appears on top */
+    justify-content: center;
+    text-align: center;
+    gap: 2.5%;
+    overflow: hidden;
+}
+
+.left-content-inner-container-bottom {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 50%;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    background-color: rgb(227, 179, 24, 0.75);
+    z-index: 2; /* Ensure this rectangle appears on top */
+    text-align: center;
+    overflow: hidden;
+    background-color: aqua;
+} 
+
+.left-content-inner-container-top-text {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--pure-white);
+}
+
+.left-content-inner-container-bottom-text {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--pure-white);
+    text-decoration: underline; 
+    text-decoration: var(--main-off-white) wavy underline;
+    text-underline-offset: 25%;
+    text-decoration-thickness: 10%; 
+    align-self: center;
+    line-height: 28px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.chosen-emotion-image-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 120px;
+    align-items: center;
+    justify-content: center; /* Centers emoji horizontally */
+    align-items: center; /* Sticks emoji to the top */
+}
+
+.selected-emotion-emoji {
+    position:absolute;
+    height: 75px;
+    width: 75px;
+    top: 45px;
+}
+
+.selected-intensity-bar{
+    position:absolute;
+    height: 150px;
+    width: 150px;
+    top: -25px;
+}
+
+.right-content-container {
+    height: 100%;
+    width: 73%;
+    border-radius: 20px;
+    position: relative;
+    z-index: 1;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;      /* Stack children vertically */
+    align-items: flex-start;     /* Default left alignment */
+    justify-content: flex-start; /* Start from the top */
+    overflow: hidden;
+    box-sizing: border-box;      /* Include padding in width/height */
+    box-shadow: var(--main-shading-with-drop-shadow);
+}
+  
+/* Create a pseudo-element for the foreground opacity. This lets the foreground rectangle be low opacity but nothing else on top is */
+.right-content-container::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--main-cyan);
+    border-radius: 20px;
+    opacity: 0.9; /* Apply the 70% opacity here */
+    z-index: -1; /* Ensure it stays behind the content */
+    box-shadow: var(--main-shading-with-drop-shadow);
+}
+
+.journal-info-container {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--pure-white);
+    line-height: 5px;
+    text-align: left;
+    padding: 25px;
+    padding-top: 15px;
+    padding-bottom: 5px;
+}
+
+.journal-prompt {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    color: var(--main-off-white);
+    font-style: italic;
+    text-decoration: underline; 
+    text-decoration: var(--main-off-white) wavy underline;
+    text-underline-offset: 25%;
+    text-decoration-thickness: 10%; 
+    padding: 25px;
+    padding-top: 0px;
+    padding-bottom: 15px;
+    text-align: center; /* Center the prompt text */
+    line-height: 40px;
+    align-self: center;
+}
+
+.journal-content {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--pure-white);
+    text-align: left;
+    padding: 25px;
+    padding-top: 5px;
+}
