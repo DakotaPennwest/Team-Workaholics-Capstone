@@ -21,6 +21,7 @@
     --main-cyan-subdued: #207F8B;
     --main-purple: #8D3CAA;
     --main-black: #1D1D1B;
+    --main-orange: #e08a00;
 
     /* Shading variables */
     --main-light-shading: 
@@ -45,6 +46,10 @@
     inset 3.6px 0px 4px rgba(0, 0, 0, 0.24),
     inset -3.6px 0px 16px rgba(0, 0, 0, 0.105);
     
+    --main-light-shading-no-sides: 
+    inset 6px 6px 20px rgba(255, 255, 255, 0.15),
+    inset 0px 3.6px 4px rgba(255, 255, 255, 0.5),
+    inset -3.6px -3.6px 16px rgba(0, 0, 0, 0.24);
 
     --profile-name-text-shadow: 
     0.15vw 0.15vw 0.3vw rgba(0, 0, 0, 0.15), 

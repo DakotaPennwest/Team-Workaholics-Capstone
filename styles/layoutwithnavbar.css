@@ -104,7 +104,7 @@ body {
     height: 60%; /* Fixed height for the container */
     width: 78%; /* Matches container width */
     background-color: var(--side-bar-off-white);
-    border-radius: 7vh;
+    border-radius: 5vh;
     box-shadow: var(--main-light-shading-pure-scaled);
     overflow: hidden; /* Ensure no overflow for long content */
     padding-bottom: 15%; /* Moves links up some so they don't go under waves */
