@@ -18,7 +18,7 @@
 
 /* Container to wrap the table and apply box shading */
 .table-container {
-  width: 850px;                
+  width: 920px;                
   border-radius: 28px;
   box-shadow: var(--main-shading-with-drop-shadow);
   position: relative;
@@ -55,6 +55,7 @@ thead th {
   font-family: 'Nunito', sans-serif;
   font-weight: 900;
   font-size: 15px;
+  width: 20%;
 }
 
 /* Body cells have an off-white background */
@@ -71,8 +72,6 @@ tbody td {
 /* 1st column: styling for journal number */
 tbody td:nth-child(1) {
   color: var(--main-red);
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
 }
 
 /* Columns 2–5 */
@@ -87,14 +86,12 @@ tbody td:nth-child(4) {
 }
 tbody td:nth-child(5) {
   color: var(--main-green-subdued);
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
 }
 
 
 .download-icon {
-  width: 65px;
-  height: 65px;
+  width: 55px;
+  height: 55px;
   background-color: var(--main-green-subdued);
   border-radius: 1000px;
   display: flex;
@@ -124,20 +121,18 @@ tbody td:nth-child(5) {
   transform: scale(0.95);
 }
 
-/* Round the corners for the bottom row 
+/* Round the corners for just the top and bottom rows  */
 
-Note: I have this commented out just incase I want to go back to doing it this way
 tbody tr:last-child td:first-child {
-  border-bottom-left-radius: 20px;
+border-bottom-left-radius: 15px;
 }
 tbody tr:last-child td:last-child {
-  border-bottom-right-radius: 20px;
+border-bottom-right-radius: 15px;
 }
 
 tbody tr:first-child td:first-child {
-  border-top-left-radius: 20px;
+border-top-left-radius: 15px;
 }
 tbody tr:first-child td:last-child {
-  border-top-right-radius: 20px;
+border-top-right-radius: 15px;
 }
-*/

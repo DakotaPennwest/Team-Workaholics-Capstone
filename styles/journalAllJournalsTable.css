@@ -111,6 +111,10 @@
     font-weight: 800;
     font-size: 18px;
     border: none;
+    /* For width, we take whatever the width of the first column is
+       and then divide it amongst the remaining 4 columns.
+       We do this so the first column has extra space to make it stand out */
+    width: calc((100% - 30%) / 4); 
   }
   
   /* 1st column: styling for journal number */
@@ -121,6 +125,8 @@
     box-shadow: var(--main-light-shading);
     border-radius: 16px;
     background-color: var(--main-red-subdued);
+    /* First column width, if changed need to also change the width calc in tbody td class*/
+    width: 30%;
   }
   
   /* Columns 2–5 */
