@@ -91,7 +91,7 @@
             <div class="table-and-filter-container">
 
                 <div class="button-container">
-                    <button class="filter-button">Filter</button>
+                    <button class="filter-button" id="openFilterButton">Filter</button>
                 </div>
 
                 <div class="table-container">
@@ -138,29 +138,186 @@
 
 	</div>
 
+    <!-- ============================= -->
+    <!-- START OF FILTER MODAL SECTION -->
+    <!-- ============================= -->
+
+    <!-- Filter Modal Container -->
+    <div class="filter-modal-container" id="filterModal">
+        <div class="filter-modal-outer-box">
+            <div class="filter-modal-content">
+                <h2>Filter</h2>
+            
+                <!-- Date filter container -->
+                <div class="date-filter-container">
+                    <h3 class="date-filter-title">Filter by Date</h3>
+                    <div class="date-filter-section">
+                    <label for="startDate">Start Date:</label>
+                    <input type="date" id="startDate">
+            
+                    <label for="endDate">End Date:</label>
+                    <input type="date" id="endDate">
+                    </div>
+                </div>
+            
+                <!-- Emotions filter section -->
+                <div class="emotions-filter-section">
+                    <h3>Filter by Emotions</h3>
+            
+                    <!-- Grid container for emotions -->
+                    <div class="emotions-grid">
+                        <!-- Row 1 (7 items) -->
+                        <div class="emotion-item">
+                            <input type="checkbox" id="excited">
+                            <label for="excited">Excited</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="disappointed">
+                            <label for="disappointed">Disappointed</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="worried">
+                            <label for="worried">Worried</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="frustrated">
+                            <label for="frustrated">Frustrated</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="amazed">
+                            <label for="amazed">Amazed</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="gross">
+                            <label for="gross">Gross</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="bored">
+                            <label for="bored">Bored</label>
+                        </div>
+                
+                        <!-- Row 2 (7 items) -->
+                        <div class="emotion-item">
+                            <input type="checkbox" id="happy">
+                            <label for="happy">Happy</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="sad">
+                            <label for="sad">Sad</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="scared">
+                            <label for="scared">Scared</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="angry">
+                            <label for="angry">Angry</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="surprised">
+                            <label for="surprised">Surprised</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="disgusted">
+                            <label for="disgusted">Disgusted</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="calm">
+                            <label for="calm">Calm</label>
+                        </div>
+                
+                        <!-- Row 3 (7 items) -->
+                        <div class="emotion-item">
+                            <input type="checkbox" id="proud">
+                            <label for="proud">Proud</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="lonely">
+                            <label for="lonely">Lonely</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="embarrassed">
+                            <label for="embarrassed">Embarrassed</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="unfairlyTreated">
+                            <label for="unfairlyTreated">Unfairly Treated</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="confused">
+                            <label for="confused">Confused</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="uncomfortable">
+                            <label for="uncomfortable">Uncomfortable</label>
+                        </div>
+                        <div class="emotion-item">
+                            <input type="checkbox" id="tired">
+                            <label for="tired">Tired</label>
+                        </div>
+                    </div>
+                    <!-- End of .emotions-grid -->
+                </div>
+                <!-- End of .emotions-filter-section -->
+            
+                <!-- Buttons -->
+                <div class="filter-buttons">
+                    <button id="applyFilterButton">Apply/Close</button>
+                    <button id="cancelFilterButton">Cancel</button>
+                    <button id="clearFiltersButton">Clear Filters</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================= -->
+    <!--  END OF FILTER MODAL SECTION  -->
+    <!-- ============================= -->
+    
+  
+
     <!-- Front and Middle Waves -->
 	<div class="waves-container">
 		<img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
 		<img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
 	</div>
 
-	<script>
-    // When the DOM content is fully loaded, this script fetches user information from the server.
-    // It then updates the element with id 'userFirstName' to display the username.
-    // If there is an error during the fetch operation, it logs the error to the console.
-    document.addEventListener("DOMContentLoaded", function() {
-        fetch('getUserInfo.php')
-            .then(response => response.json())
-            .then(data => {
-                if (data.username) {
-                    document.getElementById('userFirstName').textContent = data.username;
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching user info:', error);
+    <script>
+        // Grab references to elements
+        const openFilterBtn = document.getElementById('openFilterButton');
+        const filterModal = document.getElementById('filterModal');
+        const applyFilterButton = document.getElementById('applyFilterButton');
+        const cancelFilterButton = document.getElementById('cancelFilterButton');
+        const clearFiltersButton = document.getElementById('clearFiltersButton');
+      
+        // Open the modal when "Filter" is clicked
+        openFilterBtn.addEventListener('click', () => {
+          filterModal.style.display = 'block';
+        });
+      
+        // Close the modal on "Apply/Close"
+        applyFilterButton.addEventListener('click', () => {
+          // TODO: Collect date range + checkbox selections here if needed, then filter your data
+          filterModal.style.display = 'none';
+        });
+      
+        // Close the modal on "Cancel"
+        cancelFilterButton.addEventListener('click', () => {
+          filterModal.style.display = 'none';
+        });
+
+        clearFiltersButton.addEventListener('click', () => {
+            // Clear all date inputs
+            document.querySelectorAll('.filter-modal-content input[type="date"]').forEach(input => {
+                input.value = "";
             });
-    });
-    </script>
+            // Uncheck all checkboxes
+            document.querySelectorAll('.filter-modal-content input[type="checkbox"]').forEach(input => {
+                input.checked = false;
+            });
+        });
+      </script>
+      
+      
 
 	
 </body>
