@@ -334,8 +334,15 @@
           filterModal.style.display = 'none';
         });
         
-        // "Cancel" button: simply close the modal without updating text
+        // "Cancel" button: This does the same thing as apply and close
+        // This is because anytime we close the modal, we need to update the text 
+        // I want to keep the cancel button, even though it's not needed, because I feel
+        // It will be confusing for the user if there was no "cancel" button
         cancelFilterButton.addEventListener('click', () => {
+          const startDateVal = startDateInput.value;
+          const endDateVal = endDateInput.value;
+          filterFromDateText.innerText = "From: " + (startDateVal ? startDateVal : "Not set");
+          filterToDateText.innerText = "To: " + (endDateVal ? endDateVal : "Not set");
           filterModal.style.display = 'none';
         });
         
