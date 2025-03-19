@@ -11,7 +11,7 @@
     z-index: 0; /* Ensure the background stays behind */
     height: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
 }
 
@@ -22,14 +22,13 @@
     justify-content: center;
     flex-direction: column;
     gap: 10px;
-    margin-bottom: 2%;
+    margin-top: 15px;
 }
 
 .button-container {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: end;
+    position: relative;
+    height: 35px;
 }
 
 .filter-button {
@@ -39,26 +38,88 @@
     font-family: 'Nunito', sans-serif;
     font-style: normal;
     font-weight: 800;
-    font-size: 18px;
+    font-size: 16.5px;
     border: none;
     border-radius: 25px; /* Rounded corners */
-    padding: 10px 20px; /* Adjust button padding */
+    padding: 9px 18px; /* Adjust button padding */
     cursor: pointer;
     box-shadow: var(--main-shading-with-drop-shadow);
     width: auto; /* Ensure button is sized to its content */
-    line-height: 18px;
-    margin-right: 10px;
+    line-height: 17px;
+    position: absolute;
+    right: 10px;;
 }
 
 .filter-button:hover {
     background-color: var(--main-green);
-    box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow);
+    box-shadow: 0 0 0 3.4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow);
     color: var(--main-yellow-bold);
 }
 
 .filter-button:active {
     transform: scale(0.95);
 }
+
+.pagination-container {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  background-color: var(--main-cyan);
+  padding: 5.5px;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 1000px;
+  box-shadow: var(--main-shading-with-drop-shadow);
+}
+
+.pagination-button {
+  background-color: var(--main-red-subdued);
+  color: var(--pure-white);
+  border: none;
+  border-radius: 1000px;
+  cursor: pointer;
+  margin: 0 10px;
+  box-shadow: var(--main-shading-with-drop-shadow);
+  font-family: 'Nunito', sans-serif;
+  font-weight: 1000;
+  font-size: 16.5px;
+  width: 24px;
+  height: 24px;
+}
+
+.pagination-button:hover {
+  background-color: var(--main-red);
+  box-shadow: 0 0 0 3.4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow);
+  color: var(--main-yellow-bold);
+}
+
+.pagination-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.pagination-button:disabled:hover {
+  box-shadow: var(--main-shading-with-drop-shadow);
+  color: var(--pure-white);
+}
+
+.pagination-button:active {
+  transform: scale(0.95);
+}
+
+.pagination-button:disabled:active {
+  transform: scale(1);
+}
+
+.page-info {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--pure-white);
+}
+
 
 /* Container to wrap the table and apply box shading */
 .table-container {
@@ -85,7 +146,7 @@
   .table-container table {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 8px; 
+    border-spacing: 0 7px; 
     background-color: var(--main-blue);
     border: 20px solid var(--main-blue);
     border-bottom: 13px solid var(--main-blue);
@@ -99,17 +160,17 @@
     text-align: center;
     font-family: 'Nunito', sans-serif;
     font-weight: 900;
-    font-size: 18px;
+    font-size: 16.5px;
   }
   
   /* Body cells have an off-white background */
   tbody td {
     background-color: var(--main-off-white);
-    padding: 4px 14px;
+    padding: 3px 12.5px;
     text-align: center;
     font-family: 'Nunito', sans-serif;
     font-weight: 800;
-    font-size: 18px;
+    font-size: 16.5px;
     border: none;
     /* For width, we take whatever the width of the first column is
        and then divide it amongst the remaining 4 columns.
@@ -120,7 +181,7 @@
   /* 1st column: styling for journal number */
   tbody td:nth-child(1) {
     color: var(--pure-white);
-    font-size: 25px;
+    font-size: 23px;
     cursor: pointer;
     box-shadow: var(--main-light-shading);
     border-radius: 16px;
@@ -134,7 +195,7 @@
     color: var(--main-blue);
     border-top-left-radius: 10000px;
     border-bottom-left-radius: 10000px;
-    border-left: 5px solid var(--main-blue);
+    border-left: 4.5px solid var(--main-blue);
     padding-left: 20px;
   }
   tbody td:nth-child(3) {
@@ -155,8 +216,8 @@
     color: var(--main-yellow-bold);
     text-decoration: underline;
     text-decoration: var(--main-yellow-bold) wavy underline;
-    text-underline-offset: 2%;
-    text-decoration-thickness: 10%; 
+    text-underline-offset: 4%;
+    text-decoration-thickness: 8.5%; 
   }
   
   /* Active effect for journal number */
