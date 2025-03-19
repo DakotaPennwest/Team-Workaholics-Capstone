@@ -255,6 +255,7 @@ body {
     justify-content: center; /* Horizontally center */
     align-items: center; /* Vertically center */
     overflow: hidden;
+    scrollbar-color: var(--side-bar-bg-color) var(--main-blue-subdued);
 }
 
 /* Waves Container */
