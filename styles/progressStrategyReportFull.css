@@ -11,7 +11,7 @@
     z-index: 0; /* Ensure the background stays behind */
     height: 100%;
     display: flex;
-    align-items: center;
+    align-items:  flex-start;
     justify-content: center;
 }
 
@@ -23,6 +23,7 @@
     box-shadow: var(--main-shading-with-drop-shadow);
     position: relative;
     margin-bottom: 3%;
+    margin-top: 10%;
   }
   
   .table-shading {
@@ -60,15 +61,23 @@
   
   /* Body cells have an off-white background */
   tbody td {
-    background-color: var(--main-off-white);
-    padding: 8px 15px;
+    padding: 8px 10px;
     text-align: center;
     font-family: 'Nunito', sans-serif;
     font-weight: 800;
-    font-size: 15px;
+    font-size: 14px;
     border: none;
   }
   
+  /* Makes every other row a different color, easier to read */
+  tbody tr:nth-child(even) {
+    background-color: var(--main-off-white);
+  }
+
+  tbody tr:nth-child(odd) {
+    background-color: var(--side-bar-off-white);
+  }
+
   /* 1st column: styling for journal number */
   tbody td:nth-child(1) {
     color: var(--main-red);
