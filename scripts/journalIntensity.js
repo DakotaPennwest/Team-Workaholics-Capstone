@@ -60,7 +60,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const firstSnapPointBounds = snapPoints[0].getBoundingClientRect();
         const sliderBounds = sliderContainer.getBoundingClientRect();
-        const progressBarStart = firstSnapPointBounds.left - sliderBounds.left;
+
+        //const progressBarStart = firstSnapPointBounds.left - sliderBounds.left;
+            // I commented this line out to preserve what it was before - Dakota
+
+        // Offset by 5px
+        // We do this because the progress bar start needs to be just a bit before the first stop
+        // That way the bar maintains a visual margin around the stop and looks much nicer.
+        // I have it as a const just so I can easily find it again in case I need to adjust it - Dakota
+        const offset = 5;
+        const progressBarStart = (firstSnapPointBounds.left - sliderBounds.left) - offset;
 
         progressBar.style.left = `${progressBarStart}px`;
         progressBar.style.width = `${handlePosition - progressBarStart}px`;
@@ -69,7 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function snapHandleToPoint(snapPoint) {
         const snapPointBounds = snapPoint.getBoundingClientRect();
         const sliderBounds = sliderContainer.getBoundingClientRect();
-        const snapPosition = snapPointBounds.left - sliderBounds.left;
+
+        //const snapPosition = snapPointBounds.left - sliderBounds.left;
+            // I commented this line out to preserve what it was before - Dakota
+
+        // Add half the stop's width to get the center
+        // We do this to better center the slide progress dot overtop the stops - Dakota
+        const snapPosition = (snapPointBounds.left - sliderBounds.left) + snapPointBounds.width / 2;
 
         updateSliderVisuals(snapPosition);
         updateEmotionDisplay(snapPoints.indexOf(snapPoint));
@@ -80,10 +95,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return snapPoints.reduce((nearestIndex, snapPoint, index) => {
             const snapPointBounds = snapPoint.getBoundingClientRect();
+
+            /* Commented this out to preserve what was here - Dakota
             const snapPosition = snapPointBounds.left - sliderBounds.left;
             const distanceToCurrentPoint = Math.abs(currentPosition - snapPosition);
             const distanceToNearestPoint = Math.abs(currentPosition -
                 (snapPoints[nearestIndex].getBoundingClientRect().left - sliderBounds.left));
+            */
+
+             // Center of that stop:
+             // All of this is to try and center on the snapping points better - Dakota
+            const snapCenter = (snapPointBounds.left - sliderBounds.left) +  snapPointBounds.width / 2;
+            const distanceToCurrentPoint = Math.abs(currentPosition - snapCenter);
+
+            const nearestSnapBounds = snapPoints[nearestIndex].getBoundingClientRect();
+            const nearestSnapCenter = (nearestSnapBounds.left - sliderBounds.left) +  nearestSnapBounds.width / 2;
+            const distanceToNearestPoint = Math.abs(currentPosition - nearestSnapCenter);
+
 
             return distanceToCurrentPoint < distanceToNearestPoint ? index : nearestIndex;
         }, 0);
@@ -107,8 +135,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const leftmostSnapBounds = snapPoints[0].getBoundingClientRect();
         const rightmostSnapBounds = snapPoints[snapPoints.length - 1].getBoundingClientRect();
 
-        const minPosition = leftmostSnapBounds.left - sliderBounds.left;
-        const maxPosition = rightmostSnapBounds.left - sliderBounds.left;
+        //const minPosition = leftmostSnapBounds.left - sliderBounds.left;
+        //const maxPosition = rightmostSnapBounds.left - sliderBounds.left;
+            // Commented out to preserve what was here before - Dakota
+
+        // Min & max should be the centers of the leftmost and rightmost stops
+        // We do this to better center the slide progress dot overtop the stops - Dakota
+        const minPosition = (leftmostSnapBounds.left - sliderBounds.left)  +  leftmostSnapBounds.width / 2;
+        const maxPosition = (rightmostSnapBounds.left - sliderBounds.left) +  rightmostSnapBounds.width / 2;
 
         let newHandlePosition = e.clientX - sliderBounds.left;
         newHandlePosition = Math.max(minPosition, Math.min(newHandlePosition, maxPosition));

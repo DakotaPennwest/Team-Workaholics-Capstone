@@ -78,6 +78,12 @@
             <h2 class="go-back-text">Back</h2>
         </a>
 
+        <div class="filter-button-container">
+            <div class="filter-dates-text" id="filterFromDate">All Time</div>
+            <div class="filter-dates-text" id="filterToDate"></div>
+            <button class="filter-button" id="openFilterButton">Filter</button>
+        </div>
+
 	</div>
     
 	
@@ -119,7 +125,7 @@
                                     <div class="emotion-emoji-name" id="mostPickedEmotionName">Amazed</div>
                                 </div>
 
-                                <div class="left-content-inner-container-bottom-text" id="mostCommonCoreCategoryTimesPicked">Picked 10 Times</div>
+                                <div class="left-content-inner-container-bottom-text" id="mostCommonEmotionTimesPicked">Picked 10 Times</div>
 
                             </div>
 
@@ -142,13 +148,13 @@
                 </div>
 
                 <!-- Report Box for Most Intense Emotion -->
+                <!-- Commening out as no longer needed, but want to keep code 
                 <div class="report-box">
                     
                     <div class="left-content-container">
                         
                         <div class="left-content-inner-container-shading"> </div>
 
-                        <!-- What holds the top and bottom colored boxes -->
                         <div class="left-content-inner-container">
                             
                             <div class="left-content-inner-container-top">
@@ -191,6 +197,7 @@
                     </div>
 
                 </div>
+                -->
 
             </div>
             
@@ -200,29 +207,154 @@
 
 	</div>
 
+    
+    <!-- ============================= -->
+    <!-- START OF DATE FILTER MODAL SECTION -->
+    <!-- ============================= -->
+
+    <!-- Filter Modal Container -->
+    <div class="filter-modal-container" id="filterModal">
+        <div class="filter-modal-outer-box">
+        <div class="filter-modal-content">
+            <h2>Filter</h2>
+            
+            <h3 class="date-filter-title">Filter by Date</h3>
+            <!-- Default Date Options -->
+            <div class="default-date-options">
+            <button class="default-option" id="optionLastMonth">Last Month</button>
+            <button class="default-option" id="optionLast3Months">Last 3 Months</button>
+            <button class="default-option" id="optionLast6Months">Last 6 Months</button>
+            <button class="default-option" id="optionLastYear">Last Year</button>
+            </div>
+            
+            <!-- Date Filter Container -->
+            <div class="date-filter-container">
+            <div class="date-filter-section">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate">
+                
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate">
+            </div>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="filter-buttons">
+            <button id="applyFilterButton">Apply/Close</button>
+            <button id="cancelFilterButton">Cancel</button>
+            <button id="clearFiltersButton">Clear Filters</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!-- ============================= -->
+    <!--  END OF DATE FILTER MODAL SECTION  -->
+    <!-- ============================= -->
+
     <!-- Front and Middle Waves -->
 	<div class="waves-container">
 		<img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
 		<img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
 	</div>
 
-	<script>
-    // When the DOM content is fully loaded, this script fetches user information from the server.
-    // It then updates the element with id 'userFirstName' to display the username.
-    // If there is an error during the fetch operation, it logs the error to the console.
-    document.addEventListener("DOMContentLoaded", function() {
-        fetch('getUserInfo.php')
-            .then(response => response.json())
-            .then(data => {
-                if (data.username) {
-                    document.getElementById('userFirstName').textContent = data.username;
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching user info:', error);
-            });
-    });
-    </script>
+
+    <script>
+        // Grab modal elements
+        const openFilterBtn = document.getElementById('openFilterButton');
+        const filterModal = document.getElementById('filterModal');
+        const applyFilterButton = document.getElementById('applyFilterButton');
+        const cancelFilterButton = document.getElementById('cancelFilterButton');
+        const clearFiltersButton = document.getElementById('clearFiltersButton');
+        
+        // Date input fields
+        const startDateInput = document.getElementById('startDate');
+        const endDateInput = document.getElementById('endDate');
+        
+        // Default date option buttons
+        const optionLastMonth = document.getElementById('optionLastMonth');
+        const optionLast3Months = document.getElementById('optionLast3Months');
+        const optionLast6Months = document.getElementById('optionLast6Months');
+        const optionLastYear = document.getElementById('optionLastYear');
+        
+        // Elements to update with the selected dates
+        const filterFromDateText = document.getElementById('filterFromDate');
+        const filterToDateText = document.getElementById('filterToDate');
+        
+        // Utility function: format a Date object as YYYY-MM-DD (for input[type="date"] value)
+        function formatDate(date) {
+          const year = date.getFullYear();
+          const month = ('0' + (date.getMonth() + 1)).slice(-2);
+          const day = ('0' + date.getDate()).slice(-2);
+          return `${year}-${month}-${day}`;
+        }
+        
+        // Default option event listeners
+        optionLastMonth.addEventListener('click', () => {
+          const today = new Date();
+          const startDate = new Date(today);
+          startDate.setMonth(startDate.getMonth() - 1);
+          startDateInput.value = formatDate(startDate);
+          endDateInput.value = formatDate(today);
+        });
+        
+        optionLast3Months.addEventListener('click', () => {
+          const today = new Date();
+          const startDate = new Date(today);
+          startDate.setMonth(startDate.getMonth() - 3);
+          startDateInput.value = formatDate(startDate);
+          endDateInput.value = formatDate(today);
+        });
+        
+        optionLast6Months.addEventListener('click', () => {
+          const today = new Date();
+          const startDate = new Date(today);
+          startDate.setMonth(startDate.getMonth() - 6);
+          startDateInput.value = formatDate(startDate);
+          endDateInput.value = formatDate(today);
+        });
+        
+        optionLastYear.addEventListener('click', () => {
+          const today = new Date();
+          const startDate = new Date(today);
+          startDate.setFullYear(startDate.getFullYear() - 1);
+          startDateInput.value = formatDate(startDate);
+          endDateInput.value = formatDate(today);
+        });
+        
+        // Open the modal when the Filter button is clicked
+        openFilterBtn.addEventListener('click', () => {
+          filterModal.style.display = 'block';
+        });
+        
+        // "Apply/Close" button: update the text elements and close the modal
+        applyFilterButton.addEventListener('click', () => {
+          const startDateVal = startDateInput.value;
+          const endDateVal = endDateInput.value;
+          filterFromDateText.innerText = "From: " + (startDateVal ? startDateVal : "Not set");
+          filterToDateText.innerText = "To: " + (endDateVal ? endDateVal : "Not set");
+          filterModal.style.display = 'none';
+        });
+        
+        // "Cancel" button: This does the same thing as apply and close
+        // This is because anytime we close the modal, we need to update the text 
+        // I want to keep the cancel button, even though it's not needed, because I feel
+        // It will be confusing for the user if there was no "cancel" button
+        cancelFilterButton.addEventListener('click', () => {
+          const startDateVal = startDateInput.value;
+          const endDateVal = endDateInput.value;
+          filterFromDateText.innerText = "From: " + (startDateVal ? startDateVal : "Not set");
+          filterToDateText.innerText = "To: " + (endDateVal ? endDateVal : "Not set");
+          filterModal.style.display = 'none';
+        });
+        
+        // "Clear Filters" button: clear the date fields
+        clearFiltersButton.addEventListener('click', () => {
+          startDateInput.value = "";
+          endDateInput.value = "";
+        });
+      </script>
+      
+	
 
 	
 </body>
