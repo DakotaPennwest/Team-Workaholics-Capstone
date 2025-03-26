@@ -2,14 +2,14 @@ CREATE DATABASE IF NOT EXISTS EmotionalRegulationApp;
 USE EmotionalRegulationApp;
 
 -- Drop tables 
-DROP TABLE Emotional_Strategy_Link;
+/*DROP TABLE Emotional_Strategy_Link;
 DROP TABLE Strategy_Feedback;
 DROP TABLE Assigned_Strategy;
 DROP TABLE Journal_Entry;
 DROP TABLE Coping_Strategy;
 DROP TABLE Emotion;
 DROP TABLE Users;
-DROP TABLE Parents;
+DROP TABLE Parents;*/
 
 -- Create Parents table
 CREATE TABLE Parents (
@@ -46,7 +46,7 @@ CREATE TABLE Coping_Strategy (
     strategy_id INT AUTO_INCREMENT PRIMARY KEY,
     strategy_name VARCHAR(100) UNIQUE,
     strategy_descript TEXT,
-    strategy_steps TEXT
+    strategy_image varchar(255) DEFAULT NULL
 );
 
 
@@ -110,3 +110,76 @@ VALUES ('testParentUser', 'testParentUser', '$2y$10$/UIEPq9pA4vT1irfsX0MeOXXHEMS
 INSERT INTO Users (parent_user_id, user_fname, user_username, user_dob, user_password, user_email, consent_status)
 VALUES (1, 'testUser', 'testUser', '2000-01-01', '$2y$10$QRoOjJxJNjwdMxmg5qq/rOsApv98MrokatHYSV14lrP8aURFRUz3O', 'TestUser@gmail.com', TRUE);
 
+-- Emotion Data
+INSERT INTO Emotion (emotion_name, emotion_core_category, emotion_type) VALUES
+('Excited', 'Happiness', 'Secondary'),
+('Happy', 'Happiness', 'Primary'),
+('Proud', 'Happiness', 'Secondary'),
+('Disappointed', 'Sadness', 'Secondary'),
+('Sad', 'Sadness', 'Primary'),
+('Lonely', 'Sadness', 'Secondary'),
+('Worried', 'Fear', 'Secondary'),
+('Scared', 'Fear', 'Primary'),
+('Embarrassed', 'Fear', 'Secondary'),
+('Frustrated', 'Anger', 'Secondary'),
+('Angry', 'Anger', 'Primary'),
+('Unfairly Treated', 'Anger', 'Secondary'),
+('Amazed', 'Surprise', 'Secondary'),
+('Surprised', 'Surprise', 'Primary'),
+('Confused', 'Surprise', 'Secondary'),
+('Gross', 'Disgust', 'Secondary'),
+('Disgusted', 'Disgust', 'Primary'),
+('Uncomfortable', 'Disgust', 'Secondary'),
+('Bored', 'Neutral', 'Secondary'),
+('Calm', 'Neutral', 'Primary'),
+('Tired', 'Neutral', 'Secondary');
+
+-- Coping Strategies Data
+INSERT INTO Coping_Strategy (strategy_name, strategy_descript, strategy_image) VALUES
+  ('Guided Visualization', 'A relaxation technique that involves visualizing a peaceful place to help alleviate fear.', 'images/strategySteps/guidedVisualization.png'),
+  ('Deep Breathing', 'A technique involving controlled breathing to help manage anger.', 'images/deepBreathing.png'),
+  ('Expressing Gratitude', 'A practice that encourages acknowledging and appreciating positive aspects of life to promote happiness.', 'images/strategySteps/expressingGratitude.png'),
+  ('Positive Affirmations', 'A technique of repeating uplifting statements to counter feelings of sadness.', 'images/strategySteps/positiveAffirmations.png'),
+  ('Grounding Techniques', 'A method that uses observation and sensory experiences to combat feelings of surprise.', 'images/strategySteps/groundingTechniques.png'),
+  ('Cognitive Reframing', 'A technique to modify negative thoughts into positive ones.', 'images/strategySteps/cognitiveReframing.png');
+
+
+
+-- Map Fear to Guided Visualization (strategy_id 1):
+INSERT INTO Emotional_Strategy_Link (emotion_id, strategy_id) VALUES
+  (7, 1),  -- Worried
+  (8, 1),  -- Scared
+  (9, 1);  -- Embarrassed
+
+-- Map Anger to Deep Breathing (strategy_id 2):
+INSERT INTO Emotional_Strategy_Link (emotion_id, strategy_id) VALUES
+  (10, 2), -- Frustrated
+  (11, 2), -- Angry
+  (12, 2); -- Unfairly Treated
+
+-- Map Happiness to Expressing Gratitude (strategy_id 3):
+INSERT INTO Emotional_Strategy_Link (emotion_id, strategy_id) VALUES
+  (1, 3),  -- Excited
+  (2, 3),  -- Happy
+  (3, 3),  -- Proud
+  (19, 3),  -- Bored
+  (20, 3),  -- Calm
+  (21, 3);  -- Tired
+
+-- Map Sadness to Positive Affirmations (strategy_id 4):
+INSERT INTO Emotional_Strategy_Link (emotion_id, strategy_id) VALUES
+  (4, 4),  -- Disappointed
+  (5, 4),  -- Sad
+  (6, 4);  -- Lonely
+
+-- Map Surprise to Grounding Techniques (strategy_id 5):
+INSERT INTO Emotional_Strategy_Link (emotion_id, strategy_id) VALUES
+  (13, 5), -- Amazed
+  (14, 5), -- Surprised
+  (15, 5); -- Confused
+
+-- Map Disgust to Cognitive Reframing (strategy_id 6):
+INSERT INTO Emotional_Strategy_Link (emotion_id, strategy_id) VALUES
+  (16, 6), -- Gross
+  (17, 6), -- Disgusted
+  (18, 6); -- Uncomfortable

@@ -52,7 +52,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="navigation-bar-link-text-selected">Journal</span>
             </a>
             <!-- Strategies Link -->
-            <a href="#" class="navigation-bar-link">
+            <a href="strategiesHome.html" class="navigation-bar-link">
                 <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Strategies</span>
             </a>
@@ -112,6 +112,9 @@ if (!isset($_SESSION['username'])) {
 
     
     <script>
+		/* When the DOM content is fully loaded, this script fetches user information from the server.
+		It then updates the element with id 'userFirstName' to display the username.
+		If there is an error during the fetch operation, it logs the error to the console.*/
         document.addEventListener("DOMContentLoaded", function() {
             fetch('getUserInfo.php')
                 .then(response => response.json())

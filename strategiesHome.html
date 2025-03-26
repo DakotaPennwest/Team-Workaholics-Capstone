@@ -86,7 +86,7 @@
             <div class="home-page-boxes-container">
             
                 <!-- Strategy Box -->
-                <a href="#" class="home-page-box home-page-strategy-box">
+                <a href="strategiesCurrentStrategy.html" class="home-page-box home-page-strategy-box">
                     <div class="home-page-box-status" id="currentStrategy">
                         Your current strategy is<br>
                         <u>4-7-8 Breathing</u>
@@ -107,7 +107,25 @@
         <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
         <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
     </div>
-
+	
+<script>
+	/* When the DOM content is fully loaded, this script fetches user information from the server.
+    It then updates the element with id 'userFirstName' to display the username.
+    If there is an error during the fetch operation, it logs the error to the console. */
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('getUserInfo.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.username) {
+                        document.getElementById('userFirstName').textContent = data.username;
+						document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching user info:', error);
+                });
+        });
+    </script>
     
 
 </body>
