@@ -39,28 +39,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 switch ($accountType) {
                     case "parent":
-                        try {
-                            $stmt = $db->prepare("INSERT INTO Parents (parent_fname, parent_username, parent_password, parent_email) VALUES (?, ?, ?, ?)");
-                            $stmt->execute([$firstName, $username, $hashedPassword, $email]);
-                            $parentId = $db->lastInsertId();
-                            $_SESSION['username'] = $username;
-                            $_SESSION['role'] = 'parent';
-                            $response['success'] = true;
-                            $response['message'] = "Parent account created successfully!";
-                            $response['redirect'] = "accountcreationchilduser.html?parent_id=" . $parentId;
-                        } catch (PDOException $e) {
-                            $response['message'] = "Error: " . $e->getMessage();
-                        }
+						try {
+							$stmt = $db->prepare("INSERT INTO Parents (parent_fname, parent_username, parent_password, parent_email) VALUES (?, ?, ?, ?)");
+							$stmt->execute([$firstName, $username, $hashedPassword, $email]);
+							$parentId = $db->lastInsertId();  // This gets the parent_user_id from the Parents table
+
+							// Store the parent's ID and other info in the session
+							$_SESSION['user_id'] = $parentId;  
+							$_SESSION['username'] = $username;
+							$_SESSION['role'] = 'parent';
+
+							$response['success'] = true;
+							$response['message'] = "Parent account created successfully!";
+							$response['redirect'] = "accountcreationchilduser.html?parent_id=" . $parentId;
+						} catch (PDOException $e) {
+							$response['message'] = "Error: " . $e->getMessage();
+						}
                         break;
 
                     case "child":
                         if ($parentId) {
                             try {
-                                $stmt = $db->prepare("INSERT INTO Users (parent_user_id, user_fname, user_dob, user_email, user_username, user_password) VALUES (?, ?, ?, ?, ?, ?)");
-                                $stmt->execute([$parentId, $firstName, $_POST['birthday'], $email, $username, $hashedPassword]);
-                                $_SESSION['username'] = $username;
-                                $_SESSION['role'] = 'child';
-                                $response['success'] = true;
+                               $stmt = $db->prepare("INSERT INTO Users (parent_user_id, user_fname, user_dob, user_email, user_username, user_password) VALUES (?, ?, ?, ?, ?, ?)");
+								$stmt->execute([$parentId, $firstName, $_POST['birthday'], $email, $username, $hashedPassword]);
+								$userId = $db->lastInsertId();
+								$_SESSION['user_id'] = $userId; 
+								$_SESSION['username'] = $username;
+								$_SESSION['role'] = 'child';
+								$response['success'] = true;
                                 $response['message'] = "Child account created successfully!";
                                 $response['redirect'] = "homepage.html";
                             } catch (PDOException $e) {
@@ -71,30 +77,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         }
                         break;
 
-                    case "solo":
-                        try {
-                            $stmt = $db->prepare("INSERT INTO Users (user_fname, user_dob, user_email, user_username, user_password) VALUES (?, ?, ?, ?, ?)");
-                            $stmt->execute([$firstName, $_POST['birthday'], $email, $username, $hashedPassword]);
-                            $_SESSION['username'] = $username;
-                            $_SESSION['role'] = 'solo';
-                            $response['success'] = true;
-                            $response['message'] = "Solo user account created successfully!";
-                            $response['redirect'] = "homepage.html";
-                        } catch (PDOException $e) {
-                            $response['message'] = "Error: " . $e->getMessage();
-                        }
-                        break;
+					case "solo":
+						try {
+							$stmt = $db->prepare("INSERT INTO Users (user_fname, user_dob, user_email, user_username, user_password) VALUES (?, ?, ?, ?, ?)");
+							$stmt->execute([$firstName, $_POST['birthday'], $email, $username, $hashedPassword]);
+							$userId = $db->lastInsertId();  // Capture the new user id
+							$_SESSION['user_id'] = $userId;
+							$_SESSION['username'] = $username;
+							$_SESSION['role'] = 'solo';
+							$response['success'] = true;
+							$response['message'] = "Solo user account created successfully!";
+							$response['redirect'] = "homepage.html";
+						} catch (PDOException $e) {
+							$response['message'] = "Error: " . $e->getMessage();
+						}
+						break;
+						}
+							}
+							} catch (PDOException $e) {
+								$response['message'] = "Error: " . $e->getMessage();
+							}
+						}
 
-                    default:
-                        $response['message'] = "Invalid account type!";
-                        break;
-                }
-            }
-        } catch (PDOException $e) {
-            $response['message'] = "Error: " . $e->getMessage();
-        }
-    }
-
-    echo json_encode($response);
+						echo json_encode($response);
 }
 ?>

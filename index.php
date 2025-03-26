@@ -35,7 +35,7 @@
 
                 <div class="right-content-container">
                     <div class="form-input-container">
-                        <form id="loginForm" method="post">
+                        <form id="loginForm" method="post" enctype="multipart/form-data">
                             <div class="input-wrapper">
                                 <label for="usernameInput" class="input-label">Username</label>
                                 <input type="text" id="usernameInput" name="username" class="text-input-box" placeholder="Ex: john123" required>
