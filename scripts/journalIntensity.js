@@ -1,41 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Try to get emotion data from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    let emotionName = urlParams.get('emotionName') || 'excited'; // Default fallback to 'excited'
-    const emotionValue = urlParams.get('emotionValue') || 'excited'; // Default fallback to 'excited'
+    // Read emotion data from hidden inputs (set by PHP)
+    const emotionName = document.getElementById('passedEmotionName').value || 'excited';
+    const emotionValue = document.getElementById('passedEmotionValue').value || 'excited';
 
-    // Ensure emotionName is properly defined, just in case
-    if (!emotionName) {
-        emotionName = 'excited';
-    }
-
-    // Store the passed emotion data in hidden form fields (for further usage or form submission)
-    document.getElementById('passedEmotionName').value = emotionName;
-    document.getElementById('passedEmotionValue').value = emotionValue;
-
-    // Update the question text with the passed emotion
+    // Update the question text and the emoji display using these values
     document.getElementById('emotionIntensityQuestion').innerHTML =
         `How <u>${emotionName.toLowerCase()}</u> do you feel?`;
-
-    // Update the emoji display
     document.getElementById('selectedEmotionEmoji').src =
         `./images/emotions/${emotionValue}.svg`;
 
-    // Cache DOM elements
+    // Cache DOM elements for the slider and final form fields
     const sliderContainer = document.querySelector('.slider');
     const dragHandle = document.querySelector('.slider-handle');
     const progressBar = document.querySelector('.slider-progress');
     const snapPoints = [...document.querySelectorAll('.slider-stop')];
-
-    // Hidden form fields for final submission
     const finalEmotionName = document.getElementById('finalEmotionName');
     const finalEmotionValue = document.getElementById('finalEmotionValue');
     const finalIntensityLevel = document.getElementById('finalIntensityLevel');
     const finalIntensityLabel = document.getElementById('finalIntensityLabel');
-
-    // Define emotion intensity levels
     const emotionIntensityLevels = ['Barely', 'Somewhat', 'Moderately', 'Very', 'Extremely'];
-
     let isHandleDragging = false;
 
     function updateEmotionDisplay(intensityIndex) {
@@ -187,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Redirect with emotion data
-                    window.location.href = `journalJournaling.html?emotionName=${encodeURIComponent(emotionName)}`;
+                    // Redirect after successful save
+                    window.location.href = `journalJournaling.php?emotionName=${encodeURIComponent(emotionName)}`;
                 } else {
                     console.error('Error saving emotion intensity:', data.message);
                 }
