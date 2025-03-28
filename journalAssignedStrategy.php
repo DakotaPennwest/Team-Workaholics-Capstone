@@ -136,7 +136,7 @@ if (!$strategy) {
     <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
     <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
   </div>
-  <script src="journalFeedback.js"></script>
+  <script src="scripts/journalFeedback.js"></script>
   <script>
       document.addEventListener("DOMContentLoaded", function() {
           fetch('getUserInfo.php')
