@@ -16,7 +16,7 @@
 }
 
 .table-and-filter-container {
-    width: 900px;
+    width: 950px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -151,6 +151,7 @@
     border: 20px solid var(--main-blue);
     border-bottom: 13px solid var(--main-blue);
     border-radius: 28px;
+    white-space: nowrap;
   }
   
   /* Table header styling */
@@ -172,10 +173,13 @@
     font-weight: 800;
     font-size: 16.5px;
     border: none;
-    /* For width, we take whatever the width of the first column is
-       and then divide it amongst the remaining 4 columns.
-       We do this so the first column has extra space to make it stand out */
-    width: calc((100% - 30%) / 4); 
+    /* For width, we take 100% and minuse whatever the width of the first column is
+       and the width of the last column, and then divide it amongst the remaining 3 columns.
+       We do this so the first column has extra space to make it stand out and
+       the last column needs extra space to ensure it doesn't need to text wrap */
+    width: calc((100% - 30% - 25%) / 3); 
+
+   
   }
   
   /* 1st column: styling for journal number */
@@ -208,6 +212,8 @@
     color: var(--main-green-subdued);
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
+    /* Last column width, if changed need to also change the width calc in tbody td class*/
+    width: 25%;
   }
   
   /* Hover for journal number */
