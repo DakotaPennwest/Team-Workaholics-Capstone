@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// this seems to be having issues... Check if the user is signed in; if not, redirect to the login page.
+// ensure the user is signed in.
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -9,23 +9,21 @@ if (!isset($_SESSION['user_id'])) {
 
 $currentUserId = $_SESSION['user_id'];
 
-// db connect that can likely be replaced with our db connect file.
+// can probably replace with db connect file
 $host = "localhost";
 $db_username = "root";
 $db_password = "";
 $dbname = "emotionalregulationapp";
 
-// Create connection
 $mysqli = new mysqli($host, $db_username, $db_password, $dbname);
-
-// Check connection
 if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-// Query to retrieve journal entries for the currently signed in user.
+// query to retrieve journal entries for the signed-in user.
 $query = "
     SELECT 
+        journal_entry.journal_entry_id,
         journal_entry.journal_date, 
         emotion.emotion_name, 
         journal_entry.emotional_intensity_rating, 
@@ -38,7 +36,7 @@ $query = "
 ";
 
 $result = $mysqli->query($query);
-$index = 1; // Used for the Journal Number column.
+$index = 1; // used for the Journal Number column.
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,15 +63,15 @@ $index = 1; // Used for the Journal Number column.
             <p class="navigation-bar-user-first-name" id="userFirstName">Jason</p>
         </div>
         <div class="navigation-bar-links-container">
-            <a href="homepage.html" class="navigation-bar-link">
+            <a href="homepage.php" class="navigation-bar-link">
                 <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Home</span>
             </a>
-            <a href="journalHome.html" class="navigation-bar-link">
+            <a href="journalalljournalstable.php" class="navigation-bar-link">
                 <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text-selected">Journal</span>
             </a>
-            <a href="strategiesHome.html" class="navigation-bar-link">
+            <a href="strategiesHome.php" class="navigation-bar-link">
                 <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Strategies</span>
             </a>
@@ -84,7 +82,7 @@ $index = 1; // Used for the Journal Number column.
             <a href="#" class="navigation-bar-link">
                 <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Settings</span>
-             </a>
+            </a>
         </div>
     </div>
 
@@ -120,13 +118,15 @@ $index = 1; // Used for the Journal Number column.
                             <?php
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
+                                    // fetch journal info from database, the journal number functions as a link.
                                     echo "<tr>";
-                                    echo "<td>" . $index++ . "</td>";
+                                    echo "<td><a href='journalviewjournal.php?id=" . $row['journal_entry_id'] . "&index=" . $index . "'>" . $index . "</a></td>";
                                     echo "<td>" . htmlspecialchars($row['journal_date']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['emotion_name']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['emotional_intensity_rating']) . "</td>";
                                     echo "<td>" . htmlspecialchars($row['strategy_name']) . "</td>";
                                     echo "</tr>";
+                                    $index++;
                                 }
                             } else {
                                 echo "<tr><td colspan='5'>No journal entries found.</td></tr>";
@@ -147,7 +147,7 @@ $index = 1; // Used for the Journal Number column.
     </div>
 
     <script>
-    // Fetch user information for the navigation bar.
+    // Update navigation bar with user info.
     document.addEventListener("DOMContentLoaded", function() {
         fetch('getUserInfo.php')
             .then(response => response.json())
@@ -161,6 +161,5 @@ $index = 1; // Used for the Journal Number column.
             });
     });
     </script>
-    
 </body>
 </html>
