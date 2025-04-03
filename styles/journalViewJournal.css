@@ -179,27 +179,18 @@
     position: relative;
     z-index: 1;
     opacity: 1;
-    display: flex;
+    /* Changed from a flex container to block to let children stack naturally */
+    display: block;
     flex-direction: column;      /* Stack children vertically */
     align-items: flex-start;     /* Default left alignment */
     justify-content: flex-start; /* Start from the top */
-    overflow: hidden;
+    overflow-y: auto;
     box-sizing: border-box;      /* Include padding in width/height */
     box-shadow: var(--main-shading-with-drop-shadow);
+    background: rgb(43, 179, 197, 0.8); /* Main Cyan */
 }
   
-/* Create a pseudo-element for the foreground opacity. This lets the foreground rectangle be low opacity but nothing else on top is */
-.right-content-container::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: var(--main-cyan);
-    border-radius: 20px;
-    opacity: 0.8; 
-    z-index: -1; /* Ensure it stays behind the content */
-    box-shadow: var(--main-shading-with-drop-shadow);
-}
+
 
 .journal-info-container {
     font-family: 'Nunito', sans-serif;
@@ -231,6 +222,7 @@
     align-self: center;
 }
 
+/* Remove flex-related and overflow styling from .journal-content so it behaves like normal content */
 .journal-content {
     font-family: 'Nunito', sans-serif;
     font-weight: 800;
@@ -239,6 +231,13 @@
     text-align: left;
     padding: 25px;
     padding-top: 5px;
+}
+
+/* Make sure the info container and prompt don't shrink */
+.journal-info-container,
+.journal-prompt {
+    flex-shrink: 0;
+    /* Keep your existing styling/padding as needed. */
 }
 
 .download-icon {
