@@ -150,7 +150,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : "Unknown User
                     <div class="journal-info-container">
                         <p id="journalAuthorName"><?php echo htmlspecialchars($username); ?></p>
                         <p id="journalNumber">Journal <?php echo htmlspecialchars($journalIndex); ?></p>
-                        <p id="journalDate"><?php echo htmlspecialchars($journal['journal_date']); ?></p>
+                        <p id="journalDate"><?php echo htmlspecialchars(date("m/d/Y", strtotime($journal['journal_date']))); ?></p>
                     </div>
 
                     <div class="journal-prompt" id="journalPrompt">
