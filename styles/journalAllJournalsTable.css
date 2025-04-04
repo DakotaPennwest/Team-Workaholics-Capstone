@@ -177,7 +177,7 @@
        and the width of the last column, and then divide it amongst the remaining 3 columns.
        We do this so the first column has extra space to make it stand out and
        the last column needs extra space to ensure it doesn't need to text wrap */
-    width: calc((100% - 30% - 25%) / 3); 
+    width: calc((100% - 25% - 25%) / 3); 
 
    
   }
@@ -191,7 +191,7 @@
     border-radius: 16px;
     background-color: var(--main-red-subdued);
     /* First column width, if changed need to also change the width calc in tbody td class*/
-    width: 30%;
+    width: 25%;
   }
   
   /* Columns 2–5 */
