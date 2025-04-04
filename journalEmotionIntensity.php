@@ -140,7 +140,7 @@ $emotionId    = $_SESSION['journalEntry']['emotionId'] ?? '1';
     <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
   </div>
 
-  <script src="scripts/journalIntensity.js"></script>
+  <script src="./scripts/journalIntensity.js"></script>
 </body>
 </html>
 <script>

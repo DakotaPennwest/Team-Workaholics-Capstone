@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once 'db_connect.php';
-require_once 'updateAssignment.php'; // To update assignment cycle if needed
+require_once 'updateAssignment.php';
 
 // Ensure required session data is present
 if (!isset($_SESSION['user_id'], $_SESSION['strategy_id'])) {
@@ -23,16 +23,25 @@ $stmt->execute([$userId, $strategyId]);
 // Store the new assignment id in the session (if needed later)
 $_SESSION['assignment_id'] = $db->lastInsertId();
 
-// Optionally, update the assignment cycle (if 5 entries have been reached)
-// (In our design, this should have already been handled in journaling.php)
+// Now, check if the assignment cycle is complete.
+// (Assuming updateAssignmentCycle() returns true when 5 entries have been reached)
+$assignmentUpdated = updateAssignmentCycle($db, $userId, $strategyId);
 
-// Fetch the strategy details from the Coping_Strategy table
-$sqlStrategy = "SELECT strategy_name, strategy_descript, strategy_image AS strategy_image_url FROM Coping_Strategy WHERE strategy_id = ?";
+// If the cycle is complete, redirect to feedback page.
+if ($assignmentUpdated) {
+    header('Location: journalStrategyFeedback.html');
+    exit;
+}
+
+// Otherwise, fetch and display the current strategy details.
+$sqlStrategy = "SELECT strategy_name, strategy_descript, strategy_image AS strategy_image_url 
+                FROM Coping_Strategy 
+                WHERE strategy_id = ?";
 $stmtStrategy = $db->prepare($sqlStrategy);
 $stmtStrategy->execute([$strategyId]);
 $strategy = $stmtStrategy->fetch(PDO::FETCH_ASSOC);
 
-// Fallback: if no strategy was found, use a default (e.g., Deep Breathing with ID 2)
+// Fallback: if no strategy was found, use a default (Deep Breathing)
 if (!$strategy) {
     $_SESSION['strategy_id'] = 2;
     $stmtStrategy->execute([2]);
@@ -136,7 +145,7 @@ if (!$strategy) {
     <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
     <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
   </div>
-  <script src="scripts/journalFeedback.js"></script>
+  <script src="./scripts/journalFeedback.js"></script>
   <script>
       document.addEventListener("DOMContentLoaded", function() {
           fetch('getUserInfo.php')

@@ -1,128 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Home</title>
-    <link rel="stylesheet" href="styles/layoutwithnavbar.css">
-    <link rel="stylesheet" href="styles/stylevariables.css">
-    <link rel="stylesheet" href="styles/homepage.css">
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+  <meta charset="UTF-8">
+  <!-- Use HTML5 doctype to avoid quirks mode -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Home</title>
+  <link rel="stylesheet" href="styles/layoutwithnavbar.css">
+  <link rel="stylesheet" href="styles/stylevariables.css">
+  <link rel="stylesheet" href="styles/homepage.css">
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-    <!-- Back Wave -->
-    <div class="waves-container">
-        <img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
-    </div>
+  <!-- Back Wave -->
+  <div class="waves-container">
+    <img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
+  </div>
 
-    <!-- Navigation Bar -->
-    <div class="navigation-bar">
-        <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
-            <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
+  <!-- Navigation Bar -->
+  <div class="navigation-bar">
+    <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
+      <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
+    </a>
+    <!-- Profile Picture Section -->
+    <div class="navigation-bar-profile-picture-section">
+      <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
+    </div>
+    <!-- Profile Name Section -->
+    <div class="navigation-bar-user-name-section">
+      <p class="navigation-bar-user-first-name" id="userFirstName"></p>
+    </div>
+    <!-- Links Background -->
+    <div class="navigation-bar-links-container">
+      <!-- Home Link -->
+      <a href="homepage.html" class="navigation-bar-link">
+        <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text-selected">Home</span>
+      </a>
+      <!-- Journal Link -->
+      <a href="journalHome.html" class="navigation-bar-link">
+        <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text">Journal</span>
+      </a>
+      <!-- Strategies Link -->
+      <a href="strategiesHome.html" class="navigation-bar-link">
+        <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text">Strategies</span>
+      </a>
+      <!-- Progress Link -->
+      <a href="#" class="navigation-bar-link">
+        <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text">Progress</span>
+      </a>
+      <!-- Settings Link -->
+      <a href="#" class="navigation-bar-link">
+        <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text">Settings</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <!-- Title of Current Page-->
+    <h1 class="page-title" id="welcomeMessage">Hello!</h1>
+  </div>
+  
+  <!-- Main screen container -->
+  <div class="main-screen-container">
+    <!-- Container for boxes -->
+    <div class="content-container">
+      <!-- Decorative Elements -->
+      <img src="./images/rainbow.svg" alt="Rainbow" class="rainbow">
+      <img src="./images/cloud1withgreeting.webp" alt="Cloud 1" class="cloud cloud1">
+      <img src="./images/Cloud2.svg" alt="Cloud 2" class="cloud cloud2">
+      <img src="./images/Cloud3.svg" alt="Cloud 3" class="cloud cloud3">
+      
+      <div class="home-page-boxes-container">
+        <!-- Journal Box -->
+        <a href="journalEmotionSelection.html" class="home-page-box home-page-journal-box">
+          <div class="home-page-box-status" id="journalStatus">
+            You haven't done your journal today
+          </div>
+          <div class="home-page-box-text home-page-journal-box-text" id="journalDirection">
+            Begin Journal!
+          </div>
         </a>
-        
-        <!-- Profile Picture Section -->
-        <div class="navigation-bar-profile-picture-section">
-            <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
-        </div>
-    
-        <!-- Profile Name Section -->
-        <div class="navigation-bar-user-name-section">
-            <p class="navigation-bar-user-first-name" id="userFirstName"></p>
-        </div>
-
-        <!-- Links Background -->
-        <div class="navigation-bar-links-container">
-            <!-- Home Link -->
-            <a href="#" class="navigation-bar-link">
-                <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text-selected">Home</span>
-            </a>
-            <!-- Journal Link -->
-            <a href="journalHome.html" class="navigation-bar-link">
-                <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text">Journal</span>
-            </a>
-            <!-- Strategies Link -->
-            <a href="strategiesHome.html" class="navigation-bar-link">
-                <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text">Strategies</span>
-            </a>
-            <!-- Progress Link -->
-            <a href="#" class="navigation-bar-link">
-                <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text">Progress</span>
-            </a>
-            <!-- Settings Link -->
-            <a href="#" class="navigation-bar-link">
-                <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text">Settings</span>
-             </a>
-        </div>
-
+        <!-- Strategy Box -->
+        <a href="strategiesCurrentStrategy.html" class="home-page-box home-page-strategy-box">
+          <div class="home-page-box-status" id="currentStrategy">
+            Your current strategy is<br>
+            <u id="currentStrategyName">Loading...</u>
+          </div>
+          <div class="home-page-box-text home-page-strategy-box-text" id="strategyDirection">
+            Look at Current Strategy
+          </div>
+          <!-- Journals until next strategy counter -->
+          <div class="journals-until-next-strat-counter">
+            <div class="journals-until-next-strat-text">Journals until next strategy</div>
+            <div class="journals-until-next-strat-number" id="journalsUntilNextStrategy">--</div>
+          </div>
+        </a>
+      </div>
     </div>
+  </div>
 
-    <!-- Top bar -->
-    <div class="top-bar">
-        <!-- Title of current page -->
-        <h1 class="page-title" id="welcomeMessage"></h1>
-    </div>
-    
-    <!-- Main screen container -->
-    <div class="main-screen-container">
-        <!-- Container for boxes -->
-        <div class="content-container">
-            <!-- Rainbow -->
-            <img src="./images/rainbow.svg" alt="Rainbow" class="rainbow">
-            <!-- Clouds -->
-            <img src="./images/cloud1withgreeting.webp" alt="Cloud 1" class="cloud cloud1">
-            <img src="./images/Cloud2.svg" alt="Cloud 2" class="cloud cloud2">
-            <img src="./images/Cloud3.svg" alt="Cloud 3" class="cloud cloud3">
-            
-            <div class="home-page-boxes-container">
-                <!-- Journal Box -->
-                <a href="journalEmotionSelection.html" class="home-page-box home-page-journal-box">
-                    <div class="home-page-box-status" id="journalStatus">
-                        You haven't done your journal today
-                    </div>
-                    <div class="home-page-box-text home-page-journal-box-text" id="journalDirection">
-                        Begin Journal!
-                    </div>
-                </a>
-                <!-- Strategy Box -->
-                <a href="strategiesHome.html" class="home-page-box home-page-strategy-box">
-                    <div class="home-page-box-status" id="currentStrategy">
-                        Your current strategy is<br>
-                        Meditation
-                    </div>
-                    <div class="home-page-box-text home-page-strategy-box-text" id="strategyDirection">
-                        Go to Strategies
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
+  <!-- Front and Middle Waves -->
+  <div class="waves-container">
+    <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
+    <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
+  </div>
 
-    <!-- Front and Middle Waves -->
-    <div class="waves-container">
-        <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
-        <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
-    </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('getUserInfo.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.username) {
-                        document.getElementById('userFirstName').textContent = data.username;
-                        document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching user info:', error);
-                });
+  <!-- JavaScript: Update Navbar, Current Strategy, and Journal Count -->
+  <script>
+    // Update user info in the navbar
+    document.addEventListener("DOMContentLoaded", function() {
+      fetch('getUserInfo.php')
+        .then(response => response.json())
+        .then(data => {
+          if (data.username) {
+            document.getElementById('userFirstName').textContent = data.username;
+            document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching user info:', error);
         });
-    </script>
+    });
+
+    // Update the current assigned strategy by querying the database
+    document.addEventListener("DOMContentLoaded", function() {
+      fetch('displayCurrentStrategy.php')
+        .then(response => response.json())
+        .then(json => {
+          if (json.success) {
+            // Update the element that shows the strategy name with the fetched data
+            document.getElementById("currentStrategyName").innerHTML = json.data.strategy_name;
+          } else {
+            console.error("Error fetching strategy: " + json.message);
+            document.getElementById("currentStrategyName").innerHTML = "Not Assigned";
+          }
+        })
+        .catch(err => {
+          console.error("Error fetching current strategy:", err);
+          document.getElementById("currentStrategyName").innerHTML = "Not Assigned";
+        });
+    });
+
+    // Update the journals counter using getJournalCount.php
+    document.addEventListener("DOMContentLoaded", function() {
+      fetch('getJournalCount.php')
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            document.getElementById("journalsUntilNextStrategy").textContent = data.remaining;
+          } else {
+            console.error("Error fetching journal count: " + data.message);
+            document.getElementById("journalsUntilNextStrategy").textContent = "--";
+          }
+        })
+        .catch(err => {
+          console.error("Error fetching journal count:", err);
+          document.getElementById("journalsUntilNextStrategy").textContent = "--";
+        });
+    });
+  </script>
 </body>
 </html>

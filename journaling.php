@@ -10,6 +10,7 @@ if (!isset($_SESSION['user_id'], $_SESSION['journalEntry']['emotionId'], $_SESSI
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Retrieve POST data
     $journalContent = $_POST['journalContent'] ?? '';
     $emotionId = $_POST['emotionId'] ?? '';
     $emotionalIntensityRating = $_POST['emotionalIntensityRating'] ?? '';
@@ -19,29 +20,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     error_log("journaling.php - Received emotionId: " . $emotionId);
     error_log("journaling.php - Received emotionalIntensityRating: " . $emotionalIntensityRating);
 
-    // Save journal entry data to session (if needed later)
+    // Save journal entry data to session
     $_SESSION['journalEntry'] = [
         'journalContent' => $journalContent,
         'emotionId' => $emotionId,
         'emotionalIntensityRating' => $emotionalIntensityRating
     ];
 
-    // Query to count the current number of entries for this user and emotion
+    // Count the current number of journal entries for this user and emotion
     $sqlCount = "SELECT COUNT(*) FROM Journal_Entry WHERE user_id = ? AND emotion_id = ?";
     $stmtCount = $db->prepare($sqlCount);
     $stmtCount->execute([$userId, $emotionId]);
     $entryCount = $stmtCount->fetchColumn();
     error_log("journaling.php - Journal entry count for emotion_id {$emotionId}: " . $entryCount);
 
-    // If the count is 4, then this submission will be the 5th entry.
-    if ($entryCount == 4) {
-        // Update the assignment cycle (this function will update the Assigned_Strategy table)
+    // Regardless of the journal entry count, always update the assignment cycle if necessary
+    if ($entryCount >= 4) {
         $updated = updateAssignmentCycle($db, $userId, $_SESSION['strategy_id']);
         error_log("Assignment update triggered: " . ($updated ? "Yes" : "No"));
-        header('Location: journalAssignedStrategy.php');
-    } else {
-        header('Location: strategiesCurrentStrategy.html');
     }
+
+    // Always redirect to journalAssignedStrategy.php after processing
+    header('Location: journalAssignedStrategy.php');
     exit;
 } else {
     echo "Error: Invalid request method.";

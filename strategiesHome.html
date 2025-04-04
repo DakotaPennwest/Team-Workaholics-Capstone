@@ -1,132 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Strategies</title>
-    <link rel="stylesheet" href="styles/layoutwithnavbar.css">
-    <link rel="stylesheet" href="styles/stylevariables.css">
-    <link rel="stylesheet" href="styles/strategiesHome.css">
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Strategies</title>
+  <link rel="stylesheet" href="styles/layoutwithnavbar.css">
+  <link rel="stylesheet" href="styles/stylevariables.css">
+  <link rel="stylesheet" href="styles/strategiesHome.css">
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-    <!-- Back Wave -->
-    <div class="waves-container">
-        <img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
+  <!-- Back Wave -->
+  <div class="waves-container">
+    <img src="images/waveBack.svg" alt="Back Wave" class="wave back-wave">
+  </div>
+
+  <!-- Navigation Bar -->
+  <div class="navigation-bar">
+    <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
+      <img src="images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
+    </a>
+    <!-- Profile Picture Section -->
+    <div class="navigation-bar-profile-picture-section">
+      <img src="images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
     </div>
-
-    <!-- Navigation Bar -->
-    <div class="navigation-bar">
-        <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
-            <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
-        </a>
-        
-        <!-- Profile Picture Section -->
-        <div class="navigation-bar-profile-picture-section">
-            <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
-        </div>
-    
-        <!-- Profile Name Section -->
-        <div class="navigation-bar-user-name-section">
-            <p class="navigation-bar-user-first-name" id="userFirstName">Jason</p>
-        </div>
-
-        <!-- Links Background -->
-        <div class="navigation-bar-links-container">
-            <!-- Home Link -->
-            <a href="homepage.html" class="navigation-bar-link">
-                <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text">Home</span>
-            </a>
-            <!-- Journal Link -->
-            <a href="journalHome.html" class="navigation-bar-link">
-                <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text">Journal</span>
-            </a>
-            <!-- Strategies Link -->
-            <a href="#" class="navigation-bar-link">
-                <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text-selected">Strategies</span>
-            </a>
-            <!-- Progress Link -->
-            <a href="#" class="navigation-bar-link">
-                <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text">Progress</span>
-            </a>
-            <!-- Settings Link -->
-            <a href="#" class="navigation-bar-link">
-                <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text">Settings</span>
-             </a>
-        </div>
-
+    <!-- Profile Name Section -->
+    <div class="navigation-bar-user-name-section">
+      <p class="navigation-bar-user-first-name" id="userFirstName"><?php echo htmlspecialchars($_SESSION['username'] ?? 'User'); ?></p>
     </div>
+    <!-- Links Background -->
+    <div class="navigation-bar-links-container">
+      <a href="homepage.html" class="navigation-bar-link">
+        <img src="images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text">Home</span>
+      </a>
+      <a href="journalHome.html" class="navigation-bar-link">
+        <img src="images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text">Journal</span>
+      </a>
+      <a href="strategiesHome.html" class="navigation-bar-link">
+        <img src="images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text-selected">Strategies</span>
+      </a>
+      <a href="#" class="navigation-bar-link">
+        <img src="images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text">Progress</span>
+      </a>
+      <a href="#" class="navigation-bar-link">
+        <img src="images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text">Settings</span>
+      </a>
+    </div>
+  </div>
 
-    <!-- Top bar -->
-    <div class="top-bar">
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <!-- (Optional welcome message or other elements can be added here) -->
+    <h1 class="page-title">Your Current Strategy</h1>
+  </div>
 
-        <img src="./images/Cloud2.svg" alt="Cloud 2" class="cloud">
-
-        <!-- Title of Current Page-->
-        <h1 class="page-title">Strategies</h1>
-
-        <div class="journals-until-next-strat-counter">
-            <div class="journals-until-next-strat-text">Journals until <br> next strategy</div>
-            <div class="journals-until-next-strat-numnber" id="journalsUntilNextStrategy">3</div>
+  <!-- Main Screen Container -->
+  <div class="main-screen-container">
+    <div class="content-container">
+      <!-- Strategy Box -->
+      <a href="strategiesCurrentStrategy.html" class="home-page-box home-page-strategy-box">
+        <div class="home-page-box-status" id="currentStrategy">
+          Your current strategy is<br>
+          <u id="displayStrategyName">Loading...</u>
         </div>
-
-    </div>
-    
-    <!-- Main screen container -->
-    <div class="main-screen-container">
-
-        <!-- Container for Strategy Box -->
-        <div class="content-container">
-          
-            <div class="home-page-boxes-container">
-            
-                <!-- Strategy Box -->
-                <a href="strategiesCurrentStrategy.html" class="home-page-box home-page-strategy-box">
-                    <div class="home-page-box-status" id="currentStrategy">
-                        Your current strategy is<br>
-                        <u>4-7-8 Breathing</u>
-                    </div>
-                    <div class="home-page-box-text home-page-strategy-box-text" id="strategyDirection">
-                        Look at Current Strategy
-                    </div>
-                </a>
-
-            </div>
-                
+        <div class="home-page-box-text home-page-strategy-box-text" id="strategyDirection">
+          Look at Current Strategy
         </div>
-        
+      </a>
     </div>
+  </div>
 
-    <!-- Front and Middle Waves -->
-    <div class="waves-container">
-        <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
-        <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
-    </div>
-	
-<script>
-	/* When the DOM content is fully loaded, this script fetches user information from the server.
-    It then updates the element with id 'userFirstName' to display the username.
-    If there is an error during the fetch operation, it logs the error to the console. */
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('getUserInfo.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.username) {
-                        document.getElementById('userFirstName').textContent = data.username;
-						document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching user info:', error);
-                });
+  <!-- Front and Middle Waves -->
+  <div class="waves-container">
+    <img src="images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
+    <img src="images/waveFront.svg" alt="Front Wave" class="wave front-wave">
+  </div>
+
+  <!-- JavaScript to fetch and update the current strategy -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Fetch the assigned strategy from getAssignedStrategy.php
+      fetch('getAssignedStrategy.php')
+        .then(response => response.json())
+        .then(json => {
+          if (!json.success) {
+            console.error("Error fetching strategy:", json.message);
+            document.getElementById('displayStrategyName').textContent = "No strategy assigned";
+            return;
+          }
+          // Destructure the strategy details from the JSON response
+          const { strategy_name } = json.data;
+          // Update the DOM element to show the current strategy name
+          document.getElementById('displayStrategyName').textContent = strategy_name;
+        })
+        .catch(err => {
+          console.error("Error fetching assigned strategy:", err);
+          document.getElementById('displayStrategyName').textContent = "Error loading strategy";
         });
-    </script>
-    
 
+      // Also update the user info in the navbar
+      fetch('getUserInfo.php')
+        .then(response => response.json())
+        .then(data => {
+          if (data.username) {
+            document.getElementById('userFirstName').textContent = data.username;
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching user info:', error);
+        });
+    });
+  </script>
 </body>
 </html>
