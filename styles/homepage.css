@@ -140,7 +140,7 @@
     font-family: 'Nunito', sans-serif;
     font-style: normal;
     font-weight: 900;
-    font-size: 36px;
+    font-size: 30px;
     line-height: 45px;
     text-align: center;
     display: flex;
@@ -180,3 +180,62 @@
     align-content: center ;
     text-shadow: var(--box-text-drop-shadow); /* Use the text drop shadow variable */
 }
+
+#currentStrategyName {
+    text-decoration: var(--pure-white) wavy underline; /* Makes underline wavy */
+    text-underline-offset: 25%; /* lowers underline down 20% */
+    text-decoration-thickness: 10%; /* Makes underline a certain thickness*/
+}
+
+.journals-until-next-strat-counter {
+    position:absolute; /* Makes position relative to I believe top-bar-left*/
+    right: 6.5vh;
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center vertically */
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    padding: 0; /* Remove padding */
+    text-decoration: none;
+    height: 3.5vh; /* Adjust size relative to viewport height */
+    width: auto; /* Maintain aspect ratio */
+    pointer-events: none; /* Make it non-interactive */
+    user-select: none; /* Makes image not selectable*/
+}
+
+.journals-until-next-strat-text{
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 2vh;
+    line-height: 2.3vh;
+    color: var(--main-off-white);
+    font-style: italic;
+}
+
+.journals-until-next-strat-numnber{
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 6.2vh;
+    color: var(--main-off-white);
+    margin-left: 1vh;
+}
+
+.top-bar{
+    overflow: hidden;
+}
+
+/* Cloud styling */
+.cloudStrat {
+    position: absolute; /* Position relative to the main-screen-container */
+    right: -12vh;
+    top: -11vh;
+    height: auto; /* Maintain aspect ratio */
+    z-index: 0; /* Default z-index for clouds */
+    pointer-events: none; /* Make it non-interactive */
+    user-select: none; /* Makes image not selectable*/
+    width: 47vh;
+    opacity: 45%;
+    pointer-events: none; /* Make it non-interactive */
+    user-select: none; /* Makes image not selectable*/
+  }

@@ -57,13 +57,13 @@
     align-items: right; /* Align text bubbles to the left */
     margin: 25px;
     margin-right: 50px;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 /* The entire feedback form*/
 .feedback-form{
-    width: 850px;
-    height: 280px;
+    width: 880px;
+    height: 270px;
     background: var(--main-blue);
     border-radius: 30px;
     border-bottom-right-radius: 5px;
@@ -95,7 +95,7 @@
 /* Foreground (yellow) rectangle styling */
 .left-content-container {
     height: 100%;
-    width: 66.667%;
+    width: 62%;
     border-radius: 20px;
     position: relative; /* Position relative to the parent */
     z-index: 1; /* Ensure this rectangle appears on top */
@@ -125,7 +125,7 @@
 .right-content-container {
     position: relative;
     height: 100%;
-    width: 33.333%;
+    width: 38%;
     display: flex;
     flex-direction: column; /* Stack items vertically */
     z-index: 1; /* Ensure this rectangle appears on top */
@@ -154,7 +154,7 @@
     font-family: 'Nunito', sans-serif;
     font-style: normal;
     font-weight: 900;
-    font-size: 33px;
+    font-size: 26px;
     color: var(--pure-white);
     margin: 0px;
 }
@@ -192,7 +192,7 @@
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically if needed */
     margin: 50px;
-    margin-top: 30px;
+    margin-top: 15px;
     padding-bottom:45px;
 }
   

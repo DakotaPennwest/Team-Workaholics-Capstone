@@ -127,8 +127,22 @@ $emotionName = $_SESSION['emotion_name'] ?? 'excited';
             "Write about a time when you felt [emotion] before.",
             "What can you do next time you feel [emotion] to help yourself feel better?"
         ];
+
+        // Global variable to store the last prompt index. Need this to know what the index currently is so when we randomize, we can check it's new
+        let lastPromptIndex = -1;
+
         function setRandomPrompt() {
-            const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
+
+            let newIndex = Math.floor(Math.random() * prompts.length);
+            
+            if (prompts.length > 1) {
+                while (newIndex === lastPromptIndex) {
+                    newIndex = Math.floor(Math.random() * prompts.length);
+                }
+            }
+            lastPromptIndex = newIndex;
+
+            const randomPrompt = prompts[newIndex].replace(/\[emotion\]/g, "<?php echo addslashes($emotionName); ?>");
             // Replace [emotion] with the actual emotion name (escaped)
             document.getElementById('Prompt').innerText = randomPrompt.replace(/\[emotion\]/g, "<?php echo addslashes($emotionName); ?>");
         }

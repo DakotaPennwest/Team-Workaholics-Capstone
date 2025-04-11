@@ -9,6 +9,12 @@ document.addEventListener("DOMContentLoaded", function() {
         if (ratingEl) {
           ratingEl.textContent = ratingText;
         }
+
+        // Unhide the next button container
+        const nextButtonContainer = document.querySelector('.form-button-container');
+        if (nextButtonContainer) {
+          nextButtonContainer.classList.remove('hidden');
+        }
       }
     });
   });
@@ -29,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
       const assignedMessageEl = document.getElementById('assignedStrategyMessage');
       const assignedStrategyNameEl = document.getElementById('assignedStrategyName');
       const assignedStrategyNameFeedbackEl = document.getElementById('assignedStrategyNameFeedback');
+      const assignedStrategyNameFeedbackEl2 = document.getElementById('assignedStrategyNameFeedback2');
 
       if (strategyNameEl) {
         strategyNameEl.textContent = strategy_name;
@@ -47,6 +54,9 @@ document.addEventListener("DOMContentLoaded", function() {
       }
       if (assignedStrategyNameFeedbackEl) {
         assignedStrategyNameFeedbackEl.textContent = strategy_name;
+      }
+      if (assignedStrategyNameFeedbackEl2) {
+        assignedStrategyNameFeedbackEl2.textContent = strategy_name;
       }
     })
     .catch(err => {
