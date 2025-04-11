@@ -108,30 +108,30 @@ if (!$strategy) {
     <img src="./images/progressBar/progressBarFeedback.svg" alt="Progress" class="progress-bar">
   </div>
   <!-- Main Content -->
-  <div class="main-screen-container">
+ <div class="main-screen-container">
     <div class="content-container">
-      <!-- Chat Bubble -->
-      <div class="chat-bubble-container">
-        <div class="chat-bubble-from" id="assignedStrategyMessage">
-          Your assigned strategy is <u><?php echo htmlspecialchars($strategy['strategy_name']); ?></u>
-        </div>
-      </div>
-      <!-- Strategy Details -->
-      <div class="assigned-strategy-box">
-        <div class="left-content-container">
-          <div class="strategy-info-box">
-            <div class="strategy-info-strategy-name" id="strategyName">
-              <?php echo htmlspecialchars($strategy['strategy_name']); ?>
+        <div class="chat-bubble-container">
+            <div class="chat-bubble-from" id="assignedStrategyMessage">
+                Your assigned strategy is <u><?php echo htmlspecialchars($strategy['strategy_name']); ?></u>
             </div>
-            <div class="strategy-info-strategy-description" id="strategyDescription">
-              <?php echo htmlspecialchars($strategy['strategy_descript']); ?>
+            <div class="assigned-strategy-box">
+                <div class="left-content-container">
+                    <div class="strategy-info-box">
+                        <div class="strategy-info-strategy-name" id="strategyName">
+                            <?php echo htmlspecialchars($strategy['strategy_name']); ?>
+                        </div>
+                        <div class="strategy-info-strategy-description" id="strategyDescription">
+                            <?php echo htmlspecialchars($strategy['strategy_descript']); ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-content-container">
+                    <img src="<?php echo htmlspecialchars($strategy['strategy_image_url']); ?>" alt="Assigned Strategy Image" class="strategy-Steps">
+                </div>
             </div>
-          </div>
         </div>
-        <div class="right-content-container">
-          <img src="<?php echo htmlspecialchars($strategy['strategy_image_url']); ?>" alt="Assigned Strategy Image" class="strategy-Steps">
-        </div>
-      </div>
+    </div>
+</div>
       <!-- Hidden Form to Proceed to Final Journal Submission -->
       <div class="form-button-container">
         <form id="finalJournalForm" method="POST" action="saveJournalEntry.php">
