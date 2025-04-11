@@ -35,8 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     error_log("journaling.php - Journal entry count for emotion_id {$emotionId}: " . $entryCount);
 
     // Regardless of the journal entry count, always update the assignment cycle if necessary
-    if ($entryCount >= 4) {
+    if ($entryCount >= 5) {
         $updated = updateAssignmentCycle($db, $userId, $_SESSION['strategy_id']);
+        error_log("Current journal entry count: " . $entryCount);
         error_log("Assignment update triggered: " . ($updated ? "Yes" : "No"));
     }
 
