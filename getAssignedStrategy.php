@@ -39,7 +39,7 @@ if (isset($_SESSION['journalEntry']['emotionId']) && !empty($_SESSION['journalEn
     $_SESSION['strategy_id'] = 2;
     $_SESSION['strategy_name'] = 'Deep Breathing';
     $_SESSION['strategy_image_url'] = 'images/strategySteps/deepBreathing.png';
-    // Optionally, you might also want to set a default description:
+    // default description:
     $defaultStrategy = [
         'strategy_id' => 2,
         'strategy_name' => 'Deep Breathing',
@@ -80,7 +80,7 @@ if ($strategy) {
         'strategy_id' => 2,
         'strategy_name' => 'Deep Breathing',
         'strategy_image_url' => 'images/strategySteps/deepBreathing.png',
-        'strategy_descript' => 'Deep breathing helps calm your body and mind.'
+        'strategy_descript' => 'A technique involving controlled breathing to help manage anger.'
     ];
     echo json_encode(['success' => true, 'data' => $defaultStrategy]);
 }
