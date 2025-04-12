@@ -33,17 +33,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $entryCount = $stmtCount->fetchColumn();
     error_log("journaling.php - Journal entry count for emotion_id {$emotionId}: " . $entryCount);
 
-    // If the count is 4, then this submission will be the 5th entry.
-    if ($entryCount == 4) {
-        // Update the assignment cycle (this function will update the Assigned_Strategy table)
+     // Proceed with the assignment cycle update if the count is at threshold
+    if ($entryCount >= 5) {
         $updated = updateAssignmentCycle($db, $userId, $_SESSION['strategy_id']);
         error_log("Assignment update triggered: " . ($updated ? "Yes" : "No"));
-        header('Location: journalAssignedStrategy.php');
-    } else {
-        header('Location: strategiesCurrentStrategy.html');
     }
+
+    // Insert the journal entry into the database.
+    $sqlInsert = "INSERT INTO Journal_Entry (user_id, emotion_id, strategy_id, journal_content, emotional_intensity_rating) VALUES (?, ?, ?, ?, ?)";
+    $stmtInsert = $db->prepare($sqlInsert);
+    $stmtInsert->execute([$userId, $emotionId, $_SESSION['strategy_id'], $journalContent, $emotionalIntensityRating]);
+
+    // Always redirect to journalAssignedStrategy.php after processing
+    header('Location: journalAssignedStrategy.php');
     exit;
 } else {
+    // Handle error if this script is not accessed via POST
     echo "Error: Invalid request method.";
     exit;
 }
