@@ -12,13 +12,22 @@ if (!isset($_SESSION['user_id'], $_SESSION['strategy_id'])) {
 $userId = $_SESSION['user_id'];
 $strategyId = $_SESSION['strategy_id'];
 
-// Insert a new assignment record to mark the start of this cycle
-$sqlInsertAssignment = "
-    INSERT INTO Assigned_Strategy (user_id, strategy_id, assigned_start_date, is_current)
-    VALUES (?, ?, NOW(), 1)
-";
-$stmt = $db->prepare($sqlInsertAssignment);
-$stmt->execute([$userId, $strategyId]);
+//Check if there's an active assignment before inserting a new one
+// If not, insert a new assignment record to mark the start of this cycle
+$sqlCheckCurrent = "SELECT COUNT(*) FROM Assigned_Strategy WHERE user_id = ? AND strategy_id = ? AND is_current = 1";
+$stmtCheckCurrent = $db->prepare($sqlCheckCurrent);
+$stmtCheckCurrent->execute([$userId, $strategyId]);
+$hasCurrentAssignment = $stmtCheckCurrent->fetchColumn() > 0;
+
+if (!$hasCurrentAssignment) {
+    // Insert a new assignment record
+    $sqlInsertAssignment = "
+        INSERT INTO Assigned_Strategy (user_id, strategy_id, assigned_start_date, is_current)
+        VALUES (?, ?, NOW(), 1)
+    ";
+    $stmt = $db->prepare($sqlInsertAssignment);
+    $stmt->execute([$userId, $strategyId]);
+}
 
 // Store the new assignment id in the session (if needed later)
 $_SESSION['assignment_id'] = $db->lastInsertId();
