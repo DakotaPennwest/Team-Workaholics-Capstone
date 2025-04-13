@@ -27,14 +27,12 @@ $stmt->execute([
     $strategyId,
     $data['journalContent']
 ]);
+// Update the assignment cycle and check if it's the fifth entry
+$isFifthEntry = updateAssignmentCycle($db, $userId, $strategyId);
+error_log("saveJournalEntry.php - Is fifth entry: " . ($isFifthEntry ? "Yes" : "No"));
 
-// After insertion, call updateAssignmentCycle to check if this completes a cycle of 5 entries
-$assignmentUpdated = updateAssignmentCycle($db, $userId, $strategyId);
-error_log("saveJournalEntry.php - Assignment update result: " . ($assignmentUpdated ? "Updated" : "Not updated"));
-
-// Redirect based on whether a cycle was completed:
-// If updated (5 entries reached), send to feedback; otherwise, to the homepage.
-if ($assignmentUpdated) {
+// Redirect based on whether it's the fifth entry
+if ($isFifthEntry) {
     header('Location: journalStrategyFeedback.html');
 } else {
     header('Location: strategiesCurrentStrategy.html');
