@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Journal - Strategy Feedback</title>
+    <title>Journal</title>
     <link rel="stylesheet" href="styles/layoutwithnavbar.css">
     <link rel="stylesheet" href="styles/stylevariables.css">
     <link rel="stylesheet" href="styles/journalStrategyFeedback.css">
@@ -20,48 +20,49 @@
     <!-- Navigation Bar -->
     <div class="navigation-bar">
 
-      <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
-        <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
-      </a>
+        <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
+            <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
+        </a>
+        
 
-      <!-- Profile Picture Section -->
-      <div class="navigation-bar-profile-picture-section">
-        <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
-      </div>
-  
-      <!-- Profile Name Section -->
-      <div class="navigation-bar-user-name-section">
-        <p class="navigation-bar-user-first-name" id="userFirstName"><?php echo htmlspecialchars($_SESSION['username']); ?></p>
-      </div>
+        <!-- Profile Picture Section -->
+        <div class="navigation-bar-profile-picture-section">
+            <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
+        </div>
+    
+        <!-- Profile Name Section -->
+        <div class="navigation-bar-user-name-section">
+            <p class="navigation-bar-user-first-name" id="userFirstName">Jason</p>
+        </div>
 
-      <!-- Links Background -->
-      <div class="navigation-bar-links-container">
-          <!-- Home Link -->
-          <a href="homepage.html" class="navigation-bar-link">
-            <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
-            <span class="navigation-bar-link-text">Home</span>
-          </a>
-          <!-- Journal Link -->
-          <a href="journalHome.html" class="navigation-bar-link">
-            <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
-            <span class="navigation-bar-link-text-selected">Journal</span>
-          </a>
-          <!-- Strategies Link -->
-          <a href="strategiesHome.html" class="navigation-bar-link">
-            <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
-            <span class="navigation-bar-link-text">Strategies</span>
-          </a>
-          <!-- Progress Link -->
-          <a href="#" class="navigation-bar-link">
-            <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
-            <span class="navigation-bar-link-text">Progress</span>
-          </a>
-          <!-- Settings Link -->
-          <a href="#" class="navigation-bar-link">
-            <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
-            <span class="navigation-bar-link-text">Settings</span>
-          </a>
-      </div>
+        <!-- Links Background -->
+        <div class="navigation-bar-links-container">
+            <!-- Home Link -->
+            <a href="homepage.html" class="navigation-bar-link">
+                <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Home</span>
+            </a>
+            <!-- Journal Link -->
+            <a href="journalHome.html" class="navigation-bar-link">
+                <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text-selected">Journal</span>
+            </a>
+            <!-- Strategies Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Strategies</span>
+            </a>
+            <!-- Progress Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Progress</span>
+            </a>
+            <!-- Settings Link -->
+            <a href="#" class="navigation-bar-link">
+                <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
+                <span class="navigation-bar-link-text">Settings</span>
+             </a>
+        </div>
 
     </div>
 
@@ -93,13 +94,11 @@
             <!-- Chat Bubbles that direct the user what to do -->
             <div class="chat-bubble-container">
 
-                <div class="chat-bubble-from" id="assignedStrategyMessage">
-                  Your assigned strategy is <u id="assignedStrategyName">[Strategy Name]</u>
-                </div>
-
+                  <div class="chat-bubble-from" id="assignedStrategyMessage">
+          Your assigned strategy is <u id="assignedStrategyName">[Strategy Name]</u></div>
                 <div class="chat-bubble-from" id="askForFeedbackMessage">
-                  How <u>helpful</u> did you find <span id="assignedStrategyNameFeedback">[Strategy Name]</span>?
-                </div>
+          How <u>helpful</u> did you find <span id="assignedStrategyNameFeedback">[Strategy Name]</span>?
+        </div>
 
             </div>
             
@@ -134,8 +133,8 @@
     
                     <div class="right-content-container">
                         <div class="right-content-container-top">
-                            <div class="i-found-container" id="strategyNameQuestion">
-                                <h2>I found <br> <span id="assignedStrategyNameFeedback2">[Strategy Name]</span> </h2>
+                            <div class="i-found-container" id="strategyNameFeedbackE12">
+                              <h2>I found <br><span id="assignedStrategyNameFeedback2">[Strategy Name]</span></h2>
                             </div>
                         </div>
 
@@ -149,12 +148,15 @@
 
 
             <!-- next button -->
+            <!-- NOTE: This will need to be updated, however, I didn't want to try and do it
+                        myself and possibly mess it up so I just kept it as is for now.
+                                                                                 - Dakota -->
             <div class="form-button-container hidden">
-              <form id="feedbackForm" method="POST" action="processFeedback.php">
-                <input type="hidden" name="selectedEmotionName" id="selectedEmotionNameInput">
-                <input type="hidden" name="selectedEmotionValue" id="selectedEmotionValueInput">
-                <button class="form-button-next" type="submit">Next</button>
-              </form>
+                <form id="emotionForm" method="POST">
+                    <input type="hidden" name="selectedEmotionName" id="selectedEmotionNameInput">
+                    <input type="hidden" name="selectedEmotionValue" id="selectedEmotionValueInput">
+                    <button class="form-button-next" type="submit">Next</button>
+                </form>
             </div>
 
 		</div>
@@ -189,3 +191,4 @@
 	
 </body>
 </html>
+
