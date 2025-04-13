@@ -127,3 +127,222 @@ body {
 .front-wave {
     z-index: 3; /* Top wave */
 }
+
+
+/* Base styling for the help button */
+#helpButton {
+    position: fixed;
+    bottom: 3vh;
+    right: 3vh;
+    width: 6.5vh;
+    height: 6.5vh;
+    background-color: var(--side-bar-off-white);
+    border-radius: 1000vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 10;
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 3vh;
+    transform: scale(1);
+    color: var(--main-blue-subdued);
+    box-shadow: var(--main-shading-with-drop-shadow-scaled);
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* Hide the long help text by default */
+#helpButton .long {
+    display: none;
+}
+
+/* On hover, expand the button and swap text */
+#helpButton:hover {
+    width: 30vh;
+    transition: width 0.3s ease, transform 0.1s ease;
+}
+
+#helpButton:hover .short {
+    display: none;
+}
+
+#helpButton:hover .long {
+    display: inline;
+}
+
+#helpButton:active{
+    transform: scale(0.95);
+    color: var(--main-blue);
+    background-color: var(--main-off-white);
+}
+
+/* --- Help Modal Styles --- */
+
+/* The modal overlay */
+.help-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(3px); /* optional blur effect */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    box-shadow: var(--main-shading-with-drop-shadow-scaled);
+    font-family: 'Nunito', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+/* The modal content container */
+.help-modal-content {
+    position: relative;
+    background-color: var(--main-cyan-subdued);
+    padding: 2vh;
+    border-radius: 3vh;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: var(--main-shading-with-drop-shadow-scaled);
+    background-image: url('../images/suppliesbgpattern.png');
+    background-size: 64%;
+    background-repeat: repeat;
+}
+
+/* The help image styling – now a div with background image */
+.help-modal-image {
+    box-shadow: var(--main-shading-with-drop-shadow-scaled);
+    width: 100vh;
+    height: 56.25vh; /* Adjust as needed */
+    background-size: contain; /* or cover based on your design */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: var(--main-blue-subdued);
+    margin: 1.5vh;
+    border-radius: 1.8vh;
+    position: relative;
+}
+
+/* Close button (red circle with white X) */
+.help-modal-close {
+    position: absolute;
+    top: -2.5vh;
+    right: -2.5vh;
+    width: 8vh;
+    height: 8vh;
+    background-color: var(--main-red-subdued);
+    color: var(--pure-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 7vh;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: var(--main-shading-with-drop-shadow-scaled);
+    z-index: 300;
+}
+
+.help-modal-close:hover {
+    background-color: var(--main-red);
+    color: var(--main-yellow-bold);
+    box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow);
+}
+
+/* Navigation container for arrows and instructions */
+.help-modal-nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4vh;
+}
+
+/* Navigation arrows styled as circles */
+.help-modal-prev,
+.help-modal-next {
+    width: 8vh;
+    height: 8vh;
+    background-color: var(--main-green-subdued);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--main-shading-with-drop-shadow-scaled);
+    margin: 0 1vh;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Ensure the SVG arrows fill their container appropriately */
+.help-modal-prev img,
+.help-modal-next img {
+    width: 55%;
+    height: auto;
+    display: block;
+}
+
+/* Hover effect for arrows */
+.help-modal-prev:hover,
+.help-modal-next:hover {
+    background-color: var(--main-green);
+    box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow);
+}
+
+.help-modal-prev:active,
+.help-modal-next:active,
+.help-modal-close:active {
+    transform: scale(0.95);
+}
+
+/* Instructions text styled in a rounded rectangle */
+.help-modal-instructions {
+    font-size: 5vh;
+    color: var(--pure-white);
+    text-align: center;
+    background-color: rgb(47, 100, 150, 0.8);
+    padding: 1vh 3vh;
+    border-radius: 1000vh;
+    box-shadow: var(--main-shading-with-drop-shadow-scaled);
+}
+
+/* Dot container positioned over the bottom of the modal content */
+.help-modal-dots {
+    position: absolute;
+    bottom: 12.5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1vh;
+}
+
+/* Each dot (small circle) */
+.help-modal-dot {
+    width: 1.75vh;
+    height: 1.75vh;
+    background-color: var(--muted-blue-2);
+    border-radius: 1000vh;
+    box-shadow: var(--main-light-shading-pure-scaled);
+}
+
+/* Active dot is fully opaque */
+.help-modal-dot.active {
+    background-color: var(--main-yellow-bold);
+    box-shadow: var(--main-shading-with-drop-shadow-scaled);
+}

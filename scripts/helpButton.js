@@ -40,9 +40,6 @@ function preloadImageCount(folder) {
 // Open the help modal.
 async function openHelpModal() {
 
-  // We get the name of the current page from the url so we know what the name of the folder is
-  const currentFile = window.location.pathname.split('/').pop().split('.')[0];
-
   // We use the name we got to find the right folder that holds the manual images for current page
   const imageFolder = `./images/helpPictures/${currentFile}/`;
 
