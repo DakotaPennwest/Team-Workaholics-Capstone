@@ -86,7 +86,7 @@ CREATE TABLE Strategy_Feedback (
     assignment_id INT,
 -- This should automatically store the current date/time when a new row is made.
     feedback_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    rating INT CHECK (rating BETWEEN 1 AND 5), -- Ensures ratings are within 1-5
+    is_helpful BOOLEAN NOT NULL,
     comments TEXT, -- Allows detailed user feedback
     recommendation VARCHAR(255), -- Optional recommendations or notes
     FOREIGN KEY (assignment_id) REFERENCES Assigned_Strategy(assignment_id)
