@@ -9,7 +9,10 @@ document.addEventListener("DOMContentLoaded", function() {
         if (ratingEl) {
           ratingEl.textContent = ratingText;
         }
-
+        // Store the selected feedback in the hidden input
+          const feedbackValueInput = document.getElementById('selectedEmotionValueInput'); 
+          feedbackValueInput.value = this.value; // 'helpful' or 'unhelpful'
+        
         // Unhide the next button container
         const nextButtonContainer = document.querySelector('.form-button-container');
         if (nextButtonContainer) {
@@ -25,8 +28,8 @@ document.addEventListener("DOMContentLoaded", function() {
     .then(json => {
       if (!json.success) throw new Error(json.message);
       
-      // Expecting the JSON to include strategy_name, strategy_descript, and strategy_image_url
-      const { strategy_name, strategy_descript, strategy_image_url } = json.data;
+      // Expecting the JSON to include strategy_name, strategy_descript, and strategy_image_url, and assignment_id
+      const { assignment_id, strategy_name, strategy_descript, strategy_image_url } = json.data;
       
       // Update the elements
       const strategyNameEl = document.getElementById('strategyName');
@@ -58,6 +61,10 @@ document.addEventListener("DOMContentLoaded", function() {
       if (assignedStrategyNameFeedbackEl2) {
         assignedStrategyNameFeedbackEl2.textContent = strategy_name;
       }
+      // Capture assignment ID to send with feedback
+            if (assignmentIdInput) {
+                assignmentIdInput.value = assignment_id; // Set assignment ID from server response
+            }
     })
     .catch(err => {
       console.error('Error fetching assigned strategy:', err);
