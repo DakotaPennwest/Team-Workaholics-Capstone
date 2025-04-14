@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
 
         // Feedback submitted successfully, redirect the user
-        header("Location: homepage.html");
+        header("Location: strategiesCurrentStrategy.html");
         exit();
     } catch (PDOException $e) {
         // Catch any errors
