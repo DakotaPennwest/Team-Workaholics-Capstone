@@ -116,56 +116,57 @@
 
   <!-- JavaScript: Update Navbar, Current Strategy, and Journal Count -->
   <script>
-    // Update user info in the navbar
-    document.addEventListener("DOMContentLoaded", function() {
-      fetch('getUserInfo.php')
-        .then(response => response.json())
-        .then(data => {
-          if (data.username) {
-            document.getElementById('userFirstName').textContent = data.username;
-            document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching user info:', error);
-        });
-    });
-
-    // Update the current assigned strategy by querying the database
-    document.addEventListener("DOMContentLoaded", function() {
-      fetch('displayCurrentStrategy.php')
-        .then(response => response.json())
-        .then(json => {
-          if (json.success) {
-            // Update the element that shows the strategy name with the fetched data
-            document.getElementById("currentStrategyName").innerHTML = json.data.strategy_name;
-          } else {
-            console.error("Error fetching strategy: " + json.message);
-            document.getElementById("currentStrategyName").innerHTML = "Not Assigned";
-          }
-        })
-        .catch(err => {
-          console.error("Error fetching current strategy:", err);
-          document.getElementById("currentStrategyName").innerHTML = "Not Assigned";
-        });
-    });
-
-    // Update the journals counter using getJournalCount.php
-    document.addEventListener("DOMContentLoaded", function() {
-      fetch('getJournalCount.php')
-        .then(response => response.json())
-        .then(data => {
-          if (data.success) {
-            document.getElementById("journalsUntilNextStrategy").textContent = data.remaining;
-          } else {
-            console.error("Error fetching journal count: " + data.message);
-            document.getElementById("journalsUntilNextStrategy").textContent = "--";
-          }
-        })
-        .catch(err => {
-          console.error("Error fetching journal count:", err);
-          document.getElementById("journalsUntilNextStrategy").textContent = "--";
-        });
+   document.addEventListener("DOMContentLoaded", function() {
+        // Check if we need to force reload
+        if (window.localStorage && localStorage.getItem('reloadHomepage') === 'true') {
+            localStorage.removeItem('reloadHomepage');
+            // Force a reload from server, not cache
+            window.location.reload(true);
+            return;
+        }
+        
+        // Fetch user info
+        fetch('getUserInfo.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.username) {
+                    document.getElementById('userFirstName').textContent = data.username;
+                    document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user info:', error);
+            });
+        
+        // Fetch journal status and current strategy with cache-busting
+        fetch('getHomePageInfo.php?_=' + new Date().getTime())
+            .then(response => response.json())
+            .then(data => {
+                console.log("Received homepage data:", data); // Add debugging
+                
+                if (data.success) {
+                    // Update journal status
+                    const journalStatus = document.getElementById('journalStatus');
+                    const journalDirection = document.getElementById('journalDirection');
+                    
+                    if (data.journal_completed) {
+                        journalStatus.textContent = "You've completed your journal today!";
+                        journalDirection.textContent = "View Today's Journal";
+                    } else {
+                        journalStatus.textContent = "You haven't done your journal today";
+                        journalDirection.textContent = "Begin Journal!";
+                    }
+                    
+                    // Update strategy info
+                    const currentStrategy = document.getElementById('currentStrategy');
+                    if (currentStrategy) {
+                        currentStrategy.innerHTML = "Your current strategy is<br>" + data.strategy_name;
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching homepage info:', error);
+            });
     });
   </script>
 </body>
