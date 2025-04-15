@@ -29,31 +29,55 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 
-    // Check primary emotion counts on page load and on change
+   // Check primary emotion counts on page load
     const primaryButtons = document.querySelectorAll('.emotion-option.main input[type="radio"]');
-
-    // Function to check and update a primary emotion column
+    
     function checkPrimaryEmotion(button) {
-        const emotionValue = button.value;
-        fetch(`getEmotionCount.php?emotion=${emotionValue}`)
-            .then(response => response.json())
+        const emotionId = button.dataset.emotionid;
+        const emotionValue = button.value; // Get the emotion value (happy, sad, etc.)
+        
+        console.log("Checking emotion ID:", emotionId, "Value:", emotionValue);
+        
+        fetch(`getEmotionCount.php?emotion=${emotionId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
             .then(data => {
+                console.log("Fetched Data for emotion ID " + emotionId + ":", data);
+                
+                const parentColumn = button.closest('.emotion-column');
+                const secondaryEmotions = parentColumn.querySelectorAll('.emotion-option.secondary');
+                
+                // Show or hide secondary emotions based on the count
                 if (data.count >= 5) {
-                    const parentColumn = button.closest('.emotion-column');
-                    parentColumn.classList.remove('hide-secondary');
+                    console.log("Showing secondary emotions for:", emotionValue);
+                    secondaryEmotions.forEach(emotion => {
+                        emotion.style.display = 'flex';
+                    });
+                } else {
+                    console.log("Hiding secondary emotions for:", emotionValue);
+                    secondaryEmotions.forEach(emotion => {
+                        emotion.style.display = 'none';
+                    });
                 }
             })
             .catch(error => {
-                console.error('Error fetching emotion count:', error);
+                console.error("Error fetching emotion count:", error);
             });
     }
-
-    // Check for each primary emotion on page load
+    
+    // Check all primary emotions on page load
     primaryButtons.forEach(function(button) {
         checkPrimaryEmotion(button);
-        // Also add the change event in case the user makes a new selection
+        
+        // Add event listeners to primary buttons
         button.addEventListener('change', function() {
-            checkPrimaryEmotion(button);
+            if (this.checked) {
+                checkPrimaryEmotion(this);
+            }
         });
     });
 });
