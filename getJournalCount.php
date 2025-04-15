@@ -1,37 +1,36 @@
 <?php
 session_start();
-header('Content-Type: application/json');
-require_once 'db_connect.php';
 
-// Ensure the necessary session data is set
-if (!isset($_SESSION['user_id'], $_SESSION['strategy_id'])) {
-    echo json_encode(['success' => false, 'message' => 'Missing session data']);
+// Ensure the user is logged in (check for user_id)
+if (!isset($_SESSION['user_id'])) {
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'User not logged in']);
     exit;
 }
 
-$userId = $_SESSION['user_id'];
-$strategyId = $_SESSION['strategy_id'];
-
-// Query the database to count the journal entries for the current strategy
-$sql = "SELECT COUNT(*) FROM Journal_Entry WHERE user_id = ? AND strategy_id = ?";
-$stmt = $db->prepare($sql);
-$stmt->execute([$userId, $strategyId]);
-$count = $stmt->fetchColumn();
-
-// Compute remaining entries needed to reach a cycle of 5
-// For example, if threshold is 5 journal entries per cycle:
-$target = 5;
-$remaining = $target - ($count % $target);
-
-// Optionally, if exactly a multiple of the target you might want to show 0 (or trigger feedback)
-// Here, we assume if count is exactly a multiple (and > 0) then the cycle is complete.
-if ($count > 0 && $count % $target == 0) {
-    $remaining = 0;
+// Get emotion name from the session
+if (!isset($_SESSION['emotion_name'])) {
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'No emotion name in session']); // More specific error
+    exit;
 }
+$emotionName = $_SESSION['emotion_name']; // Use emotion_name from session
 
-echo json_encode([
-    'success' => true,
-    'count' => $count,
-    'remaining' => $remaining
-]);
+include_once 'db_connect.php';
+
+// Query to count the number of times the given emotion has been inserted for the logged-in user
+try {
+    // Correctly query the journal_entry table
+    $sql = "SELECT COUNT(*) AS count FROM Journal_Entry WHERE user_id = ? AND emotion_id = (SELECT emotion_id FROM Emotion WHERE emotion_name = ?)"; // Use emotion_id in both tables
+    $stmt = $db->prepare($sql);
+    $stmt->execute([$_SESSION['user_id'], $emotionName]); // Use emotionName from session (capitalized)
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    header('Content-Type: application/json');
+    echo json_encode(['count' => $result['count']]);
+} catch (PDOException $e) {
+    header('Content-Type: application/json');
+    echo json_encode(['error' => 'Query failed: ' . $e->getMessage()]);
+    exit;
+}
 ?>
