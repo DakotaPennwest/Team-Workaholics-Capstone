@@ -212,7 +212,7 @@
     text-decoration-thickness: 10%; 
 }
 
-/* Only hide secondary emotions when the column has the hide-secondary class */
+/* This controls if the secondary emotions are visible or not */
 .emotion-column.happiness.hide-secondary .emotion-option.secondary,
 .emotion-column.sadness.hide-secondary .emotion-option.secondary,
 .emotion-column.fear.hide-secondary .emotion-option.secondary,
@@ -220,7 +220,7 @@
 .emotion-column.surprise.hide-secondary .emotion-option.secondary,
 .emotion-column.disgust.hide-secondary .emotion-option.secondary,
 .emotion-column.neutral.hide-secondary .emotion-option.secondary {
-    visibility: hidden;
+        display: none;
 }
   
 
