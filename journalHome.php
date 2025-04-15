@@ -85,7 +85,14 @@ if (!isset($_SESSION['username'])) {
                 <!-- Journal Box -->
                 <a href="journalEmotionSelection.html" class="home-page-box home-page-journal-box">
                     <div class="home-page-box-status" id="journalStatus">
-                        You haven't done your journal today
+                      <?php
+                        // Update journal status based on completion
+                        if ($isJournalComplete) {
+                            echo "Good job! You've completed your journal today!";
+                        } else {
+                            echo "You haven't done your journal today.";
+                        }
+                        ?>
                     </div>
                     <div class="home-page-box-text home-page-journal-box-text" id="journalDirection">
                         Begin Journal!
@@ -112,22 +119,44 @@ if (!isset($_SESSION['username'])) {
 
     
     <script>
-		/* When the DOM content is fully loaded, this script fetches user information from the server.
-		It then updates the element with id 'userFirstName' to display the username.
-		If there is an error during the fetch operation, it logs the error to the console.*/
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('getUserInfo.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.username) {
-                        document.getElementById('userFirstName').textContent = data.username;
-						document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
+	//script to dynamically update the user's journaling status
+    document.addEventListener("DOMContentLoaded", function() {
+        // Fetch user info
+        fetch('getUserInfo.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.username) {
+                    document.getElementById('userFirstName').textContent = data.username;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user info:', error);
+            });
+        
+        // Fetch journal status with cache-busting
+        fetch('getHomePageInfo.php?_=' + new Date().getTime())
+            .then(response => response.json())
+            .then(data => {
+                console.log("Received journal home data:", data); // Add debugging
+                
+                if (data.success) {
+                    // Update journal status
+                    const journalStatus = document.getElementById('journalStatus');
+                    const journalDirection = document.getElementById('journalDirection');
+                    
+                    if (data.journal_completed) {
+                        journalStatus.textContent = "Good job! You've completed your journal today!";
+                        journalDirection.textContent = "View Today's Journal";
+                    } else {
+                        journalStatus.textContent = "You haven't done your journal today.";
+                        journalDirection.textContent = "Begin Journal!";
                     }
-                })
-                .catch(error => {
-                    console.error('Error fetching user info:', error);
-                });
-        });
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching homepage info:', error);
+            });
+    });
     </script>
 
 </body>
