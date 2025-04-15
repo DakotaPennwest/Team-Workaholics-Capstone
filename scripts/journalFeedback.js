@@ -1,76 +1,79 @@
 document.addEventListener("DOMContentLoaded", function() {
-  const feedbackRadios = document.querySelectorAll('input[name="feedback"]');
-  feedbackRadios.forEach(radio => {
-    radio.addEventListener('change', function() {
-      if (this.checked) {
-        const feedbackLabel = this.closest('label');
-        const ratingText = feedbackLabel.getAttribute('title');
-        const ratingEl = document.getElementById('selectedFeedbackRating');
-        if (ratingEl) {
-          ratingEl.textContent = ratingText;
-        }
-        // Store the selected feedback in the hidden input
-          const feedbackValueInput = document.getElementById('selectedEmotionValueInput'); 
-          feedbackValueInput.value = this.value; // 'helpful' or 'unhelpful'
-        
-        // Unhide the next button container
-        const nextButtonContainer = document.querySelector('.form-button-container');
-        if (nextButtonContainer) {
-          nextButtonContainer.classList.remove('hidden');
-        }
-      }
-    });
-  });
-
-  // Fetch the assigned coping strategy from the server
-  fetch('getAssignedStrategy.php')
-    .then(response => response.json())
-    .then(json => {
-      if (!json.success) throw new Error(json.message);
-      
-      // Expecting the JSON to include strategy_name, strategy_descript, and strategy_image_url, and assignment_id
-      const { assignment_id, strategy_name, strategy_descript, strategy_image_url } = json.data;
-      
-      // Update the elements
-      const strategyNameEl = document.getElementById('strategyName');
-      const strategyDescriptionEl = document.getElementById('strategyDescription');
-      const strategyImageEl = document.getElementById('strategyImage');
-      const assignedMessageEl = document.getElementById('assignedStrategyMessage');
-      const assignedStrategyNameEl = document.getElementById('assignedStrategyName');
-      const assignedStrategyNameFeedbackEl = document.getElementById('assignedStrategyNameFeedback');
-      const assignedStrategyNameFeedbackEl2 = document.getElementById('assignedStrategyNameFeedback2');
-
-      if (strategyNameEl) {
-        strategyNameEl.textContent = strategy_name;
-      }
-      if (strategyDescriptionEl) {
-        strategyDescriptionEl.textContent = strategy_descript;
-      }
-      if (strategyImageEl) {
-        strategyImageEl.src = strategy_image_url;
-      }
-      if (assignedMessageEl) {
-        assignedMessageEl.innerHTML = `Your assigned strategy is <u>${strategy_name}</u>`;
-      }
-      if (assignedStrategyNameEl) {
-        assignedStrategyNameEl.textContent = strategy_name;
-      }
-      if (assignedStrategyNameFeedbackEl) {
-        assignedStrategyNameFeedbackEl.textContent = strategy_name;
-      }
-      if (assignedStrategyNameFeedbackEl2) {
-        assignedStrategyNameFeedbackEl2.textContent = strategy_name;
-      }
-      // Capture assignment ID to send with feedback
-            if (assignmentIdInput) {
-                assignmentIdInput.value = assignment_id; // Set assignment ID from server response
+    const feedbackRadios = document.querySelectorAll('input[name="feedback"]');
+    const nextButtonContainer = document.querySelector('.form-button-container');
+    const assignmentIdInput = document.getElementById('assignmentIdInput');
+   const feedbackForm = document.getElementById('emotionForm');
+    
+    // Update the form action to use submitFeedback.php
+    if (feedbackForm) {
+        feedbackForm.action = 'submitFeedback.php';
+    }
+    
+    feedbackRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.checked) {
+                const feedbackLabel = this.closest('label');
+                const ratingText = feedbackLabel.getAttribute('title');
+                const ratingEl = document.getElementById('selectedFeedbackRating');
+                
+                if (ratingEl) {
+                    ratingEl.textContent = ratingText;
+                }
+                
+                // Store the selected feedback
+                if (selectedEmotionValueInput) {
+                    selectedEmotionValueInput.value = this.value;
+                }
+                
+                if (selectedEmotionNameInput) {
+                    selectedEmotionNameInput.value = ratingText;
+                }
+                
+                // Show the next button
+                if (nextButtonContainer) {
+                    nextButtonContainer.classList.remove('hidden');
+                }
             }
-    })
-    .catch(err => {
-      console.error('Error fetching assigned strategy:', err);
-      const assignedMessageEl = document.getElementById('assignedStrategyMessage');
-      if (assignedMessageEl) {
-        assignedMessageEl.textContent = 'Sorry — no coping strategy available right now.';
-      }
+        });
     });
+    
+    // Get strategy info from the session
+    fetch('getSessionStrategyInfo.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update strategy name in the UI
+                const strategyName = data.strategy_name;
+                const assignmentId = data.assignment_id;
+                
+                // Update the various strategy name elements
+                const strategyElements = [
+                    document.getElementById('assignedStrategyName'),
+                    document.getElementById('assignedStrategyNameFeedback'),
+                    document.getElementById('assignedStrategyNameFeedback2')
+                ];
+                
+                strategyElements.forEach(element => {
+                    if (element) {
+                        element.textContent = strategyName;
+                    }
+                });
+                
+                // Update the message
+                const messageElement = document.getElementById('assignedStrategyMessage');
+                if (messageElement) {
+                    messageElement.innerHTML = `Your assigned strategy is <u>${strategyName}</u>`;
+                }
+                
+                // Set the assignment ID for feedback
+                if (assignmentIdInput) {
+                    assignmentIdInput.value = assignmentId;
+                }
+            } else {
+                console.error('Error loading strategy information:', data.message);
+            }
+        })
+        .catch(err => {
+            console.error('Error fetching strategy:', err);
+        });
 });
