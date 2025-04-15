@@ -217,6 +217,12 @@ if (!$strategy) {
                   console.error('Error fetching user info:', error);
               });
       });
+      // Set flag to force reload of homepage on next visit
+    document.addEventListener('DOMContentLoaded', function() {
+        if (window.localStorage) {
+            localStorage.setItem('reloadHomepage', 'true');
+        }
+    });
   </script>
 </body>
 </html>
