@@ -89,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 
                 // Redirect to journal home
-                window.location.href = 'journalHome.html';
+                window.location.href = 'journalHome.php';
             </script>";
             exit();
         }
