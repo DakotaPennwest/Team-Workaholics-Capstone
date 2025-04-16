@@ -101,7 +101,7 @@ if (!$strategy) {
               <span class="navigation-bar-link-text">Home</span>
             </a>
             <!-- Journal Link -->
-            <a href="journalHome.html" class="navigation-bar-link">
+            <a href="journalHome.php" class="navigation-bar-link">
               <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
               <span class="navigation-bar-link-text-selected">Journal</span>
             </a>
