@@ -197,55 +197,10 @@ $mysqli->close();
     <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
 </div>
 
+<!-- download button functionality -->
+<script src="scripts/progressEmotionReportFull.js"></script>
+
 <script>
-    // Download icon functionality
-    const downloadIcon = document.getElementById('downloadIcon');
-    
-    // Download functionality for the table data
-    downloadIcon.addEventListener('click', () => {
-        // Get table data
-        const table = document.querySelector('table');
-        let csv = [];
-        const rows = table.querySelectorAll('tr');
-        
-        for (let i = 0; i < rows.length; i++) {
-            let row = [], cols = rows[i].querySelectorAll('td, th');
-            
-            for (let j = 0; j < cols.length; j++) {
-                // Replace any commas in the cell content to avoid CSV formatting issues
-                let text = cols[j].innerText.replace(/,/g, ' ');
-                row.push(text);
-            }
-            
-            csv.push(row.join(','));
-        }
-        
-        // Create CSV content
-        const csvContent = "data:text/csv;charset=utf-8," + csv.join('\n');
-        
-        // Create filename with current date
-        const date = new Date();
-        const dateStr = formatDate(date);
-        const fileName = `emotion_report_${dateStr}.csv`;
-        
-        // Create download link and click it
-        const encodedUri = encodeURI(csvContent);
-        const link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", fileName);
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    });
-    
-    // Utility function: format a Date object as YYYY-MM-DD (for CSV filename)
-    function formatDate(date) {
-        const year = date.getFullYear();
-        const month = ('0' + (date.getMonth() + 1)).slice(-2);
-        const day = ('0' + date.getDate()).slice(-2);
-        return `${year}-${month}-${day}`;
-    }
-    
     // Update navigation bar with user info
     document.addEventListener("DOMContentLoaded", function() {
         fetch('getUserInfo.php')
