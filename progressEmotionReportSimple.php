@@ -75,16 +75,17 @@ $coreQuery = "
 ";
 $coreResult = $mysqli->query($coreQuery);
 $coreRow = $coreResult->fetch_assoc();
-$mostCommonCoreCategory = $coreRow['emotion_core_category'];
+$mostCommonCoreCategory = $coreRow['emotion_core_category'] ?? 'None';
 
 
-// Determine Emoji Filenames
-// For the most commonly picked emotion, assume the emoji filename is the lower-case version 
-// of the emotion name with spaces removed, ending in ".svg".
+// determine Emoji Filenames
+// for the most commonly picked emotion, check if it's "None" first
 $mostPickedEmotionName = $mostCommonEmotion['emotion_name'] ?? 'None';
-$mostPickedEmotionEmoji = strtolower(str_replace(" ", "", $mostPickedEmotionName)) . ".svg";
+$mostPickedEmotionEmoji = ($mostPickedEmotionName === 'None') 
+    ? "noEmotionSelected.svg" 
+    : strtolower(str_replace(" ", "", $mostPickedEmotionName)) . ".svg";
 
-// For the most common core category, use a mapping array (update as needed).
+// for the most common core category, use a mapping array (update as needed).
 $coreCategoryEmojis = array(
     "Happiness" => "happy.svg",
     "Sadness"   => "sad.svg",
@@ -94,12 +95,15 @@ $coreCategoryEmojis = array(
     "Disgust"   => "disgusted.svg",
     "Neutral"   => "neutral.svg"
 );
-$mostCommonCoreCategory = $mostCommonCoreCategory ?? 'None';
-$mostCommonCoreCategoryEmoji = isset($coreCategoryEmojis[$mostCommonCoreCategory])
-    ? $coreCategoryEmojis[$mostCommonCoreCategory]
-    : "default.svg";
 
-// Set filter display text based on active filters
+// check if core category is None and set appropriate emoji
+$mostCommonCoreCategoryEmoji = ($mostCommonCoreCategory === 'None')
+    ? "noEmotionSelected.svg"
+    : (isset($coreCategoryEmojis[$mostCommonCoreCategory])
+        ? $coreCategoryEmojis[$mostCommonCoreCategory]
+        : "default.svg");
+
+// set filter display text based on active filters
 $filterFromDateText = "All Time";
 $filterToDateText = "";
 if ($start_date != "") {
@@ -111,7 +115,7 @@ if ($start_date != "") {
     $filterToDateText = "To: " . $end_date;
 }
 
-// Close the database connection.
+// close the database connection.
 $mysqli->close();
 ?>
 <!DOCTYPE html>
