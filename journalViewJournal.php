@@ -49,6 +49,38 @@ $mysqli->close();
 
 // retrieve username from session or default to "Unknown User"
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : "Unknown User";
+
+// Function to get the emotion emoji path based on emotion name
+function getEmotionEmojiPath($emotionName) {
+    // Map emotion names to their corresponding emoji file names
+    $emotionMap = [
+        'Happy' => 'happy.svg',
+        'Sad' => 'sad.svg',
+        'Angry' => 'angry.svg',
+        'Anxious' => 'anxious.svg',
+        'Hopeful' => 'hopeful.svg',
+        'Frustrated' => 'frustrated.svg',
+        'Content' => 'content.svg',
+        'Worried' => 'worried.svg',
+        'Excited' => 'excited.svg',
+        'Calm' => 'calm.svg',
+        'Lonely' => 'lonely.svg',
+        'Proud' => 'proud.svg',
+        // Add more emotions as needed
+    ];
+    
+    // Default emoji if the emotion doesn't match any in our map
+    $defaultEmoji = 'testEmoji.svg';
+    
+    // Return the mapped emoji or default if not found
+    $emojiFileName = isset($emotionMap[ucfirst($emotionName)]) ? $emotionMap[ucfirst($emotionName)] : $defaultEmoji;
+    
+    return "./images/emotions/" . $emojiFileName;
+}
+
+// Get the paths for the emotion emoji and intensity bar
+$emotionEmojiPath = getEmotionEmojiPath($journal['emotion_name']);
+$intensityBarPath = "./images/intensityBar/intensityBar" . $journal['emotional_intensity_rating'] . ".svg";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,18 +158,23 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : "Unknown User
                         <div class="left-content-inner-container-top">
                             <div class="left-content-inner-container-top-text">Chosen Emotion</div>
                             <div class="chosen-emotion-image-container">
-                                <!-- These images can be updated dynamically if needed -->
-                                <img src="./images/intensityBar/intensityBar3.svg" alt="selected intensity" class="selected-intensity-bar" id="selectedIntensityBar">
-                                <img src="./images/emotions/testEmoji.svg" alt="selected emotion emoji" class="selected-emotion-emoji" id="selectedEmotionEmoji">
+                                <!-- Use the dynamic intensity bar path -->
+                                <img src="<?php echo htmlspecialchars($intensityBarPath); ?>" alt="Intensity <?php echo htmlspecialchars($journal['emotional_intensity_rating']); ?>" class="selected-intensity-bar" id="selectedIntensityBar">
+                                <!-- Use the dynamic emotion emoji path -->
+                                <img src="<?php echo htmlspecialchars($emotionEmojiPath); ?>" alt="<?php echo htmlspecialchars($journal['emotion_name']); ?>" class="selected-emotion-emoji" id="selectedEmotionEmoji">
                             </div>
-                            <div class="left-content-inner-container-bottom-text" id="journalEmotion">
-                                <?php echo htmlspecialchars($journal['emotion_name']); ?>
+                            <div class="left-content-inner-container-bottom-text" 
+                                 id="journalEmotion"
+                                 data-base-emotion="<?php echo htmlspecialchars($journal['emotion_name']); ?>"
+                                 data-intensity="<?php echo intval($journal['emotional_intensity_rating']); ?>">
+                                <!-- will be replaced by JS -->
                             </div>
                         </div>
                         <div class="left-content-inner-container-bottom">
                             <div class="left-content-inner-container-top-text">Assigned Strategy</div>
                             <div class="strategy-image-container">
-                                <img src="./images/icons/strategyIconBigShaded.svg" alt="assigned strategy" class="assigned-strategy-image">
+                                <!-- Keep using the default strategy icon for all entries -->
+                                <img src="./images/icons/strategyIconBigShaded.svg" alt="Strategy" class="assigned-strategy-image">
                             </div>
                             <div class="left-content-inner-container-bottom-text" id="journalAssignedStrategy">
                                 <?php echo htmlspecialchars($journal['strategy_name']); ?>
@@ -171,10 +208,9 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : "Unknown User
         <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
     </div>
 
-    <script src="scripts/journalViewJournal.js"></script>
     <script>
-    // Update the navigation bar with user info.
     document.addEventListener("DOMContentLoaded", function() {
+        // fetch and fill user name
         fetch('getUserInfo.php')
             .then(response => response.json())
             .then(data => {
@@ -182,9 +218,43 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : "Unknown User
                     document.getElementById('userFirstName').textContent = data.username;
                 }
             })
-            .catch(error => {
-                console.error('Error fetching user info:', error);
-            });
+            .catch(console.error);
+
+        // download logic
+        document.getElementById('downloadIcon').addEventListener('click', function() {
+            const journalContent = document.getElementById('journalContent').innerText;
+            const journalDate = document.getElementById('journalDate').innerText;
+            const journalEmotion = document.getElementById('journalEmotion').innerText;
+            const journalStrategy = document.getElementById('journalAssignedStrategy').innerText;
+            const journalNumber = document.getElementById('journalNumber').innerText;
+            const content =
+                `${journalNumber}\n` +
+                `Date: ${journalDate}\n` +
+                `Emotion: ${journalEmotion}\n` +
+                `Strategy: ${journalStrategy}\n\n` +
+                `${journalContent}`;
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Journal_${journalDate.replace(/\//g, '-')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            }, 0);
+        });
+
+        // dynamic adjective prefix for emotion text
+        const levels = ['Barely', 'Somewhat', 'Moderately', 'Very', 'Extremely'];
+        const emotionEl = document.getElementById('journalEmotion');
+        const baseEmotion = emotionEl.dataset.baseEmotion || '';
+        const intensity = parseInt(emotionEl.dataset.intensity, 10);
+        // intensity ratings
+        const idx = Math.min(Math.max(intensity, 1), 5) - 1;
+        const adjective = levels[idx] || '';
+        emotionEl.textContent = adjective + (baseEmotion ? ' ' + baseEmotion : '');
     });
     </script>
     
