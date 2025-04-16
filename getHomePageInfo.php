@@ -3,6 +3,9 @@ session_start();
 header('Content-Type: application/json');
 require_once 'db_connect.php';
 
+// Set to local timezone
+date_default_timezone_set('America/New_York'); 
+
 if (!isset($_SESSION['user_id'])) {
     echo json_encode([
         'success' => false,
