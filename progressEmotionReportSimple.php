@@ -37,7 +37,6 @@ if ($end_date != "") {
     $dateClause .= " AND journal_entry.journal_date <= '$end_date'";
 }
 
-
 // Query: Most commonly picked emotion for the user (limited to date filter if applied).
 $emotionQuery = "
     SELECT e.emotion_name, e.emotion_id, e.emotion_core_category, COUNT(*) AS cnt
@@ -58,7 +57,7 @@ $totalResult = $mysqli->query($totalQuery);
 $totalRow = $totalResult->fetch_assoc();
 $totalEntries = (int)$totalRow['total'];
 
-// Calculate the percentage of times the most common emotion was chosen.
+// calculate the percentage of times the most common emotion was chosen.
 $percentChosen = ($totalEntries > 0)
     ? round(($mostCommonEmotion['cnt'] / $totalEntries) * 100)
     : 0;
@@ -82,7 +81,7 @@ $mostCommonCoreCategory = $coreRow['emotion_core_category'];
 // Determine Emoji Filenames
 // For the most commonly picked emotion, assume the emoji filename is the lower-case version 
 // of the emotion name with spaces removed, ending in ".svg".
-$mostPickedEmotionName = $mostCommonEmotion['emotion_name'];
+$mostPickedEmotionName = $mostCommonEmotion['emotion_name'] ?? 'None';
 $mostPickedEmotionEmoji = strtolower(str_replace(" ", "", $mostPickedEmotionName)) . ".svg";
 
 // For the most common core category, use a mapping array (update as needed).
@@ -95,9 +94,22 @@ $coreCategoryEmojis = array(
     "Disgust"   => "disgusted.svg",
     "Neutral"   => "neutral.svg"
 );
+$mostCommonCoreCategory = $mostCommonCoreCategory ?? 'None';
 $mostCommonCoreCategoryEmoji = isset($coreCategoryEmojis[$mostCommonCoreCategory])
     ? $coreCategoryEmojis[$mostCommonCoreCategory]
     : "default.svg";
+
+// Set filter display text based on active filters
+$filterFromDateText = "All Time";
+$filterToDateText = "";
+if ($start_date != "") {
+    $filterFromDateText = "From: " . $start_date;
+    if ($end_date != "") {
+        $filterToDateText = "To: " . $end_date;
+    }
+} else if ($end_date != "") {
+    $filterToDateText = "To: " . $end_date;
+}
 
 // Close the database connection.
 $mysqli->close();
@@ -178,8 +190,8 @@ $mysqli->close();
         </a>
 
         <div class="filter-button-container">
-            <div class="filter-dates-text" id="filterFromDate">All Time</div>
-            <div class="filter-dates-text" id="filterToDate"></div>
+            <div class="filter-dates-text" id="filterFromDate"><?php echo $filterFromDateText; ?></div>
+            <div class="filter-dates-text" id="filterToDate"><?php echo $filterToDateText; ?></div>
             <button class="filter-button" id="openFilterButton">Filter</button>
         </div>
     </div>
@@ -220,7 +232,9 @@ $mysqli->close();
                                     <div class="emotion-emoji-name" id="mostPickedEmotionName"><?php echo htmlspecialchars($mostPickedEmotionName); ?></div>
                                 </div>
 
-                                <div class="left-content-inner-container-bottom-text" id="mostCommonEmotionTimesPicked">Picked <?php echo $mostCommonEmotion['cnt']; ?> Times</div>
+                                <div class="left-content-inner-container-bottom-text" id="mostCommonEmotionTimesPicked">
+                                    Picked <?php echo isset($mostCommonEmotion['cnt']) ? $mostCommonEmotion['cnt'] : '0'; ?> Times
+                                </div>
 
                             </div>
 
@@ -247,7 +261,7 @@ $mysqli->close();
             </div>
 
             <div class="button-container">
-                <button class="go-to-full-report-button" onclick="window.location.href='progressEmotionReportFull.php'">Go to Full Report</button>
+                <button class="go-to-full-report-button" id="goToFullReportButton">Go to Full Report</button>
             </div>
 
         </div>
@@ -276,10 +290,10 @@ $mysqli->close();
                 <div class="date-filter-container">
                     <div class="date-filter-section">
                         <label for="startDate">Start Date:</label>
-                        <input type="date" id="startDate">
+                        <input type="date" id="startDate" value="<?php echo $start_date; ?>">
                         
                         <label for="endDate">End Date:</label>
-                        <input type="date" id="endDate">
+                        <input type="date" id="endDate" value="<?php echo $end_date; ?>">
                     </div>
                 </div>
 
@@ -303,26 +317,31 @@ $mysqli->close();
     </div>
 
     <script>
-        // Grab modal elements
+        // grab modal elements
         const openFilterBtn = document.getElementById('openFilterButton');
         const filterModal = document.getElementById('filterModal');
         const applyFilterButton = document.getElementById('applyFilterButton');
         const cancelFilterButton = document.getElementById('cancelFilterButton');
         const clearFiltersButton = document.getElementById('clearFiltersButton');
+        const goToFullReportButton = document.getElementById('goToFullReportButton');
         
-        // Date input fields
+        // date input fields
         const startDateInput = document.getElementById('startDate');
         const endDateInput = document.getElementById('endDate');
         
-        // Default date option buttons
+        // default date option buttons
         const optionLastMonth = document.getElementById('optionLastMonth');
         const optionLast3Months = document.getElementById('optionLast3Months');
         const optionLast6Months = document.getElementById('optionLast6Months');
         const optionLastYear = document.getElementById('optionLastYear');
         
-        // Elements to update with the selected dates
+        // elements to update with the selected dates
         const filterFromDateText = document.getElementById('filterFromDate');
         const filterToDateText = document.getElementById('filterToDate');
+        
+        // current filter values
+        let currentStartDate = "<?php echo $start_date; ?>";
+        let currentEndDate = "<?php echo $end_date; ?>";
         
         // Utility function: format a Date object as YYYY-MM-DD (for input[type="date"] value)
         function formatDate(date) {
@@ -332,7 +351,7 @@ $mysqli->close();
           return `${year}-${month}-${day}`;
         }
         
-        // Default option event listeners
+        // default option event listeners
         optionLastMonth.addEventListener('click', () => {
           const today = new Date();
           const startDate = new Date(today);
@@ -365,20 +384,26 @@ $mysqli->close();
           endDateInput.value = formatDate(today);
         });
         
-        // Open the modal when the Filter button is clicked
+        // open the modal when the Filter button is clicked
         openFilterBtn.addEventListener('click', () => {
           filterModal.style.display = 'block';
         });
         
-        // "Apply/Close" button: update the text elements and close the modal
+        // "apply/Close" button: update the text elements and close the modal
         applyFilterButton.addEventListener('click', () => {
           const startDateVal = startDateInput.value;
           const endDateVal = endDateInput.value;
-          filterFromDateText.innerText = "From: " + (startDateVal ? startDateVal : "Not set");
-          filterToDateText.innerText = "To: " + (endDateVal ? endDateVal : "Not set");
+          
+          // validate dates
+          if (startDateVal && endDateVal && new Date(endDateVal) < new Date(startDateVal)) {
+            alert("End date cannot be before start date.");
+            return;
+          }
+          
+          // close the modal
           filterModal.style.display = 'none';
-          // Reload the page with the date filter values as GET parameters.
-          // Here, we redirect to the same page with the new parameters.
+          
+          // reload the page with the date filter values as GET parameters
           let urlParams = new URLSearchParams(window.location.search);
           if (startDateVal) {
               urlParams.set('start_date', startDateVal);
@@ -393,12 +418,11 @@ $mysqli->close();
           window.location.search = urlParams.toString();
         });
         
-        // "Cancel" button: update the text elements and close the modal
+        // "Cancel" button: close the modal without applying filters
         cancelFilterButton.addEventListener('click', () => {
-          const startDateVal = startDateInput.value;
-          const endDateVal = endDateInput.value;
-          filterFromDateText.innerText = "From: " + (startDateVal ? startDateVal : "Not set");
-          filterToDateText.innerText = "To: " + (endDateVal ? endDateVal : "Not set");
+          // restore previous values
+          startDateInput.value = currentStartDate;
+          endDateInput.value = currentEndDate;
           filterModal.style.display = 'none';
         });
         
@@ -408,68 +432,19 @@ $mysqli->close();
           endDateInput.value = "";
           window.location.search = "";
         });
-      
-        // Pagination variables and functions
-        const rowsPerPage = 10;
-        let currentPage = 1;
-        const tableElem = document.querySelector(".table-container table");
-        const tbodyElem = tableElem.querySelector("tbody");
-        const rows = Array.from(tbodyElem.querySelectorAll("tr"));
-        let totalPages = Math.ceil(rows.length / rowsPerPage);
         
-        const prevBtn = document.getElementById("prevBtn");
-        const nextBtn = document.getElementById("nextBtn");
-        const pageInfo = document.getElementById("pageInfo");
-        
-        function showPage(page) {
-          if (rows.length === 0) {
-              pageInfo.textContent = "No entries found";
-              prevBtn.disabled = true;
-              nextBtn.disabled = true;
-              return;
+        // full Report button: navigate to the full report with current filters
+        goToFullReportButton.addEventListener('click', () => {
+          // construct URL with current filter parameters
+          let url = "progressEmotionReportFull.php";
+          let urlParams = new URLSearchParams(window.location.search);
+          if (urlParams.toString()) {
+            url += "?" + urlParams.toString();
           }
-          
-          rows.forEach(row => row.style.display = "none");
-          
-          const start = (page - 1) * rowsPerPage;
-          const end = start + rowsPerPage;
-          
-          rows.slice(start, end).forEach(row => row.style.display = "");
-          
-          pageInfo.textContent = "Page " + page + " of " + totalPages;
-          prevBtn.disabled = (page === 1);
-          nextBtn.disabled = (page === totalPages);
-        }
-        
-        prevBtn.addEventListener("click", () => {
-          if (currentPage > 1) {
-              currentPage--;
-              showPage(currentPage);
-          }
-        });
-        
-        nextBtn.addEventListener("click", () => {
-          if (currentPage < totalPages) {
-              currentPage++;
-              showPage(currentPage);
-          }
-        });
-        
-        showPage(currentPage);
-
-        // *** New: Add validation for date selection ***
-        // Prevent form submission if end date is before start date.
-        const filterForm = document.getElementById('filterForm');
-        filterForm.addEventListener('submit', function(event) {
-          const startDate = document.getElementById('startDate').value;
-          const endDate = document.getElementById('endDate').value;
-          if(startDate && endDate && new Date(endDate) < new Date(startDate)) {
-              alert("End date cannot be before start date.");
-              event.preventDefault();
-          }
+          window.location.href = url;
         });
 
-        // Update navigation bar with user info.
+        // update navigation bar with user info.
         document.addEventListener("DOMContentLoaded", function() {
             fetch('getUserInfo.php')
                 .then(response => response.json())
