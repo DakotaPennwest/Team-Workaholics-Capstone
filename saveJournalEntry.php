@@ -34,7 +34,7 @@ try {
                 localStorage.removeItem('homepageData');
                 localStorage.setItem('reloadHomepage', 'true');
             }
-            window.location.href = 'journalHome.html';
+            window.location.href = 'journalHome.php';
         </script>";
         exit();
     }
@@ -68,7 +68,7 @@ try {
         unset($_SESSION['journalEntry']);
         
         // Determine redirect based on entry count
-        $redirectPage = 'journalHome.html'; // Default redirect
+        $redirectPage = 'journalHome.php'; // Default redirect
         
         // Check if it's the first entry
         if ($entryCount == 1) {
@@ -128,14 +128,14 @@ try {
         // Failed to insert entry
         error_log("Failed to insert journal entry for user $userId");
         echo "<script>
-            window.location.href = 'journalHome.html';
+            window.location.href = 'journalHome.php';
         </script>";
         exit();
     }
 } catch (PDOException $e) {
     error_log("Database error in saveJournalEntry.php: " . $e->getMessage());
     echo "<script>
-        window.location.href = 'journalHome.html';
+        window.location.href = 'journalHome.php';
     </script>";
     exit();
 }
