@@ -50,6 +50,16 @@ $emotionQuery = "
 $emotionResult = $mysqli->query($emotionQuery);
 $mostCommonEmotion = $emotionResult->fetch_assoc();
 
+// prevent null errors
+if ($mostCommonEmotion === null) {
+    $mostCommonEmotion = [
+        'emotion_name'          => null,
+        'emotion_id'            => null,
+        'emotion_core_category' => null,
+        'cnt'                   => 0
+    ];
+}
+
 
 // Query: Total number of journal entries for the user (within date filter).
 $totalQuery = "SELECT COUNT(*) AS total FROM journal_entry WHERE user_id = $currentUserId $dateClause";
@@ -75,6 +85,15 @@ $coreQuery = "
 ";
 $coreResult = $mysqli->query($coreQuery);
 $coreRow = $coreResult->fetch_assoc();
+
+// prevent null errors
+if ($coreRow === null) {
+    $coreRow = [
+        'emotion_core_category' => null,
+        'cnt'                   => 0
+    ];
+}
+
 $mostCommonCoreCategory = $coreRow['emotion_core_category'];
 
 
@@ -82,7 +101,9 @@ $mostCommonCoreCategory = $coreRow['emotion_core_category'];
 // For the most commonly picked emotion, assume the emoji filename is the lower-case version 
 // of the emotion name with spaces removed, ending in ".svg".
 $mostPickedEmotionName = $mostCommonEmotion['emotion_name'] ?? 'None';
-$mostPickedEmotionEmoji = strtolower(str_replace(" ", "", $mostPickedEmotionName)) . ".svg";
+$mostPickedEmotionEmoji = isset($mostCommonEmotion['emotion_name'])
+    ? strtolower(str_replace(' ', '', $mostPickedEmotionName)) . '.svg'
+    : 'noEmotionSelected.svg';
 
 // For the most common core category, use a mapping array (update as needed).
 $coreCategoryEmojis = array(
@@ -97,7 +118,7 @@ $coreCategoryEmojis = array(
 $mostCommonCoreCategory = $mostCommonCoreCategory ?? 'None';
 $mostCommonCoreCategoryEmoji = isset($coreCategoryEmojis[$mostCommonCoreCategory])
     ? $coreCategoryEmojis[$mostCommonCoreCategory]
-    : "default.svg";
+    : "noEmotionSelected.svg";
 
 // Set filter display text based on active filters
 $filterFromDateText = "All Time";
