@@ -91,40 +91,53 @@
     <img src="images/waveFront.svg" alt="Front Wave" class="wave front-wave">
   </div>
 
-  <!-- JavaScript to fetch and update the current strategy -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      // Fetch the assigned strategy from getAssignedStrategy.php
-      fetch('getAssignedStrategy.php')
-        .then(response => response.json())
-        .then(json => {
-          if (!json.success) {
-            console.error("Error fetching strategy:", json.message);
-            document.getElementById('displayStrategyName').textContent = "No strategy assigned";
-            return;
-          }
-          // Destructure the strategy details from the JSON response
-          const { strategy_name } = json.data;
-          // Update the DOM element to show the current strategy name
-          document.getElementById('displayStrategyName').textContent = strategy_name;
-        })
-        .catch(err => {
-          console.error("Error fetching assigned strategy:", err);
-          document.getElementById('displayStrategyName').textContent = "Error loading strategy";
-        });
-
-      // Also update the user info in the navbar
-      fetch('getUserInfo.php')
+  <!-- JavaScript to fetch and update the current strategy and Journal count -->
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+    // Check if we need to force reload
+    if (window.localStorage && localStorage.getItem('reloadHomepage') === 'true') {
+        localStorage.removeItem('reloadHomepage');
+        // Force a reload from server, not cache
+        window.location.reload(true);
+        return;
+    }
+    
+    // Fetch user info
+    fetch('getUserInfo.php')
         .then(response => response.json())
         .then(data => {
-          if (data.username) {
-            document.getElementById('userFirstName').textContent = data.username;
-          }
+            if (data.username) {
+                document.getElementById('userFirstName').textContent = data.username;
+            }
         })
         .catch(error => {
-          console.error('Error fetching user info:', error);
+            console.error('Error fetching user info:', error);
         });
-    });
-  </script>
+    
+    // Fetch strategy info with cache-busting
+    fetch('getStrategyInfo.php?_=' + new Date().getTime())
+        .then(response => response.json())
+        .then(data => {
+            console.log("Received strategy data:", data); // Add debugging
+            
+            if (data.success) {
+                // Update strategy name
+                const strategyName = document.getElementById('strategyName');
+                if (strategyName) {
+                    strategyName.textContent = data.strategy_name;
+                }
+                
+                // Update journals until next strategy
+                const journalsUntilNext = document.getElementById('journalsUntilNextStrategy');
+                if (journalsUntilNext) {
+                    journalsUntilNext.textContent = data.entries_until_next;
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching strategy info:', error);
+        });
+});
+    </script>
 </body>
 </html>
