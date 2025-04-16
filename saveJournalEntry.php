@@ -5,7 +5,7 @@ require_once 'updateAssignment.php'; // To update assignment cycle if needed
 
 // Ensure necessary session data exists
 if (!isset($_SESSION['user_id'], $_SESSION['journalEntry'])) {
-    header('Location: journalHome.html'); // Redirect if not logged in
+    header('Location: homepage.html'); // Redirect if not logged in
     exit;
 }
 
@@ -34,7 +34,7 @@ try {
                 localStorage.removeItem('homepageData');
                 localStorage.setItem('reloadHomepage', 'true');
             }
-            window.location.href = 'journalHome.php';
+            window.location.replace('homepage.html');
         </script>";
         exit();
     }
@@ -120,22 +120,22 @@ try {
                 localStorage.setItem('reloadHomepage', 'true');
             }
             
-            // Continue with redirect
-            window.location.href = '$redirectPage';
+            // Use replace instead of href to prevent the # fragment issue
+            window.location.replace('$redirectPage');
         </script>";
         exit();
     } else {
         // Failed to insert entry
         error_log("Failed to insert journal entry for user $userId");
         echo "<script>
-            window.location.href = 'journalHome.php';
+            window.location.replace('homepage.html');
         </script>";
         exit();
     }
 } catch (PDOException $e) {
     error_log("Database error in saveJournalEntry.php: " . $e->getMessage());
     echo "<script>
-        window.location.href = 'journalHome.php';
+        window.location.replace('homepage.html');
     </script>";
     exit();
 }
