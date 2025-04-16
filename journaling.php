@@ -5,7 +5,7 @@ require_once 'updateAssignment.php'; // This file contains the updateAssignmentC
 
 // Ensure required session data is available
 if (!isset($_SESSION['user_id'], $_SESSION['journalEntry']['emotionId'], $_SESSION['strategy_id'])) {
-    header('Location: journalHome.html');
+    header('Location: journalHome.php');
     exit;
 }
 
