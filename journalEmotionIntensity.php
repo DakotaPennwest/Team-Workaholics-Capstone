@@ -47,7 +47,7 @@ $emotionId    = $_SESSION['journalEntry']['emotionId'] ?? '1';
         <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
         <span class="navigation-bar-link-text">Strategies</span>
       </a>
-      <a href="#" class="navigation-bar-link">
+      <a href="progressHome.html" class="navigation-bar-link">
         <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
         <span class="navigation-bar-link-text">Progress</span>
       </a>
