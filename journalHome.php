@@ -57,7 +57,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="navigation-bar-link-text">Strategies</span>
             </a>
             <!-- Progress Link -->
-            <a href="#" class="navigation-bar-link">
+            <a href="progressHome.html" class="navigation-bar-link">
                 <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Progress</span>
             </a>
