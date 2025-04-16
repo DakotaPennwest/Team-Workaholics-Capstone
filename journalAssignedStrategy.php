@@ -4,7 +4,7 @@ require_once 'db_connect.php';
 
 // Ensure user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header('Location: journalHome.html');
+    header('Location: journalHome.php');
     exit;
 }
 
