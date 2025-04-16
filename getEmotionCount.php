@@ -1,40 +1,42 @@
 <?php
-session_start();
+session_start(); // Start the session
+header('Content-Type: application/json'); // Set content type to JSON
 
-// Ensure the user is logged in
+// Ensure that the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header('Content-Type: application/json');
     echo json_encode(['error' => 'User not logged in']);
     exit;
 }
 
-// Check if the 'emotion' parameter is provided in the URL
+// Check if the 'emotion' parameter (which will be the emotion_id) is provided in the URL
 if (!isset($_GET['emotion'])) {
-    header('Content-Type: application/json');
-    echo json_encode(['error' => 'No emotion provided']);
+    echo json_encode(['error' => 'No emotion ID provided']);
     exit;
 }
 
-$emotion = $_GET['emotion'];
+// Retrieve the emotion_id from the query string
+$emotionId = $_GET['emotion'];
 
-// Include your existing database connection
-include_once 'db_connect.php';
+// Include database connection
+require_once 'db_connect.php';
 
-// Query to count the number of times the given emotion has been inserted for the logged-in user
 try {
-    // Adjust the table and column names as necessary
-    $sql = "SELECT COUNT(*) AS count FROM user_emotions WHERE user_id = :user_id AND emotion = :emotion";
+    // Query to count the number of journal entries for the given user_id and emotion_id
+    $sql = "SELECT COUNT(*) AS count 
+            FROM Journal_Entry 
+            WHERE user_id = ? AND emotion_id = ?";
+    
+    // Prepare and execute the query
     $stmt = $db->prepare($sql);
-    $stmt->execute([
-        ':user_id' => $_SESSION['user_id'],
-        ':emotion' => $emotion,
-    ]);
+    $stmt->execute([$_SESSION['user_id'], $emotionId]);
+
+    // Fetch the result
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    header('Content-Type: application/json');
-    echo json_encode(['count' => $result['count']]);
+    // Return the count as JSON response
+    echo json_encode(['success' => true, 'count' => (int)$result['count']]);
 } catch (PDOException $e) {
-    header('Content-Type: application/json');
+    // Handle any potential SQL errors gracefully
     echo json_encode(['error' => 'Query failed: ' . $e->getMessage()]);
     exit;
 }
