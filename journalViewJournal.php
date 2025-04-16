@@ -208,6 +208,9 @@ $intensityBarPath = "./images/intensityBar/intensityBar" . $journal['emotional_i
         <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
     </div>
 
+    <!-- download button functionality -->
+    <script src="scripts/journalViewJournal.js"></script>
+    
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         // fetch and fill user name
@@ -220,31 +223,6 @@ $intensityBarPath = "./images/intensityBar/intensityBar" . $journal['emotional_i
             })
             .catch(console.error);
 
-        // download logic
-        document.getElementById('downloadIcon').addEventListener('click', function() {
-            const journalContent = document.getElementById('journalContent').innerText;
-            const journalDate = document.getElementById('journalDate').innerText;
-            const journalEmotion = document.getElementById('journalEmotion').innerText;
-            const journalStrategy = document.getElementById('journalAssignedStrategy').innerText;
-            const journalNumber = document.getElementById('journalNumber').innerText;
-            const content =
-                `${journalNumber}\n` +
-                `Date: ${journalDate}\n` +
-                `Emotion: ${journalEmotion}\n` +
-                `Strategy: ${journalStrategy}\n\n` +
-                `${journalContent}`;
-            const blob = new Blob([content], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `Journal_${journalDate.replace(/\//g, '-')}.txt`;
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(() => {
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-            }, 0);
-        });
 
         // dynamic adjective prefix for emotion text
         const levels = ['Barely', 'Somewhat', 'Moderately', 'Very', 'Extremely'];
