@@ -4,6 +4,9 @@ if (!isset($_SESSION['username'])) {
     header('Location: login.php'); // Redirect to login page if not logged in
     exit();
 }
+
+// Set JavaScript variable based on session data
+$isJournalComplete = isset($_SESSION['journalEntry']['journal_entry_id']);
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +60,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="navigation-bar-link-text">Strategies</span>
             </a>
             <!-- Progress Link -->
-            <a href="progressHome.html" class="navigation-bar-link">
+            <a href="#" class="navigation-bar-link">
                 <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Progress</span>
             </a>
@@ -83,16 +86,23 @@ if (!isset($_SESSION['username'])) {
           
             <div class="home-page-boxes-container">
                 <!-- Journal Box -->
-                <a href="journalEmotionSelection.html" class="home-page-box home-page-journal-box" id="journalPageLink">
+                <a href="journalEmotionSelection.html" class="home-page-box home-page-journal-box">
                     <div class="home-page-box-status" id="journalStatus">
-                        You haven't done your journal today
+                      <?php
+                        // Update journal status based on completion
+                        if ($isJournalComplete) {
+                            echo "Good job! You've completed your journal today!";
+                        } else {
+                            echo "You haven't done your journal today.";
+                        }
+                        ?>
                     </div>
                     <div class="home-page-box-text home-page-journal-box-text" id="journalDirection">
                         Begin Journal!
                     </div>
                 </a>
                 <!-- All Journals Box -->
-                <a href="journalAllJournalsTable.php" class="home-page-box home-page-all-journal-box">
+                <a href="#" class="home-page-box home-page-all-journal-box">
                     <div class="home-page-box-status" id="currentUserAllJournals">
                         All your journals
                     </div>
@@ -110,9 +120,8 @@ if (!isset($_SESSION['username'])) {
         <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
     </div>
 
-    
-    <script>
-	//script to dynamically update the user's journaling status
+<script>
+//script to dynamically update the user's journaling status
     document.addEventListener("DOMContentLoaded", function() {
         // Fetch user info
         fetch('getUserInfo.php')
@@ -136,16 +145,13 @@ if (!isset($_SESSION['username'])) {
                     // Update journal status
                     const journalStatus = document.getElementById('journalStatus');
                     const journalDirection = document.getElementById('journalDirection');
-                    const journalPageLink = document.getElementById('journalPageLink');
                     
                     if (data.journal_completed) {
-                        journalStatus.textContent = "You've completed your journal today!";
+                        journalStatus.textContent = "Good job! You've completed your journal today!";
                         journalDirection.textContent = "View Today's Journal";
-                        journalPageLink.href = "journalAllJournalsTable.php";
                     } else {
                         journalStatus.textContent = "You haven't done your journal today.";
                         journalDirection.textContent = "Begin Journal!";
-                        journalPageLink.href = "journalEmotionSelection.html";
                     }
                 }
             })
@@ -153,7 +159,7 @@ if (!isset($_SESSION['username'])) {
                 console.error('Error fetching homepage info:', error);
             });
     });
-    </script>
-
+</script>
+  
 </body>
 </html>
