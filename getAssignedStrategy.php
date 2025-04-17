@@ -11,98 +11,102 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $userId = $_SESSION['user_id'];
+error_log("===== GET ASSIGNED STRATEGY =====");
+error_log("USER ID: $userId");
 
-// Try to get the emotion ID from the journal entry in session
-if (isset($_SESSION['journalEntry']['emotionId']) && !empty($_SESSION['journalEntry']['emotionId'])) {
-    $emotionId = $_SESSION['journalEntry']['emotionId'];
-} else {
-    // If emotion ID is not set, try to get the last assigned strategy AND assignment ID
-    $sql = "SELECT asg.strategy_id, asg.assignment_id 
-            FROM Assigned_Strategy asg
-            WHERE asg.user_id = ? 
-            ORDER BY asg.assigned_start_date DESC 
-            LIMIT 1";
-    $stmt = $db->prepare($sql);
-    $stmt->execute([$userId]);
-    $lastAssignment = $stmt->fetch(PDO::FETCH_ASSOC); // Fetch associative array
+// First, check if the user has any current assigned strategy
+$sqlCheckCurrent = "SELECT a.strategy_id, a.assignment_id, cs.strategy_name, cs.strategy_image AS strategy_image_url, cs.strategy_descript
+                  FROM Assigned_Strategy a
+                  JOIN Coping_Strategy cs ON a.strategy_id = cs.strategy_id
+                  WHERE a.user_id = :user_id AND a.is_current = 1
+                  ORDER BY a.assigned_start_date DESC
+                  LIMIT 1";
+$stmtCheckCurrent = $db->prepare($sqlCheckCurrent);
+$stmtCheckCurrent->bindParam(':user_id', $userId, PDO::PARAM_INT);
+$stmtCheckCurrent->execute();
+$currentStrategy = $stmtCheckCurrent->fetch(PDO::FETCH_ASSOC);
 
-    if ($lastAssignment) {
-        $lastStrategyId = $lastAssignment['strategy_id'];
-        $assignmentId = $lastAssignment['assignment_id']; // Get assignment ID
-
-        // Set strategy in session and fetch its details
-        $_SESSION['strategy_id'] = $lastStrategyId;
-        $sql2 = "SELECT strategy_name, strategy_image AS strategy_image_url, strategy_descript 
-                 FROM Coping_Strategy 
-                 WHERE strategy_id = ?";
-        $stmt2 = $db->prepare($sql2);
-        $stmt2->execute([$lastStrategyId]);
-        $strategyData = $stmt2->fetch(PDO::FETCH_ASSOC);
-
-        if ($strategyData) {
-            $strategyData['assignment_id'] = $assignmentId; // Add assignment ID
-            $_SESSION['strategy_name'] = $strategyData['strategy_name'];
-            $_SESSION['strategy_image_url'] = $strategyData['strategy_image_url'];
-            echo json_encode(['success' => true, 'data' => $strategyData]);
-            exit;
-        }
-    }
-
-    // Default to Deep Breathing if no emotion or last assignment is found
-    //  AND create a new assignment (you might need to adjust how this new assignment is tracked)
-    $_SESSION['strategy_id'] = 2;
-    $_SESSION['strategy_name'] = 'Deep Breathing';
-    $_SESSION['strategy_image_url'] = 'images/strategySteps/deepBreathing.png';
+// If user has a current strategy, return it
+if ($currentStrategy) {
+    error_log("FOUND CURRENT STRATEGY: " . $currentStrategy['strategy_name']);
     
-    // For simplicity, assuming assignment ID 0 for default strategy.  
-    $defaultStrategy = [
-        'strategy_id' => 2,
-        'strategy_name' => 'Deep Breathing',
-        'strategy_image_url' => 'images/strategySteps/deepBreathing.png',
-        'strategy_descript' => 'Deep breathing helps calm your body and mind.',
-        'assignment_id' => 0  // Placeholder: Needs proper assignment tracking for defaults!
-    ];
-    echo json_encode(['success' => true, 'data' => $defaultStrategy]);
+    // Update session with the current strategy information
+    $_SESSION['strategy_id'] = $currentStrategy['strategy_id'];
+    $_SESSION['strategy_name'] = $currentStrategy['strategy_name'];
+    $_SESSION['strategy_image_url'] = $currentStrategy['strategy_image_url'];
+    
+    echo json_encode(['success' => true, 'data' => $currentStrategy]);
     exit;
 }
 
-// If an emotionId is available, query the coping strategy AND assignment ID for that emotion
-$sql = "SELECT cs.strategy_id,
-               cs.strategy_name,
-               cs.strategy_image AS strategy_image_url,
-               cs.strategy_descript,
-               asg.assignment_id  -- Select assignment ID
-        FROM Coping_Strategy AS cs
-        JOIN Emotional_Strategy_Link AS esl ON cs.strategy_id = esl.strategy_id
-        LEFT JOIN Assigned_Strategy AS asg ON cs.strategy_id = asg.strategy_id AND asg.user_id = :userId -- Assuming user_id link
-        WHERE esl.emotion_id = :emotionId
-        ORDER BY asg.assigned_start_date DESC  -- Get the most recent assignment, if any
-        LIMIT 1";
-
-$stmt = $db->prepare($sql);
-$stmt->execute([':emotionId' => $emotionId, ':userId' => $userId]);
-$strategy = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if ($strategy) {
-    // Update session with the fetched strategy details
-    $_SESSION['strategy_id'] = $strategy['strategy_id'];
-    $_SESSION['strategy_name'] = $strategy['strategy_name'];
-    $_SESSION['strategy_image_url'] = $strategy['strategy_image_url'];
-    echo json_encode(['success' => true, 'data' => $strategy]);
-} else {
-    // If no strategy is found for the given emotion, default to Deep Breathing
-    //  AND create a new assignment (you might need to adjust how this new assignment is tracked).
-    $_SESSION['strategy_id'] = 2;
-    $_SESSION['strategy_name'] = 'Deep Breathing';
-    $_SESSION['strategy_image_url'] = 'images/strategySteps/deepBreathing.png';
-    $defaultStrategy = [
-        'strategy_id' => 2,
-        'strategy_name' => 'Deep Breathing',
-        'strategy_image_url' => 'images/strategySteps/deepBreathing.png',
-        'strategy_descript' => 'Deep breathing helps calm your body and mind.',
-        'assignment_id' => 0  // Placeholder: Needs proper assignment tracking for defaults
-    ];
-    error_log("No strategy found for emotion_id {$emotionId}. Defaulting to Deep Breathing.");
-    echo json_encode(['success' => true, 'data' => $defaultStrategy]);
+// If there's no current strategy, check if we need to assign one based on the latest emotion
+if (isset($_SESSION['journalEntry']['emotionId']) && !empty($_SESSION['journalEntry']['emotionId'])) {
+    $emotionId = $_SESSION['journalEntry']['emotionId'];
+    error_log("FOUND EMOTION ID IN SESSION: $emotionId");
+    
+    // Get a strategy for this emotion
+    $sqlGetStrategy = "SELECT cs.strategy_id, cs.strategy_name, cs.strategy_image AS strategy_image_url, cs.strategy_descript
+                      FROM Emotional_Strategy_Link esl
+                      JOIN Coping_Strategy cs ON esl.strategy_id = cs.strategy_id
+                      WHERE esl.emotion_id = :emotion_id
+                      ORDER BY RAND()
+                      LIMIT 1";
+    $stmtGetStrategy = $db->prepare($sqlGetStrategy);
+    $stmtGetStrategy->bindParam(':emotion_id', $emotionId, PDO::PARAM_INT);
+    $stmtGetStrategy->execute();
+    $strategy = $stmtGetStrategy->fetch(PDO::FETCH_ASSOC);
+    
+    if ($strategy) {
+        error_log("FOUND STRATEGY FOR EMOTION: " . $strategy['strategy_name']);
+        
+        // Check journal entries count to decide if we should assign this strategy
+        $sqlCount = "SELECT COUNT(*) FROM Journal_Entry WHERE user_id = :user_id";
+        $stmtCount = $db->prepare($sqlCount);
+        $stmtCount->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmtCount->execute();
+        $entryCount = $stmtCount->fetchColumn();
+        
+        error_log("USER HAS $entryCount JOURNAL ENTRIES");
+        
+        // Only assign on first entry (subsequent assignments handled by saveJournalEntry.php)
+        if ($entryCount == 0) {
+            error_log("FIRST ENTRY - ASSIGNING STRATEGY");
+            
+            // Create new assignment
+            $sqlInsert = "INSERT INTO Assigned_Strategy (user_id, strategy_id, assigned_start_date, is_current)
+                        VALUES (:user_id, :strategy_id, NOW(), 1)";
+            $stmtInsert = $db->prepare($sqlInsert);
+            $stmtInsert->bindParam(':user_id', $userId, PDO::PARAM_INT);
+            $stmtInsert->bindParam(':strategy_id', $strategy['strategy_id'], PDO::PARAM_INT);
+            $stmtInsert->execute();
+            
+            $assignmentId = $db->lastInsertId();
+            error_log("CREATED ASSIGNMENT ID: $assignmentId");
+            $strategy['assignment_id'] = $assignmentId;
+            
+            // Update session
+            $_SESSION['strategy_id'] = $strategy['strategy_id'];
+            $_SESSION['strategy_name'] = $strategy['strategy_name'];
+            $_SESSION['strategy_image_url'] = $strategy['strategy_image_url'];
+            
+            echo json_encode(['success' => true, 'data' => $strategy]);
+            exit;
+        }
+    }
 }
+
+// If we reach here, the user has no assigned strategy and we shouldn't auto-assign one
+error_log("NO STRATEGY ASSIGNED AND NOT ASSIGNING ONE");
+
+// Return "Not assigned" status
+$notAssignedResponse = [
+    'strategy_id' => null,
+    'strategy_name' => 'No strategy assigned',
+    'strategy_image_url' => '',
+    'strategy_descript' => 'Complete your first journal entry to get a coping strategy!',
+    'assignment_id' => null
+];
+
+echo json_encode(['success' => true, 'data' => $notAssignedResponse]);
+exit;
 ?>
