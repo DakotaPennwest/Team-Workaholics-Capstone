@@ -82,7 +82,7 @@
             
             <div class="home-page-boxes-container">
                 <!-- Journal Box -->
-                <a href="journalEmotionSelection.html" class="home-page-box home-page-journal-box">
+                <a href="journalEmotionSelection.html" class="home-page-box home-page-journal-box" id="journalPageLink">
                     <div class="home-page-box-status" id="journalStatus">
                         You haven't done your journal today
                     </div>
@@ -94,10 +94,10 @@
                 <a href="strategiesCurrentStrategy.html" class="home-page-box home-page-strategy-box">
                     <div class="home-page-box-status" id="currentStrategy">
                         Your current strategy is<br>
-                        Meditation
+                        Loading
                     </div>
                     <div class="home-page-box-text home-page-strategy-box-text" id="strategyDirection">
-                        Look at<br>Current Strategy
+                        Look at Current Strategy
                     </div>
                 </a>
             </div>
@@ -143,13 +143,16 @@
                     // Update journal status
                     const journalStatus = document.getElementById('journalStatus');
                     const journalDirection = document.getElementById('journalDirection');
+                    const journalPageLink = document.getElementById('journalPageLink');
                     
                     if (data.journal_completed) {
                         journalStatus.textContent = "You've completed your journal today!";
                         journalDirection.textContent = "View Today's Journal";
+                        journalPageLink.href = "journalAllJournalsTable.php";
                     } else {
                         journalStatus.textContent = "You haven't done your journal today";
                         journalDirection.textContent = "Begin Journal!";
+                        journalPageLink.href = "journalEmotionSelection.html";
                     }
                     
                     // Update strategy info

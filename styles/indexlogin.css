@@ -157,6 +157,10 @@
     text-decoration-thickness: 10%; 
 }
 
+.create-account-button:active {
+  transform: scale(0.95);
+}
+
 /* Container for the button and the text above it */
 .button-container {
   display: flex;
@@ -290,6 +294,10 @@
   color: var(--main-yellow-bold);
   background-color: var(--main-red);
   box-shadow: 0 0 0 4px var(--main-yellow-bold), var(--main-shading-with-drop-shadow); /* Add a yellow outline and default shading */ 
+}
+
+.form-button:active{
+  transform: scale(0.95);
 }
 
 

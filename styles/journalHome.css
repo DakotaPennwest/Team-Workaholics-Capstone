@@ -88,6 +88,10 @@
     text-decoration-thickness: 10%; /* Makes underline a certain thickness*/
 }
 
+.home-page-box:active{ 
+    transform: scale(0.97);
+}
+
 /* Shared text container styles */
 .home-page-box-text {
     position: absolute;
@@ -97,7 +101,7 @@
     font-family: 'Nunito', sans-serif;
     font-style: normal;
     font-weight: 900;
-    font-size: 36px;
+    font-size: 27px;
     line-height: 45px;
     text-align: center;
     display: flex;
