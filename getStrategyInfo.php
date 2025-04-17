@@ -44,11 +44,15 @@ try {
     // Calculate journals until next strategy (mod 5)
     $entriesUntilNext = 5 - ($entryCount % 5);
     if ($entriesUntilNext == 5) {
-        $entriesUntilNext = 0; // If they just got a new strategy
+        $entriesUntilNext = 5; // If they just got a new strategy(changed from 0)
     }
     
     $response['total_entries'] = $entryCount;
     $response['entries_until_next'] = $entriesUntilNext;
+    
+	 
+    // Debug log
+    error_log("getStrategyInfo.php - Total entries: $entryCount, Entries until next: $entriesUntilNext");
     
     echo json_encode($response);
     
