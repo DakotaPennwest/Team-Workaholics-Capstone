@@ -2,22 +2,26 @@ document.addEventListener("DOMContentLoaded", function() {
     const feedbackRadios = document.querySelectorAll('input[name="feedback"]');
     const nextButtonContainer = document.querySelector('.form-button-container');
     const assignmentIdInput = document.getElementById('assignmentIdInput');
-   const feedbackForm = document.getElementById('emotionForm');
+    const feedbackForm = document.getElementById('emotionForm');
+    const selectedEmotionValueInput = document.getElementById('selectedEmotionValueInput');
+    const selectedEmotionNameInput = document.getElementById('selectedEmotionNameInput');
+    const selectedFeedbackRating = document.getElementById('selectedFeedbackRating');
     
     // Update the form action to use submitFeedback.php
     if (feedbackForm) {
         feedbackForm.action = 'submitFeedback.php';
     }
     
+    // Handle feedback selection
     feedbackRadios.forEach(radio => {
         radio.addEventListener('change', function() {
             if (this.checked) {
                 const feedbackLabel = this.closest('label');
                 const ratingText = feedbackLabel.getAttribute('title');
-                const ratingEl = document.getElementById('selectedFeedbackRating');
                 
-                if (ratingEl) {
-                    ratingEl.textContent = ratingText;
+                // Update the display
+                if (selectedFeedbackRating) {
+                    selectedFeedbackRating.textContent = ratingText;
                 }
                 
                 // Store the selected feedback
@@ -68,12 +72,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Set the assignment ID for feedback
                 if (assignmentIdInput) {
                     assignmentIdInput.value = assignmentId;
+                    console.log("Setting assignment ID:", assignmentId);
                 }
             } else {
                 console.error('Error loading strategy information:', data.message);
             }
         })
         .catch(err => {
-            console.error('Error fetching strategy:', err);
+            console.error('Error fetching strategy info:', err);
         });
 });
