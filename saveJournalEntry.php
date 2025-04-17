@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once 'db_connect.php';
-require_once 'updateAssignment.php'; // To update assignment cycle if needed
 
 // Ensure necessary session data exists
 if (!isset($_SESSION['user_id'], $_SESSION['journalEntry'])) {
@@ -14,8 +13,34 @@ $userId = $_SESSION['user_id']; // Current user ID
 $strategyId = isset($_SESSION['strategy_id']) ? $_SESSION['strategy_id'] : null; // Current strategy ID
 
 try {
-    // Check for duplicate entries in journal_entry table
-    $sqlCheck = "SELECT COUNT(*) FROM Journal_Entry WHERE user_id = :user_id AND emotion_id = :emotion_id AND journal_content = :journal_content";
+    // Add debug logging
+    error_log("===== SAVE JOURNAL ENTRY =====");
+    error_log("USER ID: $userId");
+    error_log("EMOTION ID: " . $data['emotionId']);
+    error_log("INTENSITY: " . $data['emotionalIntensityRating']);
+    error_log("STRATEGY ID FROM SESSION: " . ($strategyId ? $strategyId : "NULL"));
+    
+    // If no strategy ID in session, get the current one from database
+    if (!$strategyId) {
+        $sqlCurrent = "SELECT strategy_id FROM Assigned_Strategy 
+                      WHERE user_id = :user_id AND is_current = 1 
+                      ORDER BY assigned_start_date DESC LIMIT 1";
+        $stmtCurrent = $db->prepare($sqlCurrent);
+        $stmtCurrent->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmtCurrent->execute();
+        $strategyId = $stmtCurrent->fetchColumn();
+        
+        if ($strategyId) {
+            error_log("FOUND CURRENT STRATEGY ID IN DATABASE: $strategyId");
+            $_SESSION['strategy_id'] = $strategyId;
+        } else {
+            error_log("NO CURRENT STRATEGY FOUND IN DATABASE");
+        }
+    }
+    
+    // Check for duplicate entries
+    $sqlCheck = "SELECT COUNT(*) FROM Journal_Entry 
+               WHERE user_id = :user_id AND emotion_id = :emotion_id AND journal_content = :journal_content";
     $stmtCheck = $db->prepare($sqlCheck);
     $stmtCheck->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $stmtCheck->bindParam(':emotion_id', $data['emotionId'], PDO::PARAM_INT);
@@ -24,12 +49,9 @@ try {
     $duplicateExists = $stmtCheck->fetchColumn() > 0;
 
     if ($duplicateExists) {
-        // Clear the session data if duplicate exists
+        error_log("DUPLICATE ENTRY DETECTED - REDIRECTING TO HOMEPAGE");
         unset($_SESSION['journalEntry']);
-        unset($_SESSION['strategy_id']);
-        
         echo "<script>
-            // Clear any cached homepage data
             if (window.localStorage) {
                 localStorage.removeItem('homepageData');
                 localStorage.setItem('reloadHomepage', 'true');
@@ -39,7 +61,21 @@ try {
         exit();
     }
 
-    // Insert the new journal entry if no duplicates exist
+    // Get current entry count BEFORE inserting
+    $sqlCount = "SELECT COUNT(*) FROM Journal_Entry WHERE user_id = :user_id";
+    $stmtCount = $db->prepare($sqlCount);
+    $stmtCount->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $stmtCount->execute();
+    $currentEntryCount = $stmtCount->fetchColumn();
+    
+    // New count will be current count + 1
+    $newEntryCount = $currentEntryCount + 1;
+    
+    error_log("CURRENT ENTRY COUNT: $currentEntryCount");
+    error_log("NEW ENTRY COUNT WILL BE: $newEntryCount");
+    
+    // INSERT THE JOURNAL ENTRY
+    error_log("INSERTING JOURNAL ENTRY WITH STRATEGY ID: $strategyId");
     $sqlInsert = "
         INSERT INTO Journal_Entry 
           (user_id, emotion_id, emotional_intensity_rating, strategy_id, journal_content, journal_date)
@@ -52,88 +88,65 @@ try {
     $stmtInsert->bindParam(':strategy_id', $strategyId, PDO::PARAM_INT);
     $stmtInsert->bindParam(':journal_content', $data['journalContent'], PDO::PARAM_STR);
     $stmtInsert->execute();
-
+    
     if ($stmtInsert->rowCount() > 0) {
-        // Get the current count of journal entries for this user
-        $sqlCount = "SELECT COUNT(*) FROM Journal_Entry WHERE user_id = :user_id";
-        $stmtCount = $db->prepare($sqlCount);
-        $stmtCount->bindParam(':user_id', $userId, PDO::PARAM_INT);
-        $stmtCount->execute();
-        $entryCount = $stmtCount->fetchColumn(); // Total entries for this user
+        error_log("JOURNAL ENTRY INSERTED SUCCESSFULLY");
         
-        // Store the entry count in session for use in feedback page
-        $_SESSION['entry_count'] = $entryCount;
+        // Determine if this is a 5th entry (including the one we just inserted)
+        $isFifthEntry = ($newEntryCount % 5 == 0 && $newEntryCount > 0);
         
-        // Clear session data after successful insertion
+        error_log("IS FIFTH ENTRY: " . ($isFifthEntry ? "YES" : "NO"));
+        
+        // Clear session data
         unset($_SESSION['journalEntry']);
         
-        // Determine redirect based on entry count
-        $redirectPage = 'journalHome.php'; // Default redirect
+        // Determine where to redirect
+        $redirectPage = 'journalHome.php'; // Default
         
-        // Check if it's the first entry
-        if ($entryCount == 1) {
-            // For first entry, assign a strategy
-            $sqlGetStrategy = "SELECT strategy_id FROM Coping_Strategy ORDER BY RAND() LIMIT 1";
-            $stmtGetStrategy = $db->prepare($sqlGetStrategy);
-            $stmtGetStrategy->execute();
-            $newStrategyId = $stmtGetStrategy->fetchColumn();
+        // Handle 5th entry redirect for feedback
+        if ($isFifthEntry) {
+            error_log("FIFTH ENTRY - PREPARING FOR FEEDBACK");
             
-            // Insert the assignment
-            $sqlInsertAssignment = "INSERT INTO Assigned_Strategy (user_id, strategy_id, assigned_start_date, is_current)
-                                   VALUES (:user_id, :strategy_id, NOW(), 1)";
-            $stmtInsertAssignment = $db->prepare($sqlInsertAssignment);
-            $stmtInsertAssignment->bindParam(':user_id', $userId, PDO::PARAM_INT);
-            $stmtInsertAssignment->bindParam(':strategy_id', $newStrategyId, PDO::PARAM_INT);
-            $stmtInsertAssignment->execute();
-            
-            // Redirect to show the new strategy
-            $redirectPage = 'strategiesCurrentStrategy.html';
-        }
-        // Check if it's a multiple of 5 (5th, 10th, 15th, etc.)
-        else if ($entryCount % 5 == 0) {
-            // Get current strategy assignment ID for feedback
+            // Get assignment ID for feedback
             $sqlGetAssignment = "SELECT assignment_id FROM Assigned_Strategy 
-                                WHERE user_id = :user_id AND is_current = 1";
+                                WHERE user_id = :user_id AND is_current = 1 
+                                ORDER BY assigned_start_date DESC LIMIT 1";
             $stmtGetAssignment = $db->prepare($sqlGetAssignment);
             $stmtGetAssignment->bindParam(':user_id', $userId, PDO::PARAM_INT);
             $stmtGetAssignment->execute();
             $assignmentId = $stmtGetAssignment->fetchColumn();
             
             if ($assignmentId) {
-                // Store assignment ID in session for feedback
+                error_log("SETTING UP FEEDBACK FOR ASSIGNMENT ID: $assignmentId");
                 $_SESSION['current_assignment_id'] = $assignmentId;
                 $_SESSION['needs_new_strategy'] = true;
-                
-                // Redirect to feedback page
                 $redirectPage = 'journalStrategyFeedback.html';
             } else {
-                // If no current assignment found, assign a new strategy and redirect
-                $redirectPage = 'strategiesCurrentStrategy.html';
+                error_log("NO CURRENT ASSIGNMENT FOUND FOR FEEDBACK");
             }
         }
         
-        // Use JavaScript to handle the redirect with localStorage updates
+        // Redirect to appropriate page
+        error_log("REDIRECTING TO: $redirectPage");
         echo "<script>
-            // Clear any cached homepage data
             if (window.localStorage) {
                 localStorage.removeItem('homepageData');
                 localStorage.setItem('reloadHomepage', 'true');
             }
-            
-            // Use replace instead of href to prevent the # fragment issue
+            console.log('Redirecting to: $redirectPage');
             window.location.replace('$redirectPage');
         </script>";
         exit();
     } else {
-        // Failed to insert entry
-        error_log("Failed to insert journal entry for user $userId");
+        error_log("FAILED TO INSERT JOURNAL ENTRY");
         echo "<script>
             window.location.replace('homepage.html');
         </script>";
         exit();
     }
 } catch (PDOException $e) {
-    error_log("Database error in saveJournalEntry.php: " . $e->getMessage());
+    $errorMessage = $e->getMessage();
+    error_log("DATABASE ERROR: $errorMessage");
     echo "<script>
         window.location.replace('homepage.html');
     </script>";
