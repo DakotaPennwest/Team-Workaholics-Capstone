@@ -12,7 +12,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $userId = $_SESSION['user_id'];
 
-// First, try to get the emotion ID from the journal entry in session
+// Try to get the emotion ID from the journal entry in session
 if (isset($_SESSION['journalEntry']['emotionId']) && !empty($_SESSION['journalEntry']['emotionId'])) {
     $emotionId = $_SESSION['journalEntry']['emotionId'];
 } else {
