@@ -1,10 +1,9 @@
 <?php
 session_start();
 require_once 'db_connect.php';
-require_once 'updateAssignment.php'; // This file contains the updateAssignmentCycle() function
 
 // Ensure required session data is available
-if (!isset($_SESSION['user_id'], $_SESSION['journalEntry']['emotionId'], $_SESSION['strategy_id'])) {
+if (!isset($_SESSION['user_id'])) {
     header('Location: journalHome.html');
     exit;
 }
@@ -14,37 +13,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $emotionId = $_POST['emotionId'] ?? '';
     $emotionalIntensityRating = $_POST['emotionalIntensityRating'] ?? '';
     $userId = $_SESSION['user_id'];
-
-    // Log for debugging
-    error_log("journaling.php - Received emotionId: " . $emotionId);
-    error_log("journaling.php - Received emotionalIntensityRating: " . $emotionalIntensityRating);
-
-    // Save journal entry data to session (if needed later)
+    
+    // Enhanced logging for debugging
+    error_log("===== JOURNALING.PHP =====");
+    error_log("USER ID: $userId");
+    error_log("EMOTION ID: $emotionId");
+    error_log("INTENSITY RATING: $emotionalIntensityRating");
+    
+    // Get strategy ID from session or from database
+    $strategyId = isset($_SESSION['strategy_id']) ? $_SESSION['strategy_id'] : null;
+    
+    if (!$strategyId) {
+        // If no strategy in session, try to get current one from database
+        error_log("NO STRATEGY ID IN SESSION - CHECKING DATABASE");
+        
+        $sqlCurrent = "SELECT strategy_id FROM Assigned_Strategy 
+                      WHERE user_id = :user_id AND is_current = 1 
+                      ORDER BY assigned_start_date DESC LIMIT 1";
+        $stmtCurrent = $db->prepare($sqlCurrent);
+        $stmtCurrent->bindParam(':user_id', $userId, PDO::PARAM_INT);
+        $stmtCurrent->execute();
+        $strategyId = $stmtCurrent->fetchColumn();
+        
+        if ($strategyId) {
+            error_log("FOUND CURRENT STRATEGY ID IN DATABASE: $strategyId");
+            $_SESSION['strategy_id'] = $strategyId;
+        } else {
+            // Default to Deep Breathing if no strategy assigned
+            $strategyId = 2; // Default to Deep Breathing
+            error_log("NO STRATEGY FOUND - USING DEFAULT ID: 2 (Deep Breathing)");
+        }
+    } else {
+        error_log("STRATEGY ID FROM SESSION: $strategyId");
+    }
+    
+    // Save journal entry data to session for use in saveJournalEntry.php
     $_SESSION['journalEntry'] = [
         'journalContent' => $journalContent,
         'emotionId' => $emotionId,
         'emotionalIntensityRating' => $emotionalIntensityRating
     ];
-
-    // Query to count the current number of entries for this user and emotion
-    $sqlCount = "SELECT COUNT(*) FROM Journal_Entry WHERE user_id = ? AND emotion_id = ?";
-    $stmtCount = $db->prepare($sqlCount);
-    $stmtCount->execute([$userId, $emotionId]);
-    $entryCount = $stmtCount->fetchColumn();
-    error_log("journaling.php - Journal entry count for emotion_id {$emotionId}: " . $entryCount);
-
-     // Proceed with the assignment cycle update if the count is at threshold
-    if ($entryCount >= 5) {
-        $updated = updateAssignmentCycle($db, $userId, $_SESSION['strategy_id']);
-        error_log("Assignment update triggered: " . ($updated ? "Yes" : "No"));
-    }
-
-    // Insert the journal entry into the database.
-    $sqlInsert = "INSERT INTO Journal_Entry (user_id, emotion_id, strategy_id, journal_content, emotional_intensity_rating) VALUES (?, ?, ?, ?, ?)";
-    $stmtInsert = $db->prepare($sqlInsert);
-    $stmtInsert->execute([$userId, $emotionId, $_SESSION['strategy_id'], $journalContent, $emotionalIntensityRating]);
-
-    // Always redirect to journalAssignedStrategy.php after processing
+    
+    // Redirect to journalAssignedStrategy.php which will show the strategy
+    // and then redirect to saveJournalEntry.php
+    error_log("REDIRECTING TO journalAssignedStrategy.php");
     header('Location: journalAssignedStrategy.php');
     exit;
 } else {
