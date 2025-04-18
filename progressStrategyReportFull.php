@@ -170,6 +170,7 @@ $mysqli->close();
   </script>
   <script src="scripts/helpButton.js"></script>
 
+  <script src="scripts/progressStrategyReportFull.js"></script>
   <script>
     // Navbar user info fetch
     document.addEventListener("DOMContentLoaded", () => {
