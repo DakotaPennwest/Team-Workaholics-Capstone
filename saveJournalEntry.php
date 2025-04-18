@@ -39,31 +39,11 @@ try {
     }
     
     // Check for duplicate entries
-    // Check for duplicate entries
-   $sqlCheck = "SELECT COUNT(*) FROM Journal_Entry 
+    $sqlCheck = "SELECT COUNT(*) FROM Journal_Entry 
            WHERE user_id = :user_id 
            AND emotion_id = :emotion_id 
            AND journal_content = :journal_content
            AND DATE(journal_date) = CURRENT_DATE()";
-    $stmtCheck = $db->prepare($sqlCheck);
-    $stmtCheck->bindParam(':user_id', $userId, PDO::PARAM_INT);
-    $stmtCheck->bindParam(':emotion_id', $data['emotionId'], PDO::PARAM_INT);
-    $stmtCheck->bindParam(':journal_content', $data['journalContent'], PDO::PARAM_STR);
-    $stmtCheck->execute();
-    $duplicateExists = $stmtCheck->fetchColumn() > 0;
-
-    if ($duplicateExists) {
-        error_log("DUPLICATE ENTRY DETECTED - REDIRECTING TO HOMEPAGE");
-        unset($_SESSION['journalEntry']);
-        echo "<script>
-            if (window.localStorage) {
-                localStorage.removeItem('homepageData');
-                localStorage.setItem('reloadHomepage', 'true');
-            }
-            window.location.replace('homepage.html');
-        </script>";
-        exit();
-    }
     $stmtCheck = $db->prepare($sqlCheck);
     $stmtCheck->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $stmtCheck->bindParam(':emotion_id', $data['emotionId'], PDO::PARAM_INT);
