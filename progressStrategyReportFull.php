@@ -134,7 +134,7 @@ $mysqli->close();
               <th>Times Assigned</th>
               <th>Times Rated Helpful</th>
               <th>Times Rated Unhelpful</th>
-              <th>Helpfulness</th>
+              <th>Average Rating</th>
             </tr>
           </thead>
           <tbody>
