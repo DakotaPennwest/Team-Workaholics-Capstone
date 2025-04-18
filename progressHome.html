@@ -112,7 +112,11 @@ if (!isset($_SESSION['username'])) {
         <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
     </div>
 
-    
+    <script>
+        const currentFile = "progressHome";
+    </script>
+    <script src="scripts/helpButton.js"></script>
+
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             fetch('getUserInfo.php')

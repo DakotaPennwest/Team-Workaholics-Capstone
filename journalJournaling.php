@@ -40,7 +40,7 @@ $emotionName = $_SESSION['emotion_name'] ?? 'excited';
             <p class="navigation-bar-user-first-name" id="userFirstName"><?php echo htmlspecialchars($_SESSION['username']); ?></p>
         </div>
         <div class="navigation-bar-links-container">
-            <a href="homePage.html" class="navigation-bar-link">
+            <a href="homepage.html" class="navigation-bar-link">
                 <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Home</span>
             </a>
@@ -48,15 +48,15 @@ $emotionName = $_SESSION['emotion_name'] ?? 'excited';
                 <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text-selected">Journal</span>
             </a>
-            <a href="strategies.html" class="navigation-bar-link">
+            <a href="strategiesHome.html" class="navigation-bar-link">
                 <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Strategies</span>
             </a>
-            <a href="progress.html" class="navigation-bar-link">
+            <a href="progressHome.html" class="navigation-bar-link">
                 <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Progress</span>
             </a>
-            <a href="settings.html" class="navigation-bar-link">
+            <a href="#" class="navigation-bar-link">
                 <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Settings</span>
             </a>
@@ -116,6 +116,12 @@ $emotionName = $_SESSION['emotion_name'] ?? 'excited';
         <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
         <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
     </div>
+
+    
+    <script>
+        const currentFile = "journalJournaling";
+    </script>
+    <script src="scripts/helpButton.js"></script>
 
     <!-- Scripts for prompt generation and textarea resizing -->
     <script>

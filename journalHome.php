@@ -114,6 +114,11 @@ $isJournalComplete = isset($_SESSION['journalEntry']['journal_entry_id']);
     </div>
 
 <script>
+    const currentFile = "journalHome";
+</script>
+<script src="scripts/helpButton.js"></script>
+
+<script>
 //script to dynamically update the user's journaling status
     document.addEventListener("DOMContentLoaded", function() {
         // Fetch user info

@@ -140,9 +140,17 @@ $emotionId    = $_SESSION['journalEntry']['emotionId'] ?? '1';
     <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
   </div>
 
+  <script>
+      const currentFile = "journalEmotionIntensity";
+  </script>
+  <script src="scripts/helpButton.js"></script>
+
   <script src="./scripts/journalIntensity.js"></script>
 </body>
 </html>
+
+  <!-- I don't know why this script is down here outside the html. I am keeping it in incase it is 
+        needed for something I am unawre of.  -Dakota -->
 <script>
     // When the DOM content is fully loaded, this script fetches user information from the server.
     // It then updates the element with id 'userFirstName' to display the username.
