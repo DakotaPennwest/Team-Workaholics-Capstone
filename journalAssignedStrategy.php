@@ -114,91 +114,140 @@ $strategy['strategy_image_url'] = $strategy['strategy_image'];
   <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-  <!-- Back Wave -->
-  <div class="waves-container">
-    <img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
-  </div>
-  <!-- Navigation Bar -->
-  <div class="navigation-bar">
-    <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
-      <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
-    </a>
-    <div class="navigation-bar-profile-picture-section">
-      <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
+
+    <!-- Back Wave -->
+    <!-- Needs to be here to create layered effect with nav bar -->
+	  <div class="waves-container">
+      <img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
     </div>
-    <div class="navigation-bar-user-name-section">
-      <p class="navigation-bar-user-first-name" id="userFirstName"></p>
-    </div>
-    <div class="navigation-bar-links-container">
-      <a href="homepage.html" class="navigation-bar-link">
-        <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
-        <span class="navigation-bar-link-text-selected">Home</span>
+
+    <!-- Navigation Bar -->
+    <div class="navigation-bar">
+
+      <!-- Sign Out Icon -->
+      <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
+        <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
       </a>
-      <a href="journalHome.php" class="navigation-bar-link">
-        <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
-        <span class="navigation-bar-link-text">Journal</span>
-      </a>
-      <a href="strategiesHome.html" class="navigation-bar-link">
-        <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
-        <span class="navigation-bar-link-text">Strategies</span>
-      </a>
-      <a href="#" class="navigation-bar-link">
-        <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
-        <span class="navigation-bar-link-text">Progress</span>
-      </a>
-      <a href="#" class="navigation-bar-link">
-        <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
-        <span class="navigation-bar-link-text">Settings</span>
-      </a>
-    </div>
-  </div>
-  <!-- Top Bar -->
-  <div class="top-bar">
-    <h1 class="page-title">Journal</h1>
-    <a href="javascript:history.back()" class="back-arrow">
-      <img src="./images/backarrow.svg" alt="back arrow" class="back-arrow-icon">
-      <h2 class="go-back-text">Back</h2>
-    </a>
-    <img src="./images/progressBar/progressBarFeedback.svg" alt="Progress" class="progress-bar">
-  </div>
-  <!-- Main Content -->
-  <div class="main-screen-container">
-    <div class="content-container">
-      <!-- Chat Bubble -->
-      <div class="chat-bubble-container">
-        <div class="chat-bubble-from" id="assignedStrategyMessage">
-          Your assigned strategy is <u><?php echo htmlspecialchars($strategy['strategy_name']); ?></u>
-        </div>
+
+      <!-- Profile Picture Section -->
+      <div class="navigation-bar-profile-picture-section">
+        <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
       </div>
-      <!-- Strategy Details -->
-      <div class="assigned-strategy-box">
-        <div class="left-content-container">
-          <div class="strategy-info-box">
-            <div class="strategy-info-strategy-name" id="strategyName">
-              <?php echo htmlspecialchars($strategy['strategy_name']); ?>
+    
+      <!-- Profile Name Section -->
+      <div class="navigation-bar-user-name-section">
+        <p class="navigation-bar-user-first-name" id="userFirstName"></p>
+      </div>
+
+      <!-- Links Background -->
+      <div class="navigation-bar-links-container">
+          <!-- Home Link -->
+          <a href="homepage.html" class="navigation-bar-link">
+            <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
+            <span class="navigation-bar-link-text-selected">Home</span>
+          </a>
+          <!-- Journal Link -->
+          <a href="journalHome.php" class="navigation-bar-link">
+            <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
+            <span class="navigation-bar-link-text">Journal</span>
+          </a>
+          <!-- Strategies Link -->
+          <a href="strategiesHome.html" class="navigation-bar-link">
+            <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
+            <span class="navigation-bar-link-text">Strategies</span>
+          </a>
+          <!-- Progress Link -->
+          <a href="progressHome.html" class="navigation-bar-link">
+            <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
+            <span class="navigation-bar-link-text">Progress</span>
+          </a>
+          <!-- Settings Link -->
+          <a href="#" class="navigation-bar-link">
+            <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
+            <span class="navigation-bar-link-text">Settings</span>
+          </a>
+      </div>
+
+    </div>
+
+
+	<!-- Top bar -->
+	<div class="top-bar">
+        <!-- Title of current page -->
+		<h1 class="page-title">Journal</h1>
+        <!-- Go Back arrow -->
+         <!-- Note: I can see this needed to be changed. Needs testing to ensure this method works -->
+        <a href="javascript:history.back()" class="back-arrow">
+            <img src="./images/backarrow.svg" alt="back arrow" class="back-arrow-icon">
+            <h2 class="go-back-text">Back</h2>
+        </a>
+
+         <!-- Progress Bar -->
+        <img src="./images/progressBar/progressBarFeedback.svg" alt="Progress" class="progress-bar">
+
+	</div>
+    
+	
+	<!-- Main screen container -->
+	<div class="main-screen-container">
+
+		<!-- Container for messages and feedback form -->
+		<div class="content-container">
+
+            <!-- Chat Bubbles that direct the user what to do -->
+            <div class="chat-bubble-container">
+
+              <div class="chat-bubble-from" id="assignedStrategyMessage">
+                  Your assigned strategy is <u><?php echo htmlspecialchars($strategy['strategy_name']); ?></u>
+              </div>
+
+
+                <!-- Strategy Detauls -->
+                <div class="assigned-strategy-box">
+
+                    <div class="left-content-container">
+
+                      <div class="strategy-info-box">
+
+                        <div class="strategy-info-strategy-name" id="strategyName">
+                          <?php echo htmlspecialchars($strategy['strategy_name']); ?>
+                        </div>
+
+                        <div class="strategy-info-strategy-description" id="strategyDescription">
+                          <?php echo htmlspecialchars($strategy['strategy_descript']); ?>
+                        </div>
+
+                      </div>
+
+                    </div>
+    
+                    <div class="right-content-container">
+                      <img src="<?php echo htmlspecialchars($strategy['strategy_image_url']); ?>" alt="Assigned Strategy Image" class="strategy-Steps">
+                    </div>
+
+                </div>
+
             </div>
-            <div class="strategy-info-strategy-description" id="strategyDescription">
-              <?php echo htmlspecialchars($strategy['strategy_descript']); ?>
+            
+
+            <!-- next button -->
+            <!-- Hidden Form to Proceed to Final Journal Submission -->
+            <div class="form-button-container">
+            <form id="finalJournalForm" method="POST" action="saveJournalEntry.php">
+              <button class="form-button-next" type="submit">Finish today's journal!</button>
+            </form>
             </div>
-          </div>
-        </div>
-        <div class="right-content-container">
-          <img src="<?php echo htmlspecialchars($strategy['strategy_image_url']); ?>" alt="Assigned Strategy Image" class="strategy-Steps">
-        </div>
-      </div>
-      <!-- Hidden Form to Proceed to Final Journal Submission -->
-      <div class="form-button-container">
-        <form id="finalJournalForm" method="POST" action="saveJournalEntry.php">
-          <button class="form-button-next" type="submit">Finish today's journal!</button>
-        </form>
-      </div>
-    </div>
-  </div>
+
+		</div>
+
+	</div>
+
   <!-- Front and Middle Waves -->
-  <div class="waves-container">
-    <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
-    <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
-  </div>
+	<div class="waves-container">
+		<img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
+		<img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
+	</div>
+
   <script>
       document.addEventListener("DOMContentLoaded", function() {
           fetch('getUserInfo.php')
