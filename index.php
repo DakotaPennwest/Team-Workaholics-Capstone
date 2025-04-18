@@ -63,6 +63,11 @@
     </div>
 
     <script>
+        const currentFile = "index";
+    </script>
+    <script src="scripts/helpButton.js"></script>
+
+    <script>
         function submitForm() {
             // Clear previous error messages
             document.getElementById('usernameError').innerText = '';

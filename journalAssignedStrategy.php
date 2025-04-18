@@ -249,6 +249,11 @@ $strategy['strategy_image_url'] = $strategy['strategy_image'];
 	</div>
 
   <script>
+      const currentFile = "journalAssignedStrategy";
+  </script>
+  <script src="scripts/helpButton.js"></script>
+
+  <script>
       document.addEventListener("DOMContentLoaded", function() {
           fetch('getUserInfo.php')
               .then(response => response.json())

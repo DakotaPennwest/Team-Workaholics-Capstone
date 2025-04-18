@@ -116,7 +116,7 @@ $intensityBarPath = "./images/intensityBar/intensityBar" . $journal['emotional_i
                 <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Home</span>
             </a>
-            <a href="journalHome.html" class="navigation-bar-link">
+            <a href="journalHome.php" class="navigation-bar-link">
                 <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text-selected">Journal</span>
             </a>
@@ -124,7 +124,7 @@ $intensityBarPath = "./images/intensityBar/intensityBar" . $journal['emotional_i
                 <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Strategies</span>
             </a>
-            <a href="#" class="navigation-bar-link">
+            <a href="progressHome.html" class="navigation-bar-link">
                 <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Progress</span>
             </a>
@@ -207,6 +207,12 @@ $intensityBarPath = "./images/intensityBar/intensityBar" . $journal['emotional_i
         <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
         <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
     </div>
+
+
+    <script>
+        const currentFile = "journalViewJournal";
+    </script>
+    <script src="scripts/helpButton.js"></script>
 
     <!-- download button functionality -->
     <script src="scripts/journalViewJournal.js"></script>
