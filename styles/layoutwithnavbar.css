@@ -53,6 +53,10 @@ body {
     filter: contrast(1000%);   
 }
 
+.navigation-bar-sign-out-icon:active{
+    transform: scale(0.95);
+}
+
 /* Profile Picture Section */
 .navigation-bar-profile-picture-section {
     height: 30%;
@@ -76,7 +80,7 @@ body {
 
 /* User Name section*/
 .navigation-bar-user-name-section {
-    height: 10%;
+    height: 12%;
     align-items: center; /* Center elements horizontally */
     align-content: center;
     width:fit-content;
@@ -160,6 +164,10 @@ body {
     text-decoration-thickness: 10%; 
 }
 
+.navigation-bar-link:active {
+    transform: scale(0.95);
+}
+
 /* Adjust top bar */
 .top-bar {
     margin-left: var(--navigation-bar-width); /* Automatically adjust based on the navigation bar width */
@@ -227,6 +235,10 @@ body {
     /* This will turn any black item into the specific hex code chosen. In this case, I am changing it to #FFBF10 (main yellow bold)*/
     /*Note: you have to take the difference of the invert % from 100. IN this case invert % was 84 - 100 = 16%*/
     filter: invert(16%) sepia(27%) saturate(3154%) hue-rotate(347deg) brightness(100%) contrast(102%);   
+}
+
+.back-arrow:active {
+    transform: scale(0.95);
 }
 
 /* Back Arrow Styling */

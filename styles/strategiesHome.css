@@ -75,8 +75,8 @@
     text-decoration: none;
     color: inherit;
     cursor: pointer;
-    width: 700px;
-    height: 450px;
+    width: 460px;
+    height: 380px;
     border-radius: 50px;
     position: relative;
     overflow: hidden;
@@ -112,7 +112,7 @@
 /* Hover effects shared for all boxes */
 .home-page-box:hover {
     filter: contrast(105%) brightness(108%);
-    box-shadow: 0 0 0 7px var(--main-red), var(--main-shading-with-drop-shadow);
+    box-shadow: 0 0 0 6px var(--main-red), var(--main-shading-with-drop-shadow);
 }
 
 /* This adds the underline under the text when the user hovers over each button */
@@ -121,6 +121,10 @@
     text-decoration: var(--pure-white) wavy underline; /* Makes underline wavy */
     text-underline-offset: 25%; /* lowers underline down 20% */
     text-decoration-thickness: 10%; /* Makes underline a certain thickness*/
+}
+
+.home-page-strategy-box:active{ 
+    transform: scale(0.97);
 }
 
 /* Shared text container styles */
@@ -132,7 +136,7 @@
     font-family: 'Nunito', sans-serif;
     font-style: normal;
     font-weight: 900;
-    font-size: 40px;
+    font-size: 30px;
     line-height: 45px;
     text-align: center;
     display: flex;
@@ -160,7 +164,7 @@
     font-family: 'Nunito', sans-serif; /* Match font family */
     font-style: normal;
     font-weight: 900;
-    font-size: 28px; /* Adjust font size for readability */
+    font-size: 24px; /* Adjust font size for readability */
     text-align: center; /* Center the text horizontally */
     color: var(--pure-white); /* White text color */
     z-index: 2;

@@ -4,6 +4,9 @@ if (!isset($_SESSION['username'])) {
     header('Location: login.php'); // Redirect to login page if not logged in
     exit();
 }
+
+// Set JavaScript variable based on session data
+$isJournalComplete = isset($_SESSION['journalEntry']['journal_entry_id']);
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +50,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="navigation-bar-link-text">Home</span>
             </a>
             <!-- Journal Link -->
-            <a href="journalHome.html" class="navigation-bar-link">
+            <a href="journalHome.php" class="navigation-bar-link">
                 <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text-selected">Journal</span>
             </a>
@@ -57,7 +60,7 @@ if (!isset($_SESSION['username'])) {
                 <span class="navigation-bar-link-text">Strategies</span>
             </a>
             <!-- Progress Link -->
-            <a href="#" class="navigation-bar-link">
+            <a href="progressHome.html" class="navigation-bar-link">
                 <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Progress</span>
             </a>
@@ -83,7 +86,7 @@ if (!isset($_SESSION['username'])) {
           
             <div class="home-page-boxes-container">
                 <!-- Journal Box -->
-                <a href="journalEmotionSelection.html" class="home-page-box home-page-journal-box">
+                <a href="journalEmotionSelection.html" class="home-page-box home-page-journal-box" id="journalPageLink">
                     <div class="home-page-box-status" id="journalStatus">
                         You haven't done your journal today
                     </div>
@@ -92,7 +95,7 @@ if (!isset($_SESSION['username'])) {
                     </div>
                 </a>
                 <!-- All Journals Box -->
-                <a href="#" class="home-page-box home-page-all-journal-box">
+                <a href="journalAllJournalsTable.php" class="home-page-box home-page-all-journal-box">
                     <div class="home-page-box-status" id="currentUserAllJournals">
                         All your journals
                     </div>
@@ -110,25 +113,49 @@ if (!isset($_SESSION['username'])) {
         <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
     </div>
 
-    
-    <script>
-		/* When the DOM content is fully loaded, this script fetches user information from the server.
-		It then updates the element with id 'userFirstName' to display the username.
-		If there is an error during the fetch operation, it logs the error to the console.*/
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('getUserInfo.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.username) {
-                        document.getElementById('userFirstName').textContent = data.username;
-						document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
+<script>
+//script to dynamically update the user's journaling status
+    document.addEventListener("DOMContentLoaded", function() {
+        // Fetch user info
+        fetch('getUserInfo.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.username) {
+                    document.getElementById('userFirstName').textContent = data.username;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user info:', error);
+            });
+        
+        // Fetch journal status with cache-busting
+        fetch('getHomePageInfo.php?_=' + new Date().getTime())
+            .then(response => response.json())
+            .then(data => {
+                console.log("Received journal home data:", data); // Add debugging
+                
+                if (data.success) {
+                    // Update journal status
+                    const journalStatus = document.getElementById('journalStatus');
+                    const journalDirection = document.getElementById('journalDirection');
+                    const journalPageLink = document.getElementById('journalPageLink');
+                    
+                    if (data.journal_completed) {
+                        journalStatus.textContent = "You've completed your journal today!";
+                        journalDirection.textContent = "View Today's Journal";
+                        journalPageLink.href = "journalAllJournalsTable.php";
+                    } else {
+                        journalStatus.textContent = "You haven't done your journal today.";
+                        journalDirection.textContent = "Begin Journal!";
+                        journalPageLink.href = "journalEmotionSelection.html";
                     }
-                })
-                .catch(error => {
-                    console.error('Error fetching user info:', error);
-                });
-        });
-    </script>
-
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching homepage info:', error);
+            });
+    });
+</script>
+  
 </body>
 </html>

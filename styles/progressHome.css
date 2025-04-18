@@ -90,6 +90,10 @@
     text-decoration-thickness: 10%; /* Makes underline a certain thickness*/
 }
 
+.home-page-box:active{ 
+    transform: scale(0.97);
+}
+
 /* Shared text container styles */
 .home-page-box-text {
     position: relative;

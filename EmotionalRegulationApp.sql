@@ -86,7 +86,7 @@ CREATE TABLE Strategy_Feedback (
     assignment_id INT,
 -- This should automatically store the current date/time when a new row is made.
     feedback_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    rating INT CHECK (rating BETWEEN 1 AND 5), -- Ensures ratings are within 1-5
+    is_helpful BOOLEAN NOT NULL,
     comments TEXT, -- Allows detailed user feedback
     recommendation VARCHAR(255), -- Optional recommendations or notes
     FOREIGN KEY (assignment_id) REFERENCES Assigned_Strategy(assignment_id)
@@ -137,7 +137,7 @@ INSERT INTO Emotion (emotion_name, emotion_core_category, emotion_type) VALUES
 -- Coping Strategies Data
 INSERT INTO Coping_Strategy (strategy_name, strategy_descript, strategy_image) VALUES
   ('Guided Visualization', 'A relaxation technique that involves visualizing a peaceful place to help alleviate fear.', 'images/strategySteps/guidedVisualization.png'),
-  ('Deep Breathing', 'A technique involving controlled breathing to help manage anger.', 'images/deepBreathing.png'),
+  ('Deep Breathing', 'A technique involving controlled breathing to help manage anger.', 'images/strategySteps/deepBreathing.png'),
   ('Expressing Gratitude', 'A practice that encourages acknowledging and appreciating positive aspects of life to promote happiness.', 'images/strategySteps/expressingGratitude.png'),
   ('Positive Affirmations', 'A technique of repeating uplifting statements to counter feelings of sadness.', 'images/strategySteps/positiveAffirmations.png'),
   ('Grounding Techniques', 'A method that uses observation and sensory experiences to combat feelings of surprise.', 'images/strategySteps/groundingTechniques.png'),

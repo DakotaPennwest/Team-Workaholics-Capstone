@@ -5,17 +5,16 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// Retrieve dynamic values from session or set defaults
-// These values should have been set previously (via saveEmotion.php and saveIntensity.php)
+// Retrieve dynamic values from session or use defaults
 $dynamicEmotionId = $_SESSION['selected_emotion_id'] ?? '1'; 
-$dynamicIntensity = $_SESSION['selected_emotional_intensity'] ?? '5';
+$dynamicIntensity = $_SESSION['selected_emotional_intensity'] ?? '5'; 
 $emotionName = $_SESSION['emotion_name'] ?? 'excited';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Ensure the doctype is HTML5 to avoid Quirks Mode -->
+    <!-- HTML5 doctype to avoid quirks mode -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Journal</title>
     <link rel="stylesheet" href="styles/layoutwithnavbar.css">
@@ -34,21 +33,18 @@ $emotionName = $_SESSION['emotion_name'] ?? 'excited';
         <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
             <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
         </a>
-        <!-- Profile Picture Section -->
         <div class="navigation-bar-profile-picture-section">
             <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
         </div>
-        <!-- Profile Name Section -->
         <div class="navigation-bar-user-name-section">
             <p class="navigation-bar-user-first-name" id="userFirstName"><?php echo htmlspecialchars($_SESSION['username']); ?></p>
         </div>
-        <!-- Links Background -->
         <div class="navigation-bar-links-container">
             <a href="homePage.html" class="navigation-bar-link">
                 <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Home</span>
             </a>
-            <a href="journalJournaling.html" class="navigation-bar-link">
+            <a href="journalHome.php" class="navigation-bar-link">
                 <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text-selected">Journal</span>
             </a>
@@ -76,7 +72,7 @@ $emotionName = $_SESSION['emotion_name'] ?? 'excited';
         </a>
         <img src="./images/progressBar/progressBarJournal.svg" alt="Progress" class="progress-bar">
     </div>
-
+    
     <!-- Main Screen Container -->
     <div class="main-screen-container">
         <div class="content-container">
@@ -88,14 +84,14 @@ $emotionName = $_SESSION['emotion_name'] ?? 'excited';
                 </div>
                 <div class="prompt-message-container">
                     <img src="./images/icons/newPromptIcon.svg" alt="New Prompt" class="new-prompt-icon">
-                    <!-- The prompt text will include the dynamic emotion name -->
+                    <!-- Prompt includes dynamic emotion name -->
                     <div class="chat-bubble-from">
                         <u id="Prompt">Why are you feeling <?php echo htmlspecialchars($emotionName); ?> today?</u>
                     </div>
                 </div>
             </div>
 
-            <!-- Journal Entry Form -->
+            <!-- Journal Entry Form (correctly structured) -->
             <form action="journaling.php" method="POST">
                 <div class="journal-container">
                     <div class="wrapper">
@@ -123,7 +119,7 @@ $emotionName = $_SESSION['emotion_name'] ?? 'excited';
 
     <!-- Scripts for prompt generation and textarea resizing -->
     <script>
-        // Array of prompts that include a placeholder [emotion]
+        // Array of prompts with placeholder [emotion]
         const prompts = [
             "Why are you feeling [emotion] today?",
             "Is there something that made you feel [emotion] today?",
@@ -131,9 +127,23 @@ $emotionName = $_SESSION['emotion_name'] ?? 'excited';
             "Write about a time when you felt [emotion] before.",
             "What can you do next time you feel [emotion] to help yourself feel better?"
         ];
+
+        // Global variable to store the last prompt index. Need this to know what the index currently is so when we randomize, we can check it's new
+        let lastPromptIndex = -1;
+
         function setRandomPrompt() {
-            const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
-            // Replace the placeholder with the actual emotion name from PHP (escaped)
+
+            let newIndex = Math.floor(Math.random() * prompts.length);
+            
+            if (prompts.length > 1) {
+                while (newIndex === lastPromptIndex) {
+                    newIndex = Math.floor(Math.random() * prompts.length);
+                }
+            }
+            lastPromptIndex = newIndex;
+
+            const randomPrompt = prompts[newIndex].replace(/\[emotion\]/g, "<?php echo addslashes($emotionName); ?>");
+            // Replace [emotion] with the actual emotion name (escaped)
             document.getElementById('Prompt').innerText = randomPrompt.replace(/\[emotion\]/g, "<?php echo addslashes($emotionName); ?>");
         }
         document.querySelectorAll('.new-prompt-icon, .inline-new-prompt-icon').forEach(item => {
@@ -152,7 +162,7 @@ $emotionName = $_SESSION['emotion_name'] ?? 'excited';
         window.addEventListener("load", adjustHeight);
     </script>
     <script>
-        // Update user info via AJAX (if needed)
+        // Update user info via AJAX
         document.addEventListener("DOMContentLoaded", function() {
             fetch('getUserInfo.php')
                 .then(response => response.json())

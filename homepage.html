@@ -34,12 +34,12 @@
         <!-- Links Background -->
         <div class="navigation-bar-links-container">
             <!-- Home Link -->
-            <a href="#" class="navigation-bar-link">
+            <a href="homepage.html" class="navigation-bar-link">
                 <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text-selected">Home</span>
             </a>
             <!-- Journal Link -->
-            <a href="journalHome.html" class="navigation-bar-link">
+            <a href="journalHome.php" class="navigation-bar-link">
                 <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Journal</span>
             </a>
@@ -49,7 +49,7 @@
                 <span class="navigation-bar-link-text">Strategies</span>
             </a>
             <!-- Progress Link -->
-            <a href="#" class="navigation-bar-link">
+            <a href="progressHome.html" class="navigation-bar-link">
                 <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Progress</span>
             </a>
@@ -72,6 +72,7 @@
     <div class="main-screen-container">
         <!-- Container for boxes -->
         <div class="content-container">
+            
             <!-- Rainbow -->
             <img src="./images/rainbow.svg" alt="Rainbow" class="rainbow">
             <!-- Clouds -->
@@ -81,7 +82,7 @@
             
             <div class="home-page-boxes-container">
                 <!-- Journal Box -->
-                <a href="journalEmotionSelection.html" class="home-page-box home-page-journal-box">
+                <a href="journalEmotionSelection.html" class="home-page-box home-page-journal-box" id="journalPageLink">
                     <div class="home-page-box-status" id="journalStatus">
                         You haven't done your journal today
                     </div>
@@ -90,13 +91,13 @@
                     </div>
                 </a>
                 <!-- Strategy Box -->
-                <a href="strategiesHome.html" class="home-page-box home-page-strategy-box">
+                <a href="strategiesCurrentStrategy.html" class="home-page-box home-page-strategy-box">
                     <div class="home-page-box-status" id="currentStrategy">
                         Your current strategy is<br>
-                        Meditation
+                        loading
                     </div>
                     <div class="home-page-box-text home-page-strategy-box-text" id="strategyDirection">
-                        Go to Strategies
+                        Look at Current Strategy
                     </div>
                 </a>
             </div>
@@ -109,20 +110,62 @@
         <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('getUserInfo.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.username) {
-                        document.getElementById('userFirstName').textContent = data.username;
-                        document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Check if we need to force reload
+        if (window.localStorage && localStorage.getItem('reloadHomepage') === 'true') {
+            localStorage.removeItem('reloadHomepage');
+            // Force a reload from server, not cache
+            window.location.reload(true);
+            return;
+        }
+        
+        // Fetch user info
+        fetch('getUserInfo.php')
+            .then(response => response.json())
+            .then(data => {
+                if (data.username) {
+                    document.getElementById('userFirstName').textContent = data.username;
+                    document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching user info:', error);
+            });
+        
+        // Fetch journal status and current strategy with cache-busting
+        fetch('getHomePageInfo.php?_=' + new Date().getTime())
+            .then(response => response.json())
+            .then(data => {
+                console.log("Received homepage data:", data); // Add debugging
+                
+                if (data.success) {
+                    // Update journal status
+                    const journalStatus = document.getElementById('journalStatus');
+                    const journalDirection = document.getElementById('journalDirection');
+                    const journalPageLink = document.getElementById('journalPageLink');
+                    
+                    if (data.journal_completed) {
+                        journalStatus.textContent = "You've completed your journal today!";
+                        journalDirection.textContent = "View Today's Journal";
+                        journalPageLink.href = "journalAllJournalsTable.php";
+                    } else {
+                        journalStatus.textContent = "You haven't done your journal today";
+                        journalDirection.textContent = "Begin Journal!";
+                        journalPageLink.href = "journalEmotionSelection.html";
                     }
-                })
-                .catch(error => {
-                    console.error('Error fetching user info:', error);
-                });
-        });
-    </script>
+                    
+                    // Update strategy info
+                    const currentStrategy = document.getElementById('currentStrategy');
+                    if (currentStrategy) {
+                        currentStrategy.innerHTML = "Your current strategy is<br>" + data.strategy_name;
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching homepage info:', error);
+            });
+    });
+</script>
 </body>
 </html>

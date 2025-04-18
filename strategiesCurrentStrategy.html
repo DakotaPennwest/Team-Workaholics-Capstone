@@ -1,148 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Strategies</title>
-    <link rel="stylesheet" href="styles/layoutwithnavbar.css">
-    <link rel="stylesheet" href="styles/stylevariables.css">
-    <link rel="stylesheet" href="styles/strategiesCurrentStrategy.css">
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+  <meta charset="UTF-8">
+  <!-- Use HTML5 doctype to avoid quirks mode -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Strategies</title>
+  <link rel="stylesheet" href="styles/layoutwithnavbar.css">
+  <link rel="stylesheet" href="styles/stylevariables.css">
+  <link rel="stylesheet" href="styles/strategiesCurrentStrategy.css">
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
+  <!-- Back Wave -->
+  <div class="waves-container">
+    <img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
+  </div>
 
-    <!-- Back Wave -->
-    <!-- Needs to be here to create layered effect with nav bar -->
-	<div class="waves-container">
-        <img src="./images/waveBack.svg" alt="Back Wave" class="wave back-wave">
-	</div>
-
-    <!-- Navigation Bar -->
-    <div class="navigation-bar">
-
-        <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
-            <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
-        </a>
-        
-
-        <!-- Profile Picture Section -->
-        <div class="navigation-bar-profile-picture-section">
-            <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
-        </div>
-    
-        <!-- Profile Name Section -->
-        <div class="navigation-bar-user-name-section">
-            <p class="navigation-bar-user-first-name" id="userFirstName">Jason</p>
-        </div>
-
-        <!-- Links Background -->
-        <div class="navigation-bar-links-container">
-            <!-- Home Link -->
-            <a href="homepage.html" class="navigation-bar-link">
-                <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text">Home</span>
-            </a>
-            <!-- Journal Link -->
-            <a href="journalHome.html" class="navigation-bar-link">
-                <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text">Journal</span>
-            </a>
-            <!-- Strategies Link -->
-            <a href="strategiesHome.html" class="navigation-bar-link">
-                <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text-selected">Strategies</span>
-            </a>
-            <!-- Progress Link -->
-            <a href="#" class="navigation-bar-link">
-                <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text">Progress</span>
-            </a>
-            <!-- Settings Link -->
-            <a href="#" class="navigation-bar-link">
-                <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
-                <span class="navigation-bar-link-text">Settings</span>
-             </a>
-        </div>
-
+  <!-- Navigation Bar -->
+  <div class="navigation-bar">
+    <a href="index.php" id="navigation-bar-sign-out-icon" data-tooltip="Sign Out">
+      <img src="./images/icons/signOutIcon.svg" alt="Sign Out Icon" class="navigation-bar-sign-out-icon" title="Sign Out">
+    </a>
+    <!-- Profile Picture Section -->
+    <div class="navigation-bar-profile-picture-section">
+      <img src="./images/profilePictures/Deer.webp" alt="Profile Picture" class="navigation-bar-profile-picture">
     </div>
+    <!-- Profile Name Section -->
+    <div class="navigation-bar-user-name-section">
+      <p class="navigation-bar-user-first-name" id="userFirstName">Jason</p>
+    </div>
+    <!-- Links Background -->
+    <div class="navigation-bar-links-container">
+      <a href="homepage.html" class="navigation-bar-link">
+        <img src="./images/icons/homeIcon.svg" alt="Home Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text">Home</span>
+      </a>
+      <a href="journalHome.php" class="navigation-bar-link">
+        <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text">Journal</span>
+      </a>
+      <a href="strategiesHome.html" class="navigation-bar-link">
+        <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text-selected">Strategies</span>
+      </a>
+      <a href="progressHome.html" class="navigation-bar-link">
+        <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text">Progress</span>
+      </a>
+      <a href="#" class="navigation-bar-link">
+        <img src="./images/icons/settingsIcon.svg" alt="Settings Icon" class="navigation-bar-link-icon">
+        <span class="navigation-bar-link-text">Settings</span>
+      </a>
+    </div>
+  </div>
 
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <h1 class="page-title">Your Current Strategy</h1>
+    <a href="javascript:history.back()" class="back-arrow">
+      <img src="./images/backarrow.svg" alt="Back Arrow" class="back-arrow-icon">
+      <h2 class="go-back-text">Back</h2>
+    </a>
+  </div>
 
-	<!-- Top bar -->
-	<div class="top-bar">
-        <!-- Title of current page -->
-		<h1 class="page-title">Your Current Strategy</h1>
-        <!-- Go Back arrow -->
-         <!-- Note: I can see this needed to be changed. Needs testing to ensure this method works -->
-        <a href="javascript:history.back()" class="back-arrow">
-            <img src="./images/backarrow.svg" alt="back arrow" class="back-arrow-icon">
-            <h2 class="go-back-text">Back</h2>
-        </a>
-
-	</div>
-    
-	
-	<!-- Main screen container -->
-	<div class="main-screen-container">
-
-
-		<!-- Container for messages and feedback form -->
-		<div class="content-container">
-
-            <!-- Assigned Strategy Box -->
-            <div class="assigned-strategy-box">
-                
-                <div class="left-content-container">
-
-                    <div class="strategy-info-box">
-                        <div class="strategy-info-strategy-name" id="strategyName">
-                            Deep Breathing
-                        </div>
-                        <div class="strategy-info-strategy-description" id="strategyDescription">
-                            Deep breathing helps calm your body and mind when you're feeling angry. 
-                            The 4-4-4 method is easy: Breathe in through your nose for four seconds, 
-                            hold for four seconds, then slowly breathe out through your mouth for four seconds. 
-                            This helps slow your heart rate and relax your body, making it easier to feel in control. 
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="right-content-container">
-                    <img src="./images/strategySteps/deepBreathing.png" alt="Steps" class="strategy-Steps">
-                </div>
-
+  <!-- Main screen container -->
+  <div class="main-screen-container">
+    <div class="content-container">
+      <!-- Assigned Strategy Box -->
+      <div class="assigned-strategy-box">
+        <div class="left-content-container">
+          <div class="strategy-info-box">
+            <div class="strategy-info-strategy-name" id="strategyName">Loading...</div>
+            <div class="strategy-info-strategy-description" id="strategyDescription">
+              Loading strategy description...
             </div>
-    
+          </div>
+        </div>
+        <div class="right-content-container">
+          <img id="strategyImage" src="" alt="Assigned Strategy Image" class="strategy-Steps">
+        </div>
+      </div>
+    </div>
+  </div>
 
-		</div>
+  <!-- Front and Middle Waves -->
+  <div class="waves-container">
+    <img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
+    <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
+  </div>
 
-	</div>
-
-    <!-- Front and Middle Waves -->
-	<div class="waves-container">
-		<img src="./images/waveMiddle.svg" alt="Middle Wave" class="wave middle-wave">
-		<img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
-	</div>
-
-    <script src="journalFeedback.js"></script>
-	<script>
-    /* When the DOM content is fully loaded, this script fetches user information from the server.
-     It then updates the element with id 'userFirstName' to display the username.
-     If there is an error during the fetch operation, it logs the error to the console.*/
+  <!-- JavaScript to update the Navbar and current strategy -->
+  <script>
+    // Update user info in the navbar
     document.addEventListener("DOMContentLoaded", function() {
-        fetch('getUserInfo.php')
-            .then(response => response.json())
-            .then(data => {
-                if (data.username) {
-                    document.getElementById('userFirstName').textContent = data.username;
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching user info:', error);
-            });
+      fetch('getUserInfo.php')
+        .then(response => response.json())
+        .then(data => {
+          if (data.username) {
+            document.getElementById('userFirstName').textContent = data.username;
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching user info:', error);
+        });
     });
-    </script>
 
-	
+    // Fetch the current assigned strategy and update the page
+    document.addEventListener("DOMContentLoaded", function() {
+      fetch('getAssignedStrategy.php')
+        .then(response => response.json())
+        .then(json => {
+          if (json.success) {
+            // Update the strategy name and description
+            document.getElementById("strategyName").textContent = json.data.strategy_name;
+            document.getElementById("strategyDescription").textContent = json.data.strategy_descript || "No description available.";
+            // Update the strategy image src
+            document.getElementById("strategyImage").src = json.data.strategy_image_url;
+          } else {
+            console.error("Error fetching strategy: " + json.message);
+            document.getElementById("strategyName").textContent = "Not Assigned";
+            document.getElementById("strategyDescription").textContent = "";
+            document.getElementById("strategyImage").src = "";
+          }
+        })
+        .catch(err => {
+          console.error("Error fetching assigned strategy:", err);
+          document.getElementById("strategyName").textContent = "Not Assigned";
+          document.getElementById("strategyDescription").textContent = "";
+          document.getElementById("strategyImage").src = "";
+        });
+    });
+  </script>
 </body>
 </html>

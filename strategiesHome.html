@@ -28,7 +28,7 @@
     
         <!-- Profile Name Section -->
         <div class="navigation-bar-user-name-section">
-            <p class="navigation-bar-user-first-name" id="userFirstName">Jason</p>
+            <p class="navigation-bar-user-first-name" id="userFirstName"></p>
         </div>
 
         <!-- Links Background -->
@@ -39,17 +39,17 @@
                 <span class="navigation-bar-link-text">Home</span>
             </a>
             <!-- Journal Link -->
-            <a href="journalHome.html" class="navigation-bar-link">
+            <a href="journalHome.php" class="navigation-bar-link">
                 <img src="./images/icons/journalIcon.svg" alt="Journal Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Journal</span>
             </a>
             <!-- Strategies Link -->
-            <a href="#" class="navigation-bar-link">
+            <a href="strategiesHome.html" class="navigation-bar-link">
                 <img src="./images/icons/strategyIcon.svg" alt="Strategies Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text-selected">Strategies</span>
             </a>
             <!-- Progress Link -->
-            <a href="#" class="navigation-bar-link">
+            <a href="progressHome.html" class="navigation-bar-link">
                 <img src="./images/icons/progressIcon.svg" alt="Progress Icon" class="navigation-bar-link-icon">
                 <span class="navigation-bar-link-text">Progress</span>
             </a>
@@ -89,7 +89,7 @@
                 <a href="strategiesCurrentStrategy.html" class="home-page-box home-page-strategy-box">
                     <div class="home-page-box-status" id="currentStrategy">
                         Your current strategy is<br>
-                        <u>4-7-8 Breathing</u>
+                        <u>Loading...</u>
                     </div>
                     <div class="home-page-box-text home-page-strategy-box-text" id="strategyDirection">
                         Look at Current Strategy
@@ -108,25 +108,8 @@
         <img src="./images/waveFront.svg" alt="Front Wave" class="wave front-wave">
     </div>
 	
-<script>
-	/* When the DOM content is fully loaded, this script fetches user information from the server.
-    It then updates the element with id 'userFirstName' to display the username.
-    If there is an error during the fetch operation, it logs the error to the console. */
-        document.addEventListener("DOMContentLoaded", function() {
-            fetch('getUserInfo.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.username) {
-                        document.getElementById('userFirstName').textContent = data.username;
-						document.getElementById('welcomeMessage').textContent = "Hello " + data.username;
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching user info:', error);
-                });
-        });
-    </script>
-    
+    <!-- Include the JavaScript file -->
+    <script src="scripts/strategiesHome.js"></script>
 
 </body>
 </html>
