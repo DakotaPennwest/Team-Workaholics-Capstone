@@ -12,9 +12,7 @@ A comprehensive journaling application designed to help children and individuals
 - [Development Sprints](#development-sprints)
 - [Testing](#testing)
 - [Troubleshooting](#troubleshooting)
-- [License](#license)
 - [Contact](#contact)
-- [Acknowledgments](#acknowledgments)
 
 ## Overview
 
