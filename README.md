@@ -212,16 +212,9 @@ The application uses a relational database with the following key tables:
 - **Journal Entry Failures**: Verify session variables are set correctly
 - **Strategy Assignment Issues**: Check the database for mapping errors
 
-## License
-
-[Insert License Information Here]
-
 ## Contact
 
 Team Workaholics
 - GitHub: [https://github.com/DakotaPennwest/Team-Workaholics-Capstone](https://github.com/DakotaPennwest/Team-Workaholics-Capstone)
-- [Insert Additional Contact Information]
 
-## Acknowledgments
 
-[Insert Acknowledgments Here]
